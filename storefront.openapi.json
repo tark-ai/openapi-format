@@ -3804,7 +3804,7 @@
       "get": {
         "operationId": "evaluate-coupons",
         "summary": "Evaluate coupons",
-        "description": "Evaluate applicable & inapplicable coupons based on the specified cart.",
+        "description": "Evaluate applicable \u0026 inapplicable coupons based on the specified cart.",
         "parameters": [],
         "responses": {
           "200": {
@@ -3887,7 +3887,7 @@
       "get": {
         "operationId": "evaluate-promotions",
         "summary": "Evaluate promotions",
-        "description": "Evaluate applicable & inapplicable promotions based on the specified cart.",
+        "description": "Evaluate applicable \u0026 inapplicable promotions based on the specified cart.",
         "parameters": [],
         "responses": {
           "200": {
@@ -10804,7 +10804,7 @@
       "get": {
         "operationId": "pos-evaluate-coupons",
         "summary": "Evaluate coupons",
-        "description": "Evaluate applicable & inapplicable coupons based on the specified cart.",
+        "description": "Evaluate applicable \u0026 inapplicable coupons based on the specified cart.",
         "parameters": [
           {
             "name": "id",
@@ -10886,7 +10886,7 @@
       "get": {
         "operationId": "pos-evaluate-promotions",
         "summary": "Evaluate promotions",
-        "description": "Evaluate applicable & inapplicable promotions based on the specified cart.",
+        "description": "Evaluate applicable \u0026 inapplicable promotions based on the specified cart.",
         "parameters": [
           {
             "name": "id",
@@ -12803,7 +12803,7 @@
       "post": {
         "operationId": "get-pos-fulfillment-options",
         "summary": "Retrieve fulfillment options",
-        "description": "This endpoint returns the available fulfillment options for a given cart and delivery pincode. It provides both delivery options and collect-in-store (Click & Collect) options, including details of store locations where the item can be collected.",
+        "description": "This endpoint returns the available fulfillment options for a given cart and delivery pincode. It provides both delivery options and collect-in-store (Click \u0026 Collect) options, including details of store locations where the item can be collected.",
         "parameters": [],
         "requestBody": {
           "description": "",
@@ -13041,7 +13041,7 @@
                           "$ref": "#/components/schemas/Order"
                         },
                         "payment_required": {
-                          "description": "true if to_be_paid > 0, otherwise false for zero value order.",
+                          "description": "true if to_be_paid \u003e 0, otherwise false for zero value order.",
                           "type": "boolean"
                         }
                       },
@@ -13322,7 +13322,7 @@
       "post": {
         "operationId": "get-fulfillment-options",
         "summary": "Retrieve fulfillment options",
-        "description": "This endpoint returns the available fulfillment options for a given cart and delivery pincode. It provides both delivery options and collect-in-store (Click & Collect) options, including details of store locations where the item can be collected.",
+        "description": "This endpoint returns the available fulfillment options for a given cart and delivery pincode. It provides both delivery options and collect-in-store (Click \u0026 Collect) options, including details of store locations where the item can be collected.",
         "parameters": [],
         "requestBody": {
           "description": "",
@@ -16558,7 +16558,7 @@
             ]
           },
           "business_name": {
-            "description": "Use in billing & shipping details only.",
+            "description": "Use in billing \u0026 shipping details only.",
             "type": [
               "string",
               "null"
@@ -16974,11 +16974,11 @@
             ]
           },
           "discount_percent": {
-            "description": "'> 0' if discount_type = percentage, otherwise set 0.",
+            "description": "'\u003e 0' if discount_type = percentage, otherwise set 0.",
             "type": "number"
           },
           "discount_fixed_amount": {
-            "description": "'> 0' if discount_type = fixed-amount, otherwise set 0.",
+            "description": "'\u003e 0' if discount_type = fixed-amount, otherwise set 0.",
             "type": "integer"
           }
         },
@@ -19010,7 +19010,7 @@
             ]
           },
           "backorder": {
-            "description": "\nbackorder\n\nIndicates whether the item is being fulfilled as a backorder. When true, the item is not currently in stock and will ship later once inventory is available. This may result in the order being split into multiple shipments, with delays for the backordered portion.",
+            "description": "backorder\n\nIndicates whether the item is being fulfilled as a backorder. When true, the item is not currently in stock and will ship later once inventory is available. This may result in the order being split into multiple shipments, with delays for the backordered portion.",
             "type": "boolean"
           },
           "on_offer": {
@@ -19775,12 +19775,12 @@
             "const": "pause"
           },
           "pause_start_date": {
-            "description": "optional. if specified, subscription will be paused from this date & time. If not specified, subscription will be paused immediately. datetime value should be greater than current time.",
+            "description": "optional. if specified, subscription will be paused from this date \u0026 time. If not specified, subscription will be paused immediately. datetime value should be greater than current time.",
             "type": "string",
             "format": "date-time"
           },
           "pause_end_date": {
-            "description": "optional. if specified, subscription will be activated automatically from this date & time. If not specified, subscription will remain paused. datetime value should be greater than current time.",
+            "description": "optional. if specified, subscription will be activated automatically from this date \u0026 time. If not specified, subscription will remain paused. datetime value should be greater than current time.",
             "type": "string",
             "format": "date-time"
           }
@@ -23450,9 +23450,6 @@
         }
       }
     },
-    "examples": {},
-    "requestBodies": {},
-    "headers": {},
     "securitySchemes": {
       "Authorization": {
         "type": "http",
@@ -23957,8 +23954,8 @@
       "description": "Common"
     },
     {
-      "name": "Coupons & promotions",
-      "description": "Coupons & promotions"
+      "name": "Coupons \u0026 promotions",
+      "description": "Coupons \u0026 promotions"
     },
     {
       "name": "Customers",

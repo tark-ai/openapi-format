@@ -38,12 +38,15 @@
     "clean-storefront": "for f in storefront/*.json; do openapi spec clean \"$f\" -w; done",
     "clean-admin": "for f in admin/*.json; do openapi spec clean \"$f\" -w; done",
     "split-all": "npm run split-storefront && npm run split-admin",
-    "merge-storefront": "node bin/cli.js ./storefront --mergeByTags --output storefront.openapi.json",
-    "merge-admin": "node bin/cli.js ./admin --mergeByTags --output admin.openapi.json",
+    "merge-storefront": "node bin/cli.js ./storefront --mergeByTags --output storefront.openapi.json && openapi spec clean storefront.openapi.json -w",
+    "merge-admin": "node bin/cli.js ./admin --mergeByTags --output admin.openapi.json && openapi spec clean admin.openapi.json -w",
     "merge-all": "npm run merge-storefront && npm run merge-admin",
-    "lint-storefront": "for f in storefront/*.json; do speakeasy lint openapi --schema=\"$f\" --logLevel warn --non-interactive; done",
-    "lint-admin": "for f in admin/*.json; do speakeasy lint openapi --schema=\"$f\" --logLevel warn --non-interactive; done",
-    "lint-all": "npm run lint-storefront && npm run lint-admin"
+    "lint-storefront-specs": "for f in storefront/*.json; do speakeasy lint openapi --schema=\"$f\" --logLevel warn --non-interactive; done",
+    "lint-admin-specs": "for f in admin/*.json; do speakeasy lint openapi --schema=\"$f\" --logLevel warn --non-interactive; done",
+    "lint-all": "npm run lint-storefront-specs && npm run lint-admin-specs",
+    "lint-storefront-merged": "speakeasy lint openapi --schema=\"storefront.openapi.json\" --logLevel warn --non-interactive",
+    "lint-admin-merged": "speakeasy lint openapi --schema=\"admin.openapi.json\" --logLevel warn --non-interactive",
+    "lint-all-merged": "npm run lint-storefront-merged && npm run lint-admin-merged"
   },
   "dependencies": {
     "@stoplight/yaml": "^4.3.0",
