@@ -1,0 +1,20 @@
+{
+  "allOf": [
+    {
+      "$ref": "./PaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "wallet_name": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/WalletPayment",
+    "description": "API reference for the WalletPayment schema"
+  },
+  "title": "WalletPayment"
+}

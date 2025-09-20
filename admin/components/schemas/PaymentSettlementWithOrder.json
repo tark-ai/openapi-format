@@ -1,0 +1,29 @@
+{
+  "description": "Payment settlement with orders",
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "order_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "order_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "order_status": {
+      "enum": [
+        "awaiting-approval",
+        "awaiting-shipment",
+        "shipped",
+        "delivered"
+      ]
+    }
+  },
+  "title": "PaymentSettlementWithOrder",
+  "x-tags": [
+    "Payments"
+  ]
+}

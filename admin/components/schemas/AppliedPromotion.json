@@ -1,0 +1,63 @@
+{
+  "description": "Details about an active promotion applied to a cart/order",
+  "type": "object",
+  "properties": {
+    "promotion_id": {
+      "type": "string"
+    },
+    "promotion_type": {
+      "enum": [
+        "discount",
+        "free-goods",
+        "free-shipping",
+        "buy-x-get-y",
+        "volume-based"
+      ]
+    },
+    "savings": {
+      "type": "number"
+    },
+    "product_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "variant_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "product_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "variant_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "applied_sequence": {
+      "type": "number"
+    },
+    "scope": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "promotion_id",
+    "promotion_type",
+    "savings",
+    "product_id",
+    "variant_id",
+    "product_name",
+    "variant_name",
+    "applied_sequence",
+    "scope"
+  ],
+  "title": "AppliedPromotion"
+}

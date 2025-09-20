@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "properties": {
+    "conditions_match": {
+      "enum": [
+        "all",
+        "any"
+      ]
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "data_type",
+          "field_name",
+          "operator",
+          "value"
+        ],
+        "properties": {
+          "data_type": {
+            "enum": [
+              "list",
+              "string",
+              "number",
+              "boolean"
+            ]
+          },
+          "field_name": {
+            "type": "string"
+          },
+          "operator": {
+            "enum": [
+              "equal",
+              "not-equal",
+              "exact",
+              "contains",
+              "does-not-contain",
+              "is-empty",
+              "is-not-empty",
+              "starts-with",
+              "ends-with",
+              "less",
+              "less-or-equal",
+              "greater",
+              "greater-or-equal",
+              "between"
+            ]
+          },
+          "value": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "array",
+                "description": "for list type",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "conditions_match",
+    "conditions"
+  ],
+  "title": "CategoryAutoAssignProductCondition",
+  "x-tags": [
+    "Catalog"
+  ]
+}

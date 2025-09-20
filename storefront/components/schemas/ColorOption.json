@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the associated option.",
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of the associated option.",
+      "const": "color"
+    },
+    "value": {
+      "type": "object",
+      "properties": {
+        "hexcode": {
+          "type": "string",
+          "description": "The hex code of the color (e.g., #000000).",
+          "format": "color-hex",
+          "pattern": "^#(?:[0-9a-fA-F]{3}){1,2}$"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the color."
+        }
+      },
+      "required": [
+        "name",
+        "hexcode"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ColorOption",
+    "description": "API reference for the ColorOption schema"
+  },
+  "required": [
+    "name",
+    "type",
+    "value"
+  ],
+  "title": "ColorOption"
+}

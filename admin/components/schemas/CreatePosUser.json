@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "country_code": {
+      "description": "Two-letter code begin with a plus sign prefix that identifies different countries. By default it will be +91 if not provided.",
+      "type": "string",
+      "default": "+91"
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "location_id",
+          "role_id"
+        ],
+        "properties": {
+          "location_id": {
+            "type": "string"
+          },
+          "role_id": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "first_name",
+    "phone",
+    "email",
+    "roles"
+  ],
+  "title": "CreatePosUser"
+}

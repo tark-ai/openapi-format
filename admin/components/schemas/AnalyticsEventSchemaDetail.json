@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "schema": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "./AnalyticsEventSchemaProperty.json"
+          }
+        }
+      }
+    }
+  },
+  "title": "AnalyticsEventSchemaDetail",
+  "x-tags": [
+    "Analytics"
+  ]
+}

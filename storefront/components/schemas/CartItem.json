@@ -1,0 +1,238 @@
+{
+  "description": "This Cart Item model captures the attributes of a cart item, including product details, pricing information, subscription details, and other relevant information related to Cart Item.",
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "description": "Unique identifier for the product.",
+      "type": "string",
+      "pattern": "^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$"
+    },
+    "variant_id": {
+      "description": "Unique identifier for the product.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$"
+    },
+    "sku": {
+      "description": "Stock Keeping Unit, a unique identifier for the product within inventory.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "examples": [
+        "SKU1254"
+      ]
+    },
+    "slug": {
+      "description": "Unique slug for the product",
+      "type": "string"
+    },
+    "product_name": {
+      "description": "Name of the product.",
+      "type": "string"
+    },
+    "variant_name": {
+      "description": "Name of the variant.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "product_type": {
+      "type": "string",
+      "enum": [
+        "physical",
+        "digital",
+        "bundle"
+      ],
+      "examples": [
+        "physical"
+      ]
+    },
+    "product_image_url": {
+      "description": "URL pointing to the product image.",
+      "type": "string"
+    },
+    "stock_available": {
+      "description": "Indicates whether the product is currently in stock.",
+      "type": "boolean"
+    },
+    "backorder": {
+      "description": "Indicates whether the item is being fulfilled as a backorder. When true, the item is not currently in stock and will ship later once inventory is available. This may result in the order being split into multiple shipments, with delays for the backordered portion.",
+      "type": "boolean"
+    },
+    "on_offer": {
+      "description": "Indicates whether the product is currently on offer.",
+      "type": "boolean"
+    },
+    "on_subscription": {
+      "description": "Indicates whether the product is currently on a subscription.",
+      "type": "boolean"
+    },
+    "on_promotion": {
+      "description": "Indicates whether the product is part of a promotion.",
+      "type": "boolean"
+    },
+    "quantity": {
+      "description": "The quantity of the product in the cart.",
+      "type": "integer"
+    },
+    "is_free_item": {
+      "description": "Indicates if the product is offered for free.",
+      "type": "boolean"
+    },
+    "free_quantity": {
+      "description": "Quantity of the product that is free.",
+      "type": "integer"
+    },
+    "promotion_discount_amount": {
+      "description": "Discount amount due to promotions.",
+      "type": "number",
+      "format": "double"
+    },
+    "coupon_discount_amount": {
+      "description": "Discount amount due to applied coupons.",
+      "type": "number",
+      "format": "double"
+    },
+    "price_including_tax": {
+      "type": "boolean",
+      "format": "double",
+      "examples": [
+        false
+      ]
+    },
+    "listing_price": {
+      "type": "number",
+      "format": "double",
+      "example": 200
+    },
+    "selling_price": {
+      "type": "number",
+      "format": "double",
+      "example": 199
+    },
+    "selling_price_excluding_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "min_order_quantity": {
+      "type": "integer",
+      "default": 1
+    },
+    "max_order_quantity": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "incremental_quantity": {
+      "type": "integer",
+      "default": 1
+    },
+    "handling_charge_excluding_tax": {
+      "description": "Additional cost for shipping associated with the product.",
+      "type": "number",
+      "minimum": 0,
+      "readOnly": true
+    },
+    "handling_charge_tax_rate": {
+      "description": "Additional cost for shipping associated with the product.",
+      "type": "number",
+      "minimum": 0,
+      "readOnly": true
+    },
+    "handling_charge_including_tax": {
+      "description": "Additional cost for shipping associated with the product.",
+      "type": "number",
+      "minimum": 0,
+      "readOnly": true
+    },
+    "tax_type": {
+      "description": "Type of tax applied (e.g., GST).",
+      "type": "string",
+      "default": "GST",
+      "const": "GST"
+    },
+    "tax_rate": {
+      "description": "The rate of tax applied to the product.",
+      "type": "number",
+      "format": "double"
+    },
+    "tax_amount": {
+      "description": "The total tax amount for the product.",
+      "type": "number",
+      "format": "double"
+    },
+    "associated_options": {
+      "oneOf": [
+        {
+          "$ref": "./AssociatedOption.json",
+          "description": "Used when `variant_id` is not null."
+        },
+        {
+          "type": "null",
+          "description": "Null when `variant_id` is null."
+        }
+      ]
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductAttribute.json"
+      }
+    },
+    "subscriptions": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "./ProductSubscription.json"
+      }
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CartItem",
+    "description": "API reference for the CartItem schema"
+  },
+  "required": [
+    "product_id",
+    "variant_id",
+    "sku",
+    "slug",
+    "product_name",
+    "variant_name",
+    "product_type",
+    "product_image_url",
+    "stock_available",
+    "backorder",
+    "on_offer",
+    "on_subscription",
+    "on_promotion",
+    "quantity",
+    "is_free_item",
+    "free_quantity",
+    "promotion_discount_amount",
+    "coupon_discount_amount",
+    "price_including_tax",
+    "listing_price",
+    "selling_price",
+    "selling_price_excluding_tax",
+    "min_order_quantity",
+    "max_order_quantity",
+    "incremental_quantity",
+    "handling_charge_excluding_tax",
+    "handling_charge_tax_rate",
+    "handling_charge_including_tax",
+    "tax_type",
+    "tax_rate",
+    "tax_amount",
+    "associated_options",
+    "attributes",
+    "subscriptions"
+  ]
+}

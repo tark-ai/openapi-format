@@ -1,0 +1,112 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "channel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "device": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "location_id",
+          "location_name"
+        ],
+        "properties": {
+          "location_id": {
+            "type": "string"
+          },
+          "location_name": {
+            "type": "string"
+          },
+          "role_id": {
+            "type": "string"
+          },
+          "role_name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PosUser",
+    "description": "API reference for the PosUser schema"
+  },
+  "required": [
+    "id",
+    "first_name",
+    "last_name",
+    "phone",
+    "email",
+    "channel",
+    "device",
+    "location",
+    "roles"
+  ],
+  "title": "PosUser"
+}

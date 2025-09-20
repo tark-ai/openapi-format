@@ -1,0 +1,17 @@
+{
+  "description": "UPI Payment",
+  "allOf": [
+    {
+      "$ref": "./OrderPaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "upi_id": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "title": "UpiPayment"
+}

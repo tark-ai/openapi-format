@@ -1,0 +1,19 @@
+{
+  "allOf": [
+    {
+      "$ref": "./ProductBasicDetail.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "quantity": {
+          "type": "integer"
+        }
+      }
+    }
+  ],
+  "title": "ProductBundelItem",
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "properties": {
+    "is_serviceable": {
+      "type": "boolean"
+    },
+    "shipping_methods": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "shipping_type": {
+            "enum": [
+              "auto",
+              "manual"
+            ]
+          },
+          "shipping_amount": {
+            "description": "shipping amount of manual method or as per recommened courier or range of min-max shipping amount.",
+            "type": "string"
+          },
+          "estimated_delivery_days": {
+            "description": "estimated delivery days of manual method or as per recommened courier or range of min-max estimated delivery days.",
+            "type": "string"
+          },
+          "courier_companies": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": [
+                    "string",
+                    "number"
+                  ]
+                },
+                "name": {
+                  "type": "string"
+                },
+                "shipping_amount": {
+                  "type": "number"
+                },
+                "estimated_delivery_days": {
+                  "type": "string"
+                },
+                "is_recommended": {
+                  "type": "boolean"
+                },
+                "is_hyperlocal": {
+                  "type": "boolean"
+                },
+                "mode": {
+                  "enum": [
+                    "air",
+                    "surface"
+                  ]
+                },
+                "rating": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PincodeServiceability",
+    "description": "API reference for the PincodeServiceability schema"
+  },
+  "required": [
+    "is_serviceable",
+    "shipping_methods"
+  ],
+  "title": "PincodeServiceability"
+}

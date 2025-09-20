@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "bank_account_number": {
+      "type": "string"
+    },
+    "bank_name": {
+      "type": "string"
+    }
+  },
+  "title": "PaymentMethodBankTransfer",
+  "x-tags": [
+    "Payments"
+  ]
+}

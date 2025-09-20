@@ -1,0 +1,104 @@
+{
+  "description": "Additional fields required in addition to marked as required.\n1) buy_product_id or buy_variant_id or buy_from_category_id\n2) get_product_id or get_variant_id or get_from_category_id\n3) get_free_quantity or get_discount_percent",
+  "type": "object",
+  "properties": {
+    "spending_criteria_type": {
+      "type": "string",
+      "const": "minimum-purchase-amount"
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "minimum_purchase_amount",
+          "buy_product_id",
+          "buy_variant_id",
+          "buy_from_category_id",
+          "get_product_id",
+          "get_variant_id",
+          "get_from_category_id",
+          "get_quantity",
+          "get_offer_type",
+          "get_discount_percent"
+        ],
+        "properties": {
+          "minimum_purchase_amount": {
+            "type": "number",
+            "minimum": 1
+          },
+          "buy_product_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "buy_variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "buy_from_category_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "get_product_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "get_variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "get_from_category_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "get_quantity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "get_offer_type": {
+            "enum": [
+              "discount",
+              "free"
+            ]
+          },
+          "get_discount_percent": {
+            "description": "It can be null for get_offer_type = free",
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "maximum_discount_amount": {
+      "description": "It can be null for get_offer_type = free",
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/BuyXGetYRuleBasedOnAmount",
+    "description": "API reference for the BuyXGetYRuleBasedOnAmount schema"
+  },
+  "required": [
+    "spending_criteria_type",
+    "products",
+    "maximum_discount_amount"
+  ],
+  "title": "BuyXGetYRuleBasedOnAmount"
+}

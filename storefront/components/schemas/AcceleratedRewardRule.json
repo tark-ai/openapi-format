@@ -1,0 +1,63 @@
+{
+  "type": "object",
+  "properties": {
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "product_id",
+          "variant_id",
+          "minimum_quantity",
+          "minimum_value"
+        ],
+        "properties": {
+          "product_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "minimum_quantity": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "minimum_value": {
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "category_id": {
+      "description": "Array of category ids.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "bonus_loyalty_point": {
+      "type": "integer"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/AcceleratedRewardRule",
+    "description": "API reference for the AcceleratedRewardRule schema"
+  },
+  "required": [
+    "products",
+    "category_id",
+    "bonus_loyalty_point"
+  ],
+  "title": "AcceleratedRewardRule"
+}

@@ -1,0 +1,146 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "active": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "status": {
+      "description": "this key is ignored in create coupon api and draft status will be added by default. required in update coupon api only.",
+      "enum": [
+        "draft",
+        "live",
+        "stopped",
+        "expired"
+      ]
+    },
+    "customer_eligibility": {
+      "enum": [
+        "all",
+        "customer",
+        "segment",
+        "customer-group"
+      ]
+    },
+    "customer_id": {
+      "description": "required if customer_eligibility = custo",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "segment_id": {
+      "description": "required if customer_eligibility = segment",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "customer_group_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "redemption_limits": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "total_redemptions": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "per_customer_redemptions": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "per_coupon_code_redemptions": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "total_redemptions",
+        "per_customer_redemptions",
+        "per_coupon_code_redemptions"
+      ]
+    },
+    "redemption_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "minimum_order_total": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "default": 0
+    },
+    "for_first_time_customer_only": {
+      "type": "boolean",
+      "default": false
+    },
+    "can_be_used_with_promotion": {
+      "type": "boolean",
+      "default": false
+    },
+    "starts_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name",
+    "status",
+    "customer_eligibility",
+    "starts_at"
+  ],
+  "title": "CouponPromotionCommonDetail",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

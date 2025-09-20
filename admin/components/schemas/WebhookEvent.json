@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "description": "The unique id for that event. Shared across all delivery attempts of the same event.",
+      "type": "string",
+      "readOnly": true
+    },
+    "event": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "is_test": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "event_id",
+    "event",
+    "timestamp",
+    "is_test"
+  ],
+  "title": "WebhookEvent",
+  "x-tags": [
+    "Webhooks"
+  ]
+}

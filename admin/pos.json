@@ -1,0 +1,990 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - POS",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/pos/devices": {
+      "get": {
+        "operationId": "list-devices",
+        "summary": "List all POS devices",
+        "description": "List all POS devices",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "devices": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PosDevice"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "post": {
+        "operationId": "create-device",
+        "summary": "Create POS device",
+        "description": "Create POS device",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePosDevice"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "device": {
+                          "$ref": "#/components/schemas/PosDevice"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      }
+    },
+    "/pos/devices/{id}": {
+      "get": {
+        "operationId": "get-device",
+        "summary": "Retrieve POS device detail",
+        "description": "Retrieve POS device detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "device": {
+                          "$ref": "#/components/schemas/PosDevice"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "put": {
+        "operationId": "update-device",
+        "summary": "Update POS device",
+        "description": "Update POS device",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PosDevice"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "device": {
+                          "$ref": "#/components/schemas/PosDevice"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-device",
+        "summary": "Delete POS device",
+        "description": "Delete POS device",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id of pos device",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/pos/devices/{id}/pairing-code": {
+      "post": {
+        "operationId": "generate-device-pairing-code",
+        "summary": "Generate POS device Pairing Code",
+        "description": "Generates a new verification code for pairing the specified POS device. This code is used to securely link the device with the system during the pairing process.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "pairing_code": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id of pos device",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/pos/devices/{id}/revoke": {
+      "post": {
+        "operationId": "revoke-device",
+        "summary": "Revoke POS device",
+        "description": "Disables the specified POS device, revoking its access to the system. This action updates the device’s status to disabled, preventing it from performing any operations or connecting to the POS network.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "reason"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "device": {
+                          "$ref": "#/components/schemas/PosDevice"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "id of pos device",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/pos/permissions": {
+      "get": {
+        "operationId": "list-pos-permissions",
+        "summary": "List all POS permissions",
+        "description": "List all POS permissions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "permissions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PosPermission"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": []
+    },
+    "/pos/roles": {
+      "get": {
+        "operationId": "list-pos-roles",
+        "summary": "List all POS roles",
+        "description": "List all POS roles",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "roles": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PosRole"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "post": {
+        "operationId": "create-pos-role",
+        "summary": "Create POS role",
+        "description": "Create POS role",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PosRole"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "role": {
+                          "$ref": "#/components/schemas/PosRole"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": []
+    },
+    "/pos/roles/{id}": {
+      "get": {
+        "operationId": "get-pos-role",
+        "summary": "Retrieve POS role",
+        "description": "Retrieve POS role",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "role": {
+                          "$ref": "#/components/schemas/PosRole"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "put": {
+        "operationId": "update-pos-role",
+        "summary": "Update POS role",
+        "description": "Update POS role",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "permissions": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "module_name",
+                        "resource_group",
+                        "permission_type"
+                      ],
+                      "properties": {
+                        "module_name": {
+                          "type": "string"
+                        },
+                        "resource_group": {
+                          "type": "string"
+                        },
+                        "permission_type": {
+                          "enum": [
+                            "admin",
+                            "readonly",
+                            "none"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "role": {
+                          "$ref": "#/components/schemas/PosRole"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-pos-role",
+        "summary": "Delete POS role",
+        "description": "Delete POS role",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "pos role id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/pos/users": {
+      "get": {
+        "operationId": "list-pos-users",
+        "summary": "List all POS users",
+        "description": "List all POS users",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "users": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PosUser"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "post": {
+        "operationId": "create-pos-user",
+        "summary": "Create POS user",
+        "description": "Create POS user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePosUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "user": {
+                          "$ref": "#/components/schemas/PosUser"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": []
+    },
+    "/pos/users/{id}": {
+      "get": {
+        "operationId": "get-pos-user-detail",
+        "summary": "Retrieve POS user",
+        "description": "Retrieve POS user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "user": {
+                          "$ref": "#/components/schemas/PosUser"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "put": {
+        "operationId": "update-pos-user",
+        "summary": "Update POS user",
+        "description": "Update POS user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PosUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "user": {
+                          "$ref": "#/components/schemas/PosUser"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-pos-user",
+        "summary": "Delete POS user",
+        "description": "Delete POS user",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POS"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "pos user id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "CreatePosDevice": {
+        "$ref": "./components/schemas/CreatePosDevice.json"
+      },
+      "CreatePosUser": {
+        "$ref": "./components/schemas/CreatePosUser.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "PosDevice": {
+        "$ref": "./components/schemas/PosDevice.json"
+      },
+      "PosPermission": {
+        "$ref": "./components/schemas/PosPermission.json"
+      },
+      "PosRole": {
+        "$ref": "./components/schemas/PosRole.json"
+      },
+      "PosUser": {
+        "$ref": "./components/schemas/PosUser.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "POS",
+      "description": "POS"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

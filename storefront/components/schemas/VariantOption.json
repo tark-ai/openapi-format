@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the associated option.",
+      "type": "string"
+    },
+    "key": {
+      "description": "A lookup safe version of the name that is lowercased and spaces are replaced with underscores. For instance, if name is `Product Type`, key will be `product_type`",
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "single-select",
+        "color"
+      ]
+    },
+    "value": {
+      "description": "When option_type is color, value will contain an array of objects like:\n```json\n[\n    {\n    \"name\": \"first_color\",\n    \"hexcode\": \"#000000\"\n    },\n    {\n    \"name\": \"second_color\",\n    \"hexcode\": \"#FFFFFF\"\n    }\n]\n```",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object"
+          }
+        ]
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/VariantOption",
+    "description": "API reference for the VariantOption schema"
+  },
+  "required": [
+    "name",
+    "key",
+    "type",
+    "value"
+  ],
+  "title": "VariantOption"
+}

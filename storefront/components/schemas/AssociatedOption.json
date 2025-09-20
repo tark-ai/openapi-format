@@ -1,0 +1,36 @@
+{
+  "description": "An object where each key is an option name, and the value describes the option details.",
+  "type": "object",
+  "additionalProperties": {
+    "oneOf": [
+      {
+        "$ref": "./ColorOption.json"
+      },
+      {
+        "$ref": "./SingleSelectOption.json"
+      }
+    ]
+  },
+  "examples": [
+    {
+      "background_color": {
+        "name": "Background Color",
+        "value": {
+          "name": "Blue",
+          "hexcode": "#0000FF"
+        },
+        "type": "color"
+      },
+      "size": {
+        "name": "Size",
+        "value": "Large",
+        "type": "single-select"
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/AssociatedOption",
+    "description": "API reference for the AssociatedOption schema"
+  },
+  "title": "AssociatedOption"
+}

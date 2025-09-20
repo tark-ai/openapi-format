@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The name of the associated option.",
+      "type": "string"
+    },
+    "type": {
+      "description": "The type of the associated option.",
+      "const": "single-select"
+    },
+    "value": {
+      "description": "The value of the associated option",
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/SingleSelectOption",
+    "description": "API reference for the SingleSelectOption schema"
+  },
+  "required": [
+    "name",
+    "type",
+    "value"
+  ],
+  "title": "SingleSelectOption"
+}

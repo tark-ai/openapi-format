@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "upload_source": {
+      "enum": [
+        "external-url"
+      ]
+    },
+    "external_url": {
+      "type": "string"
+    },
+    "folder_id": {
+      "description": "Optional. If provided, file will be uploaded into the specified folder.",
+      "type": "string"
+    }
+  },
+  "required": [
+    "upload_source",
+    "external_url"
+  ],
+  "title": "MediaFileUploadRequestForExternalUrl",
+  "x-tags": [
+    "Media Gallery"
+  ]
+}

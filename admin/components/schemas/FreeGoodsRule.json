@@ -1,0 +1,20 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./AutoScaleBasedOnQuantity.json"
+    },
+    {
+      "$ref": "./AutoScaleBasedOnAmount.json"
+    },
+    {
+      "$ref": "./CustomSlabsBasedOnQuantity.json"
+    },
+    {
+      "$ref": "./CustomSlabsBasedOnAmount.json"
+    }
+  ],
+  "title": "FreeGoodsRule",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "properties": {
+    "is_prepaid": {
+      "description": "Refers to a pricing model where customers are charged based on their actual usage of a service. Usage based billing works for digital products.",
+      "type": "boolean",
+      "default": false
+    },
+    "usage_based_billing": {
+      "description": "Refers to a pricing model where customers are charged based on their actual usage of a service. Usage based billing works for digital products.",
+      "type": "boolean",
+      "default": false
+    },
+    "usage_based_tiers": {
+      "description": "Refers to a pricing structure where customers are charged based on their usage, but the cost per unit of usage decreases or changes as they move into higher usage levels.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "up_to": {
+            "type": "integer"
+          },
+          "price_per_unit": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
+    "grace_period_days": {
+      "description": "The number of days after a failed payment to retry before canceling.",
+      "type": "integer",
+      "default": 0
+    },
+    "is_cancellation_allowed": {
+      "description": "Indcates whether the next billing cancellation is allowed or not.",
+      "type": "boolean",
+      "default": true
+    },
+    "days_until_cancellation_allowed": {
+      "description": "Specifies the number of days the customer has to cancel before the next billing.",
+      "type": "integer",
+      "default": 3
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/SubscriptionBehaviour",
+    "description": "API reference for the SubscriptionBehaviour schema"
+  },
+  "title": "SubscriptionBehaviour",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

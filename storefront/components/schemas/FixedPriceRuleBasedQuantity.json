@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "spending_criteria_type": {
+      "type": "string",
+      "const": "minimum-quantity"
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "product_id",
+          "variant_id",
+          "minimum_quantity",
+          "maximum_quantity",
+          "offer_price"
+        ],
+        "properties": {
+          "product_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "minimum_quantity": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "maximum_quantity": {
+            "description": "null means there is no limit.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "offer_price": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FixedPriceRuleBasedQuantity",
+    "description": "API reference for the FixedPriceRuleBasedQuantity schema"
+  },
+  "required": [
+    "spending_criteria_type",
+    "products"
+  ],
+  "title": "FixedPriceRuleBasedQuantity"
+}

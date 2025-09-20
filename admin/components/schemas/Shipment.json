@@ -1,0 +1,41 @@
+{
+  "allOf": [
+    {
+      "$ref": "./ShipmentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "shipment_items": {
+          "type": "array",
+          "items": {
+            "$ref": "./ShipmentItem.json"
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "packing": {
+          "$ref": "./ShipmentPackaging.json"
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "progression": {
+          "type": "array",
+          "items": {
+            "$ref": "./ShipmentProgression.json"
+          }
+        }
+      }
+    }
+  ],
+  "title": "Shipment",
+  "x-tags": [
+    "Shipping"
+  ]
+}

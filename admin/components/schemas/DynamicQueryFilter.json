@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "field_name": {
+      "type": "string"
+    },
+    "operator": {
+      "enum": [
+        "equal",
+        "not-equal",
+        "exact",
+        "contains",
+        "does-not-contain",
+        "is-empty",
+        "is-not-empty",
+        "starts-with",
+        "ends-with",
+        "less",
+        "less-or-equal",
+        "greater",
+        "greater-or-equal",
+        "between"
+      ]
+    },
+    "value": {
+      "oneOf": [
+        {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        {
+          "type": "integer"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "title": "DynamicQueryFilter",
+  "x-tags": [
+    "Analytics"
+  ]
+}

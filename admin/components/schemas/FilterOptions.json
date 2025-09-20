@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "$ref": "./FilterOptionsField.json"
+      }
+    },
+    "events": {
+      "description": "optional. by default empty array will be returned if events are not required in filters. ",
+      "type": "array",
+      "items": {
+        "$ref": "./FilterOptionsEvent.json"
+      }
+    },
+    "attributes": {
+      "description": "optional. by default empty array will be returned if attributes are not required in filters. ",
+      "type": "array",
+      "items": {
+        "$ref": "./FilterOptionsAttribute.json"
+      }
+    },
+    "segments": {
+      "description": "optional. by default empty array will be returned if segments are not required in filters. ",
+      "type": "array",
+      "items": {
+        "$ref": "./FilterOptionsSegment.json"
+      }
+    }
+  },
+  "required": [
+    "fields"
+  ],
+  "title": "FilterOptions",
+  "x-tags": [
+    "Filter Options"
+  ]
+}

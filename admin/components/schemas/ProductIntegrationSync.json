@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "integration_name": {
+      "type": "string"
+    },
+    "sync_status": {
+      "enum": [
+        "pending",
+        "success",
+        "failed"
+      ]
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_synced": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "ProductIntegrationSync"
+}

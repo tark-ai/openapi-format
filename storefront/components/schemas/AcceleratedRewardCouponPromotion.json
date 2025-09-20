@@ -1,0 +1,30 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "details",
+        "applies_to_product"
+      ],
+      "properties": {
+        "details": {
+          "$ref": "./AcceleratedRewardRule.json"
+        },
+        "applies_to_product": {
+          "enum": [
+            "product",
+            "category"
+          ]
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/AcceleratedRewardCouponPromotion",
+    "description": "API reference for the AcceleratedRewardCouponPromotion schema"
+  },
+  "title": "AcceleratedRewardCouponPromotion"
+}

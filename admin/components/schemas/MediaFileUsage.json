@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "used_in": {
+      "description": "section where file is used. e.g. product, campaign",
+      "enum": [
+        "product",
+        "product_variant",
+        "campaign",
+        "warehouse"
+      ]
+    },
+    "used_in_reference_id": {
+      "description": "id of the reference object. e.g. product id, campaign id",
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "MediaFileUsage",
+  "x-tags": [
+    "Media Gallery"
+  ]
+}

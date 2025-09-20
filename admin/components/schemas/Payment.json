@@ -1,0 +1,15 @@
+{
+  "description": "Common fields in inbound and refund payments.",
+  "allOf": [
+    {
+      "$ref": "./PaymentCommonFields.json"
+    },
+    {
+      "$ref": "./PaymentMethodDetail.json"
+    }
+  ],
+  "title": "Payment",
+  "x-tags": [
+    "Payments"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "description": "InvoiceDetail model",
+  "allOf": [
+    {
+      "$ref": "./Invoice.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "./InvoiceItem.json"
+          }
+        }
+      }
+    }
+  ],
+  "title": "InvoiceDetail",
+  "x-tags": [
+    "Shipping"
+  ]
+}

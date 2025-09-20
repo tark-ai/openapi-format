@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./UpdateProductWithoutVariant.json"
+    },
+    {
+      "$ref": "./UpdateProductWithVariant.json"
+    }
+  ],
+  "title": "UpdateDigitalProduct",
+  "x-tags": [
+    "Catalog"
+  ]
+}

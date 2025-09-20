@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./FixedPriceRuleBasedQuantity.json"
+    },
+    {
+      "$ref": "./FixedPriceRuleBasedAmount.json"
+    }
+  ],
+  "title": "FixedPriceRule",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

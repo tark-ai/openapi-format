@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "weight": {
+      "enum": [
+        "gm"
+      ]
+    },
+    "dimension": {
+      "enum": [
+        "cm"
+      ]
+    }
+  },
+  "title": "MeasurementUnit",
+  "x-tags": [
+    "Store"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./DiscountBasedPromotion.json"
+    },
+    {
+      "$ref": "./FixedPricePromotion.json"
+    },
+    {
+      "$ref": "./VolumeBasedPromotion.json"
+    },
+    {
+      "$ref": "./FreeGoodsPromotion.json"
+    }
+  ],
+  "title": "ProductPromotion",
+  "x-tags": [
+    "Catalog"
+  ]
+}

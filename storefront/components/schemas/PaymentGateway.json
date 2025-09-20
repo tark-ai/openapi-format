@@ -1,0 +1,11 @@
+{
+  "type": "string",
+  "enum": [
+    "PAYU",
+    "JUSPAY"
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PaymentGateway",
+    "description": "API reference for the PaymentGateway schema"
+  }
+}

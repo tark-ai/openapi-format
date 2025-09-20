@@ -1,0 +1,113 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "udf10": {
+      "type": "string"
+    },
+    "udf9": {
+      "type": "string"
+    },
+    "udf8": {
+      "type": "string"
+    },
+    "udf7": {
+      "type": "string"
+    },
+    "udf6": {
+      "type": "string"
+    },
+    "udf5": {
+      "type": "string"
+    },
+    "udf4": {
+      "type": "string"
+    },
+    "udf3": {
+      "type": "string"
+    },
+    "udf2": {
+      "type": "string"
+    },
+    "udf1": {
+      "type": "string"
+    },
+    "status_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "return_url": {
+      "type": "string"
+    },
+    "refunded": {
+      "type": "boolean",
+      "default": false
+    },
+    "product_id": {
+      "type": "string"
+    },
+    "payment_links": {
+      "type": "object",
+      "properties": {
+        "web": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "iframe": {
+          "type": "string"
+        }
+      }
+    },
+    "order_id": {
+      "type": "string"
+    },
+    "merchant_id": {
+      "type": "string"
+    },
+    "juspay": {
+      "type": "object",
+      "properties": {
+        "client_auth_token": {
+          "type": "string"
+        },
+        "client_auth_token_expiry": {
+          "type": "string"
+        }
+      }
+    },
+    "date_created": {
+      "type": "string"
+    },
+    "customer_phone": {
+      "type": "string"
+    },
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_email": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "amount_refunded": {
+      "type": "number",
+      "format": "double"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayOrder",
+    "description": "API reference for the JuspayOrder schema"
+  },
+  "title": "JuspayOrder"
+}

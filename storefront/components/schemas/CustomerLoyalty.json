@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "membership_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "loyalty_tier": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "loyalty_point_earned": {
+      "type": "integer"
+    },
+    "loyalty_point_redeemed": {
+      "type": "integer"
+    },
+    "loyalty_point_balance": {
+      "type": "integer"
+    },
+    "loyalty_point_redeemable": {
+      "type": "integer"
+    },
+    "loyalty_point_bonus_accrued": {
+      "type": "integer"
+    },
+    "date_of_reset": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "total_savings": {
+      "type": "integer"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CustomerLoyalty",
+    "description": "API reference for the CustomerLoyalty schema"
+  },
+  "title": "CustomerLoyalty"
+}

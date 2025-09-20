@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "data_type": {
+      "enum": [
+        "string",
+        "number",
+        "datetime",
+        "boolean",
+        "list"
+      ]
+    },
+    "label": {
+      "type": "string"
+    },
+    "filterable": {
+      "type": "boolean"
+    },
+    "sortable": {
+      "type": "boolean"
+    },
+    "value": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "object",
+          "number"
+        ]
+      }
+    }
+  },
+  "title": "FilterOptionsField",
+  "x-tags": [
+    "Filter Options"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "data": {
+      "description": "array of object. similar structure of metrics api, but actual keys will be decided by request payload.",
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "pagination": {
+      "$ref": "./Pagination.json"
+    }
+  },
+  "nullable": true,
+  "title": "DynamicQueryMetricsData",
+  "x-tags": [
+    "Analytics"
+  ]
+}

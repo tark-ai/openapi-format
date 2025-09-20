@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "packaging_optimisation_logic": {
+      "description": "- cost - the lowest cost of shipment\n- bins_utilization - max. utilization inside packing spaces\n- bins_number - the smallest possible number of packing spaces",
+      "enum": [
+        "cost",
+        "bins_utilization",
+        "bins_number"
+      ]
+    },
+    "location_priority": {
+      "enum": [
+        "manual",
+        "distance",
+        "inventory"
+      ]
+    },
+    "warehouse_id": {
+      "description": "optional. required only if location_priority = manual. Value should be array of warehouses ids.",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "approval_option": {
+      "default": "auto",
+      "enum": [
+        "auto",
+        "manual"
+      ]
+    },
+    "shipping_option": {
+      "default": "auto",
+      "enum": [
+        "auto",
+        "manual"
+      ]
+    },
+    "default_weight": {
+      "description": "Specifies the default weight (in kilograms) used to calculate shipping costs when product packing details are missing. This value ensures that shipping estimates can still be generated in the absence of product packing information.",
+      "type": "number"
+    }
+  },
+  "title": "ShippingConfig",
+  "x-tags": [
+    "Store"
+  ]
+}

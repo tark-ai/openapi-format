@@ -1,0 +1,22 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Coupon.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "terms_and_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "title": "CouponDetail",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

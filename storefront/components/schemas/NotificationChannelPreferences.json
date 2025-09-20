@@ -1,0 +1,28 @@
+{
+  "description": "Set specific channel preferences",
+  "type": "object",
+  "properties": {
+    "email": {
+      "description": "Indicates whether the user has opted to receive notifications via email.",
+      "type": "boolean"
+    },
+    "sms": {
+      "description": "Indicates whether the user has opted to receive notifications via SMS.",
+      "type": "boolean"
+    },
+    "whatsapp": {
+      "description": "Indicates whether the user has opted to receive notifications via WhatsApp.",
+      "type": "boolean"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/NotificationChannelPreferences",
+    "description": "API reference for the NotificationChannelPreferences schema"
+  },
+  "required": [
+    "email",
+    "sms",
+    "whatsapp"
+  ],
+  "title": "NotificationChannelPreferences"
+}

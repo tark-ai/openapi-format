@@ -1,0 +1,21 @@
+{
+  "description": "Payments using payment gateway netbanking option.",
+  "allOf": [
+    {
+      "$ref": "./PaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "bank_name": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/NetbankingPayment",
+    "description": "API reference for the NetbankingPayment schema"
+  },
+  "title": "NetbankingPayment"
+}

@@ -1,0 +1,83 @@
+{
+  "type": "object",
+  "properties": {
+    "delivery_id": {
+      "description": "The unique delivery_id for the Webhook delivery attempt",
+      "type": "string",
+      "readOnly": true
+    },
+    "event_id": {
+      "description": "The unique id for that event. Shared across all delivery attempts of the same event.",
+      "type": "string",
+      "readOnly": true
+    },
+    "webhook_id": {
+      "type": "string"
+    },
+    "webhook_name": {
+      "type": "string"
+    },
+    "endpoint": {
+      "type": "string"
+    },
+    "event": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "retry_attempt": {
+      "type": "integer"
+    },
+    "next_retry_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "failed"
+      ]
+    },
+    "response_code": {
+      "type": "integer"
+    },
+    "duration_ms": {
+      "type": "integer"
+    },
+    "error_message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_test": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "delivery_id",
+    "event_id",
+    "webhook_id",
+    "webhook_name",
+    "endpoint",
+    "event",
+    "timestamp",
+    "retry_attempt",
+    "next_retry_at",
+    "status",
+    "response_code",
+    "duration_ms",
+    "error_message",
+    "is_test"
+  ],
+  "title": "WebhookDeliveryLog",
+  "x-tags": [
+    "Webhooks"
+  ]
+}

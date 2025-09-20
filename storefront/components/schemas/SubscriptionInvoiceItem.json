@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "variant_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "product_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "variant_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "product_image_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "sku": {
+      "type": "string",
+      "readOnly": true
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "listing_price": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "selling_price": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "tax_type": {
+      "type": "string",
+      "const": "GST",
+      "readOnly": true
+    },
+    "tax_rate": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "price_including_tax": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "selling_price_excluding_tax": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/SubscriptionInvoiceItem",
+    "description": "API reference for the SubscriptionInvoiceItem schema"
+  },
+  "required": [
+    "product_id",
+    "variant_id",
+    "product_name",
+    "variant_name",
+    "product_image_url",
+    "sku",
+    "quantity",
+    "listing_price",
+    "selling_price",
+    "tax_type",
+    "tax_rate",
+    "price_including_tax",
+    "selling_price_excluding_tax"
+  ],
+  "title": "SubscriptionInvoiceItem",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

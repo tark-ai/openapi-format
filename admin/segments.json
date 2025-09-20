@@ -1,0 +1,933 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Segments",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/customers/segments": {
+      "get": {
+        "operationId": "list-segments",
+        "summary": "List all segments",
+        "description": "List all segments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "name": "segment_type",
+            "in": "query",
+            "description": "to filter segments by type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "dynamic",
+                "manual"
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "to filter segments by status",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "active",
+                "inactive",
+                "archived"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "segments": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Segment"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "post": {
+        "operationId": "create-segment",
+        "summary": "Create a segment",
+        "description": "Create a segment. In case of dynamic segment, conditions field should accept only the json format specified. Proper validation message should be returned in case different jsob object is provided.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "segment": {
+                          "$ref": "#/components/schemas/SegmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "parameters": []
+    },
+    "/customers/segments/{id}": {
+      "get": {
+        "operationId": "get-segment-detail",
+        "summary": "Retrieve segment detail",
+        "description": "Retrieve segment detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "segment": {
+                          "$ref": "#/components/schemas/SegmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "post": {
+        "operationId": "update-segment",
+        "summary": "Update segment detail",
+        "description": "Update segment detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "segment": {
+                          "$ref": "#/components/schemas/SegmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-segment",
+        "summary": "Delete segment",
+        "description": "Delete segment if not used in anywhere. ",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "segment id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/segments/{id}/ad-audiences": {
+      "post": {
+        "operationId": "create-ad-audience",
+        "summary": "Create ad-audience",
+        "description": "Create Ad-audience",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentAdAudience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "ad_audience": {
+                          "$ref": "#/components/schemas/SegmentAdAudience"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "segment id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/segments/{id}/ad-audiences/{ad_audience_id}": {
+      "get": {
+        "operationId": "get-ad-audience-detail",
+        "summary": "Retrieve ad-audience detail",
+        "description": "Retrieve ad-audience detail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "ad_audience": {
+                          "$ref": "#/components/schemas/SegmentAdAudience"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "put": {
+        "operationId": "update-ad-audience",
+        "summary": "Update ad-audience detail",
+        "description": "Update ad-audience detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SegmentAdAudience"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "ad_audience": {
+                          "$ref": "#/components/schemas/SegmentAdAudience"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-ad-audience",
+        "summary": "Delete ad-audience",
+        "description": "Delete ad-audience",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "ad_audience": {
+                          "$ref": "#/components/schemas/SegmentAdAudience"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "ad_audience_id",
+          "in": "path",
+          "description": "ad audience id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": "segment id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/segments/{id}/ad-audiences/{ad_audience_id}/sync-history": {
+      "get": {
+        "operationId": "get-ad-audience-sync-history",
+        "summary": "List all ad-audience sync hisory",
+        "description": "List all ad-audience sync hisory",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "sync_history": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/SegmentAdAudienceSyncHistory"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "ad_audience_id",
+          "in": "path",
+          "description": "ad audience id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": "segment id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/segments/{id}/members": {
+      "get": {
+        "operationId": "list-segment-members",
+        "summary": "List all segment members",
+        "description": "List all segment members. Data will be fetched from clickhouse database, using raw sql written on clickhouse db tables by matching segment dynamic conditions or matching user id of manual segment.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "segment_members": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/SegmentMember"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "post": {
+        "operationId": "update-segment-members",
+        "summary": "Add segment members",
+        "description": "Add segment members in manual segment type.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email_id": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "email_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-segment-members",
+        "summary": "Delete segment members",
+        "description": "Delete segment members in manual segment type.",
+        "parameters": [
+          {
+            "name": "email_id",
+            "in": "query",
+            "description": "use comma to separate multple email ids. maximum limit - 50 email ids",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "segment id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/segments/{id}/members-metrics": {
+      "get": {
+        "operationId": "get-segment-members-metrics",
+        "summary": "Retrieve members metrics",
+        "description": "Retrieve members metrics. Data should be retrieved from clickhouse database using raw sql.",
+        "parameters": [
+          {
+            "name": "from_date",
+            "in": "query",
+            "description": "from date",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resolution",
+            "in": "query",
+            "description": "enum field. any of (daily, weekly). default daily",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to_date",
+            "in": "query",
+            "description": "to date",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "metrics_data": {
+                          "type": "object",
+                          "properties": {
+                            "opening": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "total_in": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "total_out": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "balance": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              }
+                            },
+                            "from_date": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "to_date": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "resolution": {
+                              "enum": [
+                                "daily",
+                                "weekly"
+                              ]
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Segments"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "segment id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "Segment": {
+        "$ref": "./components/schemas/Segment.json"
+      },
+      "SegmentAdAudience": {
+        "$ref": "./components/schemas/SegmentAdAudience.json"
+      },
+      "SegmentAdAudienceSyncHistory": {
+        "$ref": "./components/schemas/SegmentAdAudienceSyncHistory.json"
+      },
+      "SegmentDetail": {
+        "$ref": "./components/schemas/SegmentDetail.json"
+      },
+      "SegmentMember": {
+        "$ref": "./components/schemas/SegmentMember.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Segments",
+      "description": "Segments"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

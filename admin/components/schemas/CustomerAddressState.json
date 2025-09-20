@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "iso_code": {
+      "type": "string"
+    },
+    "gst_code": {
+      "type": "string"
+    },
+    "alias": {
+      "type": "string"
+    }
+  },
+  "title": "CustomerAddressState",
+  "x-tags": [
+    "Store"
+  ]
+}

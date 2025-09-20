@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "lot_batch": {
+      "type": "string"
+    },
+    "mfg_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "exp_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "manufacturer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stock_quantity": {
+      "type": "integer"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/LotBatchDetail",
+    "description": "API reference for the LotBatchDetail schema"
+  },
+  "required": [
+    "lot_batch",
+    "mfg_date",
+    "exp_date",
+    "manufacturer",
+    "stock_quantity"
+  ],
+  "title": "LotBatchDetail"
+}

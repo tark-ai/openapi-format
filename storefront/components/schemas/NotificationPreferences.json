@@ -1,0 +1,28 @@
+{
+  "description": "Set channel preferences for each type of ",
+  "type": "object",
+  "properties": {
+    "transactional": {
+      "description": "These notifications are typically critical for user engagement, providing updates, confirmations, or alerts related to their account activities.",
+      "$ref": "./NotificationChannelPreferences.json"
+    },
+    "promotional": {
+      "description": "These notifications aim to engage users with promotional content and enhance their overall experience with the platform.",
+      "$ref": "./NotificationChannelPreferences.json"
+    },
+    "newsletter": {
+      "description": "These notifications are often sent periodically as part of a subscription service.\n",
+      "$ref": "./NotificationChannelPreferences.json"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/NotificationPreferences",
+    "description": "API reference for the NotificationPreferences schema"
+  },
+  "required": [
+    "transactional",
+    "promotional",
+    "newsletter"
+  ],
+  "title": "NotificationPreferences"
+}

@@ -1,0 +1,81 @@
+{
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "$ref": "./DiscountCouponPromotion.json"
+        },
+        {
+          "$ref": "./FreeGoodCouponPromotion.json"
+        },
+        {
+          "$ref": "./FixedPriceCouponPromotion.json"
+        },
+        {
+          "$ref": "./BuyXGetYCouponPromotion.json"
+        },
+        {
+          "$ref": "./VolumeBasedCouponPromotion.json"
+        },
+        {
+          "$ref": "./FreeShipingCouponPromotion.json"
+        },
+        {
+          "$ref": "./AcceleratedRewardCouponPromotion.json"
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "required": [
+        "coupon_type",
+        "coupon_code"
+      ],
+      "properties": {
+        "coupon_type": {
+          "enum": [
+            "discount",
+            "free-goods",
+            "fixed-price",
+            "free-shipping",
+            "buy-x-get-y",
+            "volume-based",
+            "accelerated-rewards"
+          ]
+        },
+        "coupon_code": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "application_rules": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "max_applicable_items": {
+              "type": "integer"
+            },
+            "application_priority": {
+              "enum": [
+                "cheapest_first",
+                "most_expensive_first",
+                "first_added"
+              ]
+            }
+          },
+          "required": [
+            "max_applicable_items",
+            "application_priority"
+          ]
+        }
+      }
+    }
+  ],
+  "title": "Coupon",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

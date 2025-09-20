@@ -1,0 +1,40 @@
+{
+  "allOf": [
+    {
+      "$ref": "./WebhookDeliveryLog.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "request_headers",
+        "request_body",
+        "response_headers",
+        "response_body"
+      ],
+      "properties": {
+        "request_headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "request_body": {
+          "type": "object"
+        },
+        "response_headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "response_body": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "title": "WebhookDeliveryLogDetail",
+  "x-tags": [
+    "Webhooks"
+  ]
+}

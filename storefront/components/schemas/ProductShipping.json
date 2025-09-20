@@ -1,0 +1,31 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "handling_charges_including_tax": {
+      "type": "number"
+    },
+    "handling_charges_excluding_tax": {
+      "type": "number"
+    },
+    "tax_type": {
+      "type": "string"
+    },
+    "tax_rate": {
+      "type": "number"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductShipping",
+    "description": "API reference for the ProductShipping schema"
+  },
+  "required": [
+    "handling_charges_including_tax",
+    "handling_charges_excluding_tax",
+    "tax_type",
+    "tax_rate"
+  ],
+  "title": "ProductShipping"
+}

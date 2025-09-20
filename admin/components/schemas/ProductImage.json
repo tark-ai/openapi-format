@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "alternate_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "sort_order": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "url_tiny": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "url_thumbnail": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "url_standard": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "url_zoom": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "file_id": {
+      "type": "string"
+    },
+    "file_type": {
+      "enum": [
+        "image"
+      ]
+    }
+  },
+  "title": "ProductImage",
+  "x-tags": [
+    "Catalog"
+  ]
+}

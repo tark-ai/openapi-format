@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/GstinDetail",
+    "description": "API reference for the GstinDetail schema"
+  },
+  "title": "GstinDetail",
+  "x-tags": [
+    "KYC"
+  ]
+}

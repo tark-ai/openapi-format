@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "campaigns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modified_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "title": "SegmentUsage",
+  "x-tags": [
+    "Segments"
+  ]
+}

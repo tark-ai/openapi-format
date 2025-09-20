@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_mode": {
+      "type": "string",
+      "const": "CASH"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayWithCash",
+    "description": "API reference for the PayWithCash schema"
+  },
+  "required": [
+    "payment_mode"
+  ],
+  "title": "PayWithCash"
+}

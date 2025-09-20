@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "country_code": {
+      "description": "Two-letter code begin with a plus sign prefix that identifies different countries.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "example": "+91"
+    },
+    "first_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PosUpdateCustomerWithEmail",
+    "description": "API reference for the PosUpdateCustomerWithEmail schema"
+  },
+  "required": [
+    "email"
+  ],
+  "title": "UpdateCustomerWithEmail"
+}

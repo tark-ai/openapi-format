@@ -1,0 +1,304 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Inventories",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/catalog/inventories": {
+      "get": {
+        "operationId": "list-inventory",
+        "summary": "List all inventories",
+        "description": "List all inventories",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventories": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "#/components/schemas/ItemWiseInventory"
+                              },
+                              {
+                                "$ref": "#/components/schemas/LotBatchWiseInventory"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Inventories"
+        ]
+      },
+      "parameters": []
+    },
+    "/catalog/inventories/activites": {
+      "get": {
+        "operationId": "list-inventory-activity",
+        "summary": "List all inventories activities",
+        "description": "Lists all inventory related activities of stock movements. This provides a comprehensive audit trail of inventory operations such as receiving, reservations, adjustments, transfers, and sales.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activities": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/InventoryActivity"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Inventories"
+        ]
+      },
+      "parameters": []
+    },
+    "/catalog/inventories/detail": {
+      "get": {
+        "operationId": "list-inventory-detail",
+        "summary": "Retrieve inventory detail",
+        "description": "Retrieves inventory details for a specific product, product variant, or lot/batch based on the parameters provided.",
+        "parameters": [
+          {
+            "name": "lot_batch",
+            "in": "query",
+            "description": "lot batch of selected productor or variant.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "Product Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variant_id",
+            "in": "query",
+            "description": "Variant Id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory": {
+                          "$ref": "#/components/schemas/InventoryDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Inventories"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "InventoryActivity": {
+        "$ref": "./components/schemas/InventoryActivity.json"
+      },
+      "InventoryDetail": {
+        "$ref": "./components/schemas/InventoryDetail.json"
+      },
+      "ItemWiseInventory": {
+        "$ref": "./components/schemas/ItemWiseInventory.json"
+      },
+      "LotBatchWiseInventory": {
+        "$ref": "./components/schemas/LotBatchWiseInventory.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Inventories",
+      "description": "Inventories"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

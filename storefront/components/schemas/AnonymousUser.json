@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of the user.",
+      "type": "string",
+      "readOnly": true
+    },
+    "is_anonymous": {
+      "description": "Indicates whether the user is anonymous.",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_logged_in": {
+      "description": "Indicates whether the user is currently logged in.",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "first_name": {
+      "description": "User’s first name.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_name": {
+      "description": "User’s last name.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "email": {
+      "description": "User’s email I’d.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_email_verified": {
+      "description": "Boolean indicating whether the email is verified.",
+      "type": "boolean",
+      "default": false,
+      "readOnly": true
+    },
+    "is_phone_verified": {
+      "description": "Boolean indicating whether the phone is verified.",
+      "type": "boolean",
+      "default": false,
+      "readOnly": true
+    },
+    "profile_image_url": {
+      "description": "URL to the user's profile image.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "description": "Timestamps indicate when the user's account was created.",
+      "type": "string",
+      "format": "datetime",
+      "readOnly": true
+    },
+    "modified_at": {
+      "description": "Timestamps indicating when the user account was last modified.",
+      "type": "string",
+      "format": "datetime",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/AnonymousUser",
+    "description": "API reference for the AnonymousUser schema"
+  },
+  "required": [
+    "id",
+    "is_anonymous",
+    "is_logged_in",
+    "first_name",
+    "last_name",
+    "phone",
+    "email",
+    "is_email_verified",
+    "is_phone_verified",
+    "profile_image_url"
+  ],
+  "title": "AnonymousUser"
+}

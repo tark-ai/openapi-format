@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "to_be_shipped": {
+      "type": "integer"
+    },
+    "in_transit": {
+      "type": "integer"
+    },
+    "on_hold": {
+      "type": "integer"
+    },
+    "delivered": {
+      "type": "integer"
+    },
+    "late_delivered": {
+      "type": "integer"
+    },
+    "returned_to_origin": {
+      "type": "integer"
+    }
+  },
+  "title": "ShippingStats"
+}

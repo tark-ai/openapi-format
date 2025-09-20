@@ -1,0 +1,47 @@
+{
+  "description": "promotion_type = discount",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "promotion_type": {
+      "enum": [
+        "discount"
+      ]
+    },
+    "starts_at": {
+      "type": "string"
+    },
+    "expires_at": {
+      "description": "null means never expires.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "./PercentageBasedDiscount.json"
+          },
+          {
+            "$ref": "./FixedAmountBasedDiscount.json"
+          }
+        ]
+      }
+    }
+  },
+  "required": [
+    "promotion_type",
+    "starts_at",
+    "details"
+  ],
+  "title": "DiscountBasedPromotion"
+}

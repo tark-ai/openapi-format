@@ -1,0 +1,35 @@
+{
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "icon_url": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "anyOf": [
+        {
+          "$ref": "./PaymentMethodCard.json"
+        },
+        {
+          "$ref": "./PaymentMethodNb.json"
+        },
+        {
+          "$ref": "./PaymentMethodWallet.json"
+        },
+        {
+          "$ref": "./PaymentMethodUpi.json"
+        },
+        {
+          "$ref": "./PaymentMethodBankTransfer.json"
+        }
+      ]
+    }
+  ],
+  "title": "PaymentMethodDetail",
+  "x-tags": [
+    "Payments"
+  ]
+}

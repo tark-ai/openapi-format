@@ -32,7 +32,18 @@
   "scripts": {
     "test": "jest --colors --verbose --reporters=default --collectCoverage --no-cache --maxWorkers=2",
     "lint": "npx prettier --write '**/*.js'",
-    "release": "npx np --branch main"
+    "release": "npx np --branch main",
+    "split-storefront": "node bin/cli.js https://openapi.commercengine.io/ce-storefront.json --splitByTags --output storefront/main.json && npm run clean-storefront",
+    "split-admin": "node bin/cli.js https://openapi.commercengine.io/ce-admin.json --splitByTags --output admin/main.json && npm run clean-admin",
+    "clean-storefront": "for f in storefront/*.json; do openapi spec clean \"$f\" -w; done",
+    "clean-admin": "for f in admin/*.json; do openapi spec clean \"$f\" -w; done",
+    "split-all": "npm run split-storefront && npm run split-admin",
+    "merge-storefront": "node bin/cli.js ./storefront --mergeByTags --output storefront.openapi.json",
+    "merge-admin": "node bin/cli.js ./admin --mergeByTags --output admin.openapi.json",
+    "merge-all": "npm run merge-storefront && npm run merge-admin",
+    "lint-storefront": "for f in storefront/*.json; do speakeasy lint openapi --schema=\"$f\" --logLevel warn --non-interactive; done",
+    "lint-admin": "for f in admin/*.json; do speakeasy lint openapi --schema=\"$f\" --logLevel warn --non-interactive; done",
+    "lint-all": "npm run lint-storefront && npm run lint-admin"
   },
   "dependencies": {
     "@stoplight/yaml": "^4.3.0",

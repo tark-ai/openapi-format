@@ -1,0 +1,58 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "shipment_number",
+      "status"
+    ],
+    "properties": {
+      "shipment_number": {
+        "type": "string"
+      },
+      "status": {
+        "enum": [
+          "shipped",
+          "in_transit",
+          "out_for_delivery",
+          "delivered",
+          "return_to_origin",
+          "lost"
+        ]
+      },
+      "shipped_date": {
+        "description": "required if shipped_date is not updated yet for this shipment.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "out_for_delivery_date": {
+        "description": "required if status is out_for_delivery.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "delivered_date": {
+        "description": "required if status is delivered.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "returned_date": {
+        "description": "required if status is return_to_origin.",
+        "type": "string",
+        "format": "date-time"
+      },
+      "awb_no": {
+        "type": "string"
+      },
+      "courier_company_name": {
+        "type": "string"
+      },
+      "shipping_label_url": {
+        "type": "string"
+      }
+    }
+  },
+  "title": "ShipmentBulkUpdate",
+  "x-tags": [
+    "Shipping"
+  ]
+}

@@ -1,0 +1,2129 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Carts",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "paths": {
+    "/carts": {
+      "post": {
+        "operationId": "create-cart",
+        "summary": "Create cart",
+        "description": "Create cart",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UpdateCartItem"
+                    }
+                  },
+                  "metadata": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/create-cart",
+          "description": "API reference for the create-cart operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "createCart"
+      }
+    },
+    "/carts/available-coupons": {
+      "get": {
+        "operationId": "list-coupons",
+        "summary": "Retrieve all coupons",
+        "description": "Retrieve active coupons",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "coupons": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Coupon"
+                          }
+                        }
+                      },
+                      "required": [
+                        "coupons"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-coupons",
+          "description": "API reference for the list-coupons operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listCoupons"
+      },
+      "parameters": []
+    },
+    "/carts/available-promotions": {
+      "get": {
+        "operationId": "list-promotions",
+        "summary": "Retrieve all promotions",
+        "description": "All active promotions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "promotions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Promotion"
+                          }
+                        }
+                      },
+                      "required": [
+                        "promotions"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-promotions",
+          "description": "API reference for the list-promotions operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listPromotions"
+      },
+      "parameters": []
+    },
+    "/carts/users/{user_id}": {
+      "get": {
+        "operationId": "get-user-cart",
+        "summary": "Retrieve cart using user id",
+        "description": "Retrieve cart detail using user id",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "cart details"
+                      ],
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-user-cart",
+          "description": "API reference for the get-user-cart operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getUserCart"
+      },
+      "delete": {
+        "operationId": "delete-user-cart",
+        "summary": "Delete cart using user id",
+        "description": "delete all items from the cart using user id.",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "All cart items are removed."
+                      ],
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/delete-user-cart",
+          "description": "API reference for the delete-user-cart operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "removeUserCart"
+      },
+      "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "description": "User ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}": {
+      "get": {
+        "operationId": "get-cart",
+        "summary": "Retrieve cart detail",
+        "description": "Retrieve cart detail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Cart ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "cart details"
+                      ],
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-cart",
+          "description": "API reference for the get-cart operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getCart"
+      },
+      "delete": {
+        "operationId": "delete-cart",
+        "summary": "Delete cart",
+        "description": "delete all items from the cart.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Cart ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "All cart items are removed."
+                      ],
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/delete-cart",
+          "description": "API reference for the delete-cart operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "deleteCart"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/address": {
+      "post": {
+        "operationId": "create-cart-address",
+        "summary": "Update cart address",
+        "description": "Update billing and shipping address",
+        "requestBody": {
+          "description": "Update billing and shipping address during checkout",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "title": "Registered User",
+                    "description": "For registered users where address is previously added",
+                    "required": [
+                      "billing_address_id",
+                      "shipping_address_id"
+                    ],
+                    "properties": {
+                      "billing_address_id": {
+                        "type": "string"
+                      },
+                      "shipping_address_id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "title": "Guest User",
+                    "description": "For guest checkout where address is not saved",
+                    "required": [
+                      "billing_address",
+                      "shipping_address"
+                    ],
+                    "properties": {
+                      "billing_address": {
+                        "$ref": "#/components/schemas/CustomerAddress"
+                      },
+                      "shipping_address": {
+                        "$ref": "#/components/schemas/CustomerAddress"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "Address updated successfully"
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/create-cart-address",
+          "description": "API reference for the create-cart-address operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "createCartAddress"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/coupon": {
+      "post": {
+        "operationId": "apply-coupon",
+        "summary": "Apply coupon",
+        "description": "Apply coupon",
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "coupon_code": {
+                    "type": "string",
+                    "examples": [
+                      "FLAT100OFF"
+                    ]
+                  }
+                },
+                "required": [
+                  "coupon_code"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/apply-coupon",
+          "description": "API reference for the apply-coupon operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "applyCoupon"
+      },
+      "delete": {
+        "operationId": "remove-coupon",
+        "summary": "Remove coupon",
+        "description": "remove coupon from cart",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/remove-coupon",
+          "description": "API reference for the remove-coupon operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "removeCoupon"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/credit-balance": {
+      "post": {
+        "operationId": "redeem-credit-balance",
+        "summary": "Use credit balance",
+        "description": "Use credit balance",
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "credit_balance_used": {
+                    "type": "number",
+                    "format": "double",
+                    "examples": [
+                      200
+                    ]
+                  }
+                },
+                "required": [
+                  "credit_balance_used"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/redeem-credit-balance",
+          "description": "API reference for the redeem-credit-balance operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "redeemCreditBalance"
+      },
+      "delete": {
+        "operationId": "remove-credit-balance",
+        "summary": "Remove credit balance",
+        "description": "remove credit balance applied to cart",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/remove-credit-balance",
+          "description": "API reference for the remove-credit-balance operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "removeCreditBalance"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/evaluate-coupons": {
+      "get": {
+        "operationId": "evaluate-coupons",
+        "summary": "Evaluate coupons",
+        "description": "Evaluate applicable \u0026 inapplicable coupons based on the specified cart.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "applicable_coupons": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ApplicableCoupon"
+                          }
+                        },
+                        "inapplicable_coupons": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/InapplicableCoupon"
+                          }
+                        }
+                      },
+                      "required": [
+                        "applicable_coupons",
+                        "inapplicable_coupons"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/evaluate-coupons",
+          "description": "API reference for the evaluate-coupons operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listPromotions"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart Id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/evaluate-promotions": {
+      "get": {
+        "operationId": "evaluate-promotions",
+        "summary": "Evaluate promotions",
+        "description": "Evaluate applicable \u0026 inapplicable promotions based on the specified cart.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "applicable_promotions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ApplicablePromotion"
+                          }
+                        },
+                        "inapplicable_promotions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/InapplicablePromotion"
+                          }
+                        }
+                      },
+                      "required": [
+                        "applicable_promotions",
+                        "inapplicable_promotions"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/evaluate-promotions",
+          "description": "API reference for the evaluate-promotions operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listPromotions"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart Id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/fulfillment-preference": {
+      "post": {
+        "operationId": "update-fulfillment-preference",
+        "summary": "Update fulfillment preference",
+        "description": "Update fulfillment preference",
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CollectInStoreFulfillment"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DeliveryFulfillment"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PartialCollectAndDelivery"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/update-fulfillment-preference",
+          "description": "API reference for the update-fulfillment-preference operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "updateFulfillmentPreference"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/items": {
+      "post": {
+        "operationId": "update-cart",
+        "summary": "Add/delete cart item",
+        "description": "Add Item to cart. To delete item from cart, pass quantity = 0",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "cart id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCartItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/update-cart",
+          "description": "API reference for the update-cart operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "updateCart"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/loyalty-points": {
+      "post": {
+        "operationId": "redeem-loyalty-points",
+        "summary": "Redeem loyalty points",
+        "description": "Redeem loyalty points",
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "loyalty_point_redeemed": {
+                    "type": "integer",
+                    "examples": [
+                      1000
+                    ],
+                    "minimum": 1
+                  }
+                },
+                "required": [
+                  "loyalty_point_redeemed"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/redeem-loyalty-points",
+          "description": "API reference for the redeem-loyalty-points operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "redeemLoyaltyPoints"
+      },
+      "delete": {
+        "operationId": "remove-loyalty-points",
+        "summary": "Remove loyalty points",
+        "description": "Remove loyalty points applied in cart",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/remove-loyalty-points",
+          "description": "API reference for the remove-loyalty-points operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "removeLoyaltyPoints"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/carts/{id}/shipping-method": {
+      "post": {
+        "operationId": "update-shipping-method",
+        "summary": "Update shipping method",
+        "description": "Update preferred shipping method and courier.",
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "shipping_provider_id": {
+                    "type": "string"
+                  },
+                  "courier_company_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "shipping_provider_id",
+                  "courier_company_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "cart": {
+                          "$ref": "#/components/schemas/Cart"
+                        }
+                      },
+                      "required": [
+                        "cart"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/update-shipping-method",
+          "description": "API reference for the update-shipping-method operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "addShippingMethod"
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Cart ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/wishlist/{user_id}": {
+      "get": {
+        "operationId": "get-wishlist",
+        "summary": "Retrieve wishlist",
+        "description": "Retrieve products in wishlist",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      },
+                      "required": [
+                        "products"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-wishlist",
+          "description": "API reference for the get-wishlist operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "getWishlist"
+      },
+      "post": {
+        "operationId": "add-to-wishlist",
+        "summary": "Add product to wishlist",
+        "description": "wishlist",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "examples": [
+                      "01F3Z7KG06J4ACWH1C4926KJEC"
+                    ]
+                  },
+                  "variant_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "product_id",
+                  "variant_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      },
+                      "required": [
+                        "products"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/add-to-wishlist",
+          "description": "API reference for the add-to-wishlist operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "addToWishlist"
+      },
+      "delete": {
+        "operationId": "delete-from-wishlist",
+        "summary": "Delete product from wishlist",
+        "description": "Remove product from wishlist",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "string",
+                    "examples": [
+                      "01F3Z7KG06J4ACWH1C4926KJEC"
+                    ]
+                  },
+                  "variant_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "product_id",
+                  "variant_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        }
+                      },
+                      "required": [
+                        "products"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/delete-from-wishlist",
+          "description": "API reference for the delete-from-wishlist operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "x-speakeasy-group": "carts",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "deleteFromWishlist"
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "CustomerGroupId": {
+        "name": "x-customer-group-id",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "This param is used to determine product pricing, promotions, and subscription rates.  If a valid customer group id is provided, pricing details will be retrieved accordingly.  If no matching data is found for the specified customer group id, the system will fall back to the default customer group id.  If no data is found for the default group either, the highest applicable price will be returned."
+      }
+    },
+    "schemas": {
+      "ApplicableCoupon": {
+        "$ref": "./components/schemas/ApplicableCoupon.json"
+      },
+      "ApplicablePromotion": {
+        "$ref": "./components/schemas/ApplicablePromotion.json"
+      },
+      "Cart": {
+        "$ref": "./components/schemas/Cart.json"
+      },
+      "CollectInStoreFulfillment": {
+        "$ref": "./components/schemas/CollectInStoreFulfillment.json"
+      },
+      "Coupon": {
+        "$ref": "./components/schemas/Coupon.json"
+      },
+      "CustomerAddress": {
+        "$ref": "./components/schemas/CustomerAddress.json"
+      },
+      "DeliveryFulfillment": {
+        "$ref": "./components/schemas/DeliveryFulfillment.json"
+      },
+      "InapplicableCoupon": {
+        "$ref": "./components/schemas/InapplicableCoupon.json"
+      },
+      "InapplicablePromotion": {
+        "$ref": "./components/schemas/InapplicablePromotion.json"
+      },
+      "Item": {
+        "$ref": "./components/schemas/Item.json"
+      },
+      "PartialCollectAndDelivery": {
+        "$ref": "./components/schemas/PartialCollectAndDelivery.json"
+      },
+      "Promotion": {
+        "$ref": "./components/schemas/Promotion.json"
+      },
+      "UpdateCartItem": {
+        "$ref": "./components/schemas/UpdateCartItem.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "description": "Access token",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Carts",
+      "description": "Carts"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  }
+}

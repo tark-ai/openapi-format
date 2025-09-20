@@ -1,0 +1,121 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "variant id",
+      "type": "string"
+    },
+    "product_id": {
+      "description": "product id",
+      "type": "string"
+    },
+    "sku": {
+      "description": "variant sku",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "slug": {
+      "type": "string"
+    },
+    "name": {
+      "description": "variant name",
+      "type": "string"
+    },
+    "product_name": {
+      "description": "variant name",
+      "type": "string"
+    },
+    "short_description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "stock_available": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "backorder": {
+      "description": "Indicates whether the item is being fulfilled as a backorder. When true, the item is not currently in stock and will ship later once inventory is available. This may result in the order being split into multiple shipments, with delays for the backordered portion.",
+      "type": "boolean"
+    },
+    "on_offer": {
+      "description": "Indicates whether this item is associated with any active (product-specific) coupons",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "on_promotion": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "on_subscription": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_default": {
+      "description": "Indicates whether a variant is marked as the default variant for a product",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "associated_options": {
+      "description": "This object contains multiple dynamic keys. Each key is a string derived from the attribute key, and the value is an object of the type `AssociatedOption`.",
+      "$ref": "./AssociatedOption.json"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductImage.json"
+      }
+    },
+    "pricing": {
+      "$ref": "./ProductPricing.json"
+    },
+    "subscription": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductSubscription.json"
+      }
+    },
+    "promotion": {
+      "$ref": "./ProductPromotion.json"
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "$ref": "./LotBatchDetail.json"
+      }
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Variant",
+    "description": "API reference for the Variant schema"
+  },
+  "required": [
+    "id",
+    "product_id",
+    "sku",
+    "slug",
+    "name",
+    "product_name",
+    "short_description",
+    "active",
+    "stock_available",
+    "on_offer",
+    "on_promotion",
+    "on_subscription",
+    "is_default",
+    "associated_options",
+    "images",
+    "pricing",
+    "subscription",
+    "promotion"
+  ],
+  "title": "ProductVariant"
+}

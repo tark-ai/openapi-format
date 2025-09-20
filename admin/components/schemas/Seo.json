@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "keywords": {
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "slug": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "keywords",
+    "slug"
+  ],
+  "title": "Seo"
+}

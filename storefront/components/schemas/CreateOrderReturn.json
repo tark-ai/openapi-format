@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "return_items": {
+      "type": "array",
+      "items": {
+        "$ref": "./OrderReturnItem.json"
+      }
+    },
+    "shipping_address": {
+      "$ref": "./CustomerAddress.json"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CreateOrderReturn",
+    "description": "API reference for the CreateOrderReturn schema"
+  },
+  "title": "CreateOrderReturn"
+}

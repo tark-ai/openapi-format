@@ -1,0 +1,29 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "details",
+        "applies_to_product"
+      ],
+      "properties": {
+        "details": {
+          "$ref": "./FreeGoodsRule.json"
+        },
+        "applies_to_product": {
+          "enum": [
+            "product"
+          ]
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FreeGoodCouponPromotion",
+    "description": "API reference for the FreeGoodCouponPromotion schema"
+  },
+  "title": "FreeGoodCouponPromotion"
+}

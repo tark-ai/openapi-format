@@ -1,0 +1,15 @@
+{
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/BuyXGetYRule",
+    "description": "API reference for the BuyXGetYRule schema"
+  },
+  "oneOf": [
+    {
+      "$ref": "./BuyXGetYRuleBasedOnQuantity.json"
+    },
+    {
+      "$ref": "./BuyXGetYRuleBasedOnAmount.json"
+    }
+  ],
+  "title": "BuyXGetYRule"
+}

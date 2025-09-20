@@ -1,0 +1,58 @@
+{
+  "description": "Common fields in all types of payments.",
+  "type": "object",
+  "properties": {
+    "transaction_type": {
+      "enum": [
+        "payment",
+        "refund"
+      ]
+    },
+    "request_number": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "payment_status": {
+      "enum": [
+        "pending",
+        "success",
+        "failed",
+        "partially_paid",
+        "refund_initiated"
+      ]
+    },
+    "payment_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payment_reference_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payment_method": {
+      "enum": [
+        "Credit Card",
+        "Debit Card",
+        "Netbanking",
+        "UPI",
+        "Wallet",
+        "Loyalty Point",
+        "IMPS",
+        "NEFT",
+        "RTGS"
+      ]
+    },
+    "icon_url": {
+      "type": "string"
+    }
+  },
+  "title": "OrderPaymentInfo",
+  "x-tags": [
+    "Orders"
+  ]
+}

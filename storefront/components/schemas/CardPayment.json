@@ -1,0 +1,31 @@
+{
+  "description": "Payments using credit card, debit card",
+  "allOf": [
+    {
+      "$ref": "./PaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "card_number": {
+          "description": "masked card number\r\ne.g. ************1111",
+          "type": "string"
+        },
+        "card_type": {
+          "type": "string",
+          "enum": [
+            "Visa",
+            "Master Card",
+            "Rupay",
+            "American Express"
+          ]
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CardPayment",
+    "description": "API reference for the CardPayment schema"
+  },
+  "title": "CardPayment"
+}

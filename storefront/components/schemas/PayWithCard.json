@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_mode": {
+      "type": "string",
+      "const": "CARD"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayWithCard",
+    "description": "API reference for the PayWithCard schema"
+  },
+  "required": [
+    "payment_mode"
+  ],
+  "title": "PayWithCard"
+}

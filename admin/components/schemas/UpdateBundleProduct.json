@@ -1,0 +1,90 @@
+{
+  "allOf": [
+    {
+      "$ref": "./ProductCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Array of category ids.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "categories": {
+          "description": "Array of category ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "images": {
+          "description": "Array of image file ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "videos": {
+          "description": "Array of video file ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductPricing.json"
+          }
+        },
+        "promotions": {
+          "$ref": "./ProductPromotion.json"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductSubscription.json"
+          }
+        },
+        "sales_channels": {
+          "type": "array",
+          "items": {
+            "$ref": "./SalesChannel.json"
+          }
+        },
+        "bundle_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "product_id",
+              "variant_id",
+              "quantity"
+            ],
+            "properties": {
+              "product_id": {
+                "type": "string"
+              },
+              "variant_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "quantity": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "UpdateBundleProduct",
+  "x-tags": [
+    "Catalog"
+  ]
+}

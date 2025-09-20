@@ -1,0 +1,1462 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Shipping",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/shipping/service-providers": {
+      "get": {
+        "operationId": "list-shipping-service-providers",
+        "summary": "List all service providers",
+        "description": "List all service providers",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "service_providers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": []
+    },
+    "/shipping/serviceability": {
+      "post": {
+        "operationId": "check-shipping-serviceability",
+        "summary": "Courier Serviceability",
+        "description": "Check Courier Serviceability",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "delivery_pincode": {
+                    "type": "string"
+                  },
+                  "weight": {
+                    "type": "number"
+                  },
+                  "length": {
+                    "type": "integer"
+                  },
+                  "breadth": {
+                    "type": "integer"
+                  },
+                  "height": {
+                    "type": "integer"
+                  },
+                  "warehouse_id": {
+                    "description": "array of warehouse ids",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "shipping_option": {
+                    "enum": [
+                      "auto",
+                      "manual"
+                    ]
+                  },
+                  "shipping_provider_id": {
+                    "description": "to check serviceability using particular shipping provider.",
+                    "type": "string"
+                  },
+                  "mode": {
+                    "enum": [
+                      "SURFACE",
+                      "AIR",
+                      "ALL"
+                    ]
+                  }
+                },
+                "required": [
+                  "delivery_pincode",
+                  "weight"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "is_servicable": {
+                          "type": "boolean"
+                        },
+                        "shipping_options": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "warehouse_id": {
+                                "type": "string"
+                              },
+                              "warehouse_name": {
+                                "type": "string"
+                              },
+                              "warehouse_pincode": {
+                                "type": "string"
+                              },
+                              "shipping_methods": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "shipping_type": {
+                                      "enum": [
+                                        "auto",
+                                        "manual"
+                                      ]
+                                    },
+                                    "shipping_amount": {
+                                      "description": "shipment amount of recommended courier, or range of shipment amount - (lowest to highest).",
+                                      "type": "string"
+                                    },
+                                    "estimated_delivery_days": {
+                                      "description": "estimated delivery days of recommended courier, or range of estimated delivery days - (lowest to highest).",
+                                      "type": "string"
+                                    },
+                                    "courier_companies": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "id": {
+                                            "type": "string"
+                                          },
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "shipping_amount": {
+                                            "type": "number"
+                                          },
+                                          "estimated_delivery_days": {
+                                            "type": "integer"
+                                          },
+                                          "is_recommended": {
+                                            "type": "boolean"
+                                          },
+                                          "is_surface": {
+                                            "type": "boolean"
+                                          },
+                                          "is_hyperlocal": {
+                                            "type": "boolean"
+                                          },
+                                          "rating": {
+                                            "type": "number"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": []
+    },
+    "/shipping/shipments": {
+      "get": {
+        "operationId": "list-shipments",
+        "summary": "List all shipments",
+        "description": "List all shipments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipments": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ShipmentList"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "post": {
+        "operationId": "create-shipment",
+        "summary": "Create shipment",
+        "description": "Create shipment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "order_number": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "$ref": "#/components/schemas/CreateShipment"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      }
+    },
+    "/shipping/shipments/bulk-update": {
+      "post": {
+        "operationId": "bulk-update-shipments",
+        "summary": "Update shipments in bulk",
+        "description": "Update shipments in bulk",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShipmentBulkUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": []
+    },
+    "/shipping/shipments/{order_number}/check-inventory": {
+      "get": {
+        "operationId": "check-order-inventory",
+        "summary": "Check Inventory",
+        "description": "Check Inventory",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory_status": {
+                          "enum": [
+                            "fulfilled",
+                            "partially-fulfilled",
+                            "not-fulfilled"
+                          ]
+                        },
+                        "shipment_items": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ShipmentItem"
+                          }
+                        },
+                        "recommended_warehouses": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "inventory_status": {
+                                "enum": [
+                                  "fulfilled",
+                                  "partially-fulfilled",
+                                  "not-fulfilled"
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        "inventory_detail": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "sku": {
+                                "type": "string"
+                              },
+                              "total_quantity": {
+                                "type": "integer"
+                              },
+                              "warehouses": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "warehouse_id": {
+                                      "type": "string"
+                                    },
+                                    "warehouse_name": {
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "allowed_action": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "Order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{order_number}/pack-items": {
+      "post": {
+        "operationId": "pack-shipment-items",
+        "summary": "Pack items",
+        "description": "Generate auto packing details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "warehouse_id": {
+                    "type": "string"
+                  },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "product_id",
+                        "variant_id",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "product_id": {
+                          "type": "string"
+                        },
+                        "variant_id": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "warehouse_id",
+                  "items"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "total_boxes": {
+                          "type": "integer"
+                        },
+                        "total_cost": {
+                          "type": "number"
+                        },
+                        "total_weight": {
+                          "type": "number"
+                        },
+                        "boxes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "enum": [
+                                  "bin",
+                                  "shipper"
+                                ]
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "length": {
+                                "type": "number"
+                              },
+                              "width": {
+                                "type": "number"
+                              },
+                              "height": {
+                                "type": "number"
+                              },
+                              "weight": {
+                                "type": "number"
+                              },
+                              "max_weight": {
+                                "type": "number"
+                              },
+                              "packed_items_count": {
+                                "type": "integer"
+                              },
+                              "packed_items_weight": {
+                                "type": "number"
+                              },
+                              "chargeable_weight": {
+                                "type": "number"
+                              },
+                              "box_count": {
+                                "type": "integer"
+                              },
+                              "items": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "description": "combination of product id and variant id separated by - (hyphen).",
+                                      "type": "string"
+                                    },
+                                    "product_id": {
+                                      "type": "string"
+                                    },
+                                    "product_name": {
+                                      "type": "string"
+                                    },
+                                    "variant_id": {
+                                      "type": "string"
+                                    },
+                                    "variant_name": {
+                                      "type": "string"
+                                    },
+                                    "length": {
+                                      "type": "number"
+                                    },
+                                    "width": {
+                                      "type": "number"
+                                    },
+                                    "height": {
+                                      "type": "number"
+                                    },
+                                    "weight": {
+                                      "type": "number"
+                                    },
+                                    "image_separated": {
+                                      "type": "string"
+                                    },
+                                    "image_sbs": {
+                                      "type": "string"
+                                    },
+                                    "coordinates": {
+                                      "type": "object",
+                                      "additionalProperties": {
+                                        "type": "integer"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "Order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{order_number}/refund-shortfall": {
+      "post": {
+        "operationId": "refund-shortfall",
+        "summary": "Refund shortfall",
+        "description": "Refund shortfall",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "sku",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "sku": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        },
+                        "free_quantity": {
+                          "type": "integer",
+                          "default": 0
+                        }
+                      }
+                    }
+                  },
+                  "payment_method": {
+                    "enum": [
+                      "original-payment-mode",
+                      "bank-transfer"
+                    ]
+                  },
+                  "bank_account_id": {
+                    "description": "required if payment_method = bank-transfer",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "items",
+                  "payment_method"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "Order Number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{order_number}/wait-for-inventory": {
+      "post": {
+        "operationId": "wait-for-inventory",
+        "summary": "Wait for inventory",
+        "description": "Wait for inventory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "revised_shipping_date": {
+                    "type": "string"
+                  },
+                  "shipping_option": {
+                    "enum": [
+                      "auto",
+                      "manual"
+                    ]
+                  },
+                  "notify_customer": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "revised_shipping_date"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "Order Number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}": {
+      "get": {
+        "operationId": "get-shipment-detail",
+        "summary": "Retrieve shipment detail",
+        "description": "Retrieve shipment detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipment": {
+                          "$ref": "#/components/schemas/ShipmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}/cancel": {
+      "post": {
+        "operationId": "cancel-shipment",
+        "summary": "Cancel shipment",
+        "description": "Shipment will be marked as unscheduled. It can be scheduled with other carrier or ship through manual method.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "reason"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}/download-invoice": {
+      "get": {
+        "operationId": "download-shipment-invoice",
+        "summary": "Download invoice",
+        "description": "Download invoice",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}/download-shipping-label": {
+      "get": {
+        "operationId": "get-shipping-label",
+        "summary": "Download shipping label",
+        "description": "Download shipping label",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}/invoice": {
+      "get": {
+        "operationId": "get-shipment-invoice",
+        "summary": "Retrieve shipment invoice",
+        "description": "Retrieve shipment invoice",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response data format",
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "pdf"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "invoice": {
+                          "$ref": "#/components/schemas/InvoiceDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}/manual-update": {
+      "put": {
+        "operationId": "update-shipment",
+        "summary": "Update shipment detail",
+        "description": "Update shipment detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  },
+                  "warehouse_id": {
+                    "type": "string"
+                  },
+                  "awb_no": {
+                    "type": "string"
+                  },
+                  "courier_company_name": {
+                    "type": "string"
+                  },
+                  "shipping_label_url": {
+                    "type": "string"
+                  },
+                  "tracking_url": {
+                    "type": "string"
+                  },
+                  "manual_shipping_charges": {
+                    "type": "number"
+                  },
+                  "eta_delivery": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "shipped_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "out_for_delivery_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "delivered_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipment": {
+                          "$ref": "#/components/schemas/ShipmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}/packing-detail": {
+      "get": {
+        "operationId": "get-shipment-packing-detail",
+        "summary": "Retrieve packing detail",
+        "description": "Retrieve packing detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "packing_detail": {
+                          "anyOf": [
+                            {
+                              "$ref": "#/components/schemas/ManualPackingDetail"
+                            },
+                            {
+                              "$ref": "#/components/schemas/AutoPackingDetail"
+                            }
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipments/{reference_number}/tracking": {
+      "get": {
+        "operationId": "get-shipment-tracking",
+        "summary": "Tracking Shipment",
+        "description": "Tracking Shipment",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "current_status": {
+                          "type": "string"
+                        },
+                        "expected_delivery_date": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "shipment_track_activities": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "activity_time": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "activity": {
+                                "type": "string"
+                              },
+                              "location": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Shipping"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "reference_number",
+          "in": "path",
+          "description": "Shipment reference number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "AutoPackingDetail": {
+        "$ref": "./components/schemas/AutoPackingDetail.json"
+      },
+      "CreateShipment": {
+        "$ref": "./components/schemas/CreateShipment.json"
+      },
+      "InvoiceDetail": {
+        "$ref": "./components/schemas/InvoiceDetail.json"
+      },
+      "ManualPackingDetail": {
+        "$ref": "./components/schemas/ManualPackingDetail.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "ShipmentBulkUpdate": {
+        "$ref": "./components/schemas/ShipmentBulkUpdate.json"
+      },
+      "ShipmentDetail": {
+        "$ref": "./components/schemas/ShipmentDetail.json"
+      },
+      "ShipmentItem": {
+        "$ref": "./components/schemas/ShipmentItem.json"
+      },
+      "ShipmentList": {
+        "$ref": "./components/schemas/ShipmentList.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Shipping",
+      "description": "Shipping"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

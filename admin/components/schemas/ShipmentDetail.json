@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "order_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "order_status": {
+      "type": "string"
+    },
+    "payment_status": {
+      "enum": [
+        "pending",
+        "success",
+        "failed"
+      ]
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "shipments": {
+      "type": "array",
+      "items": {
+        "$ref": "./Shipment.json"
+      }
+    },
+    "allowed_actions": {
+      "description": "dynamic values as per current status of the shipment.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "title": "ShipmentDetail",
+  "x-tags": [
+    "Shipping"
+  ]
+}

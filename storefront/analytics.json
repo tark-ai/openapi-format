@@ -1,0 +1,192 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Analytics",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "paths": {
+    "/analytics/track": {
+      "post": {
+        "operationId": "track-analytics-event",
+        "summary": "Track event",
+        "description": "Track event",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalyticsEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/track-analytics-event",
+          "description": "API reference for the track-analytics-event operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Analytics"
+        ],
+        "x-speakeasy-group": "analytics",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "trackAnalyticsEvent"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalyticsEvent": {
+        "$ref": "./components/schemas/AnalyticsEvent.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "description": "Access token",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Analytics",
+      "description": "Analytics"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  }
+}

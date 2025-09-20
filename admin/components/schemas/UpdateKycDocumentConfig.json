@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_mandatory": {
+      "type": "boolean"
+    },
+    "is_attachment_required": {
+      "type": "boolean"
+    },
+    "verification_type": {
+      "enum": [
+        "automatic",
+        "manual"
+      ]
+    }
+  },
+  "required": [
+    "title",
+    "is_mandatory",
+    "is_attachment_required",
+    "verification_type"
+  ],
+  "title": "UpdateKycDocumentConfig",
+  "x-tags": [
+    "Store"
+  ]
+}

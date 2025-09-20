@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "txnid": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "productinfo": {
+      "type": "string"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "si": {
+      "description": "To be used in case we want to take consent for subscription payment.\nTo create consent for subscription, value of this parameter must be 1.",
+      "const": 1
+    },
+    "si_details": {
+      "description": "Send this json object for creating subscription consent.",
+      "type": "object",
+      "properties": {
+        "billingAmount": {
+          "description": "Maximum amount that can be charged in recurring payment.",
+          "type": "number",
+          "format": "double"
+        },
+        "billingCurrency": {
+          "const": "INR"
+        },
+        "billingCycle": {
+          "description": "Subscription frequency.",
+          "const": "MONTHLY"
+        },
+        "billingInterval": {
+          "description": "Billing Interval is closely coupled with the billingCycle field and denotes at what frequency, the subscription plan needs to be executed. For monthly subscriptions, parameter values need to be sent in the request are:\nbillingCycle = MONTHLY\nbillingInterval = 1\nSimilarly, by keeping the following values, customer will be charged once in every 3 days:\nbillingCycle = DAILY\nbillingInterval = 3",
+          "type": "integer"
+        },
+        "paymentStartDate": {
+          "description": "subscription start date",
+          "type": "string",
+          "format": "date"
+        },
+        "paymentEndDate": {
+          "description": "subscription end date",
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "furl": {
+      "description": "return url in case of payment failure.",
+      "type": "string"
+    },
+    "surl": {
+      "description": "return url in case of payment success.",
+      "type": "string"
+    },
+    "hash": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayuPaymentInfo",
+    "description": "API reference for the PayuPaymentInfo schema"
+  },
+  "title": "PayuPaymentInfo"
+}

@@ -1,0 +1,23 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Order.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "payments": {
+          "type": "array",
+          "items": {
+            "$ref": "./OrderPayment.json"
+          }
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/OrderDetail",
+    "description": "API reference for the OrderDetail schema"
+  },
+  "title": "OrderDetail"
+}

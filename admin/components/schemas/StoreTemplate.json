@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "template_type": {
+      "enum": [
+        "terms-of-service",
+        "refund-policy",
+        "email",
+        "invoice",
+        "web-layer",
+        "whatsapp",
+        "chat",
+        "push-notification",
+        "webhook"
+      ]
+    },
+    "activity": {
+      "description": "example - signup, order-confirmation, order-cancelled, order-refunded, cart-abandoned, etc.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_title": {
+      "description": "to be used in email subject or notification heading if provided.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_type": {
+      "enum": [
+        "html",
+        "markdown",
+        "plaintext"
+      ]
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "template_type",
+    "content_type",
+    "content"
+  ],
+  "title": "StoreTemplate",
+  "x-tags": [
+    "Store"
+  ]
+}

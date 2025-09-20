@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "order_number": {
+      "description": "multiple order numbers are separated by comma.",
+      "type": "string"
+    },
+    "payment_link": {
+      "type": "string"
+    }
+  },
+  "title": "CreatePayment",
+  "x-tags": [
+    "Payments"
+  ]
+}

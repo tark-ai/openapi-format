@@ -1,0 +1,25 @@
+{
+  "description": "Pincode model",
+  "type": "object",
+  "properties": {
+    "pincode": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "state_name": {
+      "type": "string"
+    },
+    "country_name": {
+      "type": "string"
+    },
+    "country_iso_code": {
+      "type": "string"
+    }
+  },
+  "title": "Pincode",
+  "x-tags": [
+    "Store"
+  ]
+}

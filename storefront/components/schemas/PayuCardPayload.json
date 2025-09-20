@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_gateway": {
+      "const": "PAYU"
+    },
+    "card_number": {
+      "type": "string"
+    },
+    "card_exp_year": {
+      "type": "string"
+    },
+    "card_exp_month": {
+      "type": "string"
+    },
+    "name_on_card": {
+      "type": "string"
+    },
+    "nickname": {
+      "type": "string"
+    },
+    "card_mode": {
+      "type": "string",
+      "enum": [
+        "CC",
+        "DC"
+      ]
+    },
+    "card_type": {
+      "type": "string",
+      "enum": [
+        "VISA",
+        "MAST",
+        "RUPAY"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayuCardPayload",
+    "description": "API reference for the PayuCardPayload schema"
+  },
+  "required": [
+    "payment_gateway"
+  ],
+  "title": "PayuCardPayload"
+}

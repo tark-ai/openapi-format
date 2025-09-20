@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "attribute_id": {
+      "type": "string"
+    },
+    "attribute_value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Attributes with type of **single-select**, the value will be represented as a **string**."
+        },
+        {
+          "$ref": "./ColorObject.json",
+          "description": "**Color** attributes will have their value represented as a color object, specifying the color details with name and hexcode."
+        }
+      ]
+    },
+    "attribute_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "attribute_type": {
+      "enum": [
+        "single-select",
+        "color"
+      ],
+      "readOnly": true
+    },
+    "key": {
+      "description": "value in snake case.",
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "attribute_id",
+    "attribute_value"
+  ],
+  "title": "AssociatedOption"
+}

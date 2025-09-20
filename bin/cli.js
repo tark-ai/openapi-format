@@ -34,6 +34,7 @@ program
   .option('--split', 'split the OpenAPI document into a multi-file structure', false)
   .option('--stoplight', 'split only schemas for Stoplight Studio compatibility (use with --split)', false)
   .option('--splitByTags', 'split the OpenAPI document into multiple files by tags with shared schemas', false)
+  .option('--mergeByTags', 'merge multiple tag-based OpenAPI files back into a single document', false)
   .option('--json', 'print the file to stdout as JSON')
   .option('--yaml', 'print the file to stdout as YAML')
   .option('-p, --playground', 'Open config in online playground')
@@ -206,6 +207,51 @@ async function run(oaFile, options) {
       options = Object.assign({}, options, overlayOptions);
     } catch (err) {
       console.error('\x1b[31m', `Overlay file error - no such file or directory "${options.overlayOptions}"`);
+      if (options.verbose >= 1) {
+        console.error(err);
+      }
+      process.exit(1);
+    }
+  }
+
+  // Handle mergeByTags option early - different flow since it reads from directory instead of single file
+  if (options.mergeByTags === true) {
+    if (!oaFile) {
+      console.error('Please provide a directory path containing the split OpenAPI files');
+      return;
+    }
+
+    try {
+      infoOut(`- Input directory:\t${oaFile}`); // LOG - Input directory
+      const mergeResult = await openapiFormat.openapiMergeByTags(oaFile, options);
+      const resObj = mergeResult.data;
+
+      let output = {};
+
+      if (options.output) {
+        // Write merged OpenAPI to output file
+        await openapiFormat.writeFile(options.output, resObj, options);
+        infoOut(`- Output file:\t\t${options.output}`); // LOG - Output file
+      } else {
+        // Print merged OpenAPI to stdout
+        output = await openapiFormat.stringify(resObj, options);
+        console.log(output);
+      }
+
+      // Show options if verbose
+      if (outputLogOptions) {
+        debugOut(`${consoleLine}\n`, options.verbose);
+        debugOut(`OpenAPI-Format CLI options:`, options.verbose);
+        debugOut(`${outputLogOptions}`, options.verbose);
+      }
+
+      infoOut(`\x1b[32m${consoleLine}\x1b[0m`);
+      infoOut(`\x1b[32m✅  OpenAPI merged successfully\x1b[0m`, 99);
+      infoOut(`\x1b[32m${consoleLine}\x1b[0m`);
+
+      return output;
+    } catch (err) {
+      console.error('\x1b[31m', `Merge by tags error: ${err.message}`);
       if (options.verbose >= 1) {
         console.error(err);
       }

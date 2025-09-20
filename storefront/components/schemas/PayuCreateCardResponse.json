@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_gateway": {
+      "const": "PAYU"
+    },
+    "status": {
+      "type": "string"
+    },
+    "msg": {
+      "type": "string"
+    },
+    "cardToken": {
+      "type": "string"
+    },
+    "card_number": {
+      "type": "string"
+    },
+    "card_label": {
+      "type": "string"
+    },
+    "network_token": {
+      "type": "string"
+    },
+    "issuer_token": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayuCreateCardResponse",
+    "description": "API reference for the PayuCreateCardResponse schema"
+  },
+  "required": [
+    "payment_gateway"
+  ],
+  "title": "PayuCreateCardResponse"
+}

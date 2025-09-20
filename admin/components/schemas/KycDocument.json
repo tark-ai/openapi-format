@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "document_number": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "file": {
+      "description": "file attachment will be required or optional as per store setting.",
+      "type": "string",
+      "format": "binary",
+      "writeOnly": true
+    },
+    "document_type_id": {
+      "type": "string",
+      "writeOnly": true
+    },
+    "status": {
+      "enum": [
+        "submitted",
+        "approved",
+        "rejected"
+      ],
+      "readOnly": true
+    },
+    "title": {
+      "type": "string",
+      "readOnly": true
+    },
+    "file_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "verification_type": {
+      "enum": [
+        "automatic",
+        "manual"
+      ],
+      "readOnly": true
+    },
+    "is_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "created_by": {
+      "enum": [
+        "customer",
+        "admin"
+      ],
+      "readOnly": true
+    },
+    "created_by_user_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_by": {
+      "enum": [
+        "customer",
+        "admin"
+      ],
+      "readOnly": true
+    },
+    "modified_by_user_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_reason": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "document_number",
+    "document_type_id"
+  ],
+  "title": "KycDocument",
+  "x-tags": [
+    "Customers"
+  ]
+}

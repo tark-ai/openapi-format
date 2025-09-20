@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "delivery_pincode": {
+      "type": "string"
+    },
+    "cart_id": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CartBasedServiceabilityCheck",
+    "description": "API reference for the CartBasedServiceabilityCheck schema"
+  },
+  "required": [
+    "delivery_pincode",
+    "cart_id"
+  ],
+  "title": "CartBasedServiceabilityCheck"
+}

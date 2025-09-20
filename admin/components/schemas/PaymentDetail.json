@@ -1,0 +1,29 @@
+{
+  "description": "Payment info with settlement details.",
+  "allOf": [
+    {
+      "$ref": "./Payment.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "settlement": {
+          "type": "array",
+          "items": {
+            "$ref": "./PaymentSettlement.json"
+          }
+        },
+        "allowed_actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "title": "PaymentDetail",
+  "x-tags": [
+    "Payments"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "array",
+  "items": {
+    "allOf": [
+      {
+        "type": "object",
+        "properties": {
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "quantity"
+        ]
+      },
+      {
+        "$ref": "./Item.json"
+      }
+    ]
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductBundleItem",
+    "description": "API reference for the ProductBundleItem schema"
+  }
+}

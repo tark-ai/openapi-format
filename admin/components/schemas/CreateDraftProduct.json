@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "product_type": {
+      "enum": [
+        "physical",
+        "digital",
+        "bundle"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "product_type"
+  ],
+  "title": "CreateDraftProduct",
+  "x-tags": [
+    "Catalog"
+  ]
+}

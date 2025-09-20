@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "readOnly": true
+    },
+    "is_current": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_completed": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "completion_date": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "ShipmentProgression",
+  "x-tags": [
+    "Shipping"
+  ]
+}

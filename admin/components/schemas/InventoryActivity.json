@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "variant_id": {
+      "type": "string"
+    },
+    "variant_name": {
+      "type": "string"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "warehouse_id": {
+      "type": "string"
+    },
+    "warehouse": {
+      "$ref": "./WarehouseBasicDetail.json"
+    },
+    "activity_type": {
+      "enum": [
+        "add",
+        "reserve",
+        "reduce",
+        "adjust",
+        "update"
+      ]
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "lot_batch": {
+      "type": "string"
+    },
+    "mfg_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "exp_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "InventoryActivity",
+  "x-tags": [
+    "Catalog"
+  ]
+}

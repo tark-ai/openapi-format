@@ -1,0 +1,83 @@
+{
+  "description": "Common fields in inbound and refund payments.",
+  "type": "object",
+  "properties": {
+    "transaction_type": {
+      "enum": [
+        "payment",
+        "refund"
+      ]
+    },
+    "request_number": {
+      "type": "string"
+    },
+    "transaction_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "transaction_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "settled_amount": {
+      "type": "number",
+      "format": "double",
+      "default": 0
+    },
+    "unsettled_amount": {
+      "type": "number",
+      "format": "double",
+      "default": 0
+    },
+    "payment_method": {
+      "enum": [
+        "Credit Card",
+        "Debit Card",
+        "Netbanking",
+        "UPI",
+        "Wallet",
+        "IMPS",
+        "NEFT",
+        "RTGS"
+      ]
+    },
+    "payment_reference_number": {
+      "type": "string"
+    },
+    "payment_mode": {
+      "enum": [
+        "Bank-Transfer",
+        "Payment-Gateway"
+      ]
+    },
+    "payment_gateway": {
+      "enum": [
+        "Bank-Transfer",
+        "PayU"
+      ]
+    },
+    "status": {
+      "enum": [
+        "settled",
+        "partially_settled",
+        "unsettled"
+      ]
+    },
+    "customer_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "customer_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "title": "PaymentCommonFields",
+  "x-tags": [
+    "Payments"
+  ]
+}

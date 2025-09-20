@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "attribute_type": {
+      "enum": [
+        "String",
+        "Integer",
+        "Number",
+        "Boolean",
+        "List",
+        "Object",
+        "DateTime"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_filterable": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_readonly": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name",
+    "attribute_type"
+  ],
+  "title": "CustomerAttribute",
+  "x-tags": [
+    "Customers"
+  ]
+}

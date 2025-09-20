@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "weight": {
+      "enum": [
+        "gm"
+      ]
+    },
+    "dimension": {
+      "enum": [
+        "cm"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/MeasurementUnit",
+    "description": "API reference for the MeasurementUnit schema"
+  },
+  "title": "MeasurementUnit"
+}

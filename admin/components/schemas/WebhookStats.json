@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "delivered": {
+      "type": "integer"
+    },
+    "delivered_in_first_attempt": {
+      "type": "integer"
+    },
+    "delivered_in_second_attempt": {
+      "type": "integer"
+    },
+    "delivered_in_third_attempt": {
+      "type": "integer"
+    },
+    "delivered_in_fourth_attempt": {
+      "type": "integer"
+    },
+    "failed": {
+      "type": "integer"
+    },
+    "total_deliveries": {
+      "type": "integer"
+    },
+    "total_events": {
+      "type": "integer"
+    },
+    "average_latency": {
+      "type": "number"
+    },
+    "p50_latency": {
+      "type": "number"
+    },
+    "p75_latency": {
+      "type": "number"
+    },
+    "p95_latency": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "delivered",
+    "delivered_in_first_attempt",
+    "delivered_in_second_attempt",
+    "delivered_in_third_attempt",
+    "delivered_in_fourth_attempt",
+    "failed",
+    "total_deliveries",
+    "total_events",
+    "average_latency",
+    "p50_latency",
+    "p75_latency",
+    "p95_latency"
+  ],
+  "title": "WebhookStats",
+  "x-tags": [
+    "Webhooks"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "file_extension": {
+      "type": "string",
+      "readOnly": true
+    },
+    "file_size": {
+      "description": "in bytes",
+      "type": "integer",
+      "readOnly": true
+    },
+    "file_type": {
+      "enum": [
+        "image",
+        "video",
+        "document"
+      ],
+      "readOnly": true
+    },
+    "mime_type": {
+      "type": "string",
+      "readOnly": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "alternate_text": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "meta_data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "folder_id": {
+      "type": "string"
+    },
+    "upload_source": {
+      "enum": [
+        "local-storage",
+        "external-url"
+      ],
+      "readOnly": true
+    },
+    "status": {
+      "enum": [
+        "ready",
+        "uploaded",
+        "pending"
+      ],
+      "readOnly": true
+    },
+    "usage": {
+      "type": "array",
+      "items": {
+        "$ref": "./MediaFileUsage.json"
+      },
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "MediaFileInfo",
+  "x-tags": [
+    "Media Gallery"
+  ]
+}

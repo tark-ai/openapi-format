@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "parent_category_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "slug": {
+      "type": "string"
+    },
+    "auto_assign_products": {
+      "type": "boolean",
+      "default": false
+    },
+    "product_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "child_categories": {
+      "$ref": "./ChildCategory.json"
+    }
+  },
+  "title": "CategoryCommonDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

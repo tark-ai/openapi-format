@@ -1,0 +1,14 @@
+{
+  "anyOf": [
+    {
+      "$ref": "./ShippingRateBasedOnItemWeight.json"
+    },
+    {
+      "$ref": "./ShippingRateBasedOnOrderValue.json"
+    }
+  ],
+  "title": "ManualShippingRateCondition",
+  "x-tags": [
+    "Shipping"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "starts_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "details": {
+      "discriminator": {
+        "propertyName": "promotion_type",
+        "mapping": {
+          "discount": "#/components/schemas/DiscountBasedPromotion",
+          "fixed-price": "#/components/schemas/FixedPricePromotion",
+          "volume-based": "#/components/schemas/VolumeBasedPromotion",
+          "free-goods": "#/components/schemas/FreeGoodsPromotion"
+        }
+      },
+      "oneOf": [
+        {
+          "$ref": "./DiscountBasedPromotion.json"
+        },
+        {
+          "$ref": "./FixedPricePromotion.json"
+        },
+        {
+          "$ref": "./VolumeBasedPromotion.json"
+        },
+        {
+          "$ref": "./FreeGoodsPromotion.json"
+        }
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductPromotion",
+    "description": "API reference for the ProductPromotion schema"
+  },
+  "required": [
+    "id",
+    "starts_at",
+    "expires_at",
+    "details"
+  ],
+  "title": "ProductPromotion"
+}

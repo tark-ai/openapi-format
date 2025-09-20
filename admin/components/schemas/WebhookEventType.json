@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "event": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "event",
+    "description"
+  ],
+  "title": "WebhookEventType",
+  "x-tags": [
+    "Webhooks"
+  ]
+}

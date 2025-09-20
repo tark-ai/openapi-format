@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShippingRule.json"
+      }
+    },
+    "default_action": {
+      "$ref": "./ShippingCostAction.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "rules",
+    "default_action"
+  ],
+  "title": "ShippingCostPolicy"
+}

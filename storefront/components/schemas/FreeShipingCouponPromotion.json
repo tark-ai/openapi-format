@@ -1,0 +1,12 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FreeShipingCouponPromotion",
+    "description": "API reference for the FreeShipingCouponPromotion schema"
+  },
+  "title": "FreeShipingCouponPromotion"
+}

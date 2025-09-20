@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_name": {
+      "description": "Different schema name will be as per the types of data required. ",
+      "type": "string"
+    },
+    "query_type": {
+      "enum": [
+        "stats"
+      ]
+    },
+    "query": {
+      "type": "object",
+      "properties": {
+        "aggregate": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "type",
+              "field_name",
+              "alias"
+            ],
+            "properties": {
+              "type": {
+                "enum": [
+                  "COUNT",
+                  "SUM",
+                  "MIN",
+                  "MAX",
+                  "AVG"
+                ]
+              },
+              "field_name": {
+                "type": "string"
+              },
+              "alias": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "group_by": {
+          "description": "multiple fields separated by comma.",
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "string"
+            },
+            "having_condition": {
+              "description": "additional conditions on filters. only aggregate columns can be passed in having condition.",
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "./DynamicQueryFilter.json"
+          }
+        },
+        "sort_by": {
+          "description": "json object with key-value. example: {\"field1\":\"asc\",\"field2\":\"desc\"}",
+          "type": "object"
+        },
+        "limit": {
+          "type": "integer",
+          "default": 25
+        },
+        "offset": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "required": [
+        "aggregate"
+      ]
+    }
+  },
+  "required": [
+    "schema_name",
+    "query_type",
+    "query"
+  ],
+  "title": "AnalyticsStats",
+  "x-tags": [
+    "Analytics"
+  ]
+}

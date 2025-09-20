@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayuSavedCard",
+    "description": "API reference for the PayuSavedCard schema"
+  },
+  "title": "JuspaySavedCard"
+}

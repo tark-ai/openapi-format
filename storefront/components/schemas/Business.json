@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "business_type": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "pan_number": {
+      "type": "string"
+    },
+    "gstin": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Business",
+    "description": "API reference for the Business schema"
+  },
+  "required": [
+    "business_type",
+    "name",
+    "pan_number"
+  ],
+  "title": "Business"
+}

@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "variant_id": {
+      "type": "string"
+    },
+    "variant_name": {
+      "type": "string"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "track_quantity": {
+      "type": "boolean"
+    },
+    "allow_backorder": {
+      "type": "boolean"
+    },
+    "track_lot_bacth": {
+      "type": "boolean"
+    },
+    "received_quantity": {
+      "type": "integer"
+    },
+    "reserved_quantity": {
+      "type": "integer"
+    },
+    "sold_quantity": {
+      "type": "integer"
+    },
+    "adjusted_quantity": {
+      "type": "integer"
+    },
+    "stock_quantity": {
+      "type": "integer"
+    }
+  },
+  "title": "ItemWiseInventory",
+  "x-tags": [
+    "Catalog"
+  ]
+}

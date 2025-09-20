@@ -1,0 +1,49 @@
+{
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "$ref": "./DiscountCouponPromotion.json"
+        },
+        {
+          "$ref": "./FreeGoodCouponPromotion.json"
+        },
+        {
+          "$ref": "./BuyXGetYCouponPromotion.json"
+        },
+        {
+          "$ref": "./VolumeBasedCouponPromotion.json"
+        },
+        {
+          "$ref": "./FreeShipingCouponPromotion.json"
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "required": [
+        "promotion_type",
+        "can_be_used_with_other_promotion"
+      ],
+      "properties": {
+        "promotion_type": {
+          "enum": [
+            "discount",
+            "free-goods",
+            "free-shipping",
+            "buy-x-get-y",
+            "volume-based"
+          ]
+        },
+        "can_be_used_with_other_promotion": {
+          "type": "boolean"
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Promotion",
+    "description": "API reference for the Promotion schema"
+  },
+  "title": "Promotion"
+}

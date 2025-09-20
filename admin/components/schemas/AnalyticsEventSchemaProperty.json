@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "data_type": {
+      "enum": [
+        "string",
+        "number",
+        "boolean",
+        "datetime",
+        "json"
+      ]
+    },
+    "properties": {
+      "description": "this key will be available only if data_type is json.",
+      "type": "array",
+      "items": {
+        "$ref": "./AnalyticsEventSchemaChildProperty.json"
+      }
+    }
+  },
+  "title": "AnalyticsEventSchemaProperty",
+  "x-tags": [
+    "Analytics"
+  ]
+}

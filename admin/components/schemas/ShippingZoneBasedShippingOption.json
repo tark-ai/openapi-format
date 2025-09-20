@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "based_on": {
+      "type": "string",
+      "const": "shipping-zone"
+    },
+    "shipping_zone_id": {
+      "type": "string"
+    },
+    "service_provider_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "based_on",
+    "shipping_zone_id",
+    "service_provider_id"
+  ],
+  "title": "ShippingZoneBasedShippingOption",
+  "x-tags": [
+    "Store"
+  ]
+}

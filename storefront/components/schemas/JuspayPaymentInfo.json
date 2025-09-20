@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "order_id": {
+      "type": "string"
+    },
+    "payment_links": {
+      "type": "object",
+      "properties": {
+        "web": {
+          "type": "string"
+        },
+        "expiry": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "sdk_payload": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "payload": {
+          "type": "object",
+          "properties": {
+            "clientId": {
+              "type": "string"
+            },
+            "merchantId": {
+              "type": "string"
+            },
+            "clientAuthToken": {
+              "type": "string"
+            },
+            "clientAuthTokenExpiry": {
+              "type": "string"
+            },
+            "environment": {
+              "type": "string"
+            },
+            "orderId": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            },
+            "action": {
+              "type": "string"
+            },
+            "customerId": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "returnUrl": {
+              "type": "string"
+            },
+            "customerPhone": {
+              "type": "string"
+            },
+            "customerEmail": {
+              "type": "string"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "options.createMandate": {
+              "description": "Use for taking consent of subscription payments. If this key is used it will ask user to give consent for subscription payment.\n",
+              "const": "REQUIRED"
+            },
+            "mandate.maxAmount": {
+              "description": "Maximum amount that can be charged in recurring payment.",
+              "type": "string"
+            },
+            "mandate.start_date ": {
+              "description": "subscription start time",
+              "type": "string"
+            },
+            "mandate.end_date ": {
+              "description": "subscription end time",
+              "type": "string"
+            },
+            "mandate.frequency": {
+              "description": "subscription frequency",
+              "const": "MONTHLY"
+            },
+            "mandate.rule_value ": {
+              "description": "When frequency is passed as WEEKLY, FORTNIGHTLY, MONTHLY, BIMONTHLY, QUARTERLY, HALFYEARLY, or YEARLY then is it required that the exact day of the period should be passed.\n\n1-7 when frequency is WEEKLY. In weekly, serial numbers start from Monday. Monday represents 1 and Sunday represents 7.\n\n1-16 when frequency is FORTNIGHTLY. This mandate is executed twice a month. First day of the month is represented by value '1' and ends with '15' on 15th day of the month. Then again starts with '1' for 16th of the month and ends with the last day of the month.\n\n1-31 when frequency is MONTHLY, BIMONTHLY, QUARTERLY, HALFYEARLY, or YEARLY.",
+              "type": "string",
+              "enum": [
+                "1-7",
+                "1-16",
+                "1-31"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayPaymentInfo",
+    "description": "API reference for the JuspayPaymentInfo schema"
+  },
+  "title": "JuspayPaymentInfo"
+}

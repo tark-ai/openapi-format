@@ -1,0 +1,17 @@
+{
+  "description": "Payments using payment gateway netbanking option.",
+  "allOf": [
+    {
+      "$ref": "./OrderPaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "bank_name": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "title": "NetbankingPayment"
+}

@@ -1,0 +1,67 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Variant.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductVideo.json"
+          }
+        },
+        "seo": {
+          "$ref": "./Seo.json"
+        },
+        "shipping": {
+          "$ref": "./ProductShipping.json"
+        },
+        "packaging": {
+          "$ref": "./ProductPackaging.json"
+        },
+        "sales_channels": {
+          "type": "array",
+          "items": {
+            "$ref": "./SalesChannel.json"
+          }
+        },
+        "related_products": {
+          "type": "object",
+          "properties": {
+            "upsell": {
+              "type": "array",
+              "items": {
+                "$ref": "./ProductBasicDetail.json"
+              }
+            },
+            "cross_sell": {
+              "type": "array",
+              "items": {
+                "$ref": "./ProductBasicDetail.json"
+              }
+            }
+          }
+        },
+        "promotions": {
+          "$ref": "./ProductPromotion.json"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductSubscription.json"
+          }
+        }
+      }
+    }
+  ],
+  "examples": [],
+  "title": "VariantDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

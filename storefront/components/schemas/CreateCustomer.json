@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "business": {
+      "$ref": "./Business.json"
+    },
+    "address": {
+      "$ref": "./CustomerAddress.json"
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CreateCustomer",
+    "description": "API reference for the CreateCustomer schema"
+  },
+  "title": "CreateCustomer"
+}

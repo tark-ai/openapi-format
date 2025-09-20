@@ -1,0 +1,35 @@
+{
+  "description": "Payload for searching products.",
+  "type": "object",
+  "properties": {
+    "query": {
+      "description": "String for searching products, considers the first ten words of any given search query.",
+      "type": "string"
+    },
+    "page": {
+      "description": "To request a specific page of results.",
+      "type": "integer",
+      "default": 1
+    },
+    "limit": {
+      "description": "Maximum number of records returned for a page.",
+      "type": "integer",
+      "default": 25
+    },
+    "facets": {
+      "description": "provide list of attributes for specific facets or * for all facets.\n```json\nFor specific facets: [\"size\", \"color\", \"brand\"]\n```\n```json\nFor all facets: [\"*\"]\n```",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/SearchProduct",
+    "description": "API reference for the SearchProduct schema"
+  },
+  "required": [
+    "query"
+  ],
+  "title": "SearchProduct"
+}

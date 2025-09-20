@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "variant id",
+      "type": "string"
+    },
+    "shipping": {
+      "$ref": "./ProductShipping.json"
+    },
+    "packaging": {
+      "$ref": "./ProductPackaging.json"
+    }
+  },
+  "examples": [],
+  "title": "VariantBulkUpdate",
+  "x-tags": [
+    "Catalog"
+  ]
+}

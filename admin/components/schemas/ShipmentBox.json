@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "box_name": {
+      "type": "string"
+    },
+    "box_length": {
+      "type": "number"
+    },
+    "box_width": {
+      "type": "number"
+    },
+    "box_height": {
+      "type": "number"
+    },
+    "box_weight": {
+      "type": "number"
+    },
+    "items_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "box_count": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "title": "ShipmentBox",
+  "x-tags": [
+    "Shipping"
+  ]
+}

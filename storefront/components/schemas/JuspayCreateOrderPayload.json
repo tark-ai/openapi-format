@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "return_url": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayCreateOrderPayload",
+    "description": "API reference for the JuspayCreateOrderPayload schema"
+  },
+  "title": "JuspayCreateOrderResponse"
+}

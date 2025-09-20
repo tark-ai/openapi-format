@@ -1,0 +1,15 @@
+{
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FixedPriceRule",
+    "description": "API reference for the FixedPriceRule schema"
+  },
+  "oneOf": [
+    {
+      "$ref": "./FixedPriceRuleBasedQuantity.json"
+    },
+    {
+      "$ref": "./FixedPriceRuleBasedAmount.json"
+    }
+  ],
+  "title": "FixedPriceRule"
+}

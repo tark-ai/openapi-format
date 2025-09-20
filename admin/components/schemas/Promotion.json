@@ -1,0 +1,44 @@
+{
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "$ref": "./DiscountCouponPromotion.json"
+        },
+        {
+          "$ref": "./FreeGoodCouponPromotion.json"
+        },
+        {
+          "$ref": "./BuyXGetYCouponPromotion.json"
+        },
+        {
+          "$ref": "./VolumeBasedCouponPromotion.json"
+        },
+        {
+          "$ref": "./FreeShipingCouponPromotion.json"
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "required": [
+        "promotion_type"
+      ],
+      "properties": {
+        "promotion_type": {
+          "enum": [
+            "discount",
+            "free-goods",
+            "free-shipping",
+            "buy-x-get-y",
+            "volume-based"
+          ]
+        }
+      }
+    }
+  ],
+  "title": "Promotion",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "description": "Set specific channel preferences",
+  "type": "object",
+  "properties": {
+    "email": {
+      "description": "Indicates whether the user has opted to receive notifications via email.",
+      "type": "boolean",
+      "default": true
+    },
+    "sms": {
+      "description": "Indicates whether the user has opted to receive notifications via SMS.",
+      "type": "boolean",
+      "default": true
+    },
+    "whatsapp": {
+      "description": "Indicates whether the user has opted to receive notifications via WhatsApp.",
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "title": "NotificationChannelPreferences"
+}

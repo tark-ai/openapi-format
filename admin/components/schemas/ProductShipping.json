@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "handling_charge": {
+      "description": "A handling charge is an additional fee applied to cover the costs associated with preparing, packaging, and processing an order for shipment or delivery.",
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "handling_charge"
+  ],
+  "title": "ProductShipping",
+  "x-tags": [
+    "Catalog"
+  ]
+}

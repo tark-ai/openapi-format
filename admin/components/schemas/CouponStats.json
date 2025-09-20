@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "total_redemption": {
+      "type": "integer"
+    },
+    "total_redemption_value": {
+      "type": "number"
+    }
+  },
+  "title": "CouponStats"
+}

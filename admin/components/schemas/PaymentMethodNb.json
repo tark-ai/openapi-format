@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "bank_name": {
+      "type": "string"
+    }
+  },
+  "title": "PaymentMethodNB",
+  "x-tags": [
+    "Payments"
+  ]
+}

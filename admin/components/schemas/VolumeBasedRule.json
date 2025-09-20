@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "properties": {
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "product_id",
+          "variant_id",
+          "slabs"
+        ],
+        "properties": {
+          "product_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "slabs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "quantity",
+                "condition",
+                "discount_percent"
+              ],
+              "properties": {
+                "quantity": {
+                  "type": "integer"
+                },
+                "condition": {
+                  "enum": [
+                    "less-or-equal",
+                    "greater"
+                  ]
+                },
+                "discount_percent": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "maximum_discount_amount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "products",
+    "maximum_discount_amount"
+  ],
+  "title": "VolumeBasedRule",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

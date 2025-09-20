@@ -1,0 +1,39 @@
+{
+  "allOf": [
+    {
+      "oneOf": [
+        {
+          "$ref": "./CreateStandardSubscription.json"
+        },
+        {
+          "$ref": "./CreateCustomSubscription.json"
+        }
+      ]
+    },
+    {
+      "$ref": "./SubscriptionBehaviour.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "invoice_items"
+      ],
+      "properties": {
+        "invoice_items": {
+          "type": "array",
+          "items": {
+            "$ref": "./SubscriptionInvoiceItem.json"
+          }
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CreateSubscription",
+    "description": "API reference for the CreateSubscription schema"
+  },
+  "title": "CreateSubscription",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "details",
+        "applies_to_product"
+      ],
+      "properties": {
+        "details": {
+          "$ref": "./BuyXGetYRule.json"
+        },
+        "applies_to_product": {
+          "enum": [
+            "product"
+          ]
+        }
+      }
+    }
+  ],
+  "title": "BuyXGetYCouponPromotion"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "api_credentials": {
+      "description": "json object in key & value pair. Keys must match with params specified in required_credentials_params object (input_field_name).",
+      "type": "object"
+    }
+  },
+  "required": [
+    "api_credentials"
+  ],
+  "title": "CreateOtherServiceProvider",
+  "x-tags": [
+    "Store"
+  ]
+}

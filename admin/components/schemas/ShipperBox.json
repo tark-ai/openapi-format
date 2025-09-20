@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "product/variant id",
+      "type": "string"
+    },
+    "name": {
+      "description": "product - variant name",
+      "type": "string"
+    },
+    "length": {
+      "description": "in cm",
+      "type": "integer"
+    },
+    "width": {
+      "description": "in cm",
+      "type": "integer"
+    },
+    "height": {
+      "description": "in cm",
+      "type": "integer"
+    },
+    "dry_weight": {
+      "description": "in kilo gram",
+      "type": "number"
+    },
+    "units_per_shipper": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "length",
+    "width",
+    "height",
+    "dry_weight",
+    "units_per_shipper"
+  ],
+  "title": "ShipperBox",
+  "x-tags": [
+    "Catalog"
+  ]
+}

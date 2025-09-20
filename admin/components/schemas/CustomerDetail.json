@@ -1,0 +1,22 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Customer.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "loyalty": {
+          "$ref": "./CustomerLoyalty.json"
+        },
+        "notification_preferences": {
+          "$ref": "./NotificationPreferences.json"
+        }
+      }
+    }
+  ],
+  "title": "CustomerDetail",
+  "x-tags": [
+    "Customers"
+  ]
+}

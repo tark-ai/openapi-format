@@ -1,0 +1,90 @@
+{
+  "allOf": [
+    {
+      "$ref": "./ProductCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Array of category ids.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "categories": {
+          "description": "Array of category ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "images": {
+          "description": "Array of image file ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "videos": {
+          "description": "Array of video file ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductPricing.json"
+          }
+        },
+        "promotions": {
+          "$ref": "./ProductPromotion.json"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductSubscription.json"
+          }
+        },
+        "sales_channels": {
+          "type": "array",
+          "items": {
+            "$ref": "./SalesChannel.json"
+          }
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "associated_options",
+              "is_default"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "associated_options": {
+                "type": "array",
+                "items": {
+                  "$ref": "./AssociatedOption.json"
+                }
+              },
+              "is_default": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "UpdateProductWithoutVariant",
+  "x-tags": [
+    "Catalog"
+  ]
+}

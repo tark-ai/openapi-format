@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hsn_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "videos": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductVideo.json"
+      }
+    },
+    "shipping": {
+      "$ref": "./ProductShipping.json"
+    },
+    "upselling_product_ids": {
+      "description": "An array of product IDs",
+      "type": "array",
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "pattern": "^[a-zA-Z0-9]{26}$",
+        "examples": [
+          "01F3Z7KG06J4ACWH1C4926KJEB"
+        ]
+      }
+    },
+    "crossselling_product_ids": {
+      "description": "An array of product IDs",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9]{26}$",
+        "examples": [
+          "01F3Z7KG06J4ACWH1C4926KJEB"
+        ]
+      }
+    },
+    "seo": {
+      "$ref": "./Seo.json"
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/AdditionalProductDetails",
+    "description": "API reference for the AdditionalProductDetails schema"
+  },
+  "required": [
+    "description",
+    "hsn_code",
+    "videos",
+    "shipping",
+    "upselling_product_ids",
+    "crossselling_product_ids",
+    "seo",
+    "metadata"
+  ],
+  "title": "AdditionalProductDetails"
+}

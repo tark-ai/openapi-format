@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "slug": {
+      "type": "string"
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "keywords": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Seo",
+    "description": "API reference for the Seo schema"
+  },
+  "required": [
+    "slug",
+    "title",
+    "description",
+    "keywords"
+  ],
+  "title": "Seo"
+}

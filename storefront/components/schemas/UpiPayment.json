@@ -1,0 +1,21 @@
+{
+  "description": "UPI Payment",
+  "allOf": [
+    {
+      "$ref": "./PaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "upi_id": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/UpiPayment",
+    "description": "API reference for the UpiPayment schema"
+  },
+  "title": "UpiPayment"
+}

@@ -1,0 +1,11 @@
+{
+  "allOf": [
+    {
+      "$ref": "./UpdateProductWithVariant.json"
+    }
+  ],
+  "title": "UpdatePhysicalProductWithVariant",
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_gateway": {
+      "const": "JUSPAY"
+    },
+    "card_token": {
+      "type": "string"
+    },
+    "card_reference": {
+      "type": "string"
+    },
+    "card_fingerprint": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayCreateCardResponse",
+    "description": "API reference for the JuspayCreateCardResponse schema"
+  },
+  "required": [
+    "payment_gateway"
+  ],
+  "title": "JuspayCreateCardResponse"
+}

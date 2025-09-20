@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "global",
+        "custom"
+      ],
+      "readOnly": true
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "module_name",
+          "resource_group",
+          "permission_type"
+        ],
+        "properties": {
+          "module_name": {
+            "type": "string"
+          },
+          "resource_group": {
+            "type": "string"
+          },
+          "permission_type": {
+            "enum": [
+              "admin",
+              "readonly",
+              "none"
+            ]
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name",
+    "type",
+    "permissions"
+  ],
+  "title": "PosRole"
+}

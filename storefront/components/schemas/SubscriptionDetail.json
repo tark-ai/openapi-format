@@ -1,0 +1,32 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Subscription.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "invoice_items": {
+          "type": "array",
+          "items": {
+            "$ref": "./SubscriptionInvoiceItem.json"
+          }
+        },
+        "billing_address": {
+          "$ref": "./CustomerAddress.json"
+        },
+        "shipping_address": {
+          "$ref": "./CustomerAddress.json"
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/SubscriptionDetail",
+    "description": "API reference for the SubscriptionDetail schema"
+  },
+  "title": "SubscriptionDetail",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

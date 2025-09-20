@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "business_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "shipping_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "is_billing_same_as_shipping": {
+      "type": "boolean"
+    },
+    "billing_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "./OrderItem.json"
+      }
+    },
+    "coupon_code": {
+      "type": "string"
+    }
+  },
+  "title": "CreateDraftOrder",
+  "x-tags": [
+    "Orders"
+  ]
+}

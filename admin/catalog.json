@@ -1,0 +1,2526 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Catalog",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/catalog/attributes": {
+      "get": {
+        "operationId": "list-product-attributes",
+        "summary": "List all attributes",
+        "description": "list all attributes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Attribute"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "post": {
+        "operationId": "create-product-attribute",
+        "summary": "Create attribute",
+        "description": "create attribute",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAttribute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attribute": {
+                          "$ref": "#/components/schemas/Attribute"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      }
+    },
+    "/catalog/attributes/{id}": {
+      "get": {
+        "operationId": "get-product-attribute",
+        "summary": "Retrieve attribute",
+        "description": "retrieve attribute",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attribute": {
+                          "$ref": "#/components/schemas/Attribute"
+                        },
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductBasicDetail"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "put": {
+        "operationId": "update-product-attribute",
+        "summary": "Update attribute",
+        "description": "update attribute",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Attribute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attribute": {
+                          "$ref": "#/components/schemas/Attribute"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-product-attribute",
+        "summary": "Delete attribute",
+        "description": "delete attribute",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "attribute ulid",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/categories": {
+      "get": {
+        "operationId": "list-categories",
+        "summary": "List all categories",
+        "description": "list all categories",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "name": "category_name",
+            "in": "query",
+            "description": "use to check duplicity",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nested_level",
+            "in": "query",
+            "description": "to return categories upto specified nested level",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "parent_category_id",
+            "in": "query",
+            "description": "to return child categories",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "categories": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Category"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "post": {
+        "operationId": "create-category",
+        "summary": "Create category",
+        "description": "create new category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategory"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "category": {
+                          "$ref": "#/components/schemas/CategoryDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      }
+    },
+    "/catalog/categories/{id}": {
+      "get": {
+        "operationId": "get-category",
+        "summary": "Retrieve category",
+        "description": "retrieve category",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "category": {
+                          "$ref": "#/components/schemas/CategoryDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "put": {
+        "operationId": "update-category",
+        "summary": "Update category",
+        "description": "update category",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "category": {
+                          "$ref": "#/components/schemas/CategoryDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-category",
+        "summary": "Delete category",
+        "description": "delete category",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "category id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/integration-sync": {
+      "get": {
+        "operationId": "get-sync-status",
+        "summary": "Retrive data sync detail",
+        "description": "Retrive data sync detail",
+        "parameters": [
+          {
+            "name": "destination",
+            "in": "query",
+            "description": "integration destination",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "datocms"
+              ]
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "description": "model",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "product",
+                "category",
+                "bundle"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "sync_summary": {
+                          "$ref": "#/components/schemas/CatalogDataSyncSummary"
+                        },
+                        "sync_items": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CatalogDataSyncItem",
+                            "type": "object"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "post": {
+        "operationId": "trigger-sync",
+        "summary": "Create request for data syncing",
+        "description": "Create request for data syncing",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "destination": {
+                    "enum": [
+                      "datocms"
+                    ]
+                  },
+                  "model": {
+                    "enum": [
+                      "product",
+                      "category",
+                      "bundle"
+                    ]
+                  }
+                },
+                "required": [
+                  "destination"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "request_id": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": []
+    },
+    "/catalog/integration-sync/{item_id}": {
+      "get": {
+        "operationId": "get-item-sync",
+        "summary": "Retrive item sync detail",
+        "description": "Retrive item sync detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "sync": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "destination_name": {
+                                "type": "string"
+                              },
+                              "destination_item_id": {
+                                "type": "string"
+                              },
+                              "last_sync_time": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "item_id",
+          "in": "path",
+          "description": "commercengine id of a product, category, variant",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/integration-sync/{item_id}/activity": {
+      "get": {
+        "operationId": "list-sync-activity",
+        "summary": "List all item sync activity",
+        "description": "List all item sync activity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "sync_activity": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "destination_name": {
+                                "type": "string"
+                              },
+                              "destination_item_id": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "type": "string"
+                              },
+                              "status_code": {
+                                "type": "string"
+                              },
+                              "request_json": {
+                                "type": "object"
+                              },
+                              "response_json": {
+                                "type": "object"
+                              },
+                              "created_at": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "item_id",
+          "in": "path",
+          "description": "commercengine id of a product, category, variant",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products": {
+      "get": {
+        "operationId": "list-products",
+        "summary": "List all products",
+        "description": "list all products",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "active flag",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Product"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "post": {
+        "operationId": "create-product",
+        "summary": "Create product",
+        "description": "This endpoint allows you to create a draft product by specifying its name and type. The product is created in its preliminary stage. All additional product details, including descriptions, pricing, and images, etc, can be updated using the Update Product API endpoint.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDraftProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "product": {
+                          "$ref": "#/components/schemas/ProductDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": []
+    },
+    "/catalog/products/bulk-delete": {
+      "post": {
+        "operationId": "bulk-delete-products",
+        "summary": "Bulk delete products",
+        "description": "Deleting multiple products in single request.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "product_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": []
+    },
+    "/catalog/products/bulk-update": {
+      "post": {
+        "operationId": "bulk-update-products",
+        "summary": "Bulk update products",
+        "description": "Update specific fields of multiple products in single request.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_id": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "category_id": {
+                    "description": "if null value is passed, then categories will be removed from the specified products.",
+                    "type": [
+                      "array",
+                      "null"
+                    ],
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "status": {
+                    "enum": [
+                      "active",
+                      "inactive"
+                    ]
+                  },
+                  "stock_available": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "product_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": []
+    },
+    "/catalog/products/check-inventory": {
+      "post": {
+        "operationId": "check-product-inventory",
+        "summary": "Check inventory",
+        "description": "Retrieve products and variants inventory as per product ids and variant ids provided. To be used in S2S API call only.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "products": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "product_id",
+                        "variant_id",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "product_id": {
+                          "type": "string"
+                        },
+                        "variant_id": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "warehouse_id": {
+                    "description": "Optional: Provide array of warehouse id to check inventory for a specific warehouses.",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "products"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/InventoryCheckResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": []
+    },
+    "/catalog/products/{id}": {
+      "get": {
+        "operationId": "get-product",
+        "summary": "Retrieve product details",
+        "description": "Retrieve product details",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "product": {
+                          "$ref": "#/components/schemas/ProductDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "put": {
+        "operationId": "update-product",
+        "summary": "Update product details",
+        "description": "This API endpoint allows for partial updates to product details, enabling you to modify specific attributes like pricing, descriptions, images, promotions, subscriptions, and more, without altering the entire product record. To optimize performance, please include only the fields that need updating. For fields that contain objects or arrays (e.g., shipping, promotions, images, pricing, categories, attributes, bundle_items, related_products), send the complete data for these fields, as the existing data will be replaced entirely.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "product": {
+                          "$ref": "#/components/schemas/ProductDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-product",
+        "summary": "Delete product",
+        "description": "Delete product",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "product id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{id}/inventory": {
+      "get": {
+        "operationId": "get-inventory",
+        "summary": "Retrieve product inventory",
+        "description": "Retrieve product inventory",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductInventory"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "post": {
+        "operationId": "update-inventory",
+        "summary": "Update Product Inventory",
+        "description": "Update product inventory",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ProductInventory"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductInventory"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "product id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{id}/inventory-activity": {
+      "get": {
+        "operationId": "list-product-inventory-activity",
+        "summary": "List all inventory activities",
+        "description": "List all inventory activities",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory_activities": {
+                          "type": "array",
+                          "items": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/ProductInventoryActivity"
+                              }
+                            ]
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "post": {
+        "operationId": "create-inventory-activity",
+        "summary": "Create inventory activity",
+        "description": "Create inventory activity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductInventoryActivity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory_activity": {
+                          "allOf": [
+                            {
+                              "$ref": "#/components/schemas/ProductInventoryActivity"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "warehouse": {
+                                  "$ref": "#/components/schemas/Warehouse"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "product id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{id}/shipper-boxes": {
+      "get": {
+        "operationId": "list-shipper-boxes",
+        "summary": "List all shipper boxes",
+        "description": "List all shipper boxes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipper_boxes": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ShipperBox"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "product id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{id}/variants": {
+      "get": {
+        "operationId": "list-variants",
+        "summary": "List all product variants",
+        "description": "List all product variants",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "variants": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Variant"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "post": {
+        "operationId": "create-variant",
+        "summary": "Create variant",
+        "description": "Create variant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateVariant"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "variants": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/VariantDetail"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "product id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{id}/variants/bulk-update": {
+      "post": {
+        "operationId": "bulk-update-variants",
+        "summary": "Update variants in bulk",
+        "description": "Update shipping and packaging details of multiple variants.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/VariantBulkUpdate"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "variants": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/VariantBulkUpdate"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "product id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{id}/variants/{variant_id}": {
+      "get": {
+        "operationId": "get-variant",
+        "summary": "Retrieve a variant details",
+        "description": "Retrieve a product variant details",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "variant": {
+                          "$ref": "#/components/schemas/VariantDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "put": {
+        "operationId": "update-variant",
+        "summary": "Update a variant",
+        "description": "Update a variant",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateVariant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "variant": {
+                          "$ref": "#/components/schemas/VariantDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-variant",
+        "summary": "Delete a variant",
+        "description": "Delete a variant",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "product id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "variant_id",
+          "in": "path",
+          "description": "variant id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{product_id}/reviews": {
+      "get": {
+        "operationId": "list-reviews",
+        "summary": "List product reviews",
+        "description": "List product reviews",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "reviews": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductReview"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "product_id",
+          "in": "path",
+          "description": "product Ulid",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/products/{product_id}/reviews/{id}": {
+      "get": {
+        "operationId": "get-review",
+        "summary": "Retrieve product review",
+        "description": "Retrieve product review",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "review": {
+                          "$ref": "#/components/schemas/ProductReview"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "put": {
+        "operationId": "update-review",
+        "summary": "Update product review",
+        "description": "Update product review",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "enum": [
+                      "pending",
+                      "approved",
+                      "rejected",
+                      "archived"
+                    ]
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "is_featured": {
+                    "type": "boolean"
+                  },
+                  "review_reply": {
+                    "type": "string"
+                  },
+                  "images": {
+                    "description": "array of file ids",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "videos": {
+                    "description": "array of file ids",
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "status"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "review": {
+                          "$ref": "#/components/schemas/ProductReview"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-review",
+        "summary": "Delete product review",
+        "description": "Delete product review",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "review Ulid",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "product_id",
+          "in": "path",
+          "description": "product Ulid",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/catalog/skus": {
+      "get": {
+        "operationId": "list-skus",
+        "summary": "List all SKUs",
+        "description": "List all SKUs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "skus": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductBasicDetail"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Catalog"
+        ]
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "Attribute": {
+        "$ref": "./components/schemas/Attribute.json"
+      },
+      "CatalogDataSyncItem": {
+        "$ref": "./components/schemas/CatalogDataSyncItem.json"
+      },
+      "CatalogDataSyncSummary": {
+        "$ref": "./components/schemas/CatalogDataSyncSummary.json"
+      },
+      "Category": {
+        "$ref": "./components/schemas/Category.json"
+      },
+      "CategoryDetail": {
+        "$ref": "./components/schemas/CategoryDetail.json"
+      },
+      "CreateAttribute": {
+        "$ref": "./components/schemas/CreateAttribute.json"
+      },
+      "CreateCategory": {
+        "$ref": "./components/schemas/CreateCategory.json"
+      },
+      "CreateDraftProduct": {
+        "$ref": "./components/schemas/CreateDraftProduct.json"
+      },
+      "CreateVariant": {
+        "$ref": "./components/schemas/CreateVariant.json"
+      },
+      "InventoryCheckResponse": {
+        "$ref": "./components/schemas/InventoryCheckResponse.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "Product": {
+        "$ref": "./components/schemas/Product.json"
+      },
+      "ProductBasicDetail": {
+        "$ref": "./components/schemas/ProductBasicDetail.json"
+      },
+      "ProductDetail": {
+        "$ref": "./components/schemas/ProductDetail.json"
+      },
+      "ProductInventory": {
+        "$ref": "./components/schemas/ProductInventory.json"
+      },
+      "ProductInventoryActivity": {
+        "$ref": "./components/schemas/ProductInventoryActivity.json"
+      },
+      "ProductReview": {
+        "$ref": "./components/schemas/ProductReview.json"
+      },
+      "ShipperBox": {
+        "$ref": "./components/schemas/ShipperBox.json"
+      },
+      "UpdateProduct": {
+        "$ref": "./components/schemas/UpdateProduct.json"
+      },
+      "UpdateVariant": {
+        "$ref": "./components/schemas/UpdateVariant.json"
+      },
+      "Variant": {
+        "$ref": "./components/schemas/Variant.json"
+      },
+      "VariantBulkUpdate": {
+        "$ref": "./components/schemas/VariantBulkUpdate.json"
+      },
+      "VariantDetail": {
+        "$ref": "./components/schemas/VariantDetail.json"
+      },
+      "Warehouse": {
+        "$ref": "./components/schemas/Warehouse.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "fieldname": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Not authorized for given operation on the Resource."
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "example": "unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Catalog",
+      "description": "Catalog"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

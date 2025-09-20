@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "activity": {
+      "enum": [
+        "tier-upgrade",
+        "tier-downgrade",
+        "other"
+      ]
+    },
+    "tier_id": {
+      "type": "string"
+    },
+    "tier_name": {
+      "type": "string"
+    },
+    "total_spent": {
+      "type": "integer"
+    },
+    "total_orders": {
+      "type": "integer"
+    },
+    "remarks": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "LoyaltyTierActivity",
+  "x-tags": [
+    "Customers"
+  ]
+}

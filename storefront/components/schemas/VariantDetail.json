@@ -1,0 +1,122 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Variant.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "product_type",
+        "description",
+        "category_ids",
+        "tags",
+        "reviews_rating_sum",
+        "reviews_count",
+        "hsn_code",
+        "variant_options",
+        "product_attributes",
+        "variant_attributes",
+        "videos",
+        "shipping",
+        "seo",
+        "metadata"
+      ],
+      "properties": {
+        "product_type": {
+          "type": "string",
+          "enum": [
+            "physical",
+            "digital",
+            "bundle"
+          ],
+          "examples": [
+            "physical"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "category_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "tags": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "reviews_rating_sum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "reviews_count": {
+          "type": "integer"
+        },
+        "hsn_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "variant_options": {
+          "type": "array",
+          "items": {
+            "$ref": "./VariantOption.json"
+          }
+        },
+        "product_attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductAttribute.json"
+          }
+        },
+        "variant_attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductAttribute.json"
+          }
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductVideo.json"
+          }
+        },
+        "shipping": {
+          "$ref": "./ProductShipping.json"
+        },
+        "seo": {
+          "$ref": "./Seo.json"
+        },
+        "metadata": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/VariantDetail",
+    "description": "API reference for the VariantDetail schema"
+  },
+  "title": "VariantDetail"
+}

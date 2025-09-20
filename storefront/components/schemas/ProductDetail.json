@@ -1,0 +1,15 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Product.json"
+    },
+    {
+      "$ref": "./AdditionalProductDetails.json"
+    }
+  ],
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductDetail",
+    "description": "API reference for the ProductDetail schema"
+  }
+}

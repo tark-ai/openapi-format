@@ -1,0 +1,2859 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Store",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/store/available-payment-options": {
+      "get": {
+        "operationId": "list-available-payment-options",
+        "summary": "List all available payment options",
+        "description": "List all available payment options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_options": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/AvailablePaymentOption"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/available-shipping-options": {
+      "get": {
+        "operationId": "list-available-shipping-options",
+        "summary": "List all available shipping options",
+        "description": "List all available shipping options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_options": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/AvailableShippingOption"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/channel": {
+      "get": {
+        "operationId": "list-channels",
+        "summary": "List all channels",
+        "description": "List all channels",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "channels": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Channel"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-channel",
+        "summary": "Create channel",
+        "description": "Create channel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Channel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "channel": {
+                          "$ref": "#/components/schemas/Channel"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/channel/{id}": {
+      "put": {
+        "operationId": "update-channel",
+        "summary": "Update channel",
+        "description": "Update channel",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Channel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "channel": {
+                          "$ref": "#/components/schemas/Channel"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-channel",
+        "summary": "Delete channel",
+        "description": "Delete channel",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "channel id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/config": {
+      "get": {
+        "operationId": "get-store-config",
+        "summary": "Retrieve store config",
+        "description": "Retrieve store config",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "store_config": {
+                          "$ref": "#/components/schemas/StoreConfig"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "update-store-config",
+        "summary": "Update store config",
+        "description": "Update store config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "store_config": {
+                          "$ref": "#/components/schemas/StoreConfig"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/countries": {
+      "get": {
+        "operationId": "list-countries",
+        "summary": "List all countries",
+        "description": "List all countries",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "countries": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerAddressCountry"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Api-Key": []
+          }
+        ],
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/countries/{country_iso_code}/pincodes": {
+      "get": {
+        "operationId": "list-pincodes",
+        "summary": "List all pincodes",
+        "description": "List all pincodes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "pincodes": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Pincode"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Api-Key": []
+          }
+        ],
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "country_iso_code",
+          "in": "path",
+          "description": "country iso code in 2 chars. ex. IN for India",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/countries/{country_iso_code}/states": {
+      "get": {
+        "operationId": "list-states",
+        "summary": "List all states",
+        "description": "List all states",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "states": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerAddressState"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "X-Api-Key": []
+          }
+        ],
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "country_iso_code",
+          "in": "path",
+          "description": "country iso code in 2 chars. ex. IN for India",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/customer-group": {
+      "get": {
+        "operationId": "list-customer-groups",
+        "summary": "List all customer groups",
+        "description": "List all customer groups",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer_groups": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerGroup"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-customer-group",
+        "summary": "Create customer group",
+        "description": "Create customer group",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerGroup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer_group": {
+                          "$ref": "#/components/schemas/CustomerGroup"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/customer-group/{id}": {
+      "put": {
+        "operationId": "update-customer-group",
+        "summary": "Update customer group",
+        "description": "Update customer group",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/CustomerGroup"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer_group": {
+                          "$ref": "#/components/schemas/CustomerGroup"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-customer-group",
+        "summary": "Delete customer group",
+        "description": "Delete customer group",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer group id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/downloads": {
+      "get": {
+        "operationId": "list-downloads",
+        "summary": "List all download jobs",
+        "description": "List all download jobs",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "items": {
+                        "$ref": "#/components/schemas/DataDownload"
+                      },
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-download-request",
+        "summary": "Create download request",
+        "description": "Create download request",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data_source": {
+                    "enum": [
+                      "customers",
+                      "orders",
+                      "shipments",
+                      "payments"
+                    ]
+                  },
+                  "data_filters": {
+                    "$ref": "#/components/schemas/DataFilterObject"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/DataDownload"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/kyc-document": {
+      "get": {
+        "operationId": "list-kyc-documents",
+        "summary": "List all kyc documents",
+        "description": "List all kyc documents",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "kyc_documents": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/KycDocumentConfig"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-kyc-document",
+        "summary": "Create kyc document",
+        "description": "Create kyc document",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KycDocumentConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "kyc_document": {
+                          "$ref": "#/components/schemas/KycDocumentConfig"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/kyc-document/{id}": {
+      "put": {
+        "operationId": "update-kyc-document",
+        "summary": "Update kyc document",
+        "description": "Update kyc document",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/UpdateKycDocumentConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "kyc_document": {
+                          "$ref": "#/components/schemas/KycDocumentConfig"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-kyc-document",
+        "summary": "Delete kyc document",
+        "description": "Delete kyc document",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "kyc document id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/manual-payment-methods": {
+      "get": {
+        "operationId": "list-manual-payment-methods",
+        "summary": "List all manual payment methods",
+        "description": "List all manual payment methods",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_methods": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ManualPaymentMethod"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-manual-payment-method",
+        "summary": "Create manual payment method",
+        "description": "Create manual payment method",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualPaymentMethod"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_method": {
+                          "$ref": "#/components/schemas/ManualPaymentMethod"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/manual-payment-methods/{id}": {
+      "get": {
+        "operationId": "get-manual-payment-method",
+        "summary": "Retrieve manual payment method detail",
+        "description": "Retrieve manual payment method detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_method": {
+                          "$ref": "#/components/schemas/ManualPaymentMethod"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "put": {
+        "operationId": "update-manual-payment-method",
+        "summary": "Update manual payment method detail",
+        "description": "Update manual payment method detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualPaymentMethod"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_method": {
+                          "$ref": "#/components/schemas/ManualPaymentMethod"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-manual-payment-method",
+        "summary": "Delete manual payment method",
+        "description": "Delete manual payment method",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "payment method id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/manual-shipping-methods": {
+      "get": {
+        "operationId": "list-manual-shipping-methods",
+        "summary": "List all manual shipping methods",
+        "description": "List all manual shipping methods",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_methods": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ManualShippingMethod"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-manual-shipping-method",
+        "summary": "Create manual shipping method",
+        "description": "Create manual shipping method",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualShippingMethod"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_method": {
+                          "$ref": "#/components/schemas/ManualShippingMethod"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/manual-shipping-methods/{id}": {
+      "get": {
+        "operationId": "get-manual-shipping-method",
+        "summary": "Retrieve manual shipping method detail",
+        "description": "Retrieve manual shipping method detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_method": {
+                          "$ref": "#/components/schemas/ManualShippingMethod"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "put": {
+        "operationId": "update-manual-shipping-method",
+        "summary": "Update manual shipping method detail",
+        "description": "Update manual shipping method detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManualShippingMethod"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_method": {
+                          "$ref": "#/components/schemas/ManualShippingMethod"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-manual-shipping-method",
+        "summary": "Delete manual shipping method",
+        "description": "Delete manual shipping method",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "shipping method id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/service-providers": {
+      "get": {
+        "operationId": "list-service-providers",
+        "summary": "List all service providers",
+        "description": "List all service providers",
+        "parameters": [
+          {
+            "name": "service_type",
+            "in": "query",
+            "description": "type of service",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "shipping",
+                "payment",
+                "chat",
+                "cms"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "service_providers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ServiceProvider"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-service-provider-config",
+        "summary": "Configure a service provider",
+        "description": "Configure a service provider.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "service_provider_id"
+                    ],
+                    "properties": {
+                      "service_provider_id": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/CreateShippingServiceProvider"
+                      },
+                      {
+                        "$ref": "#/components/schemas/CreateOtherServiceProvider"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "service_provider": {
+                          "$ref": "#/components/schemas/ServiceProvider"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/service-providers/{id}": {
+      "put": {
+        "operationId": "update-service-provider-config",
+        "summary": "Update service provider config",
+        "description": "Update service provider config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceProvider"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "service_provider": {
+                          "$ref": "#/components/schemas/ServiceProvider"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-service-provider-config",
+        "summary": "Delete service provider config",
+        "description": "Delete service provider config",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "service provider id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/service-providers/{id}/test-connection": {
+      "post": {
+        "operationId": "test-service-provider-connection",
+        "summary": "Test service provider config",
+        "description": "Test service provider config",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "api_credentials": {
+                    "description": "key \u0026 value pair. keys must match with input_field_name in required_credentials_params.",
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "api_credentials"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "errors": {
+                      "description": "optional field. returned in case of errors only.",
+                      "type": "object"
+                    },
+                    "code": {
+                      "description": "optional key. returned in case of errors only.",
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "service provider id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/shipping-boxes": {
+      "get": {
+        "operationId": "get-shipping-boxes",
+        "summary": "List all shipping boxes",
+        "description": "List all shipping boxes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_boxs": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/StoreShippingBoxDetail"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-shipping-box",
+        "summary": "Create shipping box",
+        "description": "Create shipping box",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreShippingBoxDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_box": {
+                          "$ref": "#/components/schemas/StoreShippingBoxDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/shipping-boxes/{id}": {
+      "get": {
+        "operationId": "get-shipping-box",
+        "summary": "Retrieve shipping box detail",
+        "description": "Retrieve shipping box detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_box": {
+                          "$ref": "#/components/schemas/StoreShippingBoxDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "put": {
+        "operationId": "update-shipping-box",
+        "summary": "Update shipping box detail",
+        "description": "Update shipping box detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreShippingBoxDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_box": {
+                          "$ref": "#/components/schemas/StoreShippingBoxDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-shipping-box",
+        "summary": "Delete shipping box",
+        "description": "Delete shipping box",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "shipping box id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/shipping-cost-policy": {
+      "get": {
+        "operationId": "get-shipping-policy",
+        "summary": "Retrieve shipping cost policy",
+        "description": "Returns the shipping cost policy rules",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/ShippingCostPolicy"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "update-shipping-policy",
+        "summary": "Create shipping cost policy",
+        "description": "Create shipping cost policy",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShippingCostPolicy"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/ShippingCostPolicy"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      }
+    },
+    "/store/shipping-options/add": {
+      "post": {
+        "operationId": "add-shipping-option",
+        "summary": "Add shipping options",
+        "description": "Add shipping options for specified warehouse and shipping zone.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManageShippingOption"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/shipping-options/remove": {
+      "post": {
+        "operationId": "remove-shipping-option",
+        "summary": "Remove shipping options",
+        "description": "Remove shipping options for specified warehouse and shipping zone.",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManageShippingOption"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/shipping-zones": {
+      "get": {
+        "operationId": "list-shipping-zones",
+        "summary": "List all shipping zones",
+        "description": "List all shipping zones",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_zones": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ShippingZoneDetail"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-shipping-zone",
+        "summary": "Create a shipping zone",
+        "description": "Create a shipping zone",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateShippingZone"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_zone": {
+                          "$ref": "#/components/schemas/ShippingZoneDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/shipping-zones/{id}": {
+      "get": {
+        "operationId": "get-shipping-zone",
+        "summary": "Retrieve shipping zone detail",
+        "description": "Retrieve shipping zone detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_zones": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ShippingZoneDetail"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "put": {
+        "operationId": "update-shipping-zone",
+        "summary": "Update shipping zone detail",
+        "description": "Update shipping zone detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateShippingZone"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipping_zone": {
+                          "$ref": "#/components/schemas/ShippingZoneDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-shipping-zone",
+        "summary": "Delete shipping zone",
+        "description": "Delete shipping zone",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "shipping zone id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/templates": {
+      "get": {
+        "operationId": "get-templates",
+        "summary": "List all templates",
+        "description": "List all templates",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "search string",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "templates": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/StoreTemplate"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-template",
+        "summary": "Create template",
+        "description": "Create template",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreTemplateDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "template": {
+                          "$ref": "#/components/schemas/StoreTemplateDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/templates/{id}": {
+      "get": {
+        "operationId": "get-template",
+        "summary": "Retrieve template detail",
+        "description": "Retrieve template detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "template": {
+                          "$ref": "#/components/schemas/StoreTemplateDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "put": {
+        "operationId": "update-template",
+        "summary": "Update template detail",
+        "description": "Update template detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StoreTemplateDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "template": {
+                          "$ref": "#/components/schemas/StoreTemplateDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-template",
+        "summary": "Delete template",
+        "description": "Delete template",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "template id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/store/warehouses": {
+      "get": {
+        "operationId": "list-warehouses",
+        "summary": "List all warehouses",
+        "description": "List all warehouses",
+        "parameters": [
+          {
+            "name": "accepts_returns",
+            "in": "query",
+            "description": "Accepts returned goods",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "active status",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "can_collect",
+            "in": "query",
+            "description": "Customer can collect parcel or not",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "can_receive_stock",
+            "in": "query",
+            "description": "Can receive stock",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "can_ship_parcel",
+            "in": "query",
+            "description": "Can ship parcel",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "is_checkout_point",
+            "in": "query",
+            "description": "Supports pos devices or not",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "warehouse_type",
+            "in": "query",
+            "description": "warehouse type",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "retail-store",
+                "distribution-center"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "warehouses": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/WarehouseDetail"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "post": {
+        "operationId": "create-warehouse",
+        "summary": "Create a warehouse",
+        "description": "Create a warehouse",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWarehouse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "warehouse": {
+                          "$ref": "#/components/schemas/WarehouseDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/warehouses/{id}": {
+      "get": {
+        "operationId": "get-warehouse",
+        "summary": "Retrieve warehouse detail",
+        "description": "Retrieve warehouse detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "warehouse": {
+                          "$ref": "#/components/schemas/WarehouseDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "put": {
+        "operationId": "update-warehouse",
+        "summary": "Update warehouse detail",
+        "description": "Update warehouse detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWarehouse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "warehouse": {
+                          "$ref": "#/components/schemas/WarehouseDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-warehouse",
+        "summary": "Delete warehouse",
+        "description": "Delete warehouse",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Store"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "warehouse id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "AvailablePaymentOption": {
+        "$ref": "./components/schemas/AvailablePaymentOption.json"
+      },
+      "AvailableShippingOption": {
+        "$ref": "./components/schemas/AvailableShippingOption.json"
+      },
+      "Channel": {
+        "$ref": "./components/schemas/Channel.json"
+      },
+      "CreateOtherServiceProvider": {
+        "$ref": "./components/schemas/CreateOtherServiceProvider.json"
+      },
+      "CreateShippingServiceProvider": {
+        "$ref": "./components/schemas/CreateShippingServiceProvider.json"
+      },
+      "CreateShippingZone": {
+        "$ref": "./components/schemas/CreateShippingZone.json"
+      },
+      "CreateWarehouse": {
+        "$ref": "./components/schemas/CreateWarehouse.json"
+      },
+      "CustomerAddressCountry": {
+        "$ref": "./components/schemas/CustomerAddressCountry.json"
+      },
+      "CustomerAddressState": {
+        "$ref": "./components/schemas/CustomerAddressState.json"
+      },
+      "CustomerGroup": {
+        "$ref": "./components/schemas/CustomerGroup.json"
+      },
+      "DataDownload": {
+        "$ref": "./components/schemas/DataDownload.json"
+      },
+      "DataFilterObject": {
+        "$ref": "./components/schemas/DataFilterObject.json"
+      },
+      "KycDocumentConfig": {
+        "$ref": "./components/schemas/KycDocumentConfig.json"
+      },
+      "ManageShippingOption": {
+        "$ref": "./components/schemas/ManageShippingOption.json"
+      },
+      "ManualPaymentMethod": {
+        "$ref": "./components/schemas/ManualPaymentMethod.json"
+      },
+      "ManualShippingMethod": {
+        "$ref": "./components/schemas/ManualShippingMethod.json"
+      },
+      "Pincode": {
+        "$ref": "./components/schemas/Pincode.json"
+      },
+      "ServiceProvider": {
+        "$ref": "./components/schemas/ServiceProvider.json"
+      },
+      "ShippingCostPolicy": {
+        "$ref": "./components/schemas/ShippingCostPolicy.json"
+      },
+      "ShippingZoneDetail": {
+        "$ref": "./components/schemas/ShippingZoneDetail.json"
+      },
+      "StoreConfig": {
+        "$ref": "./components/schemas/StoreConfig.json"
+      },
+      "StoreShippingBoxDetail": {
+        "$ref": "./components/schemas/StoreShippingBoxDetail.json"
+      },
+      "StoreTemplate": {
+        "$ref": "./components/schemas/StoreTemplate.json"
+      },
+      "StoreTemplateDetail": {
+        "$ref": "./components/schemas/StoreTemplateDetail.json"
+      },
+      "UpdateKycDocumentConfig": {
+        "$ref": "./components/schemas/UpdateKycDocumentConfig.json"
+      },
+      "UpdateShippingZone": {
+        "$ref": "./components/schemas/UpdateShippingZone.json"
+      },
+      "WarehouseDetail": {
+        "$ref": "./components/schemas/WarehouseDetail.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      },
+      "X-Api-Key": {
+        "name": "X-Api-Key",
+        "type": "apiKey",
+        "in": "header"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Store",
+      "description": "Store"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

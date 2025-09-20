@@ -1,0 +1,30 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "rate_based_on": {
+      "enum": [
+        "item-weight"
+      ]
+    },
+    "rate_type": {
+      "enum": [
+        "fixed-price-per-kg"
+      ]
+    },
+    "shipping_rate_per_kg": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "rate_based_on",
+    "rate_type",
+    "shipping_rate_per_kg"
+  ],
+  "title": "ShippingRatePerKgFixedPrice",
+  "x-tags": [
+    "Shipping"
+  ]
+}

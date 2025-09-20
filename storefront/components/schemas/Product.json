@@ -1,0 +1,181 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The ID of the product",
+      "type": "string"
+    },
+    "sku": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "short_description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "product_type": {
+      "type": "string",
+      "enum": [
+        "physical",
+        "digital",
+        "bundle"
+      ],
+      "examples": [
+        "physical"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "stock_available": {
+      "description": "Indicates whether the product has stock available",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "backorder": {
+      "description": "Indicates whether the item is being fulfilled as a backorder. When true, the item is not currently in stock and will ship later once inventory is available. This may result in the order being split into multiple shipments, with delays for the backordered portion.",
+      "type": "boolean"
+    },
+    "on_offer": {
+      "description": "Indicates whether this item is associated with any active (product-specific) coupons",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "on_subscription": {
+      "description": "Indicates whether the product has any subscription plans avaialble",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "on_promotion": {
+      "description": "Indicates whether the product is currently on promotion. When true, the `ProductPromotion` object will contain details of the promotion",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "has_variant": {
+      "description": "Indicates whether the product has variants",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "category_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "$ref": "./Category.json"
+      }
+    },
+    "reviews_rating_sum": {
+      "type": "number",
+      "format": "double"
+    },
+    "reviews_count": {
+      "type": "integer"
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductAttribute.json"
+      }
+    },
+    "pricing": {
+      "$ref": "./ProductPricing.json"
+    },
+    "variant_options": {
+      "description": "this will be used if has_variant is true, to auto set default values.",
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "./VariantOption.json"
+      }
+    },
+    "promotion": {
+      "$ref": "./ProductPromotion.json"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductImage.json"
+      }
+    },
+    "subscription": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductSubscription.json"
+      }
+    },
+    "variants": {
+      "type": "array",
+      "items": {
+        "$ref": "./Variant.json"
+      }
+    },
+    "bundle_items": {
+      "$ref": "./ProductBundleItem.json"
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "$ref": "./LotBatchDetail.json"
+      }
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Product",
+    "description": "API reference for the Product schema"
+  },
+  "required": [
+    "id",
+    "sku",
+    "name",
+    "slug",
+    "short_description",
+    "product_type",
+    "active",
+    "stock_available",
+    "on_offer",
+    "on_subscription",
+    "on_promotion",
+    "has_variant",
+    "tags",
+    "category_ids",
+    "categories",
+    "reviews_rating_sum",
+    "reviews_count",
+    "attributes",
+    "pricing",
+    "variant_options",
+    "promotion",
+    "images",
+    "subscription",
+    "variants",
+    "bundle_items"
+  ],
+  "title": "Product"
+}

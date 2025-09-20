@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "condition": {
+      "enum": [
+        "AND",
+        "OR"
+      ]
+    },
+    "filters": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "./ColumnBasedFilterRule.json"
+          },
+          {
+            "$ref": "./DataFilterObject.json"
+          }
+        ]
+      }
+    }
+  },
+  "title": "DataFilterNestedObject",
+  "x-tags": [
+    "Segments"
+  ]
+}

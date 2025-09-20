@@ -1,0 +1,41 @@
+{
+  "description": "Loyalty Point Activity",
+  "type": "object",
+  "properties": {
+    "activity_type": {
+      "type": "string",
+      "enum": [
+        "earned",
+        "redeemed"
+      ]
+    },
+    "activity": {
+      "const": "order"
+    },
+    "reference_number": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "loyalty_point": {
+      "type": "integer"
+    },
+    "remarks": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/LoyaltyPointActivity",
+    "description": "API reference for the LoyaltyPointActivity schema"
+  },
+  "title": "LoyaltyPointActivity"
+}

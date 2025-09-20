@@ -1,0 +1,132 @@
+{
+  "type": "object",
+  "properties": {
+    "inventory_status": {
+      "enum": [
+        "fulfilled",
+        "partially-fulfilled",
+        "not-fulfilled"
+      ]
+    },
+    "total_fulfilled_products": {
+      "type": "integer"
+    },
+    "total_fulfilled_warehouses": {
+      "type": "integer"
+    },
+    "inventory": {
+      "type": "object",
+      "properties": {
+        "products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "product_id": {
+                "type": "string"
+              },
+              "variant_id": {
+                "type": "string"
+              },
+              "allow_backorder": {
+                "type": "boolean"
+              },
+              "track_inventory": {
+                "type": "boolean"
+              },
+              "requested_quantity": {
+                "type": "integer"
+              },
+              "stock_quantity": {
+                "type": "integer"
+              },
+              "allowed_quantity": {
+                "type": "integer"
+              },
+              "inventory_status": {
+                "enum": [
+                  "fulfilled",
+                  "partially-fulfilled",
+                  "not-fulfilled"
+                ]
+              },
+              "warehouses": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "warehouse_id": {
+                      "type": "string"
+                    },
+                    "warehouse_name": {
+                      "type": "string"
+                    },
+                    "stock_quantity": {
+                      "type": "integer"
+                    },
+                    "inventory_status": {
+                      "enum": [
+                        "fulfilled",
+                        "partially-fulfilled",
+                        "not-fulfilled"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "warehouses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "warehouse_id": {
+                "type": "string"
+              },
+              "warehouse_name": {
+                "type": "string"
+              },
+              "inventory_status": {
+                "enum": [
+                  "fulfilled",
+                  "partially-fulfilled",
+                  "not-fulfilled"
+                ]
+              },
+              "products": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "product_id": {
+                      "type": "string"
+                    },
+                    "variant_id": {
+                      "type": "string"
+                    },
+                    "stock_quantity": {
+                      "type": "integer"
+                    },
+                    "allowed_quantity": {
+                      "type": "integer"
+                    },
+                    "inventory_status": {
+                      "enum": [
+                        "fulfilled",
+                        "partially-fulfilled",
+                        "not-fulfilled"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "title": "InventoryCheckResponse"
+}

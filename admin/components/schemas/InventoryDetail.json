@@ -1,0 +1,22 @@
+{
+  "allOf": [
+    {
+      "$ref": "./ItemWiseInventory.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "./WarehouseWiseInventory.json"
+          }
+        }
+      }
+    }
+  ],
+  "title": "InventoryDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

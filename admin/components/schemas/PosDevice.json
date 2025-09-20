@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "device_type": {
+      "enum": [
+        "pos-terminal"
+      ]
+    },
+    "external_device_id": {
+      "description": "A unique ID issued by the Vendor.",
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "model_number": {
+      "type": "string"
+    },
+    "mac_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location_id": {
+      "type": "string"
+    },
+    "location_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "status": {
+      "enum": [
+        "unpaired",
+        "available",
+        "claimed",
+        "offline",
+        "revoked"
+      ],
+      "readOnly": true
+    },
+    "is_busy": {
+      "description": "This field specifies the device is occupied for a transaction.",
+      "type": "boolean"
+    }
+  },
+  "title": "PosDevice"
+}

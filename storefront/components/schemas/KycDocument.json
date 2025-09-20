@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "document_type": {
+      "enum": [
+        "gst",
+        "pan",
+        "tin",
+        "cin",
+        "other"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_mandatory": {
+      "type": "boolean"
+    },
+    "is_attachment_required": {
+      "type": "boolean"
+    },
+    "verification_type": {
+      "enum": [
+        "auto",
+        "manual"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/KycDocument",
+    "description": "API reference for the KycDocument schema"
+  },
+  "title": "KycDocument"
+}

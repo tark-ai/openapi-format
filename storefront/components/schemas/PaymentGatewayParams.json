@@ -1,0 +1,21 @@
+{
+  "discriminator": {
+    "propertyName": "payment_gateway",
+    "mapping": {
+      "PAYU": "#/components/schemas/PayuPaymentGatewayParams",
+      "JUSPAY": "#/components/schemas/JuspayPaymentGatewayParams"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PaymentGatewayParams",
+    "description": "API reference for the PaymentGatewayParams schema"
+  },
+  "oneOf": [
+    {
+      "$ref": "./PayuPaymentGatewayParams.json"
+    },
+    {
+      "$ref": "./JuspayPaymentGatewayParams.json"
+    }
+  ]
+}

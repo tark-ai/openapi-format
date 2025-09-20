@@ -1,0 +1,678 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Webhooks",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "OrderDetail": {
+        "$ref": "./components/schemas/OrderDetail.json"
+      },
+      "OrderPayment": {
+        "$ref": "./components/schemas/OrderPayment.json"
+      },
+      "OrderRefund": {
+        "$ref": "./components/schemas/OrderRefund.json"
+      },
+      "OrderShipment": {
+        "$ref": "./components/schemas/OrderShipment.json"
+      },
+      "PaymentInfo": {
+        "$ref": "./components/schemas/PaymentInfo.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "WebhookAccepted": {
+        "description": "Payload accepted"
+      },
+      "WebhookGone": {
+        "description": "Endpoint permanently removed"
+      },
+      "WebhookServerError": {
+        "description": "Temporary server error — we will retry"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Analytics",
+      "description": "Analytics"
+    },
+    {
+      "name": "Auth",
+      "description": "auth"
+    },
+    {
+      "name": "Campaigns",
+      "description": "Campaigns"
+    },
+    {
+      "name": "Carts",
+      "description": "Carts"
+    },
+    {
+      "name": "Catalog",
+      "description": "Catalog"
+    },
+    {
+      "name": "Common",
+      "description": "Common"
+    },
+    {
+      "name": "Coupons \u0026 promotions",
+      "description": "Coupons \u0026 promotions"
+    },
+    {
+      "name": "Customers",
+      "description": "Customers"
+    },
+    {
+      "name": "Juspay",
+      "description": "Juspay Payments"
+    },
+    {
+      "name": "KYC",
+      "description": "KYC"
+    },
+    {
+      "name": "Orders",
+      "description": "Orders"
+    },
+    {
+      "name": "Others",
+      "description": "Others"
+    },
+    {
+      "name": "Payments",
+      "description": "Payments"
+    },
+    {
+      "name": "PayU",
+      "description": "PayU Payments"
+    },
+    {
+      "name": "POS",
+      "description": "POS"
+    },
+    {
+      "name": "Shipping",
+      "description": "Shipping"
+    },
+    {
+      "name": "Store",
+      "description": "Store"
+    },
+    {
+      "name": "Subscriptions",
+      "description": "Subscriptions"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  },
+  "webhooks": {
+    "order.created": {
+      "post": {
+        "operationId": "order-created",
+        "summary": "Order created",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "order.confirmed": {
+      "post": {
+        "operationId": "order-confirmed",
+        "summary": "Order confirmed",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "order.cancelled": {
+      "post": {
+        "operationId": "order-cancelled",
+        "summary": "Order cancelled",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "order.completed": {
+      "post": {
+        "operationId": "order-completed",
+        "summary": "Order completed",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "payment.success": {
+      "post": {
+        "operationId": "payment-success",
+        "summary": "Payment successful",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPayment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "payment.failed": {
+      "post": {
+        "operationId": "payment-failed",
+        "summary": "Payment failed",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderPayment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "payment.retried": {
+      "post": {
+        "operationId": "payment-retried",
+        "summary": "Payment retried",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentInfo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "shipment.created": {
+      "post": {
+        "operationId": "shipment-created",
+        "summary": "Shipment created",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderShipment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "shipment.updated": {
+      "post": {
+        "operationId": "shipment-updated",
+        "summary": "Shipment updated",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderShipment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "shipment.cancelled": {
+      "post": {
+        "operationId": "shipment-cancelled",
+        "summary": "Shipment cancelled",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderShipment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "shipment.delivered": {
+      "post": {
+        "operationId": "shipment-delivered",
+        "summary": "Shipment delivered",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderShipment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "payment.refund.initiated": {
+      "post": {
+        "operationId": "payment-refund-created",
+        "summary": "Refund initiated",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRefund"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "payment.refund.success": {
+      "post": {
+        "operationId": "payment-refund-success",
+        "summary": "Refund successful",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRefund"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    },
+    "payment.refund.failed": {
+      "post": {
+        "operationId": "payment-refund-failed",
+        "summary": "Refund failed",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderRefund"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "410": {
+            "$ref": "#/components/responses/WebhookGone"
+          },
+          "2XX": {
+            "$ref": "#/components/responses/WebhookAccepted"
+          },
+          "5XX": {
+            "$ref": "#/components/responses/WebhookServerError"
+          }
+        }
+      }
+    }
+  }
+}

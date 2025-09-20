@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_method": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "is_subscription_enabled": {
+      "type": "boolean"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "icon_url": {
+            "type": "string"
+          },
+          "pg": {
+            "type": "string"
+          },
+          "bankcode": {
+            "type": "string"
+          },
+          "is_subscription_enabled": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayuPaymentMethod",
+    "description": "API reference for the PayuPaymentMethod schema"
+  },
+  "title": "PayuPaymentMethod"
+}

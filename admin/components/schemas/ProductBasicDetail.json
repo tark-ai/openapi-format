@@ -1,0 +1,104 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "product id or combination of product id and variant id separated by hyphen.",
+      "type": "string",
+      "readOnly": true
+    },
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "product_type": {
+      "enum": [
+        "physical",
+        "digital",
+        "bundle"
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "active",
+        "inactive"
+      ],
+      "readOnly": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviews_rating_sum": {
+      "type": "integer",
+      "format": "int32",
+      "readOnly": true
+    },
+    "reviews_count": {
+      "type": "integer",
+      "format": "int32",
+      "readOnly": true
+    },
+    "hsn_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "variant_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "variant_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "slug": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "sku": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "associated_options": {
+      "type": "array",
+      "items": {
+        "$ref": "./AssociatedOption.json"
+      }
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "stock_available": {
+      "type": "boolean"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductImage.json"
+      }
+    },
+    "pricing": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductPricing.json"
+      }
+    }
+  },
+  "title": "ProductBasicDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

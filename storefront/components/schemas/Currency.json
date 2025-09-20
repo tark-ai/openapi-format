@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "examples": [
+        "Indian Rupee"
+      ]
+    },
+    "code": {
+      "type": "string",
+      "examples": [
+        "INR"
+      ],
+      "maxLength": 3,
+      "minLength": 3
+    },
+    "symbol": {
+      "type": "string",
+      "examples": [
+        "₹"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Currency",
+    "description": "API reference for the Currency schema"
+  },
+  "required": [
+    "name",
+    "code",
+    "symbol"
+  ]
+}

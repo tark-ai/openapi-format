@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "properties": {
+    "promotion_type": {
+      "type": "string",
+      "enum": [
+        "discount",
+        "volume-based",
+        "fixed-price",
+        "free-goods"
+      ],
+      "const": "free-goods",
+      "readOnly": true
+    },
+    "buy_quantity": {
+      "description": "The quantity of items a customer must buy to receive free goods.",
+      "type": "integer"
+    },
+    "get_quantity": {
+      "description": "The quantity of free goods the customer receives.",
+      "type": "integer"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FreeGoodsPromotion",
+    "description": "API reference for the FreeGoodsPromotion schema"
+  },
+  "required": [
+    "promotion_type",
+    "buy_quantity",
+    "get_quantity"
+  ],
+  "title": "FreeGoodsPromotion"
+}

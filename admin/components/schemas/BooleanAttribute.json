@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "value": {
+      "type": "boolean"
+    },
+    "attribute_type": {
+      "enum": [
+        "Boolean"
+      ]
+    },
+    "is_readonly": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "last_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "BooleanAttribute",
+  "x-tags": [
+    "Customers"
+  ]
+}

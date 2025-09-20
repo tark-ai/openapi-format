@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "variant_id": {
+      "description": "optional. can be null for non variant product.",
+      "type": "string"
+    },
+    "warehouse_id": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "sku": {
+      "type": "string",
+      "readOnly": true
+    },
+    "activity_type": {
+      "enum": [
+        "add",
+        "reserve",
+        "reduce"
+      ]
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 512
+    },
+    "lot_batch": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mfg_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "exp_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "warehouse_id",
+    "activity_type",
+    "quantity",
+    "reason"
+  ],
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "parent_category_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "slug": {
+      "type": "string"
+    },
+    "auto_assign_products": {
+      "type": "boolean",
+      "default": false
+    },
+    "assign_products_condition": {
+      "$ref": "./CategoryAutoAssignProductCondition.json"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "title": "CreateCategory",
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "description": "Define how to round the shipping cost",
+  "type": "object",
+  "properties": {
+    "unit": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "nearest",
+        "ceil",
+        "floor"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "unit",
+    "method"
+  ],
+  "title": "Rounding"
+}

@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_method_type": {
+      "type": "string"
+    },
+    "payment_method": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayPaymentMethod",
+    "description": "API reference for the JuspayPaymentMethod schema"
+  },
+  "title": "JuspayPaymentMethod"
+}

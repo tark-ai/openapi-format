@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "total_order": {
+      "type": "integer"
+    },
+    "total_revenue": {
+      "type": "number"
+    },
+    "live_order": {
+      "type": "integer"
+    },
+    "live_order_revenue": {
+      "type": "number"
+    },
+    "completed_order": {
+      "type": "integer"
+    },
+    "completed_order_revenue": {
+      "type": "number"
+    },
+    "cancelled_order": {
+      "type": "integer"
+    },
+    "cancelled_order_revenue": {
+      "type": "number"
+    },
+    "conversion_rate": {
+      "type": "number"
+    }
+  },
+  "title": "OrderStats"
+}

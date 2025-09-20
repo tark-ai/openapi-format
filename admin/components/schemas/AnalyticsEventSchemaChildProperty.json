@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "data_type": {
+      "enum": [
+        "string",
+        "number",
+        "boolean",
+        "datetime",
+        "json"
+      ]
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "data_type": {
+            "enum": [
+              "string",
+              "number",
+              "boolean",
+              "datetime"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "title": "AnalyticsEventSchemaChildProperty",
+  "x-tags": [
+    "Analytics"
+  ]
+}

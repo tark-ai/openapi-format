@@ -1,0 +1,57 @@
+{
+  "description": "Details about an active coupon applied to a cart/order",
+  "type": "object",
+  "properties": {
+    "coupon_id": {
+      "type": "string"
+    },
+    "coupon_type": {
+      "enum": [
+        "discount",
+        "free-goods",
+        "fixed-price",
+        "free-shipping",
+        "buy-x-get-y",
+        "volume-based",
+        "accelerated-rewards"
+      ]
+    },
+    "savings": {
+      "type": "number"
+    },
+    "product_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "variant_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "product_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "variant_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "coupon_id",
+    "coupon_type",
+    "savings",
+    "product_id",
+    "variant_id",
+    "product_name",
+    "variant_name"
+  ],
+  "title": "AppliedPromotion"
+}

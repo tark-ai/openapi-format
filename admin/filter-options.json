@@ -1,0 +1,131 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Filter Options",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/store/filter-options": {
+      "get": {
+        "operationId": "list-filter-options",
+        "summary": "List all filter options",
+        "description": "List all filter options for listing data.",
+        "parameters": [
+          {
+            "name": "listing_type",
+            "in": "query",
+            "description": "name of listing api",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "product-attributes",
+                "products",
+                "categories",
+                "customers",
+                "visitors",
+                "customer-attributes",
+                "orders",
+                "payments",
+                "shipments",
+                "coupons",
+                "promotions",
+                "media-files",
+                "media-folders"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "filter_options": {
+                          "$ref": "#/components/schemas/FilterOptions"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Filter Options"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "FilterOptions": {
+        "$ref": "./components/schemas/FilterOptions.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Filter Options",
+      "description": "Filter Options"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "object": {
+      "const": "customer"
+    },
+    "object_reference_id": {
+      "type": "string"
+    },
+    "mobile_number": {
+      "type": "string"
+    },
+    "email_address": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "date_created": {
+      "type": "string"
+    },
+    "last_updated": {
+      "type": "string"
+    },
+    "mobile_country_code": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayCustomer",
+    "description": "API reference for the JuspayCustomer schema"
+  },
+  "title": "JuspayCustomer"
+}

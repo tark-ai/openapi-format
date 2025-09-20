@@ -1,0 +1,41 @@
+{
+  "description": "Schema for updating a cart item, including adding, removing, or adjusting the quantity of a product or variant.",
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "description": "The ID of the product to update in the cart.",
+      "type": "string",
+      "examples": [
+        "01H9XYZ12345ABCDE"
+      ]
+    },
+    "variant_id": {
+      "description": "The ID of the product variant, or null if the product has no variants.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "examples": [
+        null
+      ]
+    },
+    "quantity": {
+      "description": "The quantity of the product to add to or update in the cart. Use `0` to remove the item from the cart.",
+      "type": "integer",
+      "examples": [
+        1
+      ],
+      "minimum": 0
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/UpdateCartItem",
+    "description": "API reference for the UpdateCartItem schema"
+  },
+  "required": [
+    "product_id",
+    "variant_id",
+    "quantity"
+  ],
+  "title": "UpdateCartItem"
+}

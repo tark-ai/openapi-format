@@ -1,0 +1,65 @@
+{
+  "type": "object",
+  "properties": {
+    "customer_group_id": {
+      "description": "customer group id. for different pricing model in case of multiple customer groups.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "cost_price": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "listing_price": {
+      "type": "number",
+      "format": "double"
+    },
+    "selling_price": {
+      "type": "number",
+      "format": "double"
+    },
+    "min_order_quantity": {
+      "type": "integer",
+      "format": "int32",
+      "default": 1
+    },
+    "max_order_quantity": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "format": "int32"
+    },
+    "incremental_quantity": {
+      "type": "integer",
+      "format": "int32",
+      "default": 1
+    },
+    "tax_type": {
+      "enum": [
+        "GST"
+      ],
+      "readOnly": true
+    },
+    "tax_rate": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "required": [
+    "customer_group_id",
+    "cost_price",
+    "listing_price",
+    "selling_price",
+    "tax_rate"
+  ],
+  "title": "ProductPricing",
+  "x-tags": [
+    "Catalog"
+  ]
+}

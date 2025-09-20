@@ -1,0 +1,66 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "endpoint": {
+      "type": "string",
+      "format": "uri"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "example": "order.created"
+      }
+    },
+    "custom_headers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive",
+        "error"
+      ]
+    },
+    "webhook_secret_key": {
+      "description": "This will be shown only once during create. For all GET requests, this will be redacted.",
+      "type": "string",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "endpoint",
+    "events",
+    "custom_headers",
+    "status",
+    "webhook_secret_key",
+    "created_at",
+    "modified_at"
+  ],
+  "title": "Webhook",
+  "x-tags": [
+    "Webhooks"
+  ]
+}

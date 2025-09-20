@@ -1,0 +1,54 @@
+{
+  "allOf": [
+    {
+      "type": "object",
+      "required": [
+        "command"
+      ],
+      "properties": {
+        "command": {
+          "type": "string",
+          "const": "update"
+        },
+        "billing_frequency": {
+          "enum": [
+            "monthly"
+          ]
+        },
+        "billing_interval": {
+          "type": "integer",
+          "default": 1
+        },
+        "billing_limit": {
+          "description": "null means there is no limit on number of invoices generated. If specified, then subscription will be revoked automatically after billing limit is reached.",
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    {
+      "$ref": "./SubscriptionBehaviour.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "invoice_items": {
+          "type": "array",
+          "items": {
+            "$ref": "./SubscriptionInvoiceItem.json"
+          }
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/UpdateDigitalProductSubscription",
+    "description": "API reference for the UpdateDigitalProductSubscription schema"
+  },
+  "title": "UpdateDigitalProductSubscription",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

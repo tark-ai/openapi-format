@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "os": {
+      "type": "string"
+    },
+    "device": {
+      "type": "string"
+    },
+    "browser": {
+      "type": "string"
+    },
+    "last_seen": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "Visitor",
+  "x-tags": [
+    "Customers"
+  ]
+}

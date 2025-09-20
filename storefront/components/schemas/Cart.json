@@ -1,0 +1,326 @@
+{
+  "description": "This cart model is structured to capture a wide range of details, facilitating accurate representation and management of user shopping carts in an e-commerce platform.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "Unique identifier for the cart.",
+      "type": "string",
+      "pattern": "^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$"
+    },
+    "active": {
+      "description": "Indicates whether the cart is currently active or inactive.",
+      "type": "boolean"
+    },
+    "customer_note": {
+      "description": "customer note for shipping or product customization.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_promotion_applied": {
+      "description": "Indicates if a promotion is applied or not.",
+      "type": "boolean"
+    },
+    "is_coupon_applied": {
+      "description": "Indicates if a coupon is applied or not.",
+      "type": "boolean"
+    },
+    "coupon_code": {
+      "description": "Code of the applied coupon.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coupon_discount_amount": {
+      "description": "Discount amount due to the coupon.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "coupon_discount_percent": {
+      "description": "Discount amount due to the coupon.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "promotion_discount_amount": {
+      "description": "Discount amount due to promotions(If Applied).",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "promotion_discount_percent": {
+      "description": "Discount amount due to promotions(If Applied).",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "subtotal": {
+      "description": "Subtotal amount for items in the cart.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "items_tax_amount": {
+      "description": "Total tax amount for items.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "subtotal_including_tax": {
+      "description": "Subtotal including tax.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "shipping_estimated_cost": {
+      "description": "Estimated cost of shipping.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "shipping_discount_amount": {
+      "description": "Discount applied on estimated shipping cost.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "shipping_amount": {
+      "description": "Shipping amount chargable to customer.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "shipping_tax_rate": {
+      "description": "Shipping tax rate applied on shipping amount.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "shipping_tax_amount": {
+      "description": "Tax applied on shipping_amount.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "shipping_amount_including_tax": {
+      "description": "Shipping amount including shipping tax.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "shipping_provider_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "shipping_provider_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "courier_company_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "courier_company_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "estimated_delivery_days": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "handling_charge_excluding_tax": {
+      "description": "The additional charge applied to cover the costs associated with processing, packaging, and handling an order. This fee is separate from shipping charges and may include materials, or special handling requirements.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "handling_charge_tax_amount": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "handling_charge_including_tax": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "total_tax": {
+      "description": "Total tax amount for the entire cart.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "grand_total": {
+      "description": "Grand total amount for the cart.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "credit_balance_used": {
+      "description": "Amount of credit balance used.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "to_be_paid": {
+      "description": "Amount to be paid by the customer.",
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "loyalty_points_redeemed": {
+      "description": "Number of loyalty points redeemed.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "loyalty_points_earned": {
+      "description": "Number of loyalty points earned.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "cart_items_count": {
+      "description": "Number of items in the cart.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "cart_items": {
+      "description": "List containing detailed information about each item in the cart. ",
+      "type": "array",
+      "items": {
+        "$ref": "./CartItem.json"
+      }
+    },
+    "billing_address": {
+      "description": "Details of the billing address.",
+      "$ref": "./CustomerAddress.json"
+    },
+    "shipping_address": {
+      "description": "Details of the shipping address.",
+      "$ref": "./CustomerAddress.json"
+    },
+    "currency": {
+      "description": "Details about the currency being used, including `name`, `code`, and `symbol`.",
+      "$ref": "./Currency.json"
+    },
+    "metadata": {
+      "description": "Additional metadata associated with the cart.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "expires_at": {
+      "description": "the expiration timestamp of the shopping cart. .\n",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "applied_promotions": {
+      "description": "Information about the promotional offers that have been applied to the cart.",
+      "type": "array",
+      "items": {
+        "$ref": "./AppliedPromotion.json"
+      }
+    },
+    "applied_coupons": {
+      "description": "This key provides details about the savings in cart after coupon have been applied to the cart.",
+      "type": "array",
+      "items": {
+        "$ref": "./AppliedCoupon.json"
+      }
+    },
+    "promotion_savings": {
+      "type": "number",
+      "minimum": 0
+    },
+    "coupon_savings": {
+      "type": "number",
+      "minimum": 0
+    },
+    "other_savings": {
+      "type": "number",
+      "minimum": 0
+    },
+    "total_savings": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Cart",
+    "description": "API reference for the Cart schema"
+  },
+  "required": [
+    "id",
+    "active",
+    "customer_note",
+    "is_promotion_applied",
+    "is_coupon_applied",
+    "coupon_code",
+    "coupon_discount_amount",
+    "coupon_discount_percent",
+    "promotion_discount_amount",
+    "subtotal",
+    "items_tax_amount",
+    "subtotal_including_tax",
+    "shipping_estimated_cost",
+    "shipping_discount_amount",
+    "shipping_amount",
+    "shipping_tax_rate",
+    "shipping_tax_amount",
+    "shipping_amount_including_tax",
+    "shipping_provider_id",
+    "shipping_provider_name",
+    "courier_company_id",
+    "courier_company_name",
+    "estimated_delivery_days",
+    "handling_charge_excluding_tax",
+    "handling_charge_tax_amount",
+    "handling_charge_including_tax",
+    "total_tax",
+    "grand_total",
+    "credit_balance_used",
+    "to_be_paid",
+    "loyalty_points_redeemed",
+    "loyalty_points_earned",
+    "cart_items_count",
+    "cart_items",
+    "billing_address",
+    "shipping_address",
+    "currency",
+    "metadata",
+    "expires_at",
+    "applied_promotions",
+    "applied_coupons",
+    "promotion_savings",
+    "coupon_savings",
+    "other_savings",
+    "total_savings"
+  ],
+  "title": "Cart"
+}

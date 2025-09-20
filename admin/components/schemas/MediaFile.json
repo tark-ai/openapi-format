@@ -1,0 +1,17 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./MediaImageFile.json"
+    },
+    {
+      "$ref": "./MediaVideoFile.json"
+    },
+    {
+      "$ref": "./MediaDocumentFile.json"
+    }
+  ],
+  "title": "MediaFile",
+  "x-tags": [
+    "Media Gallery"
+  ]
+}

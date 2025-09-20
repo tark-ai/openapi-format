@@ -1,0 +1,30 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Category.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "child_categories": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "./Category.json"
+          }
+        }
+      },
+      "required": [
+        "child_categories"
+      ]
+    }
+  ],
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductCategory",
+    "description": "API reference for the ProductCategory schema"
+  },
+  "title": "ProductCategory"
+}

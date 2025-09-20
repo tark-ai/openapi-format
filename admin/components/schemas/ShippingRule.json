@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "condition": {
+      "$ref": "./ShippingCostCondition.json"
+    },
+    "action": {
+      "$ref": "./ShippingCostAction.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "condition",
+    "action"
+  ],
+  "title": "ShippingRule"
+}

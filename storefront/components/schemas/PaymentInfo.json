@@ -1,0 +1,57 @@
+{
+  "description": "Common fields in all types of payments.",
+  "type": "object",
+  "properties": {
+    "transaction_type": {
+      "type": "string",
+      "enum": [
+        "payment",
+        "refund"
+      ]
+    },
+    "request_number": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "success",
+        "failed",
+        "partially_paid",
+        "refund_initiated"
+      ]
+    },
+    "payment_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payment_reference_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "payment_method": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "icon_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PaymentInfo",
+    "description": "API reference for the PaymentInfo schema"
+  },
+  "title": "PaymentInfo"
+}

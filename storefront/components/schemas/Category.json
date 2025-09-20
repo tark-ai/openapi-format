@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "slug": {
+      "type": "string",
+      "readOnly": true
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parent_category_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "product_count": {
+      "type": "integer"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Category",
+    "description": "API reference for the Category schema"
+  },
+  "required": [
+    "id",
+    "name",
+    "slug",
+    "description",
+    "parent_category_id",
+    "product_count",
+    "active"
+  ],
+  "title": "Category"
+}

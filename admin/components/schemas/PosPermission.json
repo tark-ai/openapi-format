@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "module_name": {
+      "type": "string"
+    },
+    "resource_group": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "module_name",
+    "resource_group",
+    "description"
+  ],
+  "title": "PosPermission"
+}

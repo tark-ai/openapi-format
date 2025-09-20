@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "is_kyc_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_customer_group_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "brand": {
+      "$ref": "./Brand.json"
+    },
+    "currency": {
+      "$ref": "./Currency.json"
+    },
+    "customer_groups": {
+      "type": "array",
+      "items": {
+        "$ref": "./CustomerGroup.json"
+      },
+      "readOnly": true
+    },
+    "kyc_documents": {
+      "type": "array",
+      "items": {
+        "$ref": "./KycDocumentConfig.json"
+      },
+      "readOnly": true
+    },
+    "measurement": {
+      "$ref": "./MeasurementUnit.json"
+    },
+    "terms_of_service": {
+      "$ref": "./StoreTemplate.json"
+    },
+    "refund_policy": {
+      "$ref": "./StoreTemplate.json"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/StoreConfig",
+    "description": "API reference for the StoreConfig schema"
+  },
+  "required": [
+    "is_kyc_enabled",
+    "is_customer_group_enabled",
+    "brand",
+    "currency",
+    "customer_groups",
+    "kyc_documents",
+    "measurement",
+    "terms_of_service",
+    "refund_policy"
+  ],
+  "title": "StoreConfig"
+}

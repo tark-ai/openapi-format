@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "packing_option": {
+      "enum": [
+        "manual"
+      ]
+    },
+    "total_boxes": {
+      "type": "integer"
+    },
+    "total_weight": {
+      "type": "number"
+    },
+    "boxes": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipmentBox.json"
+      }
+    }
+  },
+  "title": "ManualPackingDetail"
+}

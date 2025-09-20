@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "request_number": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "return_items": {
+      "type": "array",
+      "items": {
+        "$ref": "./OrderReturnItem.json"
+      }
+    },
+    "subtotal": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "total_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "grand_total": {
+      "type": "number",
+      "format": "double"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "shipped_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "original_order_number": {
+      "type": "string"
+    },
+    "original_order_delivered_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "replacement_order_number": {
+      "type": "string"
+    },
+    "replacement_order_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "replacement_order_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "refund": {
+      "type": "array",
+      "items": {
+        "$ref": "./OrderRefund.json"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/OrderReturn",
+    "description": "API reference for the OrderReturn schema"
+  },
+  "title": "OrderReturn"
+}

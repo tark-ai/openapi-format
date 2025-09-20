@@ -1,0 +1,51 @@
+{
+  "allOf": [
+    {
+      "$ref": "./SegmentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "segment_members": {
+          "description": "accepts array of email ids. (valid emails only). \n send null value if members list is empty or to remove all existing members.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "writeOnly": true
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "ad_audiences": {
+          "type": "array",
+          "items": {
+            "$ref": "./SegmentAdAudience.json"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "usage": {
+          "type": "array",
+          "items": {
+            "$ref": "./SegmentUsage.json"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  ],
+  "title": "ManualSegment",
+  "x-tags": [
+    "Segments"
+  ]
+}

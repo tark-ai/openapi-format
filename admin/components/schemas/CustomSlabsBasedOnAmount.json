@@ -1,0 +1,66 @@
+{
+  "type": "object",
+  "properties": {
+    "spending_criteria_type": {
+      "type": "string",
+      "const": "minimum-purchase-amount"
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "product_id",
+          "variant_id",
+          "slabs"
+        ],
+        "properties": {
+          "product_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "slabs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "minimum_purchase_amount",
+                "get_quantity",
+                "condition"
+              ],
+              "properties": {
+                "minimum_purchase_amount": {
+                  "type": "number"
+                },
+                "get_quantity": {
+                  "type": "integer"
+                },
+                "condition": {
+                  "enum": [
+                    "greater-or-equal"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "spending_criteria_type",
+    "products"
+  ],
+  "title": "CustomSlabsBasedOnAmount",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

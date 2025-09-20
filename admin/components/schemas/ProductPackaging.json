@@ -1,0 +1,64 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "pack_width": {
+      "type": "number",
+      "format": "float"
+    },
+    "pack_height": {
+      "type": "number",
+      "format": "float"
+    },
+    "pack_length": {
+      "type": "number",
+      "format": "float"
+    },
+    "pack_dry_weight": {
+      "type": "number",
+      "format": "float"
+    },
+    "units_per_pack": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "vertical_rotation": {
+      "description": "Indicates whether items can be rotated during packing or if they must be kept in a strictly vertical orientation.",
+      "type": "boolean"
+    },
+    "shipper_width": {
+      "type": "number",
+      "format": "float"
+    },
+    "shipper_height": {
+      "type": "number",
+      "format": "float"
+    },
+    "shipper_length": {
+      "type": "number",
+      "format": "float"
+    },
+    "shipper_dry_weight": {
+      "type": "number",
+      "format": "float"
+    },
+    "units_per_shipper": {
+      "type": "integer",
+      "format": "int32"
+    }
+  },
+  "required": [
+    "pack_width",
+    "pack_height",
+    "pack_length",
+    "pack_dry_weight",
+    "units_per_pack",
+    "vertical_rotation"
+  ],
+  "title": "ProductPackaging",
+  "x-tags": [
+    "Catalog"
+  ]
+}

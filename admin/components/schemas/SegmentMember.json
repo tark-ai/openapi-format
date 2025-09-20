@@ -1,0 +1,49 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "email": {
+      "type": "string",
+      "readOnly": true
+    },
+    "phone": {
+      "type": "string",
+      "readOnly": true
+    },
+    "first_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "last_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "first_seen": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "last_seen": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "SegmentMember",
+  "x-tags": [
+    "Segments"
+  ]
+}

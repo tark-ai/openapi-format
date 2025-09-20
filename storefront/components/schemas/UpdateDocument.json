@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "properties": {
+    "document_number": {
+      "type": "string"
+    },
+    "kyc_document_id": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "file": {
+      "description": "file attachment will be required or optional as per store setting.",
+      "type": "string",
+      "format": "binary"
+    },
+    "modified_reason": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/UpdateDocument",
+    "description": "API reference for the UpdateDocument schema"
+  },
+  "required": [
+    "document_number",
+    "kyc_document_id",
+    "modified_reason"
+  ],
+  "title": "UpdateDocument",
+  "x-tags": [
+    "KYC"
+  ]
+}

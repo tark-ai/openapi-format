@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "upi_id": {
+      "type": "string"
+    }
+  },
+  "title": "PaymentMethodUPI",
+  "x-tags": [
+    "Payments"
+  ]
+}

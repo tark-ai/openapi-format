@@ -1,0 +1,10 @@
+{
+  "enum": [
+    "collect-in-store",
+    "delivery"
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FulfillmentPreference",
+    "description": "API reference for the FulfillmentPreference schema"
+  }
+}

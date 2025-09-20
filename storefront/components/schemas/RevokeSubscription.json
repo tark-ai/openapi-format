@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "command": {
+      "description": "To revoke a subscription.",
+      "type": "string",
+      "const": "revoke"
+    },
+    "reason": {
+      "description": "Provide reason for revoking subscription.",
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/RevokeSubscription",
+    "description": "API reference for the RevokeSubscription schema"
+  },
+  "required": [
+    "command",
+    "reason"
+  ],
+  "title": "RevokeSubscription",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

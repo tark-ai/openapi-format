@@ -1,0 +1,57 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "attribute_type": {
+      "enum": [
+        "text",
+        "number",
+        "boolean",
+        "date",
+        "single-select",
+        "multi-select",
+        "color"
+      ]
+    },
+    "is_visible": {
+      "type": "boolean"
+    },
+    "is_filterable": {
+      "type": "boolean"
+    },
+    "is_required": {
+      "type": "boolean"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "supports_variant_creation": {
+      "type": "boolean"
+    },
+    "product_count": {
+      "type": "integer",
+      "format": "int32",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "Attribute",
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "properties": {
+    "synced_status": {
+      "description": "default status = pending",
+      "enum": [
+        "success",
+        "failed",
+        "pending"
+      ]
+    },
+    "synced_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "request_payload": {
+      "type": "string"
+    },
+    "response_data": {
+      "type": "string"
+    }
+  },
+  "title": "SegmentAdAudienceSyncHistory",
+  "x-tags": [
+    "Segments"
+  ]
+}

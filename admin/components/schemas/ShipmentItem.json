@@ -1,0 +1,56 @@
+{
+  "description": "Shipment item model",
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "variant_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "variant_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "product_image_url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "sku": {
+      "type": "string",
+      "readOnly": true
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "free_quantity": {
+      "type": "integer"
+    },
+    "is_free_item": {
+      "type": "boolean",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "product_id",
+    "variant_id",
+    "quantity"
+  ],
+  "title": "ShipmentItem",
+  "x-tags": [
+    "Orders"
+  ]
+}

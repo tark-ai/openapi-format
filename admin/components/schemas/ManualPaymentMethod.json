@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "payment_instructions": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name",
+    "description",
+    "payment_instructions"
+  ],
+  "title": "ManualPaymentMethod",
+  "x-tags": [
+    "Store"
+  ]
+}

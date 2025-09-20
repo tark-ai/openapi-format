@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "product_image_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "sku": {
+      "type": "string"
+    },
+    "selling_price": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "tax_type": {
+      "type": "string",
+      "const": "GST",
+      "readOnly": true
+    },
+    "tax_rate": {
+      "type": "number",
+      "readOnly": true
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "resolution": {
+      "type": "string",
+      "enum": [
+        "refund",
+        "replacement"
+      ]
+    },
+    "return_reason": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/OrderReturnItem",
+    "description": "API reference for the OrderReturnItem schema"
+  },
+  "required": [
+    "product_id",
+    "sku",
+    "quantity",
+    "resolution",
+    "return_reason"
+  ],
+  "title": "OrderReturnItem"
+}

@@ -1,0 +1,52 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "rate_based_on": {
+      "enum": [
+        "item-weight"
+      ]
+    },
+    "rate_type": {
+      "enum": [
+        "weight-slabs"
+      ]
+    },
+    "slabs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "weight",
+          "shipping_rate",
+          "condition"
+        ],
+        "properties": {
+          "weight": {
+            "type": "number"
+          },
+          "shipping_rate": {
+            "type": "number"
+          },
+          "condition": {
+            "enum": [
+              "less-or-equal",
+              "greater"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "rate_based_on",
+    "rate_type",
+    "slabs"
+  ],
+  "title": "ShippingRateBasedOnWeightSlabs",
+  "x-tags": [
+    "Shipping"
+  ]
+}

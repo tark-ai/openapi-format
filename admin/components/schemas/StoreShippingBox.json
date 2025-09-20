@@ -1,0 +1,50 @@
+{
+  "description": "",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "length": {
+      "type": "number"
+    },
+    "width": {
+      "type": "number"
+    },
+    "height": {
+      "type": "number"
+    },
+    "empty_box_weight": {
+      "type": "number"
+    },
+    "max_weight_box_can_carry": {
+      "type": "number"
+    },
+    "empty_box_price": {
+      "type": "number"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name",
+    "length",
+    "width",
+    "height",
+    "empty_box_weight",
+    "max_weight_box_can_carry",
+    "empty_box_price"
+  ],
+  "title": "ShippingBox"
+}

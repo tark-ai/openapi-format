@@ -1,0 +1,36 @@
+{
+  "description": "List of products and orders for which customer can write review.",
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "product_image_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "selling_price": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "listing_price": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "order_number": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CustomerReadyForReview",
+    "description": "API reference for the CustomerReadyForReview schema"
+  },
+  "title": "CustomerReadyForReview"
+}

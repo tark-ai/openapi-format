@@ -1,0 +1,135 @@
+{
+  "description": "promotion_type = free-goods",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "promotion_type": {
+      "enum": [
+        "free-goods"
+      ]
+    },
+    "starts_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "description": "null means never expires.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "allOf": [
+          {
+            "required": [
+              "customer_group_id"
+            ],
+            "properties": {
+              "customer_group_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          {
+            "oneOf": [
+              {
+                "title": "ScaleAutomatically",
+                "required": [
+                  "auto_scale",
+                  "slab"
+                ],
+                "properties": {
+                  "auto_scale": {
+                    "description": "The **auto_scale** key determines whether the promotion should be automatically adjusted based on the ratio between the quantities bought and the quantities received.\\n\\nIf **true**: The promotion will be applied dynamically according to the ratio of the buy quantity to the get quantity. For example, if the promotion is \\\"Buy 2, Get 1\\\" and the customer buys 4 items, they would receive 2 free items (scaling based on the original ratio).\\n\\nIf **false**: The promotion will be applied strictly according to the predefined conditions. For example, even if the customer buys more items, they will receive the fixed free quantity as defined in the original promotion (e.g., buying 4 would still only get them 1 free item).",
+                    "type": "boolean"
+                  },
+                  "slab": {
+                    "type": "object",
+                    "properties": {
+                      "buy_quantity": {
+                        "type": "integer"
+                      },
+                      "get_quantity": {
+                        "type": "integer"
+                      },
+                      "quantity_condition": {
+                        "description": "Defines how the system will evaluate the buy_quantity to determine if the promotion should be applied.",
+                        "enum": [
+                          "less",
+                          "less-or-equal",
+                          "greater",
+                          "greater-or-equal"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "buy_quantity",
+                      "get_quantity",
+                      "quantity_condition"
+                    ]
+                  }
+                }
+              },
+              {
+                "title": "CustomSlabs",
+                "required": [
+                  "slabs"
+                ],
+                "properties": {
+                  "slabs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "buy_quantity",
+                        "get_quantity",
+                        "quantity_condition"
+                      ],
+                      "properties": {
+                        "buy_quantity": {
+                          "type": "integer"
+                        },
+                        "get_quantity": {
+                          "type": "integer"
+                        },
+                        "quantity_condition": {
+                          "description": "Defines how the system will evaluate the buy_quantity to determine if the promotion should be applied.",
+                          "enum": [
+                            "less",
+                            "less-or-equal",
+                            "greater",
+                            "greater-or-equal"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "required": [
+    "promotion_type",
+    "starts_at",
+    "details"
+  ],
+  "title": "FreeGoodsPromotion"
+}

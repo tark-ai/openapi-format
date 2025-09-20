@@ -1,0 +1,315 @@
+{
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "order_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "awaiting_approval",
+        "confirmed",
+        "partially_scheduled",
+        "awaiting_shipment",
+        "shipped",
+        "partially_shipped",
+        "undelivered",
+        "partially_undelivered",
+        "return_to_origin",
+        "partially_return_to_origin",
+        "complete",
+        "partially_delivered",
+        "cancelled",
+        "pending"
+      ]
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "success",
+        "failed",
+        "partially_paid"
+      ]
+    },
+    "payment_success_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "customer_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_promotion_applied": {
+      "type": "boolean"
+    },
+    "promotion_discount_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "promotion_discount_percent": {
+      "type": "number",
+      "format": "double"
+    },
+    "is_coupon_applied": {
+      "type": "boolean"
+    },
+    "coupon_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coupon_discount_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "coupon_discount_percent": {
+      "type": "number",
+      "format": "double"
+    },
+    "applied_promotions": {
+      "description": "Information about the promotional offers that have been applied to the cart.",
+      "type": "array",
+      "items": {
+        "$ref": "./AppliedPromotion.json"
+      }
+    },
+    "applied_coupons": {
+      "description": "This key provides details about the savings in cart after coupon have been applied to the cart.",
+      "type": "array",
+      "items": {
+        "$ref": "./AppliedCoupon.json"
+      }
+    },
+    "promotion_savings": {
+      "type": "number",
+      "format": "float",
+      "minimum": 0
+    },
+    "coupon_savings": {
+      "type": "number",
+      "format": "float",
+      "minimum": 0
+    },
+    "other_savings": {
+      "type": "number",
+      "format": "float",
+      "minimum": 0
+    },
+    "total_savings": {
+      "type": "number",
+      "format": "float",
+      "minimum": 0
+    },
+    "on_subscription": {
+      "type": "boolean"
+    },
+    "subtotal": {
+      "type": "number",
+      "format": "double"
+    },
+    "item_total_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "subtotal_including_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_estimated_cost": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "shipping_discount_amount": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_tax_rate": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "shipping_tax_amount": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "shipping_amount_including_tax": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "shipping_provider_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "shipping_provider_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "courier_company_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "courier_company_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "estimated_delivery_days": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "handling_charge_excluding_tax": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "handling_charge_tax_amount": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "handling_charge_including_tax": {
+      "type": "number",
+      "format": "double",
+      "minimum": 0
+    },
+    "total_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "grand_total": {
+      "type": "number",
+      "format": "double"
+    },
+    "loyalty_points_earned": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "loyalty_points_redeemed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "credit_balance_used": {
+      "type": "integer"
+    },
+    "to_be_paid": {
+      "type": "number",
+      "format": "double"
+    },
+    "order_items_count": {
+      "type": "integer"
+    },
+    "order_items": {
+      "type": "array",
+      "items": {
+        "$ref": "./OrderItem.json"
+      }
+    },
+    "billing_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "shipping_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        }
+      }
+    },
+    "metadata": {
+      "description": "Additional metadata associated with the order.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "is_cancellation_allowed": {
+      "description": "order cancellation option should be visible only if this flag is true.",
+      "type": "boolean"
+    },
+    "cancellation_refund_details": {
+      "description": "to show refundable details in order cancellation ui.",
+      "type": "object",
+      "properties": {
+        "loyalty_point": {
+          "description": "loyalty point redeemed will be rollbacked and credited to user account.",
+          "type": "integer"
+        },
+        "refundable_amount": {
+          "description": "amount that will be refunded to customer.",
+          "type": "number"
+        },
+        "cancellation_charges": {
+          "description": "amount deducted from paid amount.",
+          "type": "number"
+        },
+        "cancellation_charges_reason": {
+          "description": "reason for cancellation charges.",
+          "type": "string"
+        },
+        "payment_mode": {
+          "description": "payment mode for refund.",
+          "type": "string",
+          "enum": [
+            "original-payment-mode",
+            "bank-transfer"
+          ]
+        }
+      }
+    },
+    "feedback": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Order",
+    "description": "API reference for the Order schema"
+  },
+  "required": [
+    "applied_promotions",
+    "applied_coupons"
+  ],
+  "title": "Order"
+}

@@ -1,0 +1,30 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Visitor.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "segments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "VisitorDetail",
+  "x-tags": [
+    "Customers"
+  ]
+}

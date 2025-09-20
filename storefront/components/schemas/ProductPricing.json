@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "properties": {
+    "currency": {
+      "type": "string"
+    },
+    "tax_type": {
+      "type": "string",
+      "default": "GST",
+      "const": "GST",
+      "examples": [
+        "GST"
+      ]
+    },
+    "tax_rate": {
+      "type": "number",
+      "format": "double"
+    },
+    "price_including_tax": {
+      "type": "boolean",
+      "format": "double",
+      "examples": [
+        false
+      ]
+    },
+    "listing_price": {
+      "type": "number",
+      "format": "double"
+    },
+    "selling_price": {
+      "type": "number",
+      "format": "double"
+    },
+    "min_order_quantity": {
+      "type": "integer",
+      "default": 1
+    },
+    "max_order_quantity": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "incremental_quantity": {
+      "type": "integer",
+      "default": 1
+    },
+    "selling_price_excluding_tax": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductPricing",
+    "description": "API reference for the ProductPricing schema"
+  },
+  "required": [
+    "currency",
+    "tax_type",
+    "tax_rate",
+    "price_including_tax",
+    "listing_price",
+    "selling_price",
+    "min_order_quantity",
+    "max_order_quantity",
+    "incremental_quantity",
+    "selling_price_excluding_tax"
+  ],
+  "title": "ProductPricing"
+}

@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "brand name. it will be used in emails and other communications.",
+      "type": "string"
+    },
+    "logo_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "file_id": {
+      "description": "for attaching logo image from media gallery.",
+      "type": "string",
+      "writeOnly": true
+    },
+    "social_media_links": {
+      "description": "json object having key - value pair.\r\n\r\nexample - {\"facebook\": \"www.facebook.com/commecengine\"}",
+      "type": "object"
+    }
+  },
+  "title": "Brand",
+  "x-tags": [
+    "Store"
+  ]
+}

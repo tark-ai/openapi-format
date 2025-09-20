@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./PercentageDiscountRule.json"
+    },
+    {
+      "$ref": "./FixedAmountDiscountRule.json"
+    }
+  ],
+  "title": "DiscountRule",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

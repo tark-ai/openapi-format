@@ -1,0 +1,43 @@
+{
+  "description": "Create Product Review model",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "order_number": {
+      "type": "string",
+      "writeOnly": true
+    },
+    "rating": {
+      "type": "number"
+    },
+    "review_text": {
+      "type": "string"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "contentMediaType": "application/octet-stream"
+      }
+    },
+    "videos": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "contentMediaType": "application/octet-stream"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CreateReview",
+    "description": "API reference for the CreateReview schema"
+  },
+  "required": [
+    "user_id",
+    "order_number",
+    "rating"
+  ],
+  "title": "CreateProductReview"
+}

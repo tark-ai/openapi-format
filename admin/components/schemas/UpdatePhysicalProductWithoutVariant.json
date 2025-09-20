@@ -1,0 +1,44 @@
+{
+  "allOf": [
+    {
+      "$ref": "./UpdateProductWithoutVariant.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "type": "string"
+        },
+        "shipping": {
+          "$ref": "./ProductShipping.json"
+        },
+        "packaging": {
+          "$ref": "./ProductPackaging.json"
+        },
+        "related_products": {
+          "type": "object",
+          "properties": {
+            "cross_sell": {
+              "description": "Array of IDs. The ID value should be the product ID if a non-variant product is selected. For variant products, the ID should be a combination of the product ID and variant ID, separated by a hyphen ('-').",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "upsell": {
+              "description": "Array of IDs. The ID value should be the product ID if a non-variant product is selected. For variant products, the ID should be a combination of the product ID and variant ID, separated by a hyphen ('-').",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "UpdatePhysicalProductWithoutVariant",
+  "x-tags": [
+    "Catalog"
+  ]
+}

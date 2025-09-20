@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./ShippingServiceProvider.json"
+    },
+    {
+      "$ref": "./OtherServiceProvider.json"
+    }
+  ],
+  "title": "ServiceProvider",
+  "x-tags": [
+    "Store"
+  ]
+}

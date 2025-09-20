@@ -1,0 +1,25 @@
+{
+  "description": "Payments using credit card, debit card",
+  "allOf": [
+    {
+      "$ref": "./OrderPaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "card_number": {
+          "description": "masked card number\r\ne.g. ************1111",
+          "type": "string"
+        },
+        "card_type": {
+          "enum": [
+            "Visa",
+            "Master Card",
+            "Rupay"
+          ]
+        }
+      }
+    }
+  ],
+  "title": "CardPayment"
+}

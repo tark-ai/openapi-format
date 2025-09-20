@@ -1,0 +1,19 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Category.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "assign_products_condition": {
+          "$ref": "./CategoryAutoAssignProductCondition.json"
+        }
+      }
+    }
+  ],
+  "title": "CategoryDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

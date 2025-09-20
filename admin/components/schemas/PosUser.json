@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "pin": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location_id": {
+            "type": "string"
+          },
+          "location_name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "role_id": {
+            "type": "string"
+          },
+          "role_name": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive",
+        "blocked"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "PosUser"
+}

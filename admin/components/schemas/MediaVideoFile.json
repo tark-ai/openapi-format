@@ -1,0 +1,40 @@
+{
+  "allOf": [
+    {
+      "$ref": "./MediaFileInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "video_duration": {
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "type": "object",
+          "properties": {
+            "video_preview_url": {
+              "type": "string",
+              "readOnly": true
+            },
+            "video_stream_hls_url": {
+              "type": "string"
+            },
+            "video_stream_dash_url": {
+              "type": "string",
+              "readOnly": true
+            },
+            "image_thumbnail": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "MediaVideoFile",
+  "x-tags": [
+    "Media Gallery"
+  ]
+}

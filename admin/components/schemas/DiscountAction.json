@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "discount"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "percent",
+        "absolute"
+      ]
+    },
+    "value": {
+      "description": "Percentage (0–100) or absolute amount off",
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "mode",
+    "value"
+  ],
+  "title": "DiscountAction"
+}

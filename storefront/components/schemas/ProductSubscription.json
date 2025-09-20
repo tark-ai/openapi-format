@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "subscription_plan": {
+      "type": "string"
+    },
+    "subscription_price": {
+      "type": "number",
+      "format": "double"
+    },
+    "billing_interval": {
+      "description": "Billing interval determines the frequency for which the customer is charged for the subscription itself.",
+      "type": "integer"
+    },
+    "billing_frequency": {
+      "type": "string",
+      "enum": [
+        "weekly",
+        "monthly",
+        "annually"
+      ],
+      "examples": [
+        "monthly"
+      ]
+    },
+    "billing_limit": {
+      "description": "Optionally limit the number of times this subscription will invoice the customer.",
+      "type": "integer"
+    },
+    "fulfill_separately": {
+      "type": "boolean",
+      "default": false
+    },
+    "order_interval": {
+      "description": "order interval defines the frequency of when the subscription sends customers the product",
+      "type": "integer"
+    },
+    "order_frequency": {
+      "type": "string",
+      "enum": [
+        "weekly",
+        "monthly",
+        "annully"
+      ],
+      "examples": [
+        "monthly"
+      ]
+    },
+    "order_limit": {
+      "description": "By default this is set to unlimited, meaning the subscription will fulfill indefinitely. Changing the Limit to 10 would force the subscription to end after the tenth interval had been fulfilled.",
+      "type": "integer"
+    },
+    "minimum_quantity": {
+      "description": "The quantity of the plan to which the customer should be subscribed",
+      "type": "integer"
+    },
+    "billing_trial_days": {
+      "description": "Use in digital product only for trial period",
+      "type": "integer"
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductSubscription",
+    "description": "API reference for the ProductSubscription schema"
+  },
+  "required": [
+    "id",
+    "subscription_plan",
+    "subscription_price",
+    "billing_interval",
+    "billing_frequency",
+    "billing_limit",
+    "fulfill_separately",
+    "order_interval",
+    "order_frequency",
+    "order_limit",
+    "minimum_quantity",
+    "billing_trial_days"
+  ],
+  "title": "ProductSubscription"
+}

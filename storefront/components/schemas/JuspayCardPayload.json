@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_gateway": {
+      "const": "JUSPAY"
+    },
+    "card_number": {
+      "type": "string"
+    },
+    "card_exp_year": {
+      "type": "string"
+    },
+    "card_exp_month": {
+      "type": "string"
+    },
+    "name_on_card": {
+      "type": "string"
+    },
+    "nickname": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayCardPayload",
+    "description": "API reference for the JuspayCardPayload schema"
+  },
+  "required": [
+    "payment_gateway"
+  ],
+  "title": "JuspayCardPayload"
+}

@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "total_customers": {
+      "type": "integer"
+    },
+    "new_customers": {
+      "type": "integer"
+    },
+    "customer_lifetime_value": {
+      "type": "number"
+    },
+    "total_session": {
+      "type": "integer"
+    },
+    "total_session_duration": {
+      "description": "in minutes",
+      "type": "integer"
+    },
+    "avg_session_duration": {
+      "description": "in minutes\n",
+      "type": "integer"
+    },
+    "total_spending": {
+      "type": "number"
+    },
+    "total_paid": {
+      "type": "number"
+    },
+    "settled_amount": {
+      "type": "number"
+    },
+    "refunded_amount": {
+      "type": "number"
+    },
+    "account_balance": {
+      "type": "number"
+    }
+  },
+  "title": "CustomerStats"
+}

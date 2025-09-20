@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "channel": {
+      "type": "string",
+      "const": "email"
+    },
+    "email": {
+      "type": "string"
+    },
+    "otp_action": {
+      "type": "string",
+      "enum": [
+        "register",
+        "reset-password",
+        "verify-email",
+        "update-email"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/GenerateOtpWithEmail",
+    "description": "API reference for the GenerateOtpWithEmail schema"
+  },
+  "required": [
+    "channel",
+    "email",
+    "otp_action"
+  ],
+  "title": "GenerateOtpWithEmail"
+}

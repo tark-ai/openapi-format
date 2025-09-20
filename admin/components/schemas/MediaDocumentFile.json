@@ -1,0 +1,25 @@
+{
+  "allOf": [
+    {
+      "$ref": "./MediaFileInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "object",
+          "properties": {
+            "document": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "MediaDocumentFile",
+  "x-tags": [
+    "Media Gallery"
+  ]
+}

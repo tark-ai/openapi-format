@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "lot_bacth": {
+      "type": "string"
+    },
+    "mfg_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "exp_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "manufacturer": {
+      "type": "string"
+    },
+    "warehouse_id": {
+      "type": "string"
+    },
+    "warehouse": {
+      "$ref": "./WarehouseBasicDetail.json"
+    },
+    "received_quantity": {
+      "type": "integer"
+    },
+    "reserved_quantity": {
+      "type": "integer"
+    },
+    "sold_quantity": {
+      "type": "integer"
+    },
+    "adjusted_quantity": {
+      "type": "integer"
+    },
+    "stock_quantity": {
+      "type": "integer"
+    }
+  },
+  "title": "WarehouseWiseInventory",
+  "x-tags": [
+    "Catalog"
+  ]
+}

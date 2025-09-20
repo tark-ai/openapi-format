@@ -1,0 +1,32 @@
+{
+  "description": "Payment settlement with orders",
+  "type": "object",
+  "properties": {
+    "payment_method": {
+      "type": "string"
+    },
+    "payment_reference_number": {
+      "type": "string"
+    },
+    "request_number": {
+      "type": "string"
+    },
+    "transaction_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "transaction_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "status": {
+      "enum": [
+        "success"
+      ]
+    }
+  },
+  "title": "PaymentSettlementWithRefundCommon",
+  "x-tags": [
+    "Payments"
+  ]
+}

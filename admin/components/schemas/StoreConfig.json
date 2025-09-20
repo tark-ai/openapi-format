@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "properties": {
+    "is_kyc_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_customer_group_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "tax": {
+      "$ref": "./TaxConfig.json"
+    },
+    "shipping": {
+      "$ref": "./ShippingConfig.json"
+    },
+    "customer_groups": {
+      "type": "array",
+      "items": {
+        "$ref": "./CustomerGroup.json"
+      },
+      "readOnly": true
+    },
+    "kyc_documents": {
+      "type": "array",
+      "items": {
+        "$ref": "./KycDocumentConfig.json"
+      },
+      "readOnly": true
+    },
+    "channels": {
+      "type": "array",
+      "items": {
+        "$ref": "./Channel.json"
+      },
+      "readOnly": true
+    },
+    "brand": {
+      "$ref": "./Brand.json"
+    },
+    "subscription": {
+      "$ref": "./SubscriptionSetting.json"
+    },
+    "currency": {
+      "$ref": "./Currency.json"
+    },
+    "measurement": {
+      "$ref": "./MeasurementUnit.json"
+    }
+  },
+  "title": "StoreConfig",
+  "x-tags": [
+    "Store"
+  ]
+}

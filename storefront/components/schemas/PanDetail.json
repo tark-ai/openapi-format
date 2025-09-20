@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PanDetail",
+    "description": "API reference for the PanDetail schema"
+  },
+  "title": "PanDetail",
+  "x-tags": [
+    "KYC"
+  ]
+}

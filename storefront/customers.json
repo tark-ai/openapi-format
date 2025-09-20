@@ -1,0 +1,1112 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Customers",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "paths": {
+    "/customers": {
+      "post": {
+        "operationId": "create-customer",
+        "summary": "Create customer",
+        "description": "Create customer",
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer_detail": {
+                          "$ref": "#/components/schemas/CustomerDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/create-customer",
+          "description": "API reference for the create-customer operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "createCustomer"
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "operationId": "get-customer-detail",
+        "summary": "Retrieve customer detail",
+        "description": "Retrieve customer detail.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer_detail": {
+                          "$ref": "#/components/schemas/CustomerDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-customer-detail",
+          "description": "API reference for the get-customer-detail operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "getCustomerDetail"
+      },
+      "put": {
+        "operationId": "update-customer",
+        "summary": "Update customer detail",
+        "description": "Update customer detail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer_detail": {
+                          "$ref": "#/components/schemas/CustomerDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/update-customer",
+          "description": "API reference for the update-customer operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "updateCustomer"
+      }
+    },
+    "/customers/{user_id}/addresses": {
+      "get": {
+        "operationId": "list-addresses",
+        "summary": "Retrieve all addresses",
+        "description": "Retrieve billing and shipping address of particular customer",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimitParam"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "addresses": {
+                          "type": "array",
+                          "items": {
+                            "allOf": [
+                              {
+                                "$ref": "#/components/schemas/CustomerAddress"
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "is_default_billing": {
+                                    "type": "boolean"
+                                  },
+                                  "is_default_shipping": {
+                                    "type": "boolean"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-addresses",
+          "description": "API reference for the list-addresses operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listAddresses"
+      },
+      "post": {
+        "operationId": "create-address",
+        "summary": "Create address",
+        "description": "Add new address",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "User id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "payload for new address",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CustomerAddress"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "is_default_billing": {
+                        "type": "boolean"
+                      },
+                      "is_default_shipping": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "address": {
+                          "$ref": "#/components/schemas/CustomerAddress"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/create-address",
+          "description": "API reference for the create-address operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "createAddress"
+      }
+    },
+    "/customers/{user_id}/addresses/{address_id}": {
+      "get": {
+        "operationId": "get-address-detail",
+        "summary": "Retrieve particular address",
+        "description": "Retrieve address",
+        "parameters": [
+          {
+            "name": "address_id",
+            "in": "path",
+            "description": "address id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "address": {
+                          "allOf": [
+                            {
+                              "$ref": "#/components/schemas/CustomerAddress"
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "is_default_billing": {
+                                  "type": "boolean"
+                                },
+                                "is_default_shipping": {
+                                  "type": "boolean"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-address-detail",
+          "description": "API reference for the get-address-detail operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getAddressDetail"
+      },
+      "put": {
+        "operationId": "update-address-detail",
+        "summary": "Update particular address",
+        "description": "Update address",
+        "parameters": [
+          {
+            "name": "address_id",
+            "in": "path",
+            "description": "address id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "payload for address update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CustomerAddress"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "is_default_billing": {
+                        "type": "boolean"
+                      },
+                      "is_default_shipping": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "address": {
+                          "$ref": "#/components/schemas/CustomerAddress"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/update-address-detail",
+          "description": "API reference for the update-address-detail operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "updateAddressDetail"
+      },
+      "delete": {
+        "operationId": "delete-address",
+        "summary": "Remove particular address",
+        "description": "Delete address",
+        "parameters": [
+          {
+            "name": "address_id",
+            "in": "path",
+            "description": "address id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "address removed successfully"
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/delete-address",
+          "description": "API reference for the delete-address operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "deleteAddress"
+      }
+    },
+    "/customers/{user_id}/loyalty": {
+      "get": {
+        "operationId": "get-loyalty-details",
+        "summary": "Retrieve loyalty details",
+        "description": "Retrieve loyalty details",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "loyalty": {
+                          "$ref": "#/components/schemas/CustomerLoyalty"
+                        },
+                        "loyalty_point_balance": {
+                          "type": "integer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-loyalty-details",
+          "description": "API reference for the get-loyalty-details operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getLoyaltyDetails"
+      }
+    },
+    "/customers/{user_id}/loyalty-points-activity": {
+      "get": {
+        "operationId": "list-loyalty-activities",
+        "summary": "List all loyalty points activity",
+        "description": "List all loyalty points activity",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageLimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortingParam"
+          },
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "loyalty_points_activity": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/LoyaltyPointActivity"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-loyalty-activities",
+          "description": "API reference for the list-loyalty-activities operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listLoyaltyActivities"
+      }
+    },
+    "/customers/{user_id}/reviews": {
+      "get": {
+        "operationId": "list-user-reviews",
+        "summary": "Retrieve all reviews",
+        "description": "Retrieve all reviews",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "reviews": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerReview"
+                          }
+                        },
+                        "ready_for_review": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerReadyForReview"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-user-reviews",
+          "description": "API reference for the list-user-reviews operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Customers"
+        ],
+        "x-speakeasy-group": "customers",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listUserReviews"
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "pageLimitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "no of rows per page",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "pageParam": {
+        "name": "page",
+        "in": "query",
+        "description": "page number of pagination list",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "sortingParam": {
+        "name": "sort_by",
+        "in": "query",
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string",
+          "examples": [
+            "{\"country\":\"asc\",\"city\":\"asc\",\"population\":\"desc\"}"
+          ]
+        }
+      }
+    },
+    "schemas": {
+      "CreateCustomer": {
+        "$ref": "./components/schemas/CreateCustomer.json"
+      },
+      "CustomerAddress": {
+        "$ref": "./components/schemas/CustomerAddress.json"
+      },
+      "CustomerDetail": {
+        "$ref": "./components/schemas/CustomerDetail.json"
+      },
+      "CustomerLoyalty": {
+        "$ref": "./components/schemas/CustomerLoyalty.json"
+      },
+      "CustomerReadyForReview": {
+        "$ref": "./components/schemas/CustomerReadyForReview.json"
+      },
+      "CustomerReview": {
+        "$ref": "./components/schemas/CustomerReview.json"
+      },
+      "LoyaltyPointActivity": {
+        "$ref": "./components/schemas/LoyaltyPointActivity.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "UpdateCustomer": {
+        "$ref": "./components/schemas/UpdateCustomer.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "description": "Access token",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Customers",
+      "description": "Customers"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  }
+}

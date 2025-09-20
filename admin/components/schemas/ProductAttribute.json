@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "properties": {
+    "attribute_id": {
+      "type": "string"
+    },
+    "attribute_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "attribute_type": {
+      "type": "string",
+      "enum": [
+        "text",
+        "number",
+        "boolean",
+        "date",
+        "single-select",
+        "multi-select",
+        "color"
+      ],
+      "readOnly": true
+    },
+    "attribute_value": {
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "string value for attribute type **text**, **single select** and **date**."
+        },
+        {
+          "type": "number",
+          "description": "numeric value for attribute type number."
+        },
+        {
+          "type": "boolean",
+          "description": "true/false for attribute type boolean."
+        },
+        {
+          "type": "array",
+          "description": "for attribute type = multi-select",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "$ref": "./ColorObject.json",
+          "description": "for attribute type = color"
+        }
+      ]
+    },
+    "key": {
+      "description": "Value in snake case.",
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "examples": [],
+  "title": "ProductAttribute",
+  "x-tags": [
+    "Catalog"
+  ]
+}

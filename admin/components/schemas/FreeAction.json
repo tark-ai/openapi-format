@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "free"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type"
+  ],
+  "title": "FreeAction"
+}

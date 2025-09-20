@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "description": "commercengine user id.",
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayCreateCustomerPayload",
+    "description": "API reference for the JuspayCreateCustomerPayload schema"
+  },
+  "title": "JuspayCreateCustomerPayload"
+}

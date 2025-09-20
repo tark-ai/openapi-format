@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "country_code": {
+      "description": "Two-letter code begin with a plus sign prefix that identifies different countries. By default it will be +91 if not provided.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": "+91"
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": "string"
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email"
+    },
+    "first_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PosUpdateCustomerWithPhone",
+    "description": "API reference for the PosUpdateCustomerWithPhone schema"
+  },
+  "required": [
+    "phone"
+  ],
+  "title": "UpdateCustomerWithPhone"
+}

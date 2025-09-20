@@ -1,0 +1,11 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CategoryCommonDetail.json"
+    }
+  ],
+  "title": "Category",
+  "x-tags": [
+    "Catalog"
+  ]
+}

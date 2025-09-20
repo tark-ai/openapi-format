@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "user id",
+      "type": "string",
+      "readOnly": true
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "full_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "profile_image_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "country_code": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "is_phone_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_email_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_whatsapp_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive",
+        "suspended",
+        "blocked"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "last_seen": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "kyc_status": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "title": "CustomerInfo",
+  "x-tags": [
+    "Customers"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "details",
+        "applies_to_product"
+      ],
+      "properties": {
+        "details": {
+          "$ref": "./DiscountRule.json"
+        },
+        "applies_to_product": {
+          "enum": [
+            "all",
+            "product",
+            "category"
+          ]
+        }
+      }
+    }
+  ],
+  "title": "DiscountCouponPromotion"
+}

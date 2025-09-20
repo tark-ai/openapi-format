@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "activity_type": {
+      "type": "string",
+      "readOnly": true
+    },
+    "order_status": {
+      "type": "string",
+      "readOnly": true
+    },
+    "comment": {
+      "type": "string"
+    },
+    "user_type": {
+      "enum": [
+        "customer",
+        "admin",
+        "system"
+      ],
+      "readOnly": true
+    },
+    "user_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "comment"
+  ],
+  "title": "OrderActivity",
+  "x-tags": [
+    "Orders"
+  ]
+}

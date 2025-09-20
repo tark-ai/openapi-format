@@ -1322,7 +1322,7 @@ async function openapiSplitByTags(oaObj, options = {}) {
 
     // Write the tag-based API spec
     const sanitizedTag = tag.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    const tagOutputPath = path.join(options.outputDir, `${sanitizedTag}-api.${options.extension}`);
+    const tagOutputPath = path.join(options.outputDir, `${sanitizedTag}.${options.extension}`);
     await writeFile(tagOutputPath, taggedSpec, options);
   }
 
@@ -1365,12 +1365,293 @@ async function openapiSplitByTags(oaObj, options = {}) {
       });
     }
 
-    // Write the webhooks API spec
-    const webhookOutputPath = path.join(options.outputDir, `webhooks.${options.extension}`);
+    // Write the webhooks API spec with underscore prefix to avoid collision with tag-based files
+    const webhookOutputPath = path.join(options.outputDir, `_webhooks.${options.extension}`);
     await writeFile(webhookOutputPath, webhookSpec, options);
   }
 
-  console.log(`Split complete! Created ${tagsArray.length} tag-based API specs${oaObj?.webhooks ? ' + webhooks.json' : ''} with shared schemas.`);
+  console.log(`Split complete! Created ${tagsArray.length} tag-based API specs${oaObj?.webhooks ? ' + _webhooks.json' : ''} with shared schemas.`);
+}
+
+/**
+ * OpenAPI merge by tags function
+ * Merge multiple tag-based OpenAPI files back into a single OpenAPI document
+ * This reverses the openapiSplitByTags operation
+ * @param {string} inputDir Directory containing the split OpenAPI files
+ * @param {object} options OpenAPI-format options
+ * @returns {Promise<object>} Merged OpenAPI document
+ */
+async function openapiMergeByTags(inputDir, options = {}) {
+  const fs = require('fs');
+  const path = require('path');
+
+  if (!inputDir) {
+    throw new Error('Input directory is required');
+  }
+
+  if (!fs.existsSync(inputDir)) {
+    throw new Error(`Input directory does not exist: ${inputDir}`);
+  }
+
+  console.log(`Merging OpenAPI specs from directory: ${inputDir}`);
+
+  // Discover all files in the directory
+  const files = fs.readdirSync(inputDir);
+  const tagSpecs = [];
+  const schemaFiles = [];
+  let webhooksFile = null;
+  let baseSpec = null;
+
+  // Categorize files
+  for (const file of files) {
+    const filePath = path.join(inputDir, file);
+    const stats = fs.statSync(filePath);
+
+    if (stats.isFile()) {
+      if (file === '_webhooks.json' || file === '_webhooks.yaml' || file === '_webhooks.yml') {
+        webhooksFile = filePath;
+      } else if (file.endsWith('.json') || file.endsWith('.yaml') || file.endsWith('.yml')) {
+        // Check if this is a tag spec (not in components directory)
+        tagSpecs.push(filePath);
+      }
+    } else if (stats.isDirectory() && file === 'components') {
+      // Find schema files in components/schemas directory
+      const schemasDir = path.join(filePath, 'schemas');
+      if (fs.existsSync(schemasDir)) {
+        const schemaFileNames = fs.readdirSync(schemasDir);
+        for (const schemaFile of schemaFileNames) {
+          if (schemaFile.endsWith('.json') || schemaFile.endsWith('.yaml') || schemaFile.endsWith('.yml')) {
+            schemaFiles.push(path.join(schemasDir, schemaFile));
+          }
+        }
+      }
+    }
+  }
+
+  console.log(`Found ${tagSpecs.length} tag specs, ${schemaFiles.length} schema files${webhooksFile ? ', 1 _webhooks file' : ''}`);
+
+  if (tagSpecs.length === 0) {
+    throw new Error('No tag-based OpenAPI specs found in the directory');
+  }
+
+  // Read and parse all files
+  const parsedTagSpecs = [];
+  for (const specPath of tagSpecs) {
+    try {
+      const specData = await parseFile(specPath);
+      parsedTagSpecs.push(specData);
+      if (!baseSpec) {
+        baseSpec = JSON.parse(JSON.stringify(specData)); // Use first spec as base
+      }
+    } catch (error) {
+      console.warn(`Failed to parse tag spec ${specPath}: ${error.message}`);
+    }
+  }
+
+  // Read schema files
+  const schemas = {};
+  for (const schemaPath of schemaFiles) {
+    try {
+      const schemaName = path.basename(schemaPath, path.extname(schemaPath));
+      const schemaData = await parseFile(schemaPath);
+      schemas[schemaName] = schemaData;
+    } catch (error) {
+      console.warn(`Failed to parse schema ${schemaPath}: ${error.message}`);
+    }
+  }
+
+  // Read webhooks file if it exists
+  let webhooksData = null;
+  if (webhooksFile) {
+    try {
+      webhooksData = await parseFile(webhooksFile);
+    } catch (error) {
+      console.warn(`Failed to parse webhooks file: ${error.message}`);
+    }
+  }
+
+  console.log(`Successfully parsed ${parsedTagSpecs.length} specs and ${Object.keys(schemas).length} schemas`);
+
+  // Start with base spec structure (info, servers, etc.)
+  const mergedSpec = {
+    openapi: baseSpec.openapi,
+    info: {...baseSpec.info},
+    servers: baseSpec.servers ? [...baseSpec.servers] : undefined,
+    paths: {},
+    components: {
+      schemas: {},
+      responses: {},
+      parameters: {},
+      examples: {},
+      requestBodies: {},
+      headers: {},
+      securitySchemes: {}
+    }
+  };
+
+  // Clean up the title to remove tag suffix (e.g., "API - Users" -> "API")
+  if (mergedSpec.info && mergedSpec.info.title) {
+    const titleParts = mergedSpec.info.title.split(' - ');
+    if (titleParts.length > 1) {
+      mergedSpec.info.title = titleParts[0];
+    }
+  }
+
+  // Collect all unique tags (with their full definitions) and merge paths
+  const allTags = new Map(); // Use Map to store tag objects with descriptions
+  for (const spec of parsedTagSpecs) {
+    if (spec.paths) {
+      Object.assign(mergedSpec.paths, spec.paths);
+
+      // Extract tags from all operations
+      for (const pathObj of Object.values(spec.paths)) {
+        for (const [method, operation] of Object.entries(pathObj)) {
+          if (operation && operation.tags && Array.isArray(operation.tags)) {
+            operation.tags.forEach(tag => {
+              if (!allTags.has(tag)) {
+                allTags.set(tag, {name: tag}); // Default tag object
+              }
+            });
+          }
+        }
+      }
+    }
+
+    // Collect tag definitions with descriptions from spec-level tags
+    if (spec.tags && Array.isArray(spec.tags)) {
+      spec.tags.forEach(tagDef => {
+        if (tagDef.name) {
+          allTags.set(tagDef.name, tagDef); // Override with full definition
+        }
+      });
+    }
+  }
+
+  // Add resolved schemas
+  Object.assign(mergedSpec.components.schemas, schemas);
+
+  // Merge other components from all specs, deduplicating by key
+  const componentTypes = ['responses', 'parameters', 'examples', 'requestBodies', 'headers', 'securitySchemes'];
+
+  // Collect components from tag-based specs
+  for (const spec of parsedTagSpecs) {
+    if (spec.components) {
+      for (const componentType of componentTypes) {
+        if (spec.components[componentType]) {
+          for (const [key, value] of Object.entries(spec.components[componentType])) {
+            // Only add if not already present (first occurrence wins)
+            if (!mergedSpec.components[componentType][key]) {
+              mergedSpec.components[componentType][key] = value;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Also collect components from webhooks spec
+  if (webhooksData && webhooksData.components) {
+    for (const componentType of componentTypes) {
+      if (webhooksData.components[componentType]) {
+        for (const [key, value] of Object.entries(webhooksData.components[componentType])) {
+          // Only add if not already present (first occurrence wins)
+          if (!mergedSpec.components[componentType][key]) {
+            mergedSpec.components[componentType][key] = value;
+          }
+        }
+      }
+    }
+  }
+
+  // Add webhooks if they exist and collect webhook tags
+  if (webhooksData && webhooksData.webhooks) {
+    mergedSpec.webhooks = webhooksData.webhooks;
+
+    // Extract tags from webhook operations too
+    for (const webhookObj of Object.values(webhooksData.webhooks)) {
+      for (const [method, operation] of Object.entries(webhookObj)) {
+        if (operation && operation.tags && Array.isArray(operation.tags)) {
+          operation.tags.forEach(tag => {
+            if (!allTags.has(tag)) {
+              allTags.set(tag, {name: tag}); // Default tag object
+            }
+          });
+        }
+      }
+    }
+
+    // Also collect webhook-level tag definitions if they exist
+    if (webhooksData.tags && Array.isArray(webhooksData.tags)) {
+      webhooksData.tags.forEach(tagDef => {
+        if (tagDef.name) {
+          allTags.set(tagDef.name, tagDef); // Override with full definition
+        }
+      });
+    }
+  }
+
+  // Reconstruct tags array from all collected tags with full definitions
+  if (allTags.size > 0) {
+    mergedSpec.tags = Array.from(allTags.values()).sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  // Copy other root-level properties from base spec (excluding tags since we reconstructed it)
+  const rootProperties = ['externalDocs', 'security'];
+  for (const prop of rootProperties) {
+    if (baseSpec[prop]) {
+      mergedSpec[prop] = baseSpec[prop];
+    }
+  }
+
+  // Resolve external schema references back to internal references (including in webhooks)
+  const resolvedSpec = await resolveExternalSchemaReferences(mergedSpec, schemas);
+
+  console.log(`Merge complete! Combined ${Object.keys(mergedSpec.paths).length} paths, ${Object.keys(schemas).length} schemas, ${allTags.size} tags${mergedSpec.webhooks ? ', webhooks' : ''}`);
+
+  // Clean up empty component sections
+  for (const componentType of componentTypes) {
+    if (Object.keys(mergedSpec.components[componentType]).length === 0) {
+      delete mergedSpec.components[componentType];
+    }
+  }
+
+  if (Object.keys(mergedSpec.components).length === 0) {
+    delete mergedSpec.components;
+  }
+
+
+  return {data: resolvedSpec, resultData: {}};
+}
+
+/**
+ * Helper function to resolve external schema references back to internal references
+ * @param {object} spec OpenAPI specification
+ * @param {object} schemas Available schemas
+ * @returns {Promise<object>} Spec with resolved references
+ */
+async function resolveExternalSchemaReferences(spec, schemas) {
+  let specString = JSON.stringify(spec);
+
+  // Find all external schema references and replace them with internal ones
+  for (const schemaName of Object.keys(schemas)) {
+    const internalRef = `#/components/schemas/${schemaName}`;
+
+    // Replace various forms of external references:
+    // 1. Full path: "./components/schemas/SchemaName.json"
+    // 2. Relative: "./SchemaName.json"
+    // 3. Different extensions: .yaml, .yml
+    const patterns = [
+      `"\\./components/schemas/${schemaName}\\.(json|yaml|yml)"`,
+      `"\\./${schemaName}\\.(json|yaml|yml)"`,
+      `"${schemaName}\\.(json|yaml|yml)"`
+    ];
+
+    for (const pattern of patterns) {
+      specString = specString.replace(new RegExp(pattern, 'g'), `"${internalRef}"`);
+    }
+  }
+
+  return JSON.parse(specString);
 }
 
 module.exports = {
@@ -1381,6 +1662,7 @@ module.exports = {
   openapiOverlay: openapiOverlay,
   openapiSplit: openapiSplit,
   openapiSplitByTags: openapiSplitByTags,
+  openapiMergeByTags: openapiMergeByTags,
   openapiConvertVersion: openapiConvertVersion,
   openapiRename: openapiRename,
   readFile: readFile,

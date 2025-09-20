@@ -1,0 +1,44 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Warehouse.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "shipping_boxes": {
+          "type": "array",
+          "items": {
+            "$ref": "./StoreShippingBox.json"
+          },
+          "readOnly": true
+        },
+        "shipping_providers": {
+          "type": "array",
+          "items": {
+            "$ref": "./ShippingOption.json"
+          },
+          "readOnly": true
+        },
+        "manual_methods": {
+          "type": "array",
+          "items": {
+            "$ref": "./ShippingOption.json"
+          },
+          "readOnly": true
+        },
+        "available_shipping_options": {
+          "type": "array",
+          "items": {
+            "$ref": "./ShippingOption.json"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  ],
+  "title": "WarehouseDetail",
+  "x-tags": [
+    "Store"
+  ]
+}

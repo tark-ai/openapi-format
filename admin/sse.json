@@ -1,0 +1,126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - SSE",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/store/sse/global-state": {
+      "get": {
+        "operationId": "get-global-state",
+        "summary": "Retrieve global state",
+        "description": "Retrieve server sent events for global state",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "event_name": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/StoreConfig"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SSE"
+        ]
+      },
+      "parameters": []
+    },
+    "/store/sse/live-events": {
+      "get": {
+        "operationId": "get-live-events",
+        "summary": "Retrieve live events",
+        "description": "Retrieve live events",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/AnalyticsEvent"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "SSE"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalyticsEvent": {
+        "$ref": "./components/schemas/AnalyticsEvent.json"
+      },
+      "StoreConfig": {
+        "$ref": "./components/schemas/StoreConfig.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SSE",
+      "description": "SSE"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

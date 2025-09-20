@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "brand name. it will be used in emails and other communications.",
+      "type": "string"
+    },
+    "logo_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "social_media_links": {
+      "description": "json object having key - value pair.\r\n\r\nexample - {\"facebook\": \"www.facebook.com/commecengine\"}",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Brand",
+    "description": "API reference for the Brand schema"
+  },
+  "required": [
+    "name",
+    "logo_url",
+    "social_media_links"
+  ],
+  "title": "Brand"
+}

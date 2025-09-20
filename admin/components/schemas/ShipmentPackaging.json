@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "package_option": {
+      "enum": [
+        "Automatic",
+        "Custom"
+      ]
+    },
+    "boxes_count": {
+      "type": "integer"
+    },
+    "boxes": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipmentBox.json"
+      }
+    }
+  },
+  "title": "ShipmentPackaging",
+  "x-tags": [
+    "Shipping"
+  ]
+}

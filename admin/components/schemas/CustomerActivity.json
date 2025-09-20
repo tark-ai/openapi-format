@@ -1,0 +1,72 @@
+{
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "enum": [
+        "track",
+        "page",
+        "identity"
+      ]
+    },
+    "event_name": {
+      "type": "string"
+    },
+    "event_schema_id": {
+      "type": "string"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "session_origin_url": {
+      "type": "string"
+    },
+    "session_last_seen": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "event_data": {
+      "description": "analytic event raw json object.",
+      "type": "object"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "store_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "message_id": {
+      "type": "string"
+    },
+    "original_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sent_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "anonymous_id": {
+      "description": "in case user id is missing.",
+      "type": "string"
+    }
+  },
+  "title": "CustomerActivity",
+  "x-tags": [
+    "Customers"
+  ]
+}

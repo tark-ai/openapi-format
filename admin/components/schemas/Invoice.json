@@ -1,0 +1,97 @@
+{
+  "description": "Invoice model",
+  "type": "object",
+  "properties": {
+    "invoice_number": {
+      "type": "string"
+    },
+    "invoice_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "irn_number": {
+      "description": "Invoice Reference Number",
+      "type": "string"
+    },
+    "ack_number": {
+      "description": "Acknowledgement Number",
+      "type": "string"
+    },
+    "ack_date": {
+      "description": "Acknowledgement Date",
+      "type": "string",
+      "format": "date-time"
+    },
+    "signed_qr_code": {
+      "type": "string"
+    },
+    "gatepass_barcode": {
+      "type": "string"
+    },
+    "seller_details": {
+      "$ref": "./Warehouse.json"
+    },
+    "billing_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "shipping_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "subtotal": {
+      "type": "number"
+    },
+    "shipping_amount": {
+      "type": "number"
+    },
+    "coupon_code": {
+      "type": "string"
+    },
+    "coupon_discount_percent": {
+      "type": "number"
+    },
+    "coupon_discount_amount": {
+      "type": "number"
+    },
+    "total_tax": {
+      "type": "number"
+    },
+    "grand_total": {
+      "type": "number"
+    },
+    "tax_summary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tax_rate": {
+            "type": "number"
+          },
+          "taxable_value": {
+            "type": "number"
+          },
+          "igst": {
+            "type": "number"
+          },
+          "cgst": {
+            "type": "number"
+          },
+          "sgst": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "Invoice",
+  "x-tags": [
+    "Shipping"
+  ]
+}

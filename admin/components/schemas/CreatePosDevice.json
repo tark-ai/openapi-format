@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "device_type": {
+      "enum": [
+        "pos-terminal"
+      ]
+    },
+    "external_device_id": {
+      "description": "A unique ID issued by the Vendor.",
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "model_number": {
+      "type": "string"
+    },
+    "mac_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "device_type",
+    "external_device_id",
+    "vendor",
+    "model_number",
+    "location_id"
+  ],
+  "title": "CreatePosDevice"
+}

@@ -1,0 +1,290 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Analytics",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/analytics/dynamic-query": {
+      "post": {
+        "operationId": "execute-dynamic-query",
+        "summary": "Dynamic query",
+        "description": "Retrive analytics data as per dynamic query passed.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/AnalyticsStats"
+                  },
+                  {
+                    "$ref": "#/components/schemas/AnalyticsRecords"
+                  }
+                ]
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "schema_name": "analytics_log",
+                    "query_type": "stats",
+                    "query": {
+                      "aggregate": [
+                        {
+                          "type": "COUNT",
+                          "field_name": "id",
+                          "alias": "events_count"
+                        }
+                      ],
+                      "group_by": {
+                        "fields": "origin_source",
+                        "having_condition": [
+                          {
+                            "field_name": "events_count",
+                            "operator": "greater",
+                            "value": 2000
+                          }
+                        ]
+                      },
+                      "filters": [
+                        {
+                          "field_name": "origin_source",
+                          "operator": "is-not-empty",
+                          "value": null
+                        }
+                      ],
+                      "sort_by": {
+                        "origin_source": "asc"
+                      },
+                      "limit": 25,
+                      "offset": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/DynamicQueryRecords"
+                        },
+                        {
+                          "$ref": "#/components/schemas/DynamicQueryStatsData"
+                        },
+                        {
+                          "$ref": "#/components/schemas/DynamicQueryMetricsData"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Analytics"
+        ]
+      }
+    },
+    "/analytics/events/{id}": {
+      "get": {
+        "operationId": "get-analytics-event-detail",
+        "summary": "Retrieve an event detail",
+        "description": "Retrieve an event detail.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "event_detail": {
+                          "description": "rows returned by raw query passed in request body.",
+                          "$ref": "#/components/schemas/AnalyticsEventSchemaDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Analytics"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "event id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/analytics/raw-query": {
+      "post": {
+        "operationId": "execute-raw-query",
+        "summary": "Raw query",
+        "description": "Retrive data as per raw query passed.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "raw_query": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "raw_query"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "data": {
+                          "description": "rows returned by raw query passed in request body.",
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Analytics"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "AnalyticsEventSchemaDetail": {
+        "$ref": "./components/schemas/AnalyticsEventSchemaDetail.json"
+      },
+      "AnalyticsRecords": {
+        "$ref": "./components/schemas/AnalyticsRecords.json"
+      },
+      "AnalyticsStats": {
+        "$ref": "./components/schemas/AnalyticsStats.json"
+      },
+      "DynamicQueryMetricsData": {
+        "$ref": "./components/schemas/DynamicQueryMetricsData.json"
+      },
+      "DynamicQueryRecords": {
+        "$ref": "./components/schemas/DynamicQueryRecords.json"
+      },
+      "DynamicQueryStatsData": {
+        "$ref": "./components/schemas/DynamicQueryStatsData.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Analytics",
+      "description": "Analytics"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

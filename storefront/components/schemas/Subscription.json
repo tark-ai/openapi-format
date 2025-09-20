@@ -1,0 +1,258 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "plan_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "plan_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "price": {
+      "description": "The subscription price is the amount a customer is required to pay over a specified period (e.g., monthly, annually). This price may vary based on the plan selected or based on usage of services.",
+      "type": "number",
+      "format": "double"
+    },
+    "status": {
+      "enum": [
+        "created",
+        "active",
+        "paused",
+        "revoked"
+      ],
+      "readOnly": true
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "description": "if specified, subscrition will be revoked on this date.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "trial_days": {
+      "description": "If specified, payment will be charged after trial days completed.",
+      "type": "integer",
+      "default": 0
+    },
+    "trial_start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "readOnly": true
+    },
+    "trial_end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "readOnly": true
+    },
+    "next_billing_date": {
+      "type": "string",
+      "format": "date",
+      "readOnly": true
+    },
+    "last_payment_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "readOnly": true
+    },
+    "pause_start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "pause_end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "billing_frequency": {
+      "enum": [
+        "monthly"
+      ]
+    },
+    "billing_interval": {
+      "description": "Frequency unit multiplier. For example, `1` with `monthly` means every month; `3` with `weekly` means in every 3 weeks.",
+      "type": "integer",
+      "default": 1
+    },
+    "billing_limit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "shipping_frequency": {
+      "enum": [
+        "monthly"
+      ]
+    },
+    "shipping_interval": {
+      "description": "Frequency unit multiplier. For example, `1` with `monthly` means every month; `3` with `weekly` means in every 3 weeks.",
+      "type": "integer",
+      "default": 1
+    },
+    "shipping_limit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "coupon_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coupon_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coupon_discount_percent": {
+      "type": "number",
+      "default": 0
+    },
+    "coupon_discount_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "coupon_redemption_limit": {
+      "description": "Indicates how many times a coupon can be redeemed within the subscription.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "default": 0
+    },
+    "is_prepaid": {
+      "description": "Indicates whether the subscription is paid in advance. When set to true, the subscription requires the customer to pay for the entire billing period upfront. When set to false, the subscription may operate on a pay-as-you-go or post-paid model, where charges are billed after the service is provided.",
+      "type": "boolean",
+      "default": false
+    },
+    "usage_based_billing": {
+      "description": "Refers to a pricing model where customers are charged based on their actual usage of a service. Usage based billing works for digital products.",
+      "type": "boolean"
+    },
+    "usage_based_tiers": {
+      "description": "Refers to a pricing structure where customers are charged based on their usage, but the cost per unit of usage decreases or changes as they move into higher usage levels.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "up_to",
+          "price_per_unit"
+        ],
+        "properties": {
+          "up_to": {
+            "type": "integer"
+          },
+          "price_per_unit": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
+    "grace_period_days": {
+      "description": "The number of days after a failed payment to retry before canceling.",
+      "type": "integer",
+      "default": 0
+    },
+    "is_cancellation_allowed": {
+      "description": "Indcates whether the next billing cancellation is allowed or not.",
+      "type": "boolean",
+      "default": true
+    },
+    "days_until_cancellation_allowed": {
+      "description": "Specifies the number of days the customer has to cancel before the next billing.",
+      "type": "integer",
+      "default": 3
+    },
+    "currency": {
+      "description": "Details about the currency being used, including `name`, `code`, and `symbol`.",
+      "$ref": "./Currency.json"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Subscription",
+    "description": "API reference for the Subscription schema"
+  },
+  "required": [
+    "id",
+    "plan_id",
+    "plan_name",
+    "price",
+    "status",
+    "start_date",
+    "end_date",
+    "trial_days",
+    "trial_start_date",
+    "trial_end_date",
+    "next_billing_date",
+    "last_payment_date",
+    "pause_start_date",
+    "pause_end_date",
+    "billing_frequency",
+    "billing_interval",
+    "billing_limit",
+    "shipping_frequency",
+    "shipping_interval",
+    "shipping_limit",
+    "coupon_id",
+    "coupon_code",
+    "coupon_discount_percent",
+    "coupon_discount_amount",
+    "coupon_redemption_limit",
+    "is_prepaid",
+    "usage_based_billing",
+    "usage_based_tiers",
+    "grace_period_days",
+    "is_cancellation_allowed",
+    "days_until_cancellation_allowed",
+    "currency",
+    "metadata",
+    "created_at",
+    "modified_at"
+  ],
+  "title": "Subscription",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "allOf": [
+    {
+      "$ref": "./WebhookEvent.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "payload",
+        "deliveries",
+        "webhook_relations"
+      ],
+      "properties": {
+        "payload": {
+          "type": "object"
+        },
+        "deliveries": {
+          "type": "array",
+          "items": {
+            "$ref": "./WebhookDeliveryLog.json"
+          }
+        },
+        "webhook_relations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "webhook_id",
+              "webhook_name"
+            ],
+            "properties": {
+              "webhook_id": {
+                "type": "string"
+              },
+              "webhook_name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "WebhookEventDetail",
+  "x-tags": [
+    "Webhooks"
+  ]
+}

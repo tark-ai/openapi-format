@@ -1,0 +1,19 @@
+{
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "order_number": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "$ref": "./ShipmentInfo.json"
+    }
+  ],
+  "title": "ShipmentList",
+  "x-tags": [
+    "Shipping"
+  ]
+}

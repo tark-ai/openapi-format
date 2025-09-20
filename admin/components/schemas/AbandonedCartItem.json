@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "product_image_url": {
+      "type": "string"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "product_variant_id": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "free_quantity": {
+      "type": "integer"
+    },
+    "is_free_item": {
+      "type": "boolean"
+    },
+    "listing_price": {
+      "type": "number"
+    },
+    "selling_price": {
+      "type": "number"
+    },
+    "selling_price_excluding_tax": {
+      "type": "number"
+    },
+    "tax_rate": {
+      "type": "number"
+    },
+    "tax_type": {
+      "type": "string"
+    }
+  },
+  "title": "AbandonedCartItem"
+}

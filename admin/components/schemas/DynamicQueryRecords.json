@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "data": {
+      "description": "array of object containing key-value data as per fields passed in query payload.",
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "pagination": {
+      "$ref": "./Pagination.json"
+    }
+  },
+  "nullable": true,
+  "title": "DynamicQueryRecords",
+  "x-tags": [
+    "Analytics"
+  ]
+}

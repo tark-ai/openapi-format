@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "content_title": {
+      "description": "to be used in email subject or notification heading if provided.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "content_type": {
+      "enum": [
+        "html",
+        "markdown",
+        "plaintext"
+      ]
+    },
+    "content": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/StoreTemplate",
+    "description": "API reference for the StoreTemplate schema"
+  },
+  "required": [
+    "id",
+    "name",
+    "content_title",
+    "content_type",
+    "content"
+  ],
+  "title": "StoreTemplate",
+  "x-tags": [
+    "Store"
+  ]
+}

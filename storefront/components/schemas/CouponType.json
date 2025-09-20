@@ -1,0 +1,15 @@
+{
+  "enum": [
+    "discount",
+    "free-goods",
+    "fixed-price",
+    "free-shipping",
+    "buy-x-get-y",
+    "volume-based",
+    "accelerated-rewards"
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CouponType",
+    "description": "API reference for the CouponType schema"
+  }
+}

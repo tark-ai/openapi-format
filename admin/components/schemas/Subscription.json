@@ -1,0 +1,89 @@
+{
+  "description": "Subscription model",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "subscription_number": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "sub_total": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "total_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "net_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "billing_frequency": {
+      "enum": [
+        "Monthly",
+        "Quarterly",
+        "Half-yearly",
+        "Yearly"
+      ]
+    },
+    "billing_interval": {
+      "type": "integer",
+      "default": 1
+    },
+    "billing_limit": {
+      "type": "integer",
+      "default": 0
+    },
+    "fulfill_separately": {
+      "type": "boolean"
+    },
+    "fulfillment_frequency": {
+      "enum": [
+        "Monthly",
+        "Quarterly",
+        "Half-yearly",
+        "Yearly"
+      ]
+    },
+    "fulfillment_interval": {
+      "type": "integer",
+      "default": 1
+    },
+    "fulfillment_limit": {
+      "type": "integer",
+      "default": 0
+    },
+    "billing_trial_days": {
+      "type": "integer",
+      "default": 0
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "active",
+        "inactive"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "Subscription",
+  "x-tags": [
+    "Orders"
+  ]
+}

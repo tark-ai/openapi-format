@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "countries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "country_alias": {
+            "type": "string"
+          },
+          "all_states": {
+            "type": "boolean",
+            "default": true
+          },
+          "state_alias": {
+            "description": "required if all_regions=false",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "title": "UpdateShippingZone",
+  "x-tags": [
+    "Store"
+  ]
+}

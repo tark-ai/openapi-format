@@ -1,0 +1,90 @@
+{
+  "type": "object",
+  "properties": {
+    "pickup": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "product_id",
+          "product_name",
+          "variant_id",
+          "variant_name",
+          "quantity"
+        ],
+        "properties": {
+          "product_id": {
+            "type": "string"
+          },
+          "product_name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "readOnly": true
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "delivery": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "product_id",
+          "product_name",
+          "variant_id",
+          "variant_name",
+          "quantity"
+        ],
+        "properties": {
+          "product_id": {
+            "type": "string"
+          },
+          "product_name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "readOnly": true
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "shipping_address": {
+      "$ref": "./CustomerAddress.json"
+    }
+  },
+  "required": [
+    "pickup",
+    "delivery",
+    "shipping_address"
+  ],
+  "title": "PartialCollectAndDelivery"
+}

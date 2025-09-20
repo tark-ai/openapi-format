@@ -1,0 +1,83 @@
+{
+  "description": "Order shipment model",
+  "type": "object",
+  "properties": {
+    "reference_number": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "approved",
+        "shipped",
+        "delivered",
+        "cancelled"
+      ]
+    },
+    "total_weight": {
+      "type": "number"
+    },
+    "total_boxes": {
+      "type": "integer"
+    },
+    "shipment_items_count": {
+      "type": "integer"
+    },
+    "shipment_items": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipmentItem.json"
+      }
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_tax_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_amount_including_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "courier_company_id": {
+      "type": "string"
+    },
+    "courier_company_name": {
+      "type": "string"
+    },
+    "shipping_label_url": {
+      "type": "string"
+    },
+    "awb_no": {
+      "type": "string"
+    },
+    "eta_delivery": {
+      "type": "string"
+    },
+    "shipped_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "delivered_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "cancellation_reason": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "OrderShipment",
+  "x-tags": [
+    "Orders"
+  ]
+}

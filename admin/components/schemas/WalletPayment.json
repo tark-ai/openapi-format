@@ -1,0 +1,16 @@
+{
+  "allOf": [
+    {
+      "$ref": "./OrderPaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "wallet_name": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "title": "WalletPayment"
+}

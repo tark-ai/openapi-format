@@ -1,0 +1,1073 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Orders",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "get": {
+        "operationId": "list-orders",
+        "summary": "List all orders",
+        "description": "List all orders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "orders": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderList"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "post": {
+        "operationId": "create-order",
+        "summary": "Create a draft order",
+        "description": "Create a draft order",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDraftOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    },
+    "/orders/abandoned-carts": {
+      "get": {
+        "operationId": "get-abandoned-carts",
+        "summary": "List all abandoned carts",
+        "description": "List all abandoned carts",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "query",
+            "description": "customer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "abandoned_carts": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/AbandonedCart",
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": []
+    },
+    "/orders/products-purchase-count": {
+      "get": {
+        "operationId": "get-products-purchase-count",
+        "summary": "List all products purchase count",
+        "description": "List all products purchase count",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "query",
+            "description": "customer id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "product_id": {
+                                "type": "string"
+                              },
+                              "product_name": {
+                                "type": "string"
+                              },
+                              "product_image_url": {
+                                "type": "string"
+                              },
+                              "sku": {
+                                "type": "string"
+                              },
+                              "product_variant_id": {
+                                "type": "string"
+                              },
+                              "selling_price": {
+                                "type": "number"
+                              },
+                              "purchase_count": {
+                                "type": "integer"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": []
+    },
+    "/orders/subscriptions": {
+      "get": {
+        "operationId": "list-subscriptions",
+        "summary": "List all subscriptions",
+        "description": "List all subscriptions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "subscriptions": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Subscription"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": []
+    },
+    "/orders/subscriptions/{subscription_number}": {
+      "get": {
+        "operationId": "get-subscription-detail",
+        "summary": "Retrieve a subscription details",
+        "description": "Retrieve a subscription details",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "subscription": {
+                          "$ref": "#/components/schemas/Subscription"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "subscription_number",
+          "in": "path",
+          "description": "subscription number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/subscriptions/{subscription_number}/customers": {
+      "get": {
+        "operationId": "list-subscription-customers",
+        "summary": "List all subscription customers",
+        "description": "List all subscription customers",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/SubscriptionCustomer"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "subscription_number",
+          "in": "path",
+          "description": "subscription number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}": {
+      "get": {
+        "operationId": "get-order-detail",
+        "summary": "Retrieve order details",
+        "description": "Retrieve order details",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "put": {
+        "operationId": "update-order",
+        "summary": "Update order details",
+        "description": "Update order details",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateOrder"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}/accept": {
+      "post": {
+        "operationId": "accept-order",
+        "summary": "Accept order",
+        "description": "Accept order",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}/activity": {
+      "get": {
+        "operationId": "list-order-activity",
+        "summary": "List all order activity",
+        "description": "List all order activity",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activity": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderActivity"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "post": {
+        "operationId": "create-order-activity",
+        "summary": "Create order activity",
+        "description": "Create order activity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderActivity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "activity": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OrderActivity"
+                      }
+                    },
+                    "pagination": {
+                      "$ref": "#/components/schemas/Pagination"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}/cancel": {
+      "post": {
+        "operationId": "cancel-order",
+        "summary": "Cancel order",
+        "description": "Cancel order",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}/invoice": {
+      "get": {
+        "operationId": "get-order-invoice",
+        "summary": "Retrieve order invoice",
+        "description": "Retrieve order invoice",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response data format",
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "pdf"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "invoices": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/InvoiceDetail"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}/receipt": {
+      "get": {
+        "operationId": "get-order-receipt",
+        "summary": "Retrieve order receipt",
+        "description": "Retrieves a printable receipt for a specific order using the order number. This endpoint returns either structured JSON data or a formatted PDF, suitable for customer presentation. Response format (JSON or PDF) is determined by an optional query parameter (e.g. format=pdf or format=json).",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response data format",
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "pdf"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order_receipt": {
+                          "$ref": "#/components/schemas/OrderReceiptJsonFormat"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}/shipments": {
+      "get": {
+        "operationId": "list-order-shipments",
+        "summary": "Retrieve order shipments",
+        "description": "Retrieve order shipments",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipment": {
+                          "$ref": "#/components/schemas/ShipmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/orders/{order_number}/verify-payment": {
+      "post": {
+        "operationId": "verify-order-payment",
+        "summary": "Verify order payment",
+        "description": "Verify order payment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderActivity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "payments": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OrderPayment"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "order_number",
+          "in": "path",
+          "description": "order number",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "AbandonedCart": {
+        "$ref": "./components/schemas/AbandonedCart.json"
+      },
+      "CreateDraftOrder": {
+        "$ref": "./components/schemas/CreateDraftOrder.json"
+      },
+      "InvoiceDetail": {
+        "$ref": "./components/schemas/InvoiceDetail.json"
+      },
+      "OrderActivity": {
+        "$ref": "./components/schemas/OrderActivity.json"
+      },
+      "OrderDetail": {
+        "$ref": "./components/schemas/OrderDetail.json"
+      },
+      "OrderList": {
+        "$ref": "./components/schemas/OrderList.json"
+      },
+      "OrderPayment": {
+        "$ref": "./components/schemas/OrderPayment.json"
+      },
+      "OrderReceiptJsonFormat": {
+        "$ref": "./components/schemas/OrderReceiptJsonFormat.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "ShipmentDetail": {
+        "$ref": "./components/schemas/ShipmentDetail.json"
+      },
+      "Subscription": {
+        "$ref": "./components/schemas/Subscription.json"
+      },
+      "SubscriptionCustomer": {
+        "$ref": "./components/schemas/SubscriptionCustomer.json"
+      },
+      "UpdateOrder": {
+        "$ref": "./components/schemas/UpdateOrder.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Orders",
+      "description": "Orders"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

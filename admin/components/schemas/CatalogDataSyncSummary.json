@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sync_status": {
+      "enum": [
+        "success",
+        "failed"
+      ]
+    },
+    "total_items": {
+      "type": "integer"
+    },
+    "total_items_synced": {
+      "type": "integer"
+    }
+  },
+  "title": "CatalogDataSyncSummary",
+  "x-tags": [
+    "Catalog"
+  ]
+}

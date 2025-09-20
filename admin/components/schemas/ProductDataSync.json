@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "sku": {
+      "type": "string"
+    },
+    "listing_price": {
+      "type": "number"
+    },
+    "selling_price": {
+      "type": "number"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "stock_available": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string"
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "ProductDataSync",
+  "x-tags": [
+    "Catalog"
+  ]
+}

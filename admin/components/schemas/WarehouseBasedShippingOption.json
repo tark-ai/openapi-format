@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "properties": {
+    "based_on": {
+      "type": "string",
+      "const": "warehouse"
+    },
+    "warehouse_id": {
+      "type": "string"
+    },
+    "service_provider_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "based_on",
+    "warehouse_id",
+    "service_provider_id"
+  ],
+  "title": "WarehouseBasedShippingOption",
+  "x-tags": [
+    "Store"
+  ]
+}

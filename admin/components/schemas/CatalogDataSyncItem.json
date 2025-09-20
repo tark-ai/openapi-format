@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "oneOf": [
+    {
+      "$ref": "./ProductDataSync.json"
+    },
+    {
+      "$ref": "./BundleDataSync.json"
+    },
+    {
+      "$ref": "./CategoryDataSync.json"
+    }
+  ],
+  "title": "CatalogDataSyncItem",
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "description": "Order shipment model",
+  "type": "object",
+  "properties": {
+    "reference_number": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "unscheduled",
+        "schedule_requested",
+        "scheduled",
+        "packed",
+        "shipped",
+        "in_transit",
+        "out_for_delivery",
+        "delivery_attempted",
+        "undelivered",
+        "return_to_origin",
+        "delivered",
+        "cancelled"
+      ]
+    },
+    "total_weight": {
+      "type": "number"
+    },
+    "total_boxes": {
+      "type": "integer"
+    },
+    "shipment_items_count": {
+      "type": "integer"
+    },
+    "shipment_items": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShipmentItem.json"
+      }
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_tax_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_amount_including_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "courier_company_name": {
+      "type": "string"
+    },
+    "shipping_label_url": {
+      "type": "string"
+    },
+    "awb_no": {
+      "type": "string"
+    },
+    "tracking_url": {
+      "type": "string"
+    },
+    "eta_delivery": {
+      "type": "string"
+    },
+    "shipped_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "delivered_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "cancellation_reason": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/OrderShipment",
+    "description": "API reference for the OrderShipment schema"
+  },
+  "title": "OrderShipment"
+}

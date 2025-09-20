@@ -1,0 +1,129 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "active",
+        "inactive"
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "stock_available": {
+      "type": "boolean"
+    },
+    "short_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 256
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "product_type": {
+      "enum": [
+        "physical",
+        "digital",
+        "bundle"
+      ],
+      "readOnly": true
+    },
+    "hsn_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductAttribute.json"
+      }
+    },
+    "seo": {
+      "$ref": "./Seo.json"
+    },
+    "variant_options": {
+      "type": "array",
+      "items": {
+        "$ref": "./VariantOption.json"
+      },
+      "readOnly": true
+    },
+    "reviews_rating_sum": {
+      "type": "integer",
+      "format": "int32",
+      "readOnly": true
+    },
+    "reviews_count": {
+      "type": "integer",
+      "format": "int32",
+      "readOnly": true
+    },
+    "is_featured": {
+      "type": "boolean"
+    },
+    "on_offer": {
+      "type": "boolean",
+      "default": false,
+      "readOnly": true
+    },
+    "on_promotion": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "on_subscription": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "has_variant": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "variant_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "title": "ProductCommonDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

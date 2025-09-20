@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "enum": [
+        "event"
+      ]
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "condition": {
+              "enum": [
+                "and",
+                "or"
+              ]
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "$ref": "./EventAttributeBasedFilterRule.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    "inverse": {
+      "type": "boolean"
+    },
+    "times": {
+      "type": "integer"
+    },
+    "within": {
+      "type": "integer"
+    }
+  },
+  "title": "EventBasedFilterRule",
+  "x-tags": [
+    "Segments"
+  ]
+}

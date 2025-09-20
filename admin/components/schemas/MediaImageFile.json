@@ -1,0 +1,41 @@
+{
+  "allOf": [
+    {
+      "$ref": "./MediaFileInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "external_url": {
+          "type": "string",
+          "readOnly": true
+        },
+        "url": {
+          "type": "object",
+          "properties": {
+            "image_original": {
+              "type": "string",
+              "readOnly": true
+            },
+            "image_standard": {
+              "type": "string",
+              "readOnly": true
+            },
+            "image_thumbnail": {
+              "type": "string",
+              "readOnly": true
+            },
+            "image_blur": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    }
+  ],
+  "title": "MediaImageFile",
+  "x-tags": [
+    "Media Gallery"
+  ]
+}

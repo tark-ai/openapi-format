@@ -1,0 +1,40 @@
+{
+  "type": "object",
+  "oneOf": [
+    {
+      "minProperties": 1,
+      "maxProperties": 2,
+      "additionalProperties": false,
+      "properties": {
+        "gte": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    {
+      "properties": {
+        "gt": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    {
+      "properties": {
+        "lte": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    {
+      "properties": {
+        "lt": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  ]
+}

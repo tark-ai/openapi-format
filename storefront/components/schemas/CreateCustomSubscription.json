@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "properties": {
+    "plan_type": {
+      "type": "string",
+      "const": "custom",
+      "readOnly": true
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "description": "if specified, subscrition will be revoked on this date.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "billing_frequency": {
+      "enum": [
+        "monthly"
+      ]
+    },
+    "billing_interval": {
+      "description": "Frequency unit multiplier. For example, `1` with `monthly` means every month; `3` with `weekly` means in every 3 weeks.",
+      "type": "integer",
+      "default": 1
+    },
+    "billing_limit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "shipping_frequency": {
+      "enum": [
+        "monthly"
+      ]
+    },
+    "shipping_interval": {
+      "description": "Frequency unit multiplier. For example, `1` with `monthly` means every month; `3` with `weekly` means in every 3 weeks.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "default": 1
+    },
+    "shipping_limit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "coupon_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CreateCustomSubscription",
+    "description": "API reference for the CreateCustomSubscription schema"
+  },
+  "required": [
+    "plan_type",
+    "billing_frequency",
+    "billing_interval",
+    "billing_limit"
+  ],
+  "title": "CreateCustomSubscription",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

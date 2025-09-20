@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "promotion_type": {
+      "$ref": "./PromotionType.json"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "suggestion": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/InapplicablePromotion",
+    "description": "API reference for the InapplicablePromotion schema"
+  }
+}

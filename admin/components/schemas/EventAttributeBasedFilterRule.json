@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "field": {
+      "type": "string"
+    },
+    "operator": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  },
+  "title": "EventAttributeBasedFilterRule",
+  "x-tags": [
+    "Segments"
+  ]
+}

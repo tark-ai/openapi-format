@@ -1,0 +1,31 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Order.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "billing_address": {
+          "$ref": "./CustomerAddress.json"
+        },
+        "shipping_address": {
+          "$ref": "./CustomerAddress.json"
+        },
+        "order_items": {
+          "type": "array",
+          "items": {
+            "$ref": "./OrderItem.json"
+          }
+        },
+        "payments": {
+          "type": "array",
+          "items": {
+            "$ref": "./OrderPayment.json"
+          }
+        }
+      }
+    }
+  ],
+  "title": "OrderReceiptJsonFormat"
+}

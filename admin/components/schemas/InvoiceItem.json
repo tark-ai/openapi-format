@@ -1,0 +1,49 @@
+{
+  "description": "InvoiceItem model",
+  "type": "object",
+  "properties": {
+    "sku": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "product_image_url": {
+      "type": "string"
+    },
+    "listing_price": {
+      "type": "number"
+    },
+    "selling_price": {
+      "type": "number"
+    },
+    "qty": {
+      "type": "integer"
+    },
+    "free_qty": {
+      "type": "integer"
+    },
+    "tax_type": {
+      "type": "string"
+    },
+    "tax_rate": {
+      "type": "number"
+    },
+    "hsncode": {
+      "type": "string"
+    },
+    "batch_number": {
+      "type": "string"
+    },
+    "expiry": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    }
+  },
+  "title": "InvoiceItem",
+  "x-tags": [
+    "Shipping"
+  ]
+}

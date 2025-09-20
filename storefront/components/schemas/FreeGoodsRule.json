@@ -1,0 +1,21 @@
+{
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FreeGoodsRule",
+    "description": "API reference for the FreeGoodsRule schema"
+  },
+  "oneOf": [
+    {
+      "$ref": "./AutoScaleBasedOnQuantity.json"
+    },
+    {
+      "$ref": "./AutoScaleBasedOnAmount.json"
+    },
+    {
+      "$ref": "./CustomSlabsBasedOnQuantity.json"
+    },
+    {
+      "$ref": "./CustomSlabsBasedOnAmount.json"
+    }
+  ],
+  "title": "FreeGoodsRule"
+}

@@ -1,0 +1,101 @@
+{
+  "allOf": [
+    {
+      "$ref": "./Product.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductVideo.json"
+          }
+        },
+        "pricing": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductPricing.json"
+          }
+        },
+        "shipping": {
+          "$ref": "./ProductShipping.json"
+        },
+        "packaging": {
+          "$ref": "./ProductPackaging.json"
+        },
+        "promotions": {
+          "$ref": "./ProductPromotion.json"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductSubscription.json"
+          }
+        },
+        "sales_channels": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "sales_channel_sku": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "related_products": {
+          "type": "object",
+          "properties": {
+            "upsell": {
+              "type": "array",
+              "items": {
+                "$ref": "./ProductBasicDetail.json"
+              }
+            },
+            "cross_sell": {
+              "type": "array",
+              "items": {
+                "$ref": "./ProductBasicDetail.json"
+              }
+            }
+          }
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "$ref": "./Variant.json"
+          }
+        },
+        "bundle_items": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductBundleItem.json"
+          }
+        },
+        "seo": {
+          "$ref": "./Seo.json"
+        },
+        "integrations": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductIntegrationSync.json"
+          }
+        }
+      }
+    }
+  ],
+  "title": "ProductDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

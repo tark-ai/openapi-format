@@ -1,0 +1,24 @@
+{
+  "description": "Order Payment",
+  "oneOf": [
+    {
+      "$ref": "./CardPayment.json"
+    },
+    {
+      "$ref": "./NetbankingPayment.json"
+    },
+    {
+      "$ref": "./UpiPayment.json"
+    },
+    {
+      "$ref": "./WalletPayment.json"
+    },
+    {
+      "$ref": "./BankTransfer.json"
+    },
+    {
+      "$ref": "./LoyaltyPointPayment.json"
+    }
+  ],
+  "title": "OrderPayment"
+}

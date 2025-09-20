@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "segment id",
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "description": "segment name",
+      "type": "string"
+    },
+    "segment_type": {
+      "enum": [
+        "dynamic",
+        "manual"
+      ]
+    },
+    "status": {
+      "description": "default status is draft",
+      "enum": [
+        "draft",
+        "active",
+        "inactive",
+        "archived"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "meta": {
+      "description": "meta data in key-value pair. example - [{\"key\":\"value\"}]",
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "description": {
+      "type": "string"
+    },
+    "people_count": {
+      "type": "integer",
+      "default": 0,
+      "readOnly": true
+    },
+    "usage_count": {
+      "type": "integer",
+      "default": 0,
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "archived_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "name",
+    "segment_type"
+  ],
+  "title": "SegmentInfo",
+  "x-tags": [
+    "Segments"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "description": "Country wise states model",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "iso_code": {
+      "type": "string"
+    },
+    "gst_code": {
+      "type": "string"
+    },
+    "state_alias": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CountryState",
+    "description": "API reference for the CountryState schema"
+  },
+  "required": [
+    "name",
+    "iso_code"
+  ],
+  "title": "CountryState"
+}

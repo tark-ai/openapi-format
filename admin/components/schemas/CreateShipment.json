@@ -1,0 +1,100 @@
+{
+  "description": "Create shipment model",
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "shipments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "warehouse_id",
+          "shipment_items",
+          "packing_option",
+          "shipping_option",
+          "shipping_provider_id",
+          "total_weight"
+        ],
+        "properties": {
+          "warehouse_id": {
+            "type": "string"
+          },
+          "shipment_items": {
+            "type": "array",
+            "items": {
+              "$ref": "./ShipmentItem.json"
+            }
+          },
+          "packing_option": {
+            "enum": [
+              "auto",
+              "manual"
+            ]
+          },
+          "shipping_option": {
+            "enum": [
+              "auto",
+              "manual"
+            ]
+          },
+          "shipping_provider_id": {
+            "type": "string"
+          },
+          "total_weight": {
+            "type": "number",
+            "default": 0
+          },
+          "boxes": {
+            "description": "use this field for packing_option = manual",
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "./ShipmentBox.json"
+            }
+          },
+          "tracking_link": {
+            "description": "use this field for shipping_option = manual",
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "expected_delivery_date": {
+            "description": "use this field for shipping_option = manual",
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "manual_shipping_charges": {
+            "description": "use this field for shipping_option = manual",
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "courier_company_id": {
+            "description": "Specifies the courier company to be used for shipping when shipping_option is set to auto. If not provided, the system will choose the most suitable courier automatically.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "order_number",
+    "shipments"
+  ],
+  "title": "CreateShipment",
+  "x-tags": [
+    "Shipping"
+  ]
+}

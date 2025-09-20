@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "promotion_type": {
+      "$ref": "./PromotionType.json"
+    },
+    "estimated_discount": {
+      "type": "number"
+    },
+    "savings_message": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ApplicablePromotion",
+    "description": "API reference for the ApplicablePromotion schema"
+  }
+}

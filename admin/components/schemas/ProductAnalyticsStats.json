@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "viewed": {
+      "type": "integer"
+    },
+    "added_to_cart": {
+      "type": "integer"
+    },
+    "removed_from_cart": {
+      "type": "integer"
+    },
+    "checkout_started": {
+      "type": "integer"
+    },
+    "purchased": {
+      "type": "integer"
+    }
+  },
+  "title": "ProductAnalyticsStats"
+}

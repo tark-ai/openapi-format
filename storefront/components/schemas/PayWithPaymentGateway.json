@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_mode": {
+      "type": "string",
+      "const": "PG"
+    },
+    "payment_gateway": {
+      "$ref": "./PaymentGateway.json"
+    },
+    "payment_gateway_params": {
+      "$ref": "./PaymentGatewayParams.json"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayWithPaymentGateway",
+    "description": "API reference for the PayWithPaymentGateway schema"
+  },
+  "required": [
+    "payment_mode",
+    "payment_gateway",
+    "payment_gateway_params"
+  ],
+  "title": "PayWithPaymentGateway"
+}

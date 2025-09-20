@@ -1,0 +1,73 @@
+{
+  "type": "object",
+  "properties": {
+    "charge_automatically": {
+      "type": "boolean"
+    },
+    "retry_and_dunning": {
+      "type": "boolean"
+    },
+    "retry_and_dunning_rules": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "object",
+        "required": [
+          "days",
+          "retry_payment",
+          "send_notification"
+        ],
+        "properties": {
+          "days": {
+            "description": "days after first payment failure",
+            "type": "integer"
+          },
+          "retry_payment": {
+            "type": "boolean"
+          },
+          "send_notification": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "retry_final_step_action": {
+      "description": "send null value for no action.",
+      "enum": [
+        "mark-as-unpaid",
+        "cancel-subscription"
+      ]
+    },
+    "pause_during_trial": {
+      "type": "boolean"
+    },
+    "pause_when_past_due": {
+      "type": "boolean"
+    },
+    "pause_indefinitely": {
+      "type": "boolean"
+    },
+    "skip_next_interval": {
+      "type": "boolean"
+    },
+    "skip_next_interval_threshold": {
+      "description": "days before next shipment. required if skip_next_interval = true",
+      "type": "integer",
+      "default": 0
+    }
+  },
+  "required": [
+    "charge_automatically",
+    "retry_and_dunning",
+    "pause_during_trial",
+    "pause_when_past_due",
+    "pause_indefinitely",
+    "skip_next_interval"
+  ],
+  "title": "SubscriptionSetting",
+  "x-tags": [
+    "Store"
+  ]
+}

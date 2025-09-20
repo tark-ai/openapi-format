@@ -1,0 +1,46 @@
+{
+  "description": "pagination metadata structure",
+  "type": "object",
+  "properties": {
+    "total_records": {
+      "type": "integer"
+    },
+    "total_pages": {
+      "type": "integer"
+    },
+    "previous_page": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "limit": {
+      "type": "integer"
+    },
+    "next_page": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "total_records": 252,
+      "total_pages": 26,
+      "previous_page": null,
+      "next_page": 2,
+      "limit": 10
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Pagination",
+    "description": "API reference for the Pagination schema"
+  },
+  "required": [
+    "total_records",
+    "total_pages",
+    "limit",
+    "next_page"
+  ]
+}

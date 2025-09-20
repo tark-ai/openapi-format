@@ -1,0 +1,25 @@
+{
+  "description": "Bank transfer payment - IMPS, NEFT, RTGS",
+  "allOf": [
+    {
+      "$ref": "./PaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "bank_account_number": {
+          "description": "masked account number\r\ne.g. ************1234",
+          "type": "string"
+        },
+        "bank_name": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/BankTransfer",
+    "description": "API reference for the BankTransfer schema"
+  },
+  "title": "BankTransfer"
+}

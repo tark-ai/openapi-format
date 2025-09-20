@@ -1,0 +1,69 @@
+{
+  "description": "promotion_type = fixed-price",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "promotion_type": {
+      "enum": [
+        "fixed-price"
+      ]
+    },
+    "starts_at": {
+      "type": "string"
+    },
+    "expires_at": {
+      "description": "null means never expires.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "offer_price",
+          "customer_group_id",
+          "minimum_quantity",
+          "maximum_quantity"
+        ],
+        "properties": {
+          "offer_price": {
+            "type": "number"
+          },
+          "customer_group_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "minimum_quantity": {
+            "description": "It refers to the minimum quantity of a specific item a customer must purchase to qualify for the promotion.",
+            "type": "integer",
+            "default": 1
+          },
+          "maximum_quantity": {
+            "description": "It refers to the maximum quantity of a specific item a customer can purchase in order to qualify for the promotion. If this field is set to null, it indicates that there is no limit.",
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "promotion_type",
+    "starts_at",
+    "details"
+  ],
+  "title": "FixedPricePromotion"
+}

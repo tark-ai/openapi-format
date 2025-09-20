@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_gateway": {
+      "type": "string",
+      "default": "PAYU",
+      "const": "PAYU"
+    },
+    "furl": {
+      "type": "string"
+    },
+    "surl": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayuPaymentGatewayParams",
+    "description": "API reference for the PayuPaymentGatewayParams schema"
+  },
+  "required": [
+    "payment_gateway",
+    "furl",
+    "surl"
+  ],
+  "title": "PayuPaymentGatewayParams"
+}

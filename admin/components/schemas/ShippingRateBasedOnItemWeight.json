@@ -1,0 +1,15 @@
+{
+  "description": "",
+  "anyOf": [
+    {
+      "$ref": "./ShippingRateBasedOnWeightSlabs.json"
+    },
+    {
+      "$ref": "./ShippingRatePerKgFixedPrice.json"
+    }
+  ],
+  "title": "ShippingRateBasedOnItemWeight",
+  "x-tags": [
+    "Shipping"
+  ]
+}

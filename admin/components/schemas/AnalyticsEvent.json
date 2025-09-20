@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "event_type": {
+      "enum": [
+        "track",
+        "page",
+        "identify"
+      ]
+    },
+    "event_name": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "event_data": {
+      "type": "object"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "store_id": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "message_id": {
+      "type": "string"
+    },
+    "original_timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sent_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "received_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "anonymous_id": {
+      "type": "string"
+    },
+    "origin_source": {
+      "type": "string"
+    },
+    "origin_url": {
+      "type": "string"
+    },
+    "session_created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "session_last_seen": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "session_id": {
+      "type": "string"
+    },
+    "utm_params": {
+      "type": "object"
+    },
+    "initial_origin_url": {
+      "type": "string"
+    },
+    "initial_origin_source": {
+      "type": "string"
+    },
+    "initial_utm_params": {
+      "type": "object"
+    }
+  },
+  "title": "AnalyticsEvent"
+}

@@ -1,0 +1,2500 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Customers",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/customers": {
+      "get": {
+        "operationId": "list-customers",
+        "summary": "List all customers",
+        "description": "List all customers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Customer"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-customer",
+        "summary": "Create customer",
+        "description": "Create customer",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomer"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer": {
+                          "$ref": "#/components/schemas/Customer"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": []
+    },
+    "/customers/attributes": {
+      "get": {
+        "operationId": "list-customer-attributes",
+        "summary": "List all attributes",
+        "description": "List all attributes",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerAttribute"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-customer-attribute",
+        "summary": "Create an attribute",
+        "description": "Create an attribute",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerAttribute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attribute": {
+                          "$ref": "#/components/schemas/CustomerAttribute"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": []
+    },
+    "/customers/attributes/{id}": {
+      "get": {
+        "operationId": "get-customer-attribute",
+        "summary": "Retrieve attribute detail",
+        "description": "Retrieve attribute detail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attribute": {
+                          "$ref": "#/components/schemas/CustomerAttribute"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "put": {
+        "operationId": "update-customer-attribute",
+        "summary": "Update an attribute",
+        "description": "Update an attribute",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomerAttribute"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attribute": {
+                          "$ref": "#/components/schemas/CustomerAttribute"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-customer-attribute",
+        "summary": "Delete an attribute",
+        "description": "Delete an attribute",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "attribute id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/loyalty-members": {
+      "get": {
+        "operationId": "list-loyalty-members",
+        "summary": "List all loyalty members",
+        "description": "List all loyalty members",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "loyalty_members": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/LoyaltyMember"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": []
+    },
+    "/customers/loyalty-program": {
+      "get": {
+        "operationId": "list-loyalty-programs",
+        "summary": "List all loyalty program",
+        "description": "List all loyalty program",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "loyalty_programs": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/LoyaltyProgram"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-loyalty-program",
+        "summary": "Create loyalty program",
+        "description": "Create loyalty program",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoyaltyProgram"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "loyalty_program": {
+                          "$ref": "#/components/schemas/LoyaltyProgram"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      }
+    },
+    "/customers/loyalty-program/{id}": {
+      "get": {
+        "operationId": "get-loyalty-program-detail",
+        "summary": "Retrieve loyalty program detail",
+        "description": "Retrieve loyalty program detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "loyalty_program": {
+                          "$ref": "#/components/schemas/LoyaltyProgram"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "put": {
+        "operationId": "update-loyalty-program",
+        "summary": "Update loyalty program detail",
+        "description": "Update loyalty program detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoyaltyProgram"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "loyalty_program": {
+                          "$ref": "#/components/schemas/LoyaltyProgram"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-loyalty-program",
+        "summary": "Delete loyalty program",
+        "description": "Delete loyalty program",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "loyalty program id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/visitors": {
+      "get": {
+        "operationId": "list-visitors",
+        "summary": "List all visitors",
+        "description": "List all visitors",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "visitors": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Visitor"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": []
+    },
+    "/customers/visitors/{id}": {
+      "get": {
+        "operationId": "get-visitor-detail",
+        "summary": "Retrieve visitor detail",
+        "description": "Retrieve visitor detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "visitor": {
+                          "$ref": "#/components/schemas/VisitorDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "visitor id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/visitors/{id}/activities": {
+      "get": {
+        "operationId": "list-visitor-activity",
+        "summary": "List all activities",
+        "description": "List all activities",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activities": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerActivity"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "visitor id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/visitors/{id}/attributes": {
+      "get": {
+        "operationId": "list-visitor-attributes",
+        "summary": "List all visitor attributes",
+        "description": "List all visitor attributes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "#/components/schemas/StringAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/IntegerAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/NumberAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/BooleanAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/ListAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/ObjectAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/DateTimeAttribute"
+                              }
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-visitor-attribute",
+        "summary": "Create an attribute",
+        "description": "Create an attribute",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/StringAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/IntegerAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/NumberAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BooleanAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ListAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ObjectAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DateTimeAttribute"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "visitor id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/visitors/{id}/attributes/{attribute_id}": {
+      "put": {
+        "operationId": "update-visitor-attribute",
+        "summary": "Update visitor attribute",
+        "description": "Update visitor attribute",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "object"
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-visitor-attribute",
+        "summary": "Delete visitor attribute",
+        "description": "Delete visitor attribute",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "attribute_id",
+          "in": "path",
+          "description": "attribute id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": "visitor id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}": {
+      "get": {
+        "operationId": "get-customer-detail",
+        "summary": "Retrieve customer detail",
+        "description": "Retrieve customer detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer": {
+                          "$ref": "#/components/schemas/CustomerDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "Customer Id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/activities": {
+      "get": {
+        "operationId": "list-customer-activity",
+        "summary": "List all activities",
+        "description": "List all activities",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activities": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CustomerActivity"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/addresses": {
+      "get": {
+        "operationId": "list-addresses",
+        "summary": "List all addresses",
+        "description": "List all addresses",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "addresses": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Address"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-address",
+        "summary": "Create address",
+        "description": "Create address",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Address"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "address": {
+                          "$ref": "#/components/schemas/Address"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/addresses/{address_id}": {
+      "put": {
+        "operationId": "update-address",
+        "summary": "Update address detail",
+        "description": "Update address detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/Address"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "address": {
+                          "$ref": "#/components/schemas/Address"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-address",
+        "summary": "Delete address",
+        "description": "Delete address",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "address_id",
+          "in": "path",
+          "description": "address id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/attributes": {
+      "get": {
+        "operationId": "list-user-attributes",
+        "summary": "List all customer attributes",
+        "description": "List all customer attributes",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "#/components/schemas/StringAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/IntegerAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/NumberAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/BooleanAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/ListAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/ObjectAttribute"
+                              },
+                              {
+                                "$ref": "#/components/schemas/DateTimeAttribute"
+                              }
+                            ],
+                            "type": "object"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-user-attribute",
+        "summary": "Create an attribute",
+        "description": "Create an attribute",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/StringAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/IntegerAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/NumberAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BooleanAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ListAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ObjectAttribute"
+                  },
+                  {
+                    "$ref": "#/components/schemas/DateTimeAttribute"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/attributes/{attribute_id}": {
+      "put": {
+        "operationId": "update-user-attribute",
+        "summary": "Update customer attribute",
+        "description": "Update customer attribute",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "oneOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "boolean"
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "type": "object"
+                      },
+                      {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-user-attribute",
+        "summary": "Delete customer attribute",
+        "description": "Delete customer attribute",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "attribute_id",
+          "in": "path",
+          "description": "attribute id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/banking": {
+      "get": {
+        "operationId": "list-bank-accounts",
+        "summary": "List all bank accounts",
+        "description": "List all bank accounts",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "bank_accounts": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/BusinessBanking"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-bank-account",
+        "summary": "Create bank account",
+        "description": "Create bank account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessBanking"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "bank_account": {
+                          "$ref": "#/components/schemas/BusinessBanking"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/banking/{bank_account_id}": {
+      "get": {
+        "operationId": "get-bank-account-detail",
+        "summary": "Retrieve bank account detail",
+        "description": "Retrieve bank account detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "bank_account": {
+                          "$ref": "#/components/schemas/BusinessBanking"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "put": {
+        "operationId": "update-bank-account",
+        "summary": "Update bank account detail",
+        "description": "Update bank account detail",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessBanking"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "bank_account": {
+                          "$ref": "#/components/schemas/BusinessBanking"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-bank-account",
+        "summary": "Delete bank account",
+        "description": "Delete bank account",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "bank_account_id",
+          "in": "path",
+          "description": "bank account id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/documents": {
+      "get": {
+        "operationId": "list-customer-kyc-documents",
+        "summary": "List all documents",
+        "description": "List all documents",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "documents": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/KycDocument"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-customer-kyc-document",
+        "summary": "Create document",
+        "description": "Create document",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/KycDocument"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "document": {
+                          "$ref": "#/components/schemas/KycDocument"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/documents/{document_id}": {
+      "get": {
+        "operationId": "get-customer-kyc-document-detail",
+        "summary": "Retrieve document detail",
+        "description": "Retrieve document detail",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "document": {
+                          "$ref": "#/components/schemas/KycDocument"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "put": {
+        "operationId": "update-customer-kyc-document",
+        "summary": "Update document detail",
+        "description": "Update document detail",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/UpdateKycDocument"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "document": {
+                          "$ref": "#/components/schemas/KycDocument"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-customer-kyc-document",
+        "summary": "Delete document",
+        "description": "Delete document",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "document_id",
+          "in": "path",
+          "description": "document id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/loyalty-point-activities": {
+      "get": {
+        "operationId": "list-loyalty-activity",
+        "summary": "List all loyalty point activities",
+        "description": "List all loyalty point activities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activities": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/LoyaltyPointActivity"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "post": {
+        "operationId": "create-loyalty-activity",
+        "summary": "Create loyalty point activity",
+        "description": "Create loyalty point activity",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoyaltyPointActivity"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activity": {
+                          "$ref": "#/components/schemas/LoyaltyPointActivity"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/loyalty-tier-activities": {
+      "get": {
+        "operationId": "list-loyalty-tier-activity",
+        "summary": "List all loyalty tier activities",
+        "description": "List all loyalty tier activities",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activities": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/LoyaltyTierActivity"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/customers/{id}/notification-preferences": {
+      "get": {
+        "operationId": "get-user-notification-preferences",
+        "summary": "Retrieve notification preferences",
+        "description": "Retrieve notification preferences",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "notification_preferences": {
+                          "$ref": "#/components/schemas/NotificationPreferences"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "put": {
+        "operationId": "update-user-notification-preferences",
+        "summary": "Update notification preferences",
+        "description": "Update notification preferences",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/NotificationPreferences"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "notification_preferences": {
+                          "$ref": "#/components/schemas/NotificationPreferences"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "customer id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "Address": {
+        "$ref": "./components/schemas/Address.json"
+      },
+      "BooleanAttribute": {
+        "$ref": "./components/schemas/BooleanAttribute.json"
+      },
+      "BusinessBanking": {
+        "$ref": "./components/schemas/BusinessBanking.json"
+      },
+      "CreateCustomer": {
+        "$ref": "./components/schemas/CreateCustomer.json"
+      },
+      "Customer": {
+        "$ref": "./components/schemas/Customer.json"
+      },
+      "CustomerActivity": {
+        "$ref": "./components/schemas/CustomerActivity.json"
+      },
+      "CustomerAttribute": {
+        "$ref": "./components/schemas/CustomerAttribute.json"
+      },
+      "CustomerDetail": {
+        "$ref": "./components/schemas/CustomerDetail.json"
+      },
+      "DateTimeAttribute": {
+        "$ref": "./components/schemas/DateTimeAttribute.json"
+      },
+      "IntegerAttribute": {
+        "$ref": "./components/schemas/IntegerAttribute.json"
+      },
+      "KycDocument": {
+        "$ref": "./components/schemas/KycDocument.json"
+      },
+      "ListAttribute": {
+        "$ref": "./components/schemas/ListAttribute.json"
+      },
+      "LoyaltyMember": {
+        "$ref": "./components/schemas/LoyaltyMember.json"
+      },
+      "LoyaltyPointActivity": {
+        "$ref": "./components/schemas/LoyaltyPointActivity.json"
+      },
+      "LoyaltyProgram": {
+        "$ref": "./components/schemas/LoyaltyProgram.json"
+      },
+      "LoyaltyTierActivity": {
+        "$ref": "./components/schemas/LoyaltyTierActivity.json"
+      },
+      "NotificationPreferences": {
+        "$ref": "./components/schemas/NotificationPreferences.json"
+      },
+      "NumberAttribute": {
+        "$ref": "./components/schemas/NumberAttribute.json"
+      },
+      "ObjectAttribute": {
+        "$ref": "./components/schemas/ObjectAttribute.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "StringAttribute": {
+        "$ref": "./components/schemas/StringAttribute.json"
+      },
+      "UpdateCustomerAttribute": {
+        "$ref": "./components/schemas/UpdateCustomerAttribute.json"
+      },
+      "UpdateKycDocument": {
+        "$ref": "./components/schemas/UpdateKycDocument.json"
+      },
+      "Visitor": {
+        "$ref": "./components/schemas/Visitor.json"
+      },
+      "VisitorDetail": {
+        "$ref": "./components/schemas/VisitorDetail.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Customers",
+      "description": "Customers"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

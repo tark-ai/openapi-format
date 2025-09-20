@@ -1,0 +1,37 @@
+{
+  "description": "Attribute for boolean values",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "key": {
+      "description": "A lookup safe version of the name that is lowercased and spaces are replaced with underscores. For instance, if name is `Product Type`, key will be `product_type`",
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "example": "boolean"
+    },
+    "value": {
+      "description": "For boolean attributes",
+      "type": "boolean"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/BooleanAttribute",
+    "description": "API reference for the BooleanAttribute schema"
+  },
+  "readOnly": true,
+  "required": [
+    "id",
+    "name",
+    "key",
+    "type",
+    "value"
+  ],
+  "title": "BooleanAttribute"
+}

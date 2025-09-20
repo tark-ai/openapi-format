@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "shipping_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "is_billing_same_as_shipping": {
+      "type": "boolean"
+    },
+    "billing_address": {
+      "$ref": "./CustomerAddress.json"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "./OrderItem.json"
+      }
+    },
+    "coupon_code": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "shipping_address",
+    "is_billing_same_as_shipping",
+    "items"
+  ],
+  "title": "UpdateOrder",
+  "x-tags": [
+    "Orders"
+  ]
+}

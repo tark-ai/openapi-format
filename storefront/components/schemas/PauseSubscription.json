@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "properties": {
+    "command": {
+      "description": "To pause an active subscription.",
+      "type": "string",
+      "const": "pause"
+    },
+    "pause_start_date": {
+      "description": "optional. if specified, subscription will be paused from this date & time. If not specified, subscription will be paused immediately. datetime value should be greater than current time.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "pause_end_date": {
+      "description": "optional. if specified, subscription will be activated automatically from this date & time. If not specified, subscription will remain paused. datetime value should be greater than current time.",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PauseSubscription",
+    "description": "API reference for the PauseSubscription schema"
+  },
+  "required": [
+    "command"
+  ],
+  "title": "PauseSubscription",
+  "x-tags": [
+    "Subscriptions"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CustomerInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "business": {
+          "$ref": "./BusinessInfo.json"
+        },
+        "segments": {
+          "type": "array",
+          "items": {
+            "$ref": "./CustomerSegment.json"
+          }
+        }
+      }
+    }
+  ],
+  "title": "Customer",
+  "x-tags": [
+    "Customers"
+  ]
+}

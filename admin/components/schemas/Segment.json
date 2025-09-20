@@ -1,0 +1,11 @@
+{
+  "allOf": [
+    {
+      "$ref": "./SegmentInfo.json"
+    }
+  ],
+  "title": "Segment",
+  "x-tags": [
+    "Segments"
+  ]
+}

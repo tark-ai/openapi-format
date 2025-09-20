@@ -1,0 +1,32 @@
+{
+  "allOf": [
+    {
+      "$ref": "./VariantCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "associated_options": {
+          "type": "array",
+          "items": {
+            "$ref": "./AssociatedOption.json"
+          }
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductImage.json"
+          }
+        }
+      }
+    }
+  ],
+  "examples": [],
+  "title": "Variant",
+  "x-tags": [
+    "Catalog"
+  ]
+}

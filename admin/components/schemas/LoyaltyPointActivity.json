@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "properties": {
+    "activity": {
+      "enum": [
+        "order",
+        "credit-note",
+        "tier-upgrade",
+        "tier-downgrade",
+        "no-purchase-activity",
+        "points-carryforward",
+        "signup",
+        "bonus",
+        "other"
+      ]
+    },
+    "action": {
+      "enum": [
+        "add",
+        "remove"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "loyalty_points": {
+      "type": "integer"
+    },
+    "reference_number": {
+      "type": "string"
+    },
+    "internal_note": {
+      "type": "string"
+    },
+    "remarks": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "activity",
+    "action",
+    "title",
+    "loyalty_points"
+  ],
+  "title": "LoyaltyPointActivity",
+  "x-tags": [
+    "Customers"
+  ]
+}

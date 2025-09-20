@@ -1,0 +1,17 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./FreeAction.json"
+    },
+    {
+      "$ref": "./FixedChargeAction.json"
+    },
+    {
+      "$ref": "./DiscountAction.json"
+    },
+    {
+      "$ref": "./DynamicAction.json"
+    }
+  ],
+  "title": "ShippingCostAction"
+}

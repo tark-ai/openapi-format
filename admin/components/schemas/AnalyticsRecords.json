@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_name": {
+      "type": "string"
+    },
+    "query_type": {
+      "enum": [
+        "records"
+      ]
+    },
+    "query": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "description": "multiple fields separated by comma.",
+          "type": "string"
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "./DynamicQueryFilter.json"
+          }
+        },
+        "sort_by": {
+          "description": "json object with key-value. example: {\"field1\":\"asc\",\"field2\":\"desc\"}",
+          "type": "object"
+        },
+        "limit": {
+          "type": "integer",
+          "default": 25
+        },
+        "offset": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "required": [
+        "fields"
+      ]
+    }
+  },
+  "required": [
+    "schema_name",
+    "query_type",
+    "query"
+  ],
+  "title": "AnalyticsRecords",
+  "x-tags": [
+    "Analytics"
+  ]
+}

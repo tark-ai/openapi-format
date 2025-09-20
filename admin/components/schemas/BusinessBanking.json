@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "account_type": {
+      "enum": [
+        "inbound",
+        "outbound"
+      ]
+    },
+    "account_name": {
+      "type": "string"
+    },
+    "account_number": {
+      "type": "string"
+    },
+    "ifsc_code": {
+      "type": "string"
+    },
+    "bank_name": {
+      "type": "string"
+    },
+    "is_default": {
+      "description": "first account will be marked as default untill another account is marked as default.",
+      "type": "boolean"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "account_type",
+    "account_name",
+    "account_number",
+    "ifsc_code",
+    "bank_name"
+  ],
+  "title": "BusinessBanking",
+  "x-tags": [
+    "Customers"
+  ]
+}

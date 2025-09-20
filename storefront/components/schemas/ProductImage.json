@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "alternate_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sort_order": {
+      "type": "integer"
+    },
+    "url_tiny": {
+      "type": "string"
+    },
+    "url_thumbnail": {
+      "type": "string"
+    },
+    "url_standard": {
+      "type": "string"
+    },
+    "url_zoom": {
+      "type": "string"
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductImage",
+    "description": "API reference for the ProductImage schema"
+  },
+  "required": [
+    "id",
+    "title",
+    "alternate_text",
+    "sort_order",
+    "url_tiny",
+    "url_thumbnail",
+    "url_standard",
+    "url_zoom"
+  ],
+  "title": "ProductImage"
+}

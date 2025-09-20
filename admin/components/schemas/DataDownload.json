@@ -1,0 +1,86 @@
+{
+  "type": "object",
+  "properties": {
+    "job_id": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "ready",
+        "failed"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "job_type": {
+      "enum": [
+        "download_orders",
+        "download_customers",
+        "download_shipments",
+        "download_payments"
+      ]
+    },
+    "data_source": {
+      "enum": [
+        "orders",
+        "customers",
+        "shipments",
+        "payments"
+      ]
+    },
+    "data_filters": {
+      "$ref": "./DataFilterObject.json"
+    },
+    "download": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "file_name": {
+          "type": "string"
+        },
+        "file_type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "file_name",
+        "file_type"
+      ]
+    },
+    "error_message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "processed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "job_id",
+    "status",
+    "name",
+    "job_type",
+    "data_source",
+    "data_filters",
+    "download",
+    "error_message",
+    "created_at",
+    "processed_at"
+  ],
+  "title": "DataDownload"
+}

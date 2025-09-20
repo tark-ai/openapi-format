@@ -1,0 +1,37 @@
+{
+  "description": "Attribute for single-select values",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "key": {
+      "description": "A lookup safe version of the name that is lowercased and spaces are replaced with underscores. For instance, if name is `Product Type`, key will be `product_type`",
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "example": "single-select"
+    },
+    "value": {
+      "description": "For single-select attributes",
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/SingleSelectAttribute",
+    "description": "API reference for the SingleSelectAttribute schema"
+  },
+  "readOnly": true,
+  "required": [
+    "id",
+    "name",
+    "key",
+    "type",
+    "value"
+  ],
+  "title": "SingleSelectAttribute"
+}

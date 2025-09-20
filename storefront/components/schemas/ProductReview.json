@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "properties": {
+    "rating": {
+      "description": "The rating of the product review. Must be in rang 1-5 (multiple of 0.5)",
+      "type": "number",
+      "format": "double",
+      "maximum": 5,
+      "minimum": 1,
+      "multipleOf": 0.5,
+      "readOnly": true
+    },
+    "review_text": {
+      "description": "The text for the product review.",
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "description": "The name of the reviewer.",
+      "type": "string",
+      "readOnly": true
+    },
+    "email": {
+      "description": "The email of the reviewer. Must be a valid email, or an empty string.",
+      "type": "string",
+      "format": "email",
+      "examples": [
+        "mr@bees.com"
+      ],
+      "readOnly": true
+    },
+    "status": {
+      "description": "Reviews with approved status will be displayed.",
+      "type": "string",
+      "enum": [
+        "approved"
+      ],
+      "readOnly": true
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "review_date": {
+      "description": "The ISO 8601 date-time for when review was first submitted or last modified by the original submitter.",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "blur_url": {
+            "type": "string"
+          },
+          "thumbnail_url": {
+            "type": "string"
+          },
+          "standard_url": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "videos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cover_image_url": {
+            "type": "string"
+          },
+          "video_preview_url": {
+            "type": "string"
+          },
+          "playback": {
+            "type": "object",
+            "properties": {
+              "hls": {
+                "type": "string"
+              },
+              "dash": {
+                "type": "string"
+              }
+            }
+          },
+          "duration": {
+            "description": "seconds",
+            "type": "string"
+          },
+          "size": {
+            "description": "bytes",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "created_at": {
+      "description": "The ISO 8601 date-time for when review is created.",
+      "type": "string",
+      "format": "date-time",
+      "examples": [
+        "2023-05-25T14:15:22Z"
+      ],
+      "readOnly": true
+    },
+    "modified_at": {
+      "description": "The ISO 8601 date-time for when review was last modified.",
+      "type": "string",
+      "format": "date-time",
+      "examples": [
+        "2023-05-25T14:15:22Z"
+      ],
+      "readOnly": true
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductReview",
+    "description": "API reference for the ProductReview schema"
+  },
+  "title": "ProductReview"
+}

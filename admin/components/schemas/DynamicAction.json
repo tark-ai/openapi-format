@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "dynamic"
+    },
+    "rounding": {
+      "$ref": "./Rounding.json"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "type",
+    "rounding"
+  ],
+  "title": "DynamicAction"
+}

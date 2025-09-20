@@ -1,0 +1,88 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "description": "name of loyalty program",
+      "type": "string"
+    },
+    "renewal_type": {
+      "description": "frequency at which loyalty program will be renewed.",
+      "enum": [
+        "yearly",
+        "never",
+        "custom"
+      ]
+    },
+    "starts_at": {
+      "description": "If renewal_type is \"custom\", a corresponding valid date must be specified; for other types, the value should be null.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "date_of_reset": {
+      "description": "If renewal_type is \"custom\", a corresponding valid date must be specified; for other types, the value should be null.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "tier_upgrade_criteria": {
+      "description": "to decide tier upgradation based on no of orders or total purchase value",
+      "enum": [
+        "total-spent",
+        "total-orders",
+        "custom"
+      ]
+    },
+    "points_earning_type": {
+      "description": "Defines how points are earned. \"dynamic\" means points are calculated based on a rate (points_earning_rate), \"fixed\" means a fixed number of points are given.",
+      "enum": [
+        "dynamic",
+        "fixed"
+      ]
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "active",
+        "inactive"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "tiers": {
+      "type": "array",
+      "items": {
+        "$ref": "./LoyaltyTier.json"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "renewal_type",
+    "starts_at",
+    "date_of_reset",
+    "tier_upgrade_criteria",
+    "points_earning_type",
+    "tiers"
+  ],
+  "title": "LoyaltyProgram",
+  "x-tags": [
+    "Customers"
+  ]
+}

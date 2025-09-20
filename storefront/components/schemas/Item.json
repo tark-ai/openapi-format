@@ -1,0 +1,166 @@
+{
+  "type": "object",
+  "properties": {
+    "product_id": {
+      "type": "string"
+    },
+    "variant_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sku": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string"
+    },
+    "variant_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "product_type": {
+      "type": "string",
+      "enum": [
+        "physical",
+        "digital",
+        "bundle"
+      ],
+      "examples": [
+        "physical"
+      ]
+    },
+    "short_description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "stock_available": {
+      "type": "boolean"
+    },
+    "backorder": {
+      "description": "Indicates whether the item is being fulfilled as a backorder. When true, the item is not currently in stock and will ship later once inventory is available. This may result in the order being split into multiple shipments, with delays for the backordered portion.",
+      "type": "boolean"
+    },
+    "on_offer": {
+      "description": "Indicates whether this item is associated with any active (product-specific) coupons",
+      "type": "boolean"
+    },
+    "on_subscription": {
+      "type": "boolean"
+    },
+    "on_promotion": {
+      "type": "boolean"
+    },
+    "category_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviews_count": {
+      "type": "integer"
+    },
+    "reviews_rating_sum": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductAttribute.json"
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductImage.json"
+      }
+    },
+    "pricing": {
+      "$ref": "./ProductPricing.json"
+    },
+    "promotion": {
+      "$ref": "./ProductPromotion.json"
+    },
+    "subscription": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductSubscription.json"
+      }
+    },
+    "associated_options": {
+      "oneOf": [
+        {
+          "$ref": "./AssociatedOption.json",
+          "description": "Used when `variant_id` is not null."
+        },
+        {
+          "type": "null",
+          "description": "Null when `variant_id` is null."
+        }
+      ]
+    },
+    "shipping": {
+      "$ref": "./ProductShipping.json"
+    },
+    "inventory": {
+      "type": "array",
+      "items": {
+        "$ref": "./LotBatchDetail.json"
+      }
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Item",
+    "description": "API reference for the Item schema"
+  },
+  "required": [
+    "product_id",
+    "variant_id",
+    "sku",
+    "slug",
+    "product_name",
+    "variant_name",
+    "product_type",
+    "short_description",
+    "active",
+    "stock_available",
+    "on_offer",
+    "on_subscription",
+    "on_promotion",
+    "category_ids",
+    "tags",
+    "reviews_count",
+    "reviews_rating_sum",
+    "attributes",
+    "images",
+    "pricing",
+    "promotion",
+    "subscription",
+    "associated_options"
+  ],
+  "title": "SKU"
+}

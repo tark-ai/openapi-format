@@ -1,0 +1,29 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "details",
+        "applies_to_product"
+      ],
+      "properties": {
+        "details": {
+          "$ref": "./VolumeBasedRule.json"
+        },
+        "applies_to_product": {
+          "enum": [
+            "product"
+          ]
+        }
+      }
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/VolumeBasedCouponPromotion",
+    "description": "API reference for the VolumeBasedCouponPromotion schema"
+  },
+  "title": "VolumeBasedCouponPromotion"
+}

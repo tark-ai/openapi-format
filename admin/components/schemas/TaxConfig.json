@@ -1,0 +1,37 @@
+{
+  "type": "object",
+  "properties": {
+    "tax_type": {
+      "enum": [
+        "GST"
+      ]
+    },
+    "taxable_location": {
+      "enum": [
+        "shipping-address",
+        "billing-address"
+      ]
+    },
+    "is_product_price_include_tax": {
+      "description": "This field indicates whether the product prices, handling charges already include applicable taxes.\n\n- If set to true, the product prices are inclusive of tax, meaning no additional tax will be added during checkout.\n\n- If set to false, taxes are excluded from the listed prices and will be calculated and added separately at checkout.",
+      "type": "boolean"
+    },
+    "is_tax_apply_after_discount": {
+      "type": "boolean"
+    },
+    "is_discount_apply_after_tax": {
+      "type": "boolean"
+    },
+    "shipping_tax_rate": {
+      "type": "number"
+    },
+    "handling_charge_tax_rate": {
+      "description": "This represents the tax rate percentage applied specifically to handling charge in shipping. A handling charge is an additional fee applied to cover the costs associated with preparing, packaging, and processing an order for shipment or delivery.",
+      "type": "number"
+    }
+  },
+  "title": "TaxConfig",
+  "x-tags": [
+    "Store"
+  ]
+}

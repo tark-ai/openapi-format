@@ -1,0 +1,26 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "details",
+        "applies_to_product"
+      ],
+      "properties": {
+        "details": {
+          "$ref": "./AcceleratedRewardRule.json"
+        },
+        "applies_to_product": {
+          "enum": [
+            "product",
+            "category"
+          ]
+        }
+      }
+    }
+  ],
+  "title": "AcceleratedRewardCouponPromotion"
+}

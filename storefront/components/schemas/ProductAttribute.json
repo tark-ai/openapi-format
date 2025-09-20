@@ -1,0 +1,48 @@
+{
+  "discriminator": {
+    "propertyName": "type",
+    "mapping": {
+      "color": "#/components/schemas/ColorAttribute",
+      "single-select": "#/components/schemas/SingleSelectAttribute",
+      "multi-select": "#/components/schemas/MultiSelectAttribute",
+      "text": "#/components/schemas/TextAttribute",
+      "date": "#/components/schemas/DateAttribute",
+      "number": "#/components/schemas/NumberAttribute",
+      "boolean": "#/components/schemas/BooleanAttribute"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ProductAttribute",
+    "description": "API reference for the ProductAttribute schema"
+  },
+  "oneOf": [
+    {
+      "$ref": "./ColorAttribute.json",
+      "type": "object"
+    },
+    {
+      "$ref": "./SingleSelectAttribute.json",
+      "type": "object"
+    },
+    {
+      "$ref": "./MultiSelectAttribute.json",
+      "type": "object"
+    },
+    {
+      "$ref": "./TextAttribute.json",
+      "type": "object"
+    },
+    {
+      "$ref": "./DateAttribute.json",
+      "type": "object"
+    },
+    {
+      "$ref": "./NumberAttribute.json",
+      "type": "object"
+    },
+    {
+      "$ref": "./BooleanAttribute.json",
+      "type": "object"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "fulfillment_type": {
+      "type": "string",
+      "const": "delivery"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/DeliveryFulfillment",
+    "description": "API reference for the DeliveryFulfillment schema"
+  },
+  "required": [
+    "fulfillment_type"
+  ],
+  "title": "DeliveryFulfillment"
+}

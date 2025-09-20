@@ -1,0 +1,161 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "shipping_method_type": {
+      "enum": [
+        "manual",
+        "local-pickup"
+      ]
+    },
+    "type": {
+      "enum": [
+        "manual",
+        "local-pickup"
+      ],
+      "readOnly": true
+    },
+    "fulfillment_type": {
+      "enum": [
+        "delivery",
+        "collect-in-store"
+      ],
+      "readOnly": true
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "logo": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "readOnly": true
+    },
+    "is_connected": {
+      "type": "boolean",
+      "default": true,
+      "readOnly": true
+    },
+    "is_forward_shipping": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_return_shipping": {
+      "type": "boolean",
+      "default": true
+    },
+    "maximum_weight": {
+      "description": "can be null if there is no limit on weight.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "enable_shipping_rate": {
+      "type": "boolean"
+    },
+    "shipping_rate_name": {
+      "description": "required if enable_shipping_rate = true",
+      "type": "string"
+    },
+    "shipping_rate_fixed_price": {
+      "description": "can be null if shipping_rate_condition is provided.",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "shipping_rate_condition": {
+      "description": "can be null if shipping_rate_fixed_price is provided.",
+      "$ref": "./ManualShippingRateCondition.json"
+    },
+    "delivery_leadtime_minimum": {
+      "description": "in days.",
+      "type": "integer"
+    },
+    "delivery_leadtime_maximum": {
+      "description": "in days.",
+      "type": "integer"
+    },
+    "shipping_zone_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "writeOnly": true
+    },
+    "warehouse_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "writeOnly": true
+    },
+    "shipping_zone": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "warehouses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "shipping_method_type",
+    "type",
+    "description",
+    "logo",
+    "is_connected",
+    "is_forward_shipping",
+    "is_return_shipping",
+    "enable_shipping_rate",
+    "delivery_leadtime_minimum",
+    "delivery_leadtime_maximum",
+    "shipping_zone_id",
+    "warehouse_id"
+  ],
+  "title": "ManualShippingMethod",
+  "x-tags": [
+    "Shipping"
+  ]
+}

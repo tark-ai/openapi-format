@@ -1,0 +1,54 @@
+{
+  "description": "Attribute for colors",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "key": {
+      "description": "A lookup safe version of the name that is lowercased and spaces are replaced with underscores. For instance, if name is `Product Type`, key will be `product_type`",
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "example": "color"
+    },
+    "value": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "hexcode"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "hexcode": {
+            "description": "The hex code of the color (e.g., #000000).",
+            "type": "string",
+            "format": "color-hex",
+            "pattern": "^#(?:[0-9a-fA-F]{3}){1,2}$"
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/ColorAttribute",
+    "description": "API reference for the ColorAttribute schema"
+  },
+  "readOnly": true,
+  "required": [
+    "id",
+    "name",
+    "key",
+    "type",
+    "value"
+  ],
+  "title": "ColorAttribute"
+}

@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "document_number": {
+      "type": "string"
+    },
+    "kyc_document_id": {
+      "type": "string",
+      "writeOnly": true
+    },
+    "note": {
+      "type": "string"
+    },
+    "file": {
+      "description": "file attachment will be required or optional as per store setting.",
+      "type": "string",
+      "format": "binary",
+      "writeOnly": true
+    },
+    "status": {
+      "enum": [
+        "submitted",
+        "approved",
+        "rejected",
+        "expired"
+      ],
+      "readOnly": true
+    },
+    "title": {
+      "type": "string",
+      "readOnly": true
+    },
+    "file_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "verification_type": {
+      "enum": [
+        "automatic",
+        "manual"
+      ],
+      "readOnly": true
+    },
+    "is_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "verified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "created_by": {
+      "enum": [
+        "customer",
+        "admin"
+      ],
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_by": {
+      "enum": [
+        "customer",
+        "admin"
+      ],
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_reason": {
+      "type": "string",
+      "readOnly": true
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/Document",
+    "description": "API reference for the Document schema"
+  },
+  "required": [
+    "document_number",
+    "kyc_document_id"
+  ],
+  "title": "Document",
+  "x-tags": [
+    "KYC"
+  ]
+}

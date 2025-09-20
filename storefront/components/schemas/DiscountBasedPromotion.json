@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "promotion_type": {
+      "type": "string",
+      "enum": [
+        "discount",
+        "volume-based",
+        "fixed-price",
+        "free-goods"
+      ],
+      "const": "discount"
+    },
+    "discount_type": {
+      "type": "string",
+      "enum": [
+        "percentage",
+        "fixed-amount"
+      ]
+    },
+    "discount_percent": {
+      "description": "'> 0' if discount_type = percentage, otherwise set 0.",
+      "type": "number"
+    },
+    "discount_fixed_amount": {
+      "description": "'> 0' if discount_type = fixed-amount, otherwise set 0.",
+      "type": "integer"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/DiscountBasedPromotion",
+    "description": "API reference for the DiscountBasedPromotion schema"
+  },
+  "required": [
+    "promotion_type",
+    "discount_type"
+  ],
+  "title": "DiscountBasedPromotion"
+}

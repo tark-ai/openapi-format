@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./ManualSegment.json"
+    },
+    {
+      "$ref": "./DynamicSegment.json"
+    }
+  ],
+  "title": "SegmentDetail",
+  "x-tags": [
+    "Segments"
+  ]
+}

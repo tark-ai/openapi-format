@@ -1,0 +1,80 @@
+{
+  "description": "promotion_type = volume-based",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "promotion_type": {
+      "enum": [
+        "volume-based"
+      ]
+    },
+    "starts_at": {
+      "type": "string"
+    },
+    "expires_at": {
+      "description": "null means never expires.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "details": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "customer_group_id",
+          "slabs"
+        ],
+        "properties": {
+          "customer_group_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "slabs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "quantity",
+                "quantity_condition",
+                "discount_percent"
+              ],
+              "properties": {
+                "quantity": {
+                  "type": "integer"
+                },
+                "quantity_condition": {
+                  "description": "This key defines how the system will evaluate the quantity to determine if the promotion should be applied, based on the specified slab.",
+                  "enum": [
+                    "less",
+                    "less-or-equal",
+                    "greater",
+                    "greater-or-equal"
+                  ]
+                },
+                "discount_percent": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "promotion_type",
+    "starts_at",
+    "details"
+  ],
+  "title": "VolumeBasedPromotion"
+}

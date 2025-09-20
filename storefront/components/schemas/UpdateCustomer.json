@@ -1,0 +1,14 @@
+{
+  "type": "object",
+  "properties": {
+    "business": {
+      "$ref": "./Business.json"
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/UpdateCustomer",
+    "description": "API reference for the UpdateCustomer schema"
+  },
+  "title": "UpdateCustomer"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_mode": {
+      "type": "string",
+      "const": "UPI"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PayWithUPI",
+    "description": "API reference for the PayWithUPI schema"
+  },
+  "required": [
+    "payment_mode"
+  ],
+  "title": "PayWithUPI"
+}

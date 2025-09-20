@@ -1,0 +1,40 @@
+{
+  "description": "Attribute for multi-select values",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "key": {
+      "description": "A lookup safe version of the name that is lowercased and spaces are replaced with underscores. For instance, if name is `Product Type`, key will be `product_type`",
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "example": "multi-select"
+    },
+    "value": {
+      "description": "For multi-select attributes",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/MultiSelectAttribute",
+    "description": "API reference for the MultiSelectAttribute schema"
+  },
+  "readOnly": true,
+  "required": [
+    "id",
+    "name",
+    "key",
+    "type",
+    "value"
+  ],
+  "title": "MultiSelectAttribute"
+}

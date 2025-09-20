@@ -1,0 +1,1521 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Catalog",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "paths": {
+    "/catalog/categories": {
+      "get": {
+        "operationId": "list-categories",
+        "summary": "List all categories",
+        "description": "Returns a list of your product categories. The categories are returned sorted by creation date, with the most recently created categories appearing first.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/sortingParam"
+          },
+          {
+            "name": "nested_level",
+            "in": "query",
+            "description": "return child categories up to nesting level",
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "maximum": 4,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "parent_category_id",
+            "in": "query",
+            "description": "To return child categories using category id.",
+            "schema": {
+              "type": "string",
+              "example": "01JWZW41Y3FBKTZSP399SKANY7",
+              "examples": [
+                "01JWZW41Y3FBKTZSP399SKANY7"
+              ]
+            }
+          },
+          {
+            "name": "parent_category_slug",
+            "in": "query",
+            "description": "To return child categories using category slug",
+            "schema": {
+              "type": "string",
+              "example": "vitals"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "all categories"
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "categories": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductCategory"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "categories",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-categories",
+          "description": "API reference for the list-categories operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listCategories"
+      }
+    },
+    "/catalog/products": {
+      "get": {
+        "operationId": "list-products",
+        "summary": "List all products",
+        "description": "Returns a list of your products. The products are returned sorted by creation date, with the most recently created products appearing first.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortingParam"
+          },
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "description": "filter products by categories ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": true,
+            "style": "form"
+          },
+          {
+            "name": "category_slug",
+            "in": "query",
+            "description": "filter products by categories slugs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "inventory",
+            "in": "query",
+            "description": "Determines whether to include or exlude inventory details in response json",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "Products retrieved successfully."
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Product"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "products",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-products",
+          "description": "API reference for the list-products operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listProducts"
+      }
+    },
+    "/catalog/products/cross-sell": {
+      "get": {
+        "operationId": "list-crosssell-products",
+        "summary": "Retrieve cross-sell products",
+        "description": "Retrieves a list of products specified for cross selling. The cross-sell products are returned based on product ids specified in request param.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "no of rows per page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number in pagination",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "Product ids of cart items",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "json to sort records",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "products",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-crosssell-products",
+          "description": "API reference for the list-crosssell-products operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listCrosssellProducts"
+      }
+    },
+    "/catalog/products/search": {
+      "post": {
+        "operationId": "search-products",
+        "summary": "Search products",
+        "description": "Search for products matching a specific words or characters given.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "skus": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        },
+                        "facet_distribution": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "additionalProperties": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "facet_stats": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                              "min": {
+                                "type": "number"
+                              },
+                              "max": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "min",
+                              "max"
+                            ]
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "skus",
+                        "facet_distribution",
+                        "facet_stats",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/search-products",
+          "description": "API reference for the search-products operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "searchProducts"
+      }
+    },
+    "/catalog/products/similar": {
+      "get": {
+        "operationId": "list-similar-products",
+        "summary": "Retrieve similar products",
+        "description": "Retrieves a list of products similar to a specified product based on their attributes and category. The similar products are returned sorted by relevance, with the most closely matching products appearing first. Useful for providing product recommendations to your customers.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "no of rows per page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number in pagination",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "to retrieve similar products of specified products",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "json to sort records",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "products",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-similar-products",
+          "description": "API reference for the list-similar-products operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listSimilarProducts"
+      }
+    },
+    "/catalog/products/up-sell": {
+      "get": {
+        "operationId": "list-upsell-products",
+        "summary": "Retrieve up-sell products",
+        "description": "Retrieves a list of products specified for upsell. The upsell products are returned based on product ids specified in request param.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "no of rows per page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number in pagination",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "Product ids of cart items",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "sort_by",
+            "in": "query",
+            "description": "json to sort records",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "description": "Masssage",
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "products",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-upsell-products",
+          "description": "API reference for the list-upsell-products operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listUpsellProducts"
+      }
+    },
+    "/catalog/products/{product_id_or_slug}": {
+      "get": {
+        "operationId": "get-product-detail",
+        "summary": "Retrieve a product detail",
+        "description": "Retrieves the details of an existing product. Supply either the unique product ID or the unique slug, and Commerce Engine will return the corresponding product information.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "inventory",
+            "in": "query",
+            "description": "Determines whether to include or exlude inventory details in response json",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "product_id_or_slug",
+            "in": "path",
+            "description": "The unique identifier of the product. Can be either the product ID or the slug.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "examples": [
+                "01XGCYCT8CRHXW4BG91JXCMDCW",
+                "detox-candy"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "Products retrieved successfully."
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "product": {
+                          "$ref": "#/components/schemas/ProductDetail"
+                        }
+                      },
+                      "required": [
+                        "product"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-product-detail",
+          "description": "API reference for the get-product-detail operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getProductDetail"
+      }
+    },
+    "/catalog/products/{product_id}/reviews": {
+      "get": {
+        "operationId": "list-product-reviews",
+        "summary": "List all product reviews",
+        "description": "List of reviews for a specified product. The reviews are returned sorted by submission date, with the most recent reviews appearing first. You can filter the reviews by rating, reviewer, or date for more detailed analysis.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortingParam"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "id of a particular product",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "review_tag",
+            "in": "query",
+            "description": "filter review with review tag",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "reviews": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ProductReview"
+                          }
+                        },
+                        "review_tags": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "reviews"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-product-reviews",
+          "description": "API reference for the list-product-reviews operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listProductReviews"
+      },
+      "post": {
+        "operationId": "create-product-review",
+        "summary": "Create product review",
+        "description": "Create a product review",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "id of a particular product",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateReview"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "Review submitted successfully."
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/create-product-review",
+          "description": "API reference for the create-product-review operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "createProductReview"
+      }
+    },
+    "/catalog/products/{product_id}/variants": {
+      "get": {
+        "operationId": "list-product-variants",
+        "summary": "Retrieve product variants",
+        "description": "Retrieves the variants of an existing product. Supply the unique product ID, and Commerce Engine will return the corresponding product variants information.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "inventory",
+            "in": "query",
+            "description": "Determines whether to include or exlude inventory details in response json",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "ID of a particular product",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "examples": [
+                "01H7YK0C86V9PGT0HXRJVEZXJQ"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "Products retrieved successfully."
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "variants": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Variant"
+                          }
+                        }
+                      },
+                      "required": [
+                        "variants"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-product-variants",
+          "description": "API reference for the list-product-variants operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listProductVariants"
+      }
+    },
+    "/catalog/products/{product_id}/variants/{variant_id}": {
+      "get": {
+        "operationId": "get-variant-detail",
+        "summary": "Retrieve variant detail",
+        "description": "Retrieves the details of a particular variant. Supply the unique product ID, and variant ID.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "inventory",
+            "in": "query",
+            "description": "Determines whether to include or exlude inventory details in response json",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "product id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "examples": [
+                "01H7YK0C86V9PGT0HXRJVEZXJQ"
+              ]
+            }
+          },
+          {
+            "name": "variant_id",
+            "in": "path",
+            "description": "variant id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "Products retrieved successfully."
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "variant": {
+                          "$ref": "#/components/schemas/VariantDetail"
+                        }
+                      },
+                      "required": [
+                        "variant"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-variant-detail",
+          "description": "API reference for the get-variant-detail operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getVariantDetail"
+      }
+    },
+    "/catalog/skus": {
+      "get": {
+        "operationId": "list-skus",
+        "summary": "List all SKUs",
+        "description": "Returns a list of SKUs. The SKUs are returned sorted by creation date, with the most recently created SKUs appearing first.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortingParam"
+          },
+          {
+            "$ref": "#/components/parameters/CustomerGroupId"
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "description": "filter sku by categories",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": true,
+            "style": "form"
+          },
+          {
+            "name": "inventory",
+            "in": "query",
+            "description": "Determines whether to include or exlude inventory details in response json",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "sku",
+            "in": "query",
+            "description": "array of sku",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "examples": [
+                        "SKUs retrieved successfully."
+                      ]
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "skus": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Item"
+                          },
+                          "readOnly": true
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "skus",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-skus",
+          "description": "API reference for the list-skus operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Catalog"
+        ],
+        "x-speakeasy-group": "catalog",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listSkus"
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "CustomerGroupId": {
+        "name": "x-customer-group-id",
+        "in": "header",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "This param is used to determine product pricing, promotions, and subscription rates.  If a valid customer group id is provided, pricing details will be retrieved accordingly.  If no matching data is found for the specified customer group id, the system will fall back to the default customer group id.  If no data is found for the default group either, the highest applicable price will be returned."
+      },
+      "pageLimitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "no of rows per page",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "pageParam": {
+        "name": "page",
+        "in": "query",
+        "description": "page number of pagination list",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "description": "search keyword",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "sortingParam": {
+        "name": "sort_by",
+        "in": "query",
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string",
+          "examples": [
+            "{\"country\":\"asc\",\"city\":\"asc\",\"population\":\"desc\"}"
+          ]
+        }
+      }
+    },
+    "schemas": {
+      "CreateReview": {
+        "$ref": "./components/schemas/CreateReview.json"
+      },
+      "Item": {
+        "$ref": "./components/schemas/Item.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "Product": {
+        "$ref": "./components/schemas/Product.json"
+      },
+      "ProductCategory": {
+        "$ref": "./components/schemas/ProductCategory.json"
+      },
+      "ProductDetail": {
+        "$ref": "./components/schemas/ProductDetail.json"
+      },
+      "ProductReview": {
+        "$ref": "./components/schemas/ProductReview.json"
+      },
+      "SearchProduct": {
+        "$ref": "./components/schemas/SearchProduct.json"
+      },
+      "Variant": {
+        "$ref": "./components/schemas/Variant.json"
+      },
+      "VariantDetail": {
+        "$ref": "./components/schemas/VariantDetail.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "description": "Access token",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Catalog",
+      "description": "Catalog"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  }
+}

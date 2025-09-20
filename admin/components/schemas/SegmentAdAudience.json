@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "audience_match_field": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "service_provider_id": {
+      "type": "string"
+    },
+    "service_provider_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "last_synced_status": {
+      "description": "default status = pending",
+      "enum": [
+        "success",
+        "failed",
+        "pending"
+      ],
+      "readOnly": true
+    },
+    "last_synced_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "total_people_synced": {
+      "type": "integer",
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name",
+    "service_provider_id"
+  ],
+  "title": "SegmentAdAudience",
+  "x-tags": [
+    "Segments"
+  ]
+}

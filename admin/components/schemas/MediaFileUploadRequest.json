@@ -1,0 +1,11 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./MediaFileUploadRequestForLocalStorage.json"
+    },
+    {
+      "$ref": "./MediaFileUploadRequestForExternalUrl.json"
+    }
+  ],
+  "title": "MediaFileUploadRequest"
+}

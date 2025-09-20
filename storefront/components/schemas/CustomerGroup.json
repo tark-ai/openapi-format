@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_default": {
+      "description": "first record will be treated as default if not changed.",
+      "type": "boolean"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CustomerGroup",
+    "description": "API reference for the CustomerGroup schema"
+  },
+  "required": [
+    "id",
+    "name",
+    "description",
+    "is_default",
+    "active"
+  ],
+  "title": "CustomerGroup"
+}

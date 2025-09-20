@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "document_number": {
+      "type": "string"
+    },
+    "document_type_id": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "file": {
+      "description": "file attachment will be required or optional as per store setting.",
+      "type": "string",
+      "format": "binary"
+    },
+    "status": {
+      "enum": [
+        "submitted",
+        "approved",
+        "rejected"
+      ]
+    },
+    "modified_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "document_number",
+    "document_type_id",
+    "modified_reason"
+  ],
+  "title": "UpdateKycDocument",
+  "x-tags": [
+    "Customers"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "type": "object",
+  "properties": {
+    "subscription_plan_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "subscription_plan": {
+      "type": "string"
+    },
+    "billing_interval": {
+      "type": "integer",
+      "format": "int32"
+    },
+    "billing_frequency": {
+      "enum": [
+        "monthly"
+      ]
+    },
+    "billing_limit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "billing_trial_days": {
+      "type": "integer",
+      "format": "int32",
+      "default": 0
+    },
+    "order_interval": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "order_frequency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "monthly"
+      ]
+    },
+    "order_limit": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "fulfill_separately": {
+      "type": "boolean"
+    },
+    "subscription_price": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "suscription_price",
+          "minimum_quantity",
+          "customer_group_id"
+        ],
+        "properties": {
+          "suscription_price": {
+            "type": "number",
+            "format": "double"
+          },
+          "minimum_quantity": {
+            "type": "integer",
+            "default": 1
+          },
+          "customer_group_id": {
+            "description": "customer group id.",
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "subscription_plan",
+    "billing_interval",
+    "billing_frequency",
+    "billing_limit",
+    "billing_trial_days",
+    "fulfill_separately",
+    "subscription_price"
+  ],
+  "title": "ProductSubscription",
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "packing_option": {
+      "enum": [
+        "auto"
+      ]
+    },
+    "total_boxes": {
+      "type": "integer"
+    },
+    "total_weight": {
+      "type": "number"
+    },
+    "json_data": {
+      "description": "json data of 3dbin packing.",
+      "type": "object"
+    }
+  },
+  "title": "AutoPackingDetail"
+}

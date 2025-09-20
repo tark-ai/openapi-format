@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "properties": {
+    "promotion_type": {
+      "type": "string",
+      "enum": [
+        "discount",
+        "volume-based",
+        "fixed-price",
+        "free-goods"
+      ],
+      "const": "fixed-price",
+      "readOnly": true
+    },
+    "offer_price": {
+      "type": "number"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/FixedPricePromotion",
+    "description": "API reference for the FixedPricePromotion schema"
+  },
+  "required": [
+    "promotion_type",
+    "offer_price"
+  ],
+  "title": "FixedPricePromotion"
+}

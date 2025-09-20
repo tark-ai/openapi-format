@@ -1,0 +1,8 @@
+{
+  "allOf": [
+    {
+      "$ref": "./CouponPromotionCommonDetail.json"
+    }
+  ],
+  "title": "FreeShipingCouponPromotion"
+}

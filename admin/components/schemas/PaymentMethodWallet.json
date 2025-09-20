@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "wallet_name": {
+      "type": "string"
+    }
+  },
+  "title": "PaymentMethodWallet",
+  "x-tags": [
+    "Payments"
+  ]
+}

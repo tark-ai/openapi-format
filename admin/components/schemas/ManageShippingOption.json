@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./ShippingZoneBasedShippingOption.json"
+    },
+    {
+      "$ref": "./WarehouseBasedShippingOption.json"
+    }
+  ],
+  "title": "ManageShippingOption",
+  "x-tags": [
+    "Store"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "properties": {
+    "channel": {
+      "enum": [
+        "sms",
+        "whatsapp"
+      ]
+    },
+    "country_code": {
+      "description": "Two-letter code begin with a plus sign prefix that identifies different countries. By default it will be +91 if not provided.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": "string"
+    },
+    "otp_action": {
+      "type": "string",
+      "enum": [
+        "register",
+        "reset-password",
+        "verify-phone",
+        "update-phone"
+      ]
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/GenerateOtpWithPhone",
+    "description": "API reference for the GenerateOtpWithPhone schema"
+  },
+  "required": [
+    "channel",
+    "phone",
+    "otp_action"
+  ],
+  "title": "GenerateOtpWithPhone"
+}

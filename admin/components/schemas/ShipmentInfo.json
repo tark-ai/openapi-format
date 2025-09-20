@@ -1,0 +1,148 @@
+{
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "order_status": {
+      "type": "string"
+    },
+    "shipment_number": {
+      "type": "string"
+    },
+    "warehouse_id": {
+      "type": "string"
+    },
+    "warehouse_name": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "total_weight": {
+      "type": "number"
+    },
+    "total_boxes": {
+      "type": "integer"
+    },
+    "shipment_items_count": {
+      "type": "integer"
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_tax_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_amount_including_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "courier_company_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "courier_company_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "courier_company_image_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "awb_no": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "shipping_label_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "eta_delivery": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "shipped_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "delivered_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "slo": {
+      "type": "object",
+      "properties": {
+        "expected_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "actual_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "difference": {
+          "type": "string"
+        }
+      }
+    },
+    "cancellation_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "shipping_address_line1": {
+      "type": "string"
+    },
+    "shipping_address_line2": {
+      "type": "string"
+    },
+    "shipping_landmark": {
+      "type": "string"
+    },
+    "shipping_pincode": {
+      "type": "string"
+    },
+    "shipping_city": {
+      "type": "string"
+    },
+    "shipping_state": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    },
+    "modified_at": {
+      "type": "string"
+    }
+  },
+  "title": "ShipmentInfo",
+  "x-tags": [
+    "Shipping"
+  ]
+}

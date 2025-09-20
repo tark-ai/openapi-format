@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "spending_criteria_type": {
+      "type": "string",
+      "const": "minimum-quantity"
+    },
+    "products": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "product_id",
+          "variant_id",
+          "auto_scale",
+          "slab"
+        ],
+        "properties": {
+          "product_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "variant_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "auto_scale": {
+            "type": "boolean",
+            "const": true
+          },
+          "slab": {
+            "type": "object",
+            "properties": {
+              "buy_quantity": {
+                "type": "integer"
+              },
+              "get_quantity": {
+                "type": "integer"
+              },
+              "condition": {
+                "enum": [
+                  "greater-or-equal"
+                ]
+              }
+            },
+            "required": [
+              "buy_quantity",
+              "get_quantity",
+              "condition"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "spending_criteria_type",
+    "products"
+  ],
+  "title": "AutoScaleBasedOnQuantity",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

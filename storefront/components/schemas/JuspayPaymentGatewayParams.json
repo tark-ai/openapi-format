@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "payment_gateway": {
+      "type": "string",
+      "default": "JUSPAY",
+      "const": "JUSPAY"
+    },
+    "action": {
+      "description": "`paymentPage` is the default option that you should select when using hyper-checkout",
+      "type": "string",
+      "enum": [
+        "paymentPage",
+        "paymentManagement"
+      ]
+    },
+    "integration_type": {
+      "description": "Use `hyper-checkout` for Juspay hosted checkout",
+      "type": "string",
+      "enum": [
+        "hyper-checkout",
+        "express-checkout"
+      ]
+    },
+    "return_url": {
+      "description": "This is the URL that the gateway will redirect to once payment processing is complete. This will be a GET request by default",
+      "type": "string"
+    },
+    "gateway_reference_id": {
+      "description": "The exact gateway reference ID that was set up in the integration",
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/JuspayPaymentGatewayParams",
+    "description": "API reference for the JuspayPaymentGatewayParams schema"
+  },
+  "required": [
+    "payment_gateway",
+    "action",
+    "integration_type",
+    "return_url",
+    "gateway_reference_id"
+  ],
+  "title": "JuspayPaymentGatewayParams"
+}

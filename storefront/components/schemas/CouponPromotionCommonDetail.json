@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tags": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    },
+    "redemption_limits": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "total_redemptions": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "per_customer_redemptions": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "per_coupon_code_redemptions": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "total_redemptions",
+        "per_customer_redemptions",
+        "per_coupon_code_redemptions"
+      ]
+    },
+    "redemption_count": {
+      "type": "integer",
+      "readOnly": true
+    },
+    "minimum_order_total": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "default": 0
+    },
+    "starts_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CouponPromotionCommonDetail",
+    "description": "API reference for the CouponPromotionCommonDetail schema"
+  },
+  "required": [
+    "id",
+    "name",
+    "description",
+    "tags",
+    "redemption_limits",
+    "redemption_count",
+    "minimum_order_total",
+    "starts_at",
+    "expires_at"
+  ],
+  "title": "CouponPromotionCommonDetail"
+}

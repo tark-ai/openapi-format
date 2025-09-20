@@ -1,0 +1,137 @@
+{
+  "description": "List of reviews posted by the user.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "product_id": {
+      "type": "string"
+    },
+    "product_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "product_image_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "status": {
+      "type": "string",
+      "readOnly": true
+    },
+    "rating": {
+      "type": "number"
+    },
+    "review_text": {
+      "type": "string"
+    },
+    "review_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "average_rating": {
+      "type": "number",
+      "readOnly": true
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "blur_url": {
+            "type": "string",
+            "readOnly": true
+          },
+          "thumbnail_url": {
+            "type": "string",
+            "readOnly": true
+          },
+          "standard_url": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "videos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "cover_image_url": {
+            "type": "string",
+            "readOnly": true
+          },
+          "video_preview_url": {
+            "type": "string",
+            "readOnly": true
+          },
+          " playback": {
+            "type": "object",
+            "properties": {
+              "hls": {
+                "type": "string"
+              },
+              "dash": {
+                "type": "string"
+              }
+            }
+          },
+          "duration": {
+            "type": "string",
+            "readOnly": true
+          },
+          "size": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "listing_price": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "selling_price": {
+      "type": "number",
+      "format": "double",
+      "readOnly": true
+    },
+    "order_number": {
+      "type": "string",
+      "readOnly": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CustomerReview",
+    "description": "API reference for the CustomerReview schema"
+  },
+  "required": [
+    "product_id",
+    "rating",
+    "review_text",
+    "order_number"
+  ],
+  "title": "CustomerReview"
+}

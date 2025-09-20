@@ -1,0 +1,25 @@
+{
+  "description": "Order Payment",
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/OrderPayment",
+    "description": "API reference for the OrderPayment schema"
+  },
+  "oneOf": [
+    {
+      "$ref": "./CardPayment.json"
+    },
+    {
+      "$ref": "./NetbankingPayment.json"
+    },
+    {
+      "$ref": "./UpiPayment.json"
+    },
+    {
+      "$ref": "./WalletPayment.json"
+    },
+    {
+      "$ref": "./BankTransfer.json"
+    }
+  ],
+  "title": "OrderPayment"
+}

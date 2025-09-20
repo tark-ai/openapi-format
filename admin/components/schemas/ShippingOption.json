@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_connected": {
+      "type": "boolean"
+    },
+    "is_forward_shipping": {
+      "type": "boolean"
+    },
+    "is_return_shipping": {
+      "type": "boolean"
+    },
+    "logo": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "type": {
+      "enum": [
+        "auto",
+        "manual"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    }
+  },
+  "title": "ShippingOption"
+}

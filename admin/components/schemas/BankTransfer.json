@@ -1,0 +1,21 @@
+{
+  "description": "Bank transfer payment - IMPS, NEFT, RTGS",
+  "allOf": [
+    {
+      "$ref": "./OrderPaymentInfo.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "bank_account_number": {
+          "description": "masked account number\r\ne.g. ************1234",
+          "type": "string"
+        },
+        "bank_name": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "title": "BankTransfer"
+}

@@ -1,0 +1,121 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique ID of the user.",
+      "type": "string",
+      "readOnly": true
+    },
+    "first_name": {
+      "description": "User’s first name.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_name": {
+      "description": "User’s last name.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "email": {
+      "description": "User’s email I’d.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "email"
+    },
+    "is_email_verified": {
+      "description": "Boolean indicating whether the email is verified.",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "country_code": {
+      "description": "Two-letter code begin with a plus sign prefix that identifies different countries. By default it will be +91 if not provided.\nUse this key along with phone. Not necessary for email.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_phone_verified": {
+      "description": "Boolean indicating whether the phone is verified.",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "profile_image_url": {
+      "description": "URL to the user's profile image.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_anonymous": {
+      "description": "Indicates whether the user is anonymous.",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_logged_in": {
+      "description": "Indicates whether the user is currently logged in.",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "login_methods": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "email",
+          "phone",
+          "whatsapp",
+          "password"
+        ]
+      }
+    },
+    "notification_preferences": {
+      "description": "User's notification preferences are categorized by transactional, promotional, and newsletter types.",
+      "$ref": "./NotificationPreferences.json"
+    },
+    "created_at": {
+      "description": "Timestamps indicate when the user's account was created.",
+      "type": "string",
+      "format": "datetime",
+      "readOnly": true
+    },
+    "modified_at": {
+      "description": "Timestamps indicating when the user account was last modified.",
+      "type": "string",
+      "format": "datetime",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/User",
+    "description": "API reference for the User schema"
+  },
+  "required": [
+    "id",
+    "first_name",
+    "last_name",
+    "email",
+    "is_email_verified",
+    "phone",
+    "country_code",
+    "is_phone_verified",
+    "profile_image_url",
+    "is_anonymous",
+    "is_logged_in",
+    "login_methods",
+    "notification_preferences"
+  ],
+  "title": "User"
+}

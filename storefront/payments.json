@@ -1,0 +1,609 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Payments",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "paths": {
+    "/payments/cards": {
+      "get": {
+        "operationId": "list-saved-cards",
+        "summary": "List all saved cards",
+        "description": "List all saved cards.",
+        "parameters": [
+          {
+            "name": "payment_gateway",
+            "in": "query",
+            "description": "payment gateway code",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/PaymentGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "#/components/schemas/PayuSavedCard"
+                              },
+                              {
+                                "$ref": "#/components/schemas/JuspaySavedCard"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-saved-cards",
+          "description": "API reference for the list-saved-cards operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "x-speakeasy-group": "payments",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listSavedCards"
+      },
+      "post": {
+        "operationId": "add-card",
+        "summary": "Add card",
+        "description": "Add a new card",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "card_details": {
+                    "discriminator": {
+                      "propertyName": "payment_gateway",
+                      "mapping": {
+                        "juspay": "#/components/schemas/JuspayCardPayload",
+                        "payu": "#/components/schemas/PayuCardPayload"
+                      }
+                    },
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/PayuCardPayload"
+                      },
+                      {
+                        "$ref": "#/components/schemas/JuspayCardPayload"
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "card_details"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "discriminator": {
+                        "propertyName": "payment_gateway",
+                        "mapping": {
+                          "juspay": "#/components/schemas/JuspayCreateCardResponse",
+                          "payu": "#/components/schemas/PayuCreateCardResponse"
+                        }
+                      },
+                      "properties": {
+                        "payment_gateway": {
+                          "type": "string",
+                          "enum": [
+                            "juspay",
+                            "payu"
+                          ],
+                          "readOnly": true
+                        },
+                        "card-details": {
+                          "oneOf": [
+                            {
+                              "$ref": "#/components/schemas/PayuCreateCardResponse"
+                            },
+                            {
+                              "$ref": "#/components/schemas/JuspayCreateCardResponse"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "payment_gateway",
+                        "card-details"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/add-card",
+          "description": "API reference for the add-card operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "x-speakeasy-group": "payments",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "addCard"
+      }
+    },
+    "/payments/payment-methods": {
+      "get": {
+        "operationId": "list-payment-methods",
+        "summary": "List all payment methods",
+        "description": "List all payment methods",
+        "parameters": [
+          {
+            "name": "payment_gateway",
+            "in": "query",
+            "description": "payment gateway code",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/PaymentGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_methods": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "#/components/schemas/PayuPaymentMethod"
+                              },
+                              {
+                                "$ref": "#/components/schemas/JuspayPaymentMethod"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-payment-methods",
+          "description": "API reference for the list-payment-methods operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "x-speakeasy-group": "payments",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listPaymentMethods"
+      }
+    },
+    "/payments/payment-options": {
+      "get": {
+        "operationId": "list-payment-options",
+        "summary": "List all payment options",
+        "description": "List all payment options",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_options": {
+                          "type": "array",
+                          "items": {
+                            "enum": [
+                              "CASH",
+                              "UPI",
+                              "CARD",
+                              "PG"
+                            ]
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-payment-options",
+          "description": "API reference for the list-payment-options operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "x-speakeasy-group": "payments",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listPaymentMethods"
+      },
+      "parameters": []
+    },
+    "/payments/verify-vpa": {
+      "get": {
+        "operationId": "verify-vpa",
+        "summary": "Verify VPA",
+        "description": "The Virtual Payment Address or VPA is a unique ID given to an individual using the Unified Payment Interface (UPI) service to send or receive money. In the case of UPI collect VPA is the mandatory param and merchants are always advised to check if the VPA is valid or not.\nValidating the VPA will help in reducing the failure rate due to incorrect vpa. ",
+        "parameters": [
+          {
+            "name": "payment_gateway",
+            "in": "query",
+            "description": "payment gateway code",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/PaymentGateway"
+            }
+          },
+          {
+            "name": "vpa",
+            "in": "query",
+            "description": "The Virtual Payment Address or VPA is a unique ID given to an individual using the Unified Payment Interface (UPI) service.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "vpa": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/verify-vpa",
+          "description": "API reference for the verify-vpa operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Payments"
+        ],
+        "x-speakeasy-group": "payments",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "verifyVpa"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "JuspayCardPayload": {
+        "$ref": "./components/schemas/JuspayCardPayload.json"
+      },
+      "JuspayCreateCardResponse": {
+        "$ref": "./components/schemas/JuspayCreateCardResponse.json"
+      },
+      "JuspayPaymentMethod": {
+        "$ref": "./components/schemas/JuspayPaymentMethod.json"
+      },
+      "JuspaySavedCard": {
+        "$ref": "./components/schemas/JuspaySavedCard.json"
+      },
+      "PaymentGateway": {
+        "$ref": "./components/schemas/PaymentGateway.json"
+      },
+      "PayuCardPayload": {
+        "$ref": "./components/schemas/PayuCardPayload.json"
+      },
+      "PayuCreateCardResponse": {
+        "$ref": "./components/schemas/PayuCreateCardResponse.json"
+      },
+      "PayuPaymentMethod": {
+        "$ref": "./components/schemas/PayuPaymentMethod.json"
+      },
+      "PayuSavedCard": {
+        "$ref": "./components/schemas/PayuSavedCard.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "description": "Access token",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Payments",
+      "description": "Payments"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  }
+}

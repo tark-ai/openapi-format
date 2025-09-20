@@ -1,0 +1,97 @@
+{
+  "type": "object",
+  "properties": {
+    "membership_number": {
+      "type": "string"
+    },
+    "points_earned": {
+      "description": "total points earned within the current loyalty program.",
+      "type": "integer"
+    },
+    "points_redeemed": {
+      "description": "total points redeemed within the current loyalty program.",
+      "type": "integer"
+    },
+    "points_balance": {
+      "description": "total points available.",
+      "type": "integer"
+    },
+    "total_spent": {
+      "description": "The total amount a customer has spent within the current loyalty program, excluding taxes, promotional discounts, and redeemed loyalty points. This value is used to determine tier eligibility and earning points calculation.",
+      "type": "integer"
+    },
+    "total_orders": {
+      "description": "The total number of completed orders counted in the current loyalty program.",
+      "type": "integer"
+    },
+    "lifetime_spent": {
+      "description": " The total amount a customer has spent across all time, regardless of loyalty program participation. This includes all completed orders and excludes taxes, promotional discounts, and redeemed points.",
+      "type": "integer"
+    },
+    "lifetime_orders": {
+      "description": "The total number of completed orders across all time, regardless of loyalty program.",
+      "type": "integer"
+    },
+    "date_of_join": {
+      "description": " The date and time when the customer first enrolled in the loyalty program.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "date_of_assign": {
+      "description": "The date and time when the customer's current loyalty tier or program instance was assigned. This may change when tiers are upgraded, downgraded, or reassigned.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "date_of_reset": {
+      "description": " The date and time when the customer’s current loyalty program cycle will reset, at which points earned, points redeemed, balance points, total spent, total orders will be cleared.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "current_tier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "next_tier": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "total_spent_threshold": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "total_orders_threshold": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    }
+  },
+  "title": "CustomerLoyalty",
+  "x-tags": [
+    "Customers"
+  ]
+}

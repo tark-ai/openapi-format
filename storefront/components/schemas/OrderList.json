@@ -1,0 +1,122 @@
+{
+  "description": "order list model",
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "description": "Unique number associated with the order.",
+      "type": "string"
+    },
+    "order_date": {
+      "description": "Date and time when the order was placed.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "description": "Current status of the order (e.g., \"pending,\" \"processing,\" \"shipped,\" etc.).",
+      "type": "string",
+      "enum": [
+        "draft",
+        "awaiting_approval",
+        "confirmed",
+        "partially_scheduled",
+        "awaiting_shipment",
+        "shipped",
+        "partially_shipped",
+        "undelivered",
+        "partially_undelivered",
+        "return_to_origin",
+        "partially_return_to_origin",
+        "complete",
+        "partially_delivered",
+        "cancelled"
+      ]
+    },
+    "payment_status": {
+      "description": "Current payment status of the order (e.g., \"pending,\" \"success,\" \"failed\").",
+      "type": "string",
+      "enum": [
+        "pending",
+        "success",
+        "failed",
+        "partially_paid"
+      ]
+    },
+    "payment_success_date": {
+      "description": "Date and time when the payment for the order was successfully processed.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "has_refund": {
+      "description": "Indicates whether the order has a refund associated with it or not.",
+      "type": "boolean"
+    },
+    "on_subscription": {
+      "description": "Indicates whether the order includes subscription items.",
+      "type": "boolean"
+    },
+    "grand_total": {
+      "description": "Total amount for the order, including all items, taxes, and discounts.",
+      "type": "number",
+      "format": "double"
+    },
+    "loyalty_point_redeemed": {
+      "description": "Number of loyalty points redeemed in the order.",
+      "type": "integer"
+    },
+    "credit_balance_used": {
+      "description": "Amount of credit balance used in the order.",
+      "type": "integer"
+    },
+    "to_be_paid": {
+      "description": "Amount remaining to be paid for the order.",
+      "type": "number",
+      "format": "double"
+    },
+    "order_items_count": {
+      "description": "Total count of items included in the order.",
+      "type": "integer"
+    },
+    "order_items": {
+      "type": "array",
+      "items": {
+        "$ref": "./OrderItem.json"
+      }
+    },
+    "customer_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "loyalty_point_earned": {
+      "type": "integer"
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/OrderList",
+    "description": "API reference for the OrderList schema"
+  },
+  "title": "OrderList"
+}

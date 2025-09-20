@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "fulfillment_type": {
+      "type": "string",
+      "const": "collect-in-store"
+    },
+    "pickup_location_id": {
+      "type": "string"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CollectInStoreFulfillment",
+    "description": "API reference for the CollectInStoreFulfillment schema"
+  },
+  "required": [
+    "fulfillment_type",
+    "pickup_location_id"
+  ],
+  "title": "CollectInStoreFulfillment"
+}

@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_visible": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_filterable": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "title": "UpdateCustomerAttribute",
+  "x-tags": [
+    "Customers"
+  ]
+}

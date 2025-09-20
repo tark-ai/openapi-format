@@ -1,0 +1,1320 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - POSAdmin",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/pos/catalog/inventories": {
+      "get": {
+        "operationId": "pos-list-inventory",
+        "summary": "List all inventories",
+        "description": "List all inventories",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventories": {
+                          "type": "array",
+                          "items": {
+                            "oneOf": [
+                              {
+                                "$ref": "#/components/schemas/ItemWiseInventory"
+                              },
+                              {
+                                "$ref": "#/components/schemas/LotBatchWiseInventory"
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/catalog/inventories/activites": {
+      "get": {
+        "operationId": "pos-list-inventory-activity",
+        "summary": "List all inventories activities",
+        "description": "Lists all inventory related activities of stock movements. This provides a comprehensive audit trail of inventory operations such as receiving, reservations, adjustments, transfers, and sales.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activities": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/InventoryActivity"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/catalog/inventories/detail": {
+      "get": {
+        "operationId": "pos-list-inventory-detail",
+        "summary": "Retrieve inventory detail",
+        "description": "Retrieves inventory details for a specific product, product variant, or lot/batch based on the parameters provided.",
+        "parameters": [
+          {
+            "name": "lot_batch",
+            "in": "query",
+            "description": "lot batch of selected productor or variant.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "Product Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variant_id",
+            "in": "query",
+            "description": "Variant Id",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory": {
+                          "$ref": "#/components/schemas/InventoryDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/customers": {
+      "get": {
+        "operationId": "pos-list-customers",
+        "summary": "List all customers",
+        "description": "List all customers",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customers": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Customer"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/customers/{id}": {
+      "get": {
+        "operationId": "pos-get-customer-detail",
+        "summary": "Retrieve customer detail",
+        "description": "Retrieve customer detail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Customer Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "customer": {
+                          "$ref": "#/components/schemas/CustomerDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/orders": {
+      "get": {
+        "operationId": "pos-list-orders",
+        "summary": "List all orders",
+        "description": "List all orders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "orders": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderList"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/orders/{order_number}": {
+      "get": {
+        "operationId": "pos-get-order-detail",
+        "summary": "Retrieve order details",
+        "description": "Retrieve order details",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/orders/{order_number}/activity": {
+      "get": {
+        "operationId": "pos-list-order-activity",
+        "summary": "List all order activity",
+        "description": "List all order activity",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "activity": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderActivity"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/orders/{order_number}/invoice": {
+      "get": {
+        "operationId": "pos-get-order-invoice",
+        "summary": "Retrieve order invoice",
+        "description": "Retrieve order invoice",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response data format",
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "pdf"
+              ]
+            }
+          },
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "invoices": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/InvoiceDetail"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/orders/{order_number}/receipt": {
+      "get": {
+        "operationId": "pos-get-order-receipt",
+        "summary": "Retrieve order receipt",
+        "description": "Retrieves a printable receipt for a specific order using the order number. This endpoint returns either structured JSON data or a formatted PDF, suitable for customer presentation. Response format (JSON or PDF) is determined by an optional query parameter (e.g. format=pdf or format=json).",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response data format",
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "pdf"
+              ]
+            }
+          },
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order_receipt": {
+                          "$ref": "#/components/schemas/OrderReceiptJsonFormat"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/orders/{order_number}/shipments": {
+      "get": {
+        "operationId": "pos-list-order-shipments",
+        "summary": "Retrieve order shipments",
+        "description": "Retrieve order shipments",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipment": {
+                          "$ref": "#/components/schemas/ShipmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/shipping/shipments": {
+      "get": {
+        "operationId": "pos-list-shipments",
+        "summary": "List all shipments",
+        "description": "List all shipments",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipments": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ShipmentList"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/shipping/shipments/{order_number}/check-inventory": {
+      "get": {
+        "operationId": "pos-check-order-inventory",
+        "summary": "Check Inventory",
+        "description": "Check Inventory",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "inventory_status": {
+                          "enum": [
+                            "fulfilled",
+                            "partially-fulfilled",
+                            "not-fulfilled"
+                          ]
+                        },
+                        "shipment_items": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ShipmentItem"
+                          }
+                        },
+                        "recommended_warehouses": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "inventory_status": {
+                                "enum": [
+                                  "fulfilled",
+                                  "partially-fulfilled",
+                                  "not-fulfilled"
+                                ]
+                              }
+                            }
+                          }
+                        },
+                        "inventory_detail": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "sku": {
+                                "type": "string"
+                              },
+                              "total_quantity": {
+                                "type": "integer"
+                              },
+                              "warehouses": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "warehouse_id": {
+                                      "type": "string"
+                                    },
+                                    "warehouse_name": {
+                                      "type": "string"
+                                    },
+                                    "quantity": {
+                                      "type": "integer"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "allowed_action": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/shipping/shipments/{order_number}/refund-shortfall": {
+      "post": {
+        "operationId": "pos-refund-shortfall",
+        "summary": "Refund shortfall",
+        "description": "Refund shortfall",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "Order Number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "sku",
+                        "quantity"
+                      ],
+                      "properties": {
+                        "sku": {
+                          "type": "string"
+                        },
+                        "quantity": {
+                          "type": "integer"
+                        },
+                        "free_quantity": {
+                          "type": "integer",
+                          "default": 0
+                        }
+                      }
+                    }
+                  },
+                  "payment_method": {
+                    "enum": [
+                      "original-payment-mode",
+                      "bank-transfer"
+                    ]
+                  },
+                  "bank_account_id": {
+                    "description": "required if payment_method = bank-transfer",
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                },
+                "required": [
+                  "items",
+                  "payment_method"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/shipping/shipments/{reference_number}": {
+      "get": {
+        "operationId": "pos-get-shipment-detail",
+        "summary": "Retrieve shipment detail",
+        "description": "Retrieve shipment detail",
+        "parameters": [
+          {
+            "name": "reference_number",
+            "in": "path",
+            "description": "Shipment reference number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipment": {
+                          "$ref": "#/components/schemas/ShipmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/shipping/shipments/{reference_number}/invoice": {
+      "get": {
+        "operationId": "pos-get-shipment-invoice",
+        "summary": "Retrieve shipment invoice",
+        "description": "Retrieve shipment invoice",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Response data format",
+            "schema": {
+              "type": "string",
+              "default": "json",
+              "enum": [
+                "json",
+                "pdf"
+              ]
+            }
+          },
+          {
+            "name": "reference_number",
+            "in": "path",
+            "description": "Shipment reference number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "invoice": {
+                          "$ref": "#/components/schemas/InvoiceDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              },
+              "application/pdf": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/pos/shipping/shipments/{reference_number}/manual-update": {
+      "put": {
+        "operationId": "pos-update-shipment",
+        "summary": "Update shipment detail",
+        "description": "Update shipment detail",
+        "parameters": [
+          {
+            "name": "reference_number",
+            "in": "path",
+            "description": "Shipment reference number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  },
+                  "warehouse_id": {
+                    "type": "string"
+                  },
+                  "awb_no": {
+                    "type": "string"
+                  },
+                  "courier_company_name": {
+                    "type": "string"
+                  },
+                  "shipping_label_url": {
+                    "type": "string"
+                  },
+                  "tracking_url": {
+                    "type": "string"
+                  },
+                  "manual_shipping_charges": {
+                    "type": "number"
+                  },
+                  "eta_delivery": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "shipped_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "out_for_delivery_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "delivered_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "shipment": {
+                          "$ref": "#/components/schemas/ShipmentDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "POSAdmin"
+        ],
+        "x-speakeasy-group": "pos",
+        "x-speakeasy-ignore": true
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "Customer": {
+        "$ref": "./components/schemas/Customer.json"
+      },
+      "CustomerDetail": {
+        "$ref": "./components/schemas/CustomerDetail.json"
+      },
+      "InventoryActivity": {
+        "$ref": "./components/schemas/InventoryActivity.json"
+      },
+      "InventoryDetail": {
+        "$ref": "./components/schemas/InventoryDetail.json"
+      },
+      "InvoiceDetail": {
+        "$ref": "./components/schemas/InvoiceDetail.json"
+      },
+      "ItemWiseInventory": {
+        "$ref": "./components/schemas/ItemWiseInventory.json"
+      },
+      "LotBatchWiseInventory": {
+        "$ref": "./components/schemas/LotBatchWiseInventory.json"
+      },
+      "OrderActivity": {
+        "$ref": "./components/schemas/OrderActivity.json"
+      },
+      "OrderDetail": {
+        "$ref": "./components/schemas/OrderDetail.json"
+      },
+      "OrderList": {
+        "$ref": "./components/schemas/OrderList.json"
+      },
+      "OrderReceiptJsonFormat": {
+        "$ref": "./components/schemas/OrderReceiptJsonFormat.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "ShipmentDetail": {
+        "$ref": "./components/schemas/ShipmentDetail.json"
+      },
+      "ShipmentItem": {
+        "$ref": "./components/schemas/ShipmentItem.json"
+      },
+      "ShipmentList": {
+        "$ref": "./components/schemas/ShipmentList.json"
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "POSAdmin",
+      "description": "Admin endpoints to be used as proxy in pos"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

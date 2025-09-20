@@ -1,0 +1,82 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_connected": {
+      "type": "boolean"
+    },
+    "is_forward_shipping": {
+      "type": "boolean"
+    },
+    "is_return_shipping": {
+      "type": "boolean"
+    },
+    "logo": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "type": {
+      "enum": [
+        "auto",
+        "manual"
+      ]
+    },
+    "fulfillment_type": {
+      "enum": [
+        "delivery",
+        "collect-in-store"
+      ]
+    },
+    "status": {
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "warehouses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "shipping_zone": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "title": "AvailableShippingOption",
+  "x-tags": [
+    "Store"
+  ]
+}

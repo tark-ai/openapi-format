@@ -1,0 +1,22 @@
+{
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "customer_id": {
+          "type": "string"
+        },
+        "customer_name": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "$ref": "./CustomerLoyalty.json"
+    }
+  ],
+  "title": "LoyaltyMember",
+  "x-tags": [
+    "Customers"
+  ]
+}

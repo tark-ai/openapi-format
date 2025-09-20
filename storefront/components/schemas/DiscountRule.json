@@ -1,0 +1,15 @@
+{
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/DiscountRule",
+    "description": "API reference for the DiscountRule schema"
+  },
+  "oneOf": [
+    {
+      "$ref": "./PercentageDiscountRule.json"
+    },
+    {
+      "$ref": "./FixedAmountDiscountRule.json"
+    }
+  ],
+  "title": "DiscountRule"
+}

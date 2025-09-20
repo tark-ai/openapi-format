@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "total_payments": {
+      "type": "integer"
+    },
+    "totaL_payments_value": {
+      "type": "number"
+    },
+    "total_refunds": {
+      "type": "integer"
+    },
+    "total_refunds_value": {
+      "type": "number"
+    }
+  },
+  "title": "PaymentStats"
+}

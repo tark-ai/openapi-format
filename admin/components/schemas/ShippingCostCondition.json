@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "oneOf": [
+    {
+      "additionalProperties": false,
+      "title": "Order Total",
+      "required": [
+        "order_total"
+      ],
+      "properties": {
+        "order_total": {
+          "$ref": "./Comparison.json"
+        }
+      }
+    },
+    {
+      "additionalProperties": false,
+      "title": "Shipping Mode",
+      "required": [
+        "shipping_mode"
+      ],
+      "properties": {
+        "shipping_mode": {
+          "description": "e.g. [\"air\",\"surface\"]",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "additionalProperties": false,
+      "title": "Shipping Providers",
+      "required": [
+        "providers"
+      ],
+      "properties": {
+        "providers": {
+          "description": "e.g. [\"dhl\",\"fedex\"]",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "title": "ShippingCostCondition"
+}

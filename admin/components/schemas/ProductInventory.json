@@ -1,0 +1,105 @@
+{
+  "type": "object",
+  "properties": {
+    "variant_id": {
+      "description": "required only if product has_variant = true. otherwise it can be excluded or pass null.\n",
+      "type": "string"
+    },
+    "update_other_variants": {
+      "description": "Can be used for the product having variants. if true, same inventry details will be updated to other variants which are not mentioned in request body.",
+      "type": "boolean",
+      "writeOnly": true
+    },
+    "track_quantity": {
+      "type": "boolean"
+    },
+    "track_lot_batch": {
+      "type": "boolean"
+    },
+    "allow_backorder": {
+      "type": "boolean"
+    },
+    "stock": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "warehouse_id",
+          "stock_quantity"
+        ],
+        "properties": {
+          "sku": {
+            "type": "string",
+            "readOnly": true
+          },
+          "warehouse_id": {
+            "type": "string"
+          },
+          "warehouse_name": {
+            "type": "string",
+            "readOnly": true
+          },
+          "received_quantity": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "reserved_quantity": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "sold_quantity": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "adjusted_quantity": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "stock_quantity": {
+            "type": "integer"
+          },
+          "lot_batch": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "mfg_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "exp_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "manufacturer": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          },
+          "modified_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
+      }
+    }
+  },
+  "title": "ProductInventory",
+  "x-tags": [
+    "Catalog"
+  ]
+}

@@ -1,0 +1,429 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Shipping",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "paths": {
+    "/shipping/fulfillment-options": {
+      "post": {
+        "operationId": "get-fulfillment-options",
+        "summary": "Retrieve fulfillment options",
+        "description": "This endpoint returns the available fulfillment options for a given cart and delivery pincode. It provides both delivery options and collect-in-store (Click \u0026 Collect) options, including details of store locations where the item can be collected.",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartBasedServiceabilityCheck"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "summary": {
+                          "type": "object",
+                          "properties": {
+                            "collect_available": {
+                              "type": "boolean"
+                            },
+                            "deliver_available": {
+                              "type": "boolean"
+                            },
+                            "recommended_fulfillment_type": {
+                              "$ref": "#/components/schemas/FulfillmentPreference"
+                            },
+                            "recommended_store": {
+                              "$ref": "#/components/schemas/CollectInStore"
+                            }
+                          },
+                          "required": [
+                            "collect_available",
+                            "deliver_available",
+                            "recommended_fulfillment_type"
+                          ]
+                        },
+                        "collect": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/CollectInStore"
+                          }
+                        },
+                        "deliver": {
+                          "$ref": "#/components/schemas/PincodeServiceability"
+                        }
+                      },
+                      "required": [
+                        "summary"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-fulfillment-options",
+          "description": "API reference for the get-fulfillment-options operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Shipping"
+        ],
+        "x-speakeasy-group": "shipping",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "fulfillmentOptions"
+      },
+      "parameters": []
+    },
+    "/shipping/serviceability/{pincode}": {
+      "get": {
+        "operationId": "check-pincode-serviceability",
+        "summary": "Check serviceability",
+        "description": "Checking if delivery is available to the entered pincode based on shipping zones.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "is_serviceable": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "is_serviceable"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/check-pincode-serviceability",
+          "description": "API reference for the check-pincode-serviceability operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Shipping"
+        ],
+        "x-speakeasy-group": "shipping",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "checkServiceability"
+      },
+      "parameters": [
+        {
+          "name": "pincode",
+          "in": "path",
+          "description": "delivery pincode",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/shipping/shipping-methods": {
+      "post": {
+        "operationId": "get-shipping-methods",
+        "summary": "List available shipping methods",
+        "description": "Checks whether a given pincode is serviceable and returns all available shipping methods based on delivery address",
+        "parameters": [],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CartBasedServiceabilityCheck"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/PincodeServiceability"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-shipping-methods",
+          "description": "API reference for the get-shipping-methods operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Shipping"
+        ],
+        "x-speakeasy-group": "shipping",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "shippingMethods"
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "CartBasedServiceabilityCheck": {
+        "$ref": "./components/schemas/CartBasedServiceabilityCheck.json"
+      },
+      "CollectInStore": {
+        "$ref": "./components/schemas/CollectInStore.json"
+      },
+      "FulfillmentPreference": {
+        "$ref": "./components/schemas/FulfillmentPreference.json"
+      },
+      "PincodeServiceability": {
+        "$ref": "./components/schemas/PincodeServiceability.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "description": "Access token",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Shipping",
+      "description": "Shipping"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  }
+}

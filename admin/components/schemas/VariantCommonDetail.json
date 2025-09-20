@@ -1,0 +1,103 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "variant id",
+      "type": "string",
+      "readOnly": true
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "stock_available": {
+      "type": "boolean"
+    },
+    "is_default": {
+      "type": "boolean"
+    },
+    "short_description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "sku": {
+      "description": "variant sku. can be null for digital product.",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "slug": {
+      "description": "variant sku. can be null for digital product.",
+      "type": "string"
+    },
+    "hsn_code": {
+      "type": "string",
+      "readOnly": true
+    },
+    "on_offer": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "on_promotion": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "on_subscription": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "product_type": {
+      "enum": [
+        "physical",
+        "digital"
+      ],
+      "readOnly": true
+    },
+    "product_id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "product_name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "pricing": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductPricing.json"
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "variant_attributes": {
+      "type": "array",
+      "items": {
+        "$ref": "./ProductAttribute.json"
+      }
+    }
+  },
+  "examples": [],
+  "title": "VariantCommonDetail",
+  "x-tags": [
+    "Catalog"
+  ]
+}

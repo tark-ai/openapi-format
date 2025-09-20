@@ -1,0 +1,12 @@
+{
+  "description": "Loyalty point redemption.",
+  "allOf": [
+    {
+      "$ref": "./OrderPaymentInfo.json"
+    }
+  ],
+  "title": "LoyaltyPointPayment",
+  "x-tags": [
+    "Orders"
+  ]
+}

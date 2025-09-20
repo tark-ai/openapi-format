@@ -1,0 +1,30 @@
+{
+  "allOf": [
+    {
+      "$ref": "./ItemWiseInventory.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "lot_batch": {
+          "type": "string"
+        },
+        "mfg_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "exp_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "manufacturer": {
+          "type": "string"
+        }
+      }
+    }
+  ],
+  "title": "LotBatchWiseInventory",
+  "x-tags": [
+    "Catalog"
+  ]
+}

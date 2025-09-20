@@ -1,0 +1,30 @@
+{
+  "allOf": [
+    {
+      "$ref": "./ProductCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Array of category ids.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "categories": {
+          "description": "Array of category ids.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  ],
+  "title": "UpdateProductWithVariant",
+  "x-tags": [
+    "Catalog"
+  ]
+}

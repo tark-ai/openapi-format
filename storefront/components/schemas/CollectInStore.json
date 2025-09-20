@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "distance_km": {
+      "type": "number"
+    },
+    "collect_eta_minutes": {
+      "type": "integer"
+    },
+    "is_recommended": {
+      "type": "boolean"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CollectInStore",
+    "description": "API reference for the CollectInStore schema"
+  },
+  "title": "CollectInStore"
+}

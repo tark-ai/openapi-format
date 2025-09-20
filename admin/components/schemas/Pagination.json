@@ -1,0 +1,31 @@
+{
+  "description": "pagination metadata structure",
+  "type": "object",
+  "properties": {
+    "total_records": {
+      "type": "integer"
+    },
+    "total_pages": {
+      "type": "integer"
+    },
+    "previous_page": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "nullable": true
+    },
+    "limit": {
+      "type": "integer",
+      "default": 25
+    },
+    "next_page": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "nullable": true
+    }
+  },
+  "title": "Pagination"
+}

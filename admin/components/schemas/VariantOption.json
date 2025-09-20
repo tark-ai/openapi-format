@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "attribute_id": {
+      "type": "string"
+    },
+    "attribute_value": {
+      "description": "The attribute value can be represented as an array of strings for single-select attribute types. For color attribute types, the value will be represented as a color object, which contains color details with name and hexcode.",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "./ColorObject.json"
+          }
+        ]
+      }
+    },
+    "attribute_name": {
+      "type": "string"
+    },
+    "attribute_type": {
+      "enum": [
+        "single-select",
+        "color"
+      ]
+    },
+    "key": {
+      "description": "value in snake case.",
+      "type": "string"
+    }
+  },
+  "title": "VariantOption"
+}

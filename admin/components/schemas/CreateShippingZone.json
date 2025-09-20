@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "countries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "country_alias",
+          "all_states"
+        ],
+        "properties": {
+          "country_alias": {
+            "type": "string"
+          },
+          "all_states": {
+            "type": "boolean",
+            "default": true
+          },
+          "state_alias": {
+            "description": "required if all_regions=false",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "name",
+    "countries"
+  ],
+  "title": "ShippingZone",
+  "x-tags": [
+    "Store"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "description": "Payment settlement details.",
+  "allOf": [
+    {
+      "type": "object",
+      "properties": {
+        "settlement_option": {
+          "enum": [
+            "order",
+            "refund",
+            "payment"
+          ]
+        },
+        "settlement_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "settled_amount": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "oneOf": [
+        {
+          "$ref": "./PaymentSettlementWithOrder.json"
+        },
+        {
+          "$ref": "./PaymentSettlementWithRefund.json"
+        },
+        {
+          "$ref": "./RefundForPaymentSettlement.json"
+        }
+      ]
+    }
+  ],
+  "title": "PaymentSettlement",
+  "x-tags": [
+    "Payments"
+  ]
+}

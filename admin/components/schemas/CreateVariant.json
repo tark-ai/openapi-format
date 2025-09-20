@@ -1,0 +1,91 @@
+{
+  "allOf": [
+    {
+      "$ref": "./VariantCommonDetail.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "name",
+        "associated_options"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "associated_options": {
+          "type": "array",
+          "items": {
+            "$ref": "./AssociatedOption.json"
+          }
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "videos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "seo": {
+          "$ref": "./Seo.json"
+        },
+        "shipping": {
+          "$ref": "./ProductShipping.json"
+        },
+        "packaging": {
+          "$ref": "./ProductPackaging.json"
+        },
+        "sales_channels": {
+          "type": "array",
+          "items": {
+            "$ref": "./SalesChannel.json"
+          }
+        },
+        "related_products": {
+          "type": "object",
+          "properties": {
+            "cross_sell": {
+              "description": "Array of IDs. The ID value should be the product ID if a non-variant product is selected. For variant products, the ID should be a combination of the product ID and variant ID, separated by a hyphen ('-').",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "upsell": {
+              "description": "Array of IDs. The ID value should be the product ID if a non-variant product is selected. For variant products, the ID should be a combination of the product ID and variant ID, separated by a hyphen ('-').",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "promotions": {
+          "$ref": "./ProductPromotion.json"
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "./ProductSubscription.json"
+          }
+        }
+      }
+    }
+  ],
+  "examples": [],
+  "title": "CreateVariant",
+  "x-tags": [
+    "Catalog"
+  ]
+}

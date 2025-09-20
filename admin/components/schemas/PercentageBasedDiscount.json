@@ -1,0 +1,50 @@
+{
+  "description": "promotion_type = discount",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "discount_type": {
+      "type": "string",
+      "const": "percentage"
+    },
+    "discount_percent": {
+      "type": "number"
+    },
+    "customer_group_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "minimum_quantity": {
+      "description": "It refers to the minimum quantity of a specific item a customer must purchase to qualify for the promotion.",
+      "type": "integer",
+      "default": 1
+    },
+    "maximum_quantity": {
+      "description": "It refers to the maximum quantity of a specific item a customer can purchase in order to qualify for the promotion. If this field is set to null, it indicates that there is no limit.",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "maximum_discount_amount": {
+      "description": "When a value is specified, the discount amount will not exceed the defined maximum, ensuring that the promotion stays within a controlled discount range. If this field is set to null, it indicates that there is no limit to the discount amount.",
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "discount_type",
+    "discount_percent",
+    "customer_group_id",
+    "minimum_quantity",
+    "maximum_quantity",
+    "maximum_discount_amount"
+  ],
+  "title": "PercentageBasedDiscount"
+}

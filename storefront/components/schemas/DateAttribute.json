@@ -1,0 +1,38 @@
+{
+  "description": "Attribute for date values",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "key": {
+      "description": "A lookup safe version of the name that is lowercased and spaces are replaced with underscores. For instance, if name is `Product Type`, key will be `product_type`",
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "example": "date"
+    },
+    "value": {
+      "description": "For date attributes",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/DateAttribute",
+    "description": "API reference for the DateAttribute schema"
+  },
+  "readOnly": true,
+  "required": [
+    "id",
+    "name",
+    "key",
+    "type",
+    "value"
+  ],
+  "title": "DateAttribute"
+}

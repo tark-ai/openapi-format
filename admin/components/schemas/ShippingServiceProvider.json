@@ -1,0 +1,197 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "service_type": {
+      "enum": [
+        "shipping",
+        "payment",
+        "chat",
+        "cms"
+      ],
+      "readOnly": true
+    },
+    "description": {
+      "type": "string",
+      "readOnly": true
+    },
+    "short_description": {
+      "type": "string",
+      "readOnly": true
+    },
+    "type": {
+      "type": "string",
+      "const": "auto",
+      "readOnly": true
+    },
+    "fulfillment_type": {
+      "type": "string",
+      "const": "delivery",
+      "readOnly": true
+    },
+    "logo": {
+      "type": "string",
+      "readOnly": true
+    },
+    "website_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "api_doc_url": {
+      "type": "string",
+      "readOnly": true
+    },
+    "required_credentials_params": {
+      "description": "json object in key & value pair.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input_field_name": {
+            "type": "string"
+          },
+          "input_field_label": {
+            "type": "string"
+          },
+          "input_field_type": {
+            "enum": [
+              "text",
+              "number",
+              "boolean",
+              "email",
+              "password"
+            ]
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "is_connected": {
+      "type": "boolean",
+      "default": false,
+      "readOnly": true
+    },
+    "is_forward_shipping": {
+      "type": "boolean",
+      "default": false,
+      "readOnly": true
+    },
+    "is_return_shipping": {
+      "type": "boolean",
+      "default": false,
+      "readOnly": true
+    },
+    "is_connection_expired": {
+      "type": "boolean",
+      "default": true,
+      "readOnly": true
+    },
+    "supports_test_connection": {
+      "type": "boolean",
+      "default": true,
+      "readOnly": true
+    },
+    "api_credentials": {
+      "description": "json object in key & value pair. Keys must match with params specified in required_credentials_params object (input_field_name).",
+      "type": "object"
+    },
+    "status": {
+      "default": "active",
+      "enum": [
+        "active",
+        "inactive",
+        "error"
+      ]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "is_supported": {
+            "type": "boolean"
+          },
+          "features": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "is_supported": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "warehouse_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "writeOnly": true
+    },
+    "shipping_zone_id": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "writeOnly": true
+    },
+    "warehouses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "shipping_zone": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    }
+  },
+  "title": "ShippingServiceProvider",
+  "x-tags": [
+    "Store"
+  ]
+}

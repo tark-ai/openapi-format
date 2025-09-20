@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "cart_items_count": {
+      "type": "integer"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "is_promotion_applied": {
+      "type": "boolean"
+    },
+    "promotion_discount_percent": {
+      "type": "number"
+    },
+    "promotion_discount_amount": {
+      "type": "number"
+    },
+    "is_coupon_applied": {
+      "type": "boolean"
+    },
+    "coupon_code": {
+      "type": "string"
+    },
+    "coupon_discount_percent": {
+      "type": "number"
+    },
+    "coupon_discount_amount": {
+      "type": "number"
+    },
+    "loyalty_point_redeemed": {
+      "type": "number"
+    },
+    "loyalty_point_earned": {
+      "type": "number"
+    },
+    "credit_balance_used": {
+      "type": "number"
+    },
+    "currency": {
+      "$ref": "./Currency.json"
+    },
+    "metadata": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "cart_items": {
+      "type": "array",
+      "items": {
+        "$ref": "./AbandonedCartItem.json"
+      }
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subtotal": {
+      "type": "number"
+    },
+    "item_total_tax": {
+      "type": "number"
+    },
+    "subtotal_including_tax": {
+      "type": "number"
+    },
+    "shipping_amount": {
+      "type": "number"
+    },
+    "shipping_total_tax": {
+      "type": "number"
+    },
+    "shipping_amount_including_tax": {
+      "type": "number"
+    },
+    "total_tax": {
+      "type": "number"
+    },
+    "grand_total": {
+      "type": "number"
+    },
+    "to_be_paid": {
+      "type": "number"
+    }
+  },
+  "title": "AbandonedCart"
+}

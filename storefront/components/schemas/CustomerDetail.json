@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0123456789ABCDEFGHJKMNPQRSTVWXYZ]{26}$",
+      "readOnly": true
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "country_code": {
+      "description": "Two-letter code begin with a plus sign prefix that identifies different countries. By default it will be +91 if not provided.\r\n",
+      "type": "string"
+    },
+    "phone": {
+      "description": "10 digit phone number without country code.",
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "is_phone_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "is_email_verified": {
+      "type": "boolean",
+      "readOnly": true
+    },
+    "business": {
+      "$ref": "./Business.json"
+    }
+  },
+  "examples": [],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/CustomerDetail",
+    "description": "API reference for the CustomerDetail schema"
+  },
+  "title": "CustomerDetail"
+}

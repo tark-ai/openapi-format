@@ -1,0 +1,1198 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Webhooks",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/webhooks": {
+      "get": {
+        "operationId": "list-webhooks",
+        "summary": "List Webhooks",
+        "description": "List of all webhooks",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "items": {
+                        "$ref": "#/components/schemas/Webhook"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "post": {
+        "operationId": "create-webhook",
+        "summary": "Create Webhook",
+        "description": "Create a new webhook for the store. The response returns the newly created webhook configuration.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "endpoint": {
+                    "type": "string",
+                    "format": "uri"
+                  },
+                  "events": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "example": "orders.created"
+                    }
+                  },
+                  "custom_headers": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "name",
+                  "endpoint",
+                  "events"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Webhook created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/Webhook"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "success": true,
+                      "message": "Webhook created successfully",
+                      "content": {
+                        "created_at": "2025-03-25T12:00:00Z",
+                        "custom_headers": {
+                          "Authorization": "Bearer xyz123"
+                        },
+                        "endpoint": "https://example.com/hooks/order",
+                        "events": [
+                          "orders.created",
+                          "orders.shipped"
+                        ],
+                        "id": "e8a17f04-449f-40d2-9248-818b935f3c01",
+                        "modified_at": "2025-03-25T12:00:00Z",
+                        "name": "Order Webhook",
+                        "status": "active",
+                        "webhook_secret_key": "whsec_9e91f874..."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    },
+    "/webhooks/deliveries": {
+      "get": {
+        "operationId": "list-webhook-logs",
+        "summary": "List All Deliveries Log",
+        "description": "Paginated list of delivery attempts made across all webhooks. Supports optional filtering by `webhook_id` and `event_id`.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "logs": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/WebhookDeliveryLog"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "required": [
+                        "logs",
+                        "pagination"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      }
+    },
+    "/webhooks/deliveries/{delivery_id}": {
+      "get": {
+        "operationId": "get-webhook-log-detail",
+        "summary": "Get Delivery Log Detail",
+        "description": "Get Delivery Log Detail",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "log": {
+                          "$ref": "#/components/schemas/WebhookDeliveryLogDetail"
+                        }
+                      },
+                      "required": [
+                        "log"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "delivery_id",
+          "in": "path",
+          "description": "delivery id",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/webhooks/event-types": {
+      "get": {
+        "operationId": "list-webhook-event-types",
+        "summary": "List all event types",
+        "description": "List all event types",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "items": {
+                        "$ref": "#/components/schemas/WebhookEventType"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": []
+    },
+    "/webhooks/events": {
+      "get": {
+        "operationId": "list-webhook-events",
+        "summary": "List All Events",
+        "description": "List all events.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageNumber"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimit"
+          },
+          {
+            "$ref": "#/components/parameters/sortByOptions"
+          },
+          {
+            "$ref": "#/components/parameters/searchKeyword"
+          },
+          {
+            "$ref": "#/components/parameters/columnBasedFilters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Events fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "events": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "event_id",
+                              "event",
+                              "timestamp",
+                              "is_test"
+                            ],
+                            "properties": {
+                              "event_id": {
+                                "type": "string"
+                              },
+                              "event": {
+                                "type": "string"
+                              },
+                              "timestamp": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "is_test": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "required": [
+                        "events"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": []
+    },
+    "/webhooks/events/{event_id}": {
+      "get": {
+        "operationId": "get-webhook-event-detail",
+        "summary": "Get Event Details",
+        "description": "Fetch the original event payload and metadata, including all related delivery attempts.",
+        "responses": {
+          "200": {
+            "description": "Event fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/WebhookEventDetail"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "event_id",
+          "in": "path",
+          "description": "Unique identifier of the event to retrieve",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "ulid"
+          }
+        }
+      ]
+    },
+    "/webhooks/{webhook_id}": {
+      "get": {
+        "operationId": "get-webhook-detail",
+        "summary": "Get Webhook Details",
+        "description": "Retrieve details of a single webhook by its ID.",
+        "responses": {
+          "200": {
+            "description": "Webhook details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/Webhook"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "success": true,
+                      "message": "Webhook retrieved successfully",
+                      "content": {
+                        "created_at": "2025-03-25T12:00:00Z",
+                        "custom_headers": {
+                          "Authorization": "Bearer xyz123"
+                        },
+                        "endpoint": "https://example.com/hooks/order",
+                        "events": [
+                          "orders.created",
+                          "orders.shipped"
+                        ],
+                        "id": "e8a17f04-449f-40d2-9248-818b935f3c01",
+                        "modified_at": "2025-03-25T12:00:00Z",
+                        "name": "Order Webhook",
+                        "status": "active",
+                        "webhook_secret_key": "whsec_9e91f874..."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "put": {
+        "operationId": "update-webhook",
+        "summary": "Update Webhook",
+        "description": "Update an existing webhook by replacing all fields.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Webhook"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "$ref": "#/components/schemas/Webhook"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "delete": {
+        "operationId": "delete-webhook",
+        "summary": "Delete Webhook",
+        "description": "Permanently delete a webhook by its ID.",
+        "responses": {
+          "200": {
+            "description": "Webhook deleted successfully. No content returned.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "webhook_id",
+          "in": "path",
+          "description": "Webhook ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/webhooks/{webhook_id}/deliveries/{delivery_id}/retry": {
+      "post": {
+        "operationId": "retry-webhook-delivery",
+        "summary": "Retry Webhook Delivery",
+        "description": "Manually retry a specific delivery log by re-sending the same payload to the configured webhook endpoint.",
+        "responses": {
+          "200": {
+            "description": "Webhook retried successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "delivery_id": {
+                          "description": "New delivery attempt ID for this replay",
+                          "type": "string",
+                          "format": "ulid"
+                        }
+                      },
+                      "required": [
+                        "delivery_id"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "delivery_id",
+          "in": "path",
+          "description": "The ID of the delivery attempt to retry",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        {
+          "name": "webhook_id",
+          "in": "path",
+          "description": "The ID of the webhook",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/webhooks/{webhook_id}/replay-event/{event_id}": {
+      "post": {
+        "operationId": "replay-webhook-event",
+        "summary": "Replay Event to Webhook",
+        "description": "Replay an existing event to a specific webhook. This triggers a new delivery with a fresh delivery_id.",
+        "responses": {
+          "200": {
+            "description": "Webhook replay queued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "delivery_id": {
+                          "description": "New delivery attempt ID for this replay",
+                          "type": "string",
+                          "format": "ulid"
+                        }
+                      },
+                      "required": [
+                        "delivery_id"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "success": true,
+                      "message": "Replay successfully queued",
+                      "content": {
+                        "delivery_id": "01HV6J6G8R3CE2PY4WJZ6ZTKCV"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "event_id",
+          "in": "path",
+          "description": "The ID of the event to replay",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "ulid"
+          }
+        },
+        {
+          "name": "webhook_id",
+          "in": "path",
+          "description": "The ID of the webhook to send the replay to",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    },
+    "/webhooks/{webhook_id}/rotate-secret": {
+      "post": {
+        "operationId": "rotate-webhook-secret",
+        "summary": "Rotate Webhook Secret",
+        "description": "Rotate the webhook's HMAC secret. The new secret is returned once and used to sign future webhook requests.",
+        "responses": {
+          "200": {
+            "description": "Secret rotated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "webhook_secret_key": {
+                          "description": "The new HMAC secret key (only shown once)",
+                          "type": "string",
+                          "example": "whsec_c8a0f9d7a12fbc1f388db1c621730fb935182ef918de3b7e36e77dcf99c44f9"
+                        }
+                      },
+                      "required": [
+                        "webhook_secret_key"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "success": true,
+                      "message": "Webhook secret rotated successfully",
+                      "content": {
+                        "webhook_secret_key": "whsec_c8a0f9d7a12fbc1f388db1c621730fb935182ef918de3b7e36e77dcf99c44f9"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "webhook_id",
+          "in": "path",
+          "description": "Webhook ID",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "/webhooks/{webhook_id}/test": {
+      "post": {
+        "operationId": "send-test-webhook",
+        "summary": "Send Test Webhook",
+        "description": "Sends a test webhook to the configured callback URL. You may optionally provide a test payload.",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event": {
+                    "description": "The event type to simulate",
+                    "type": "string",
+                    "example": "orders.created"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Test webhook sent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "delivery_id": {
+                          "description": "New delivery attempt ID for this replay",
+                          "type": "string",
+                          "format": "ulid"
+                        }
+                      },
+                      "required": [
+                        "delivery_id"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message"
+                  ]
+                },
+                "examples": {
+                  "default": {
+                    "value": {
+                      "success": true,
+                      "message": "Test webhook sent successfully"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Webhooks"
+        ]
+      },
+      "parameters": [
+        {
+          "name": "webhook_id",
+          "in": "path",
+          "description": "The ID of the webhook to send a test to",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      ]
+    }
+  },
+  "components": {
+    "parameters": {
+      "columnBasedFilters": {
+        "name": "filters",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "example": "{\"condition\":\"AND\",\"filters\":[{\"type\":\"data\",\"field\":\"status\",\"operator\":\"equals\",\"value\":\"success\"}]}"
+        },
+        "description": "JSON object"
+      },
+      "pageLimit": {
+        "name": "limit",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 25,
+          "minimum": 1
+        },
+        "description": "no of rows per page"
+      },
+      "pageNumber": {
+        "name": "page",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1,
+          "minimum": 1
+        },
+        "description": "page number of pagination list"
+      },
+      "searchKeyword": {
+        "name": "search",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "description": "search keyword"
+      },
+      "sortByOptions": {
+        "name": "sort_by",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string"
+        },
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}"
+      }
+    },
+    "schemas": {
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "Webhook": {
+        "$ref": "./components/schemas/Webhook.json"
+      },
+      "WebhookDeliveryLog": {
+        "$ref": "./components/schemas/WebhookDeliveryLog.json"
+      },
+      "WebhookDeliveryLogDetail": {
+        "$ref": "./components/schemas/WebhookDeliveryLogDetail.json"
+      },
+      "WebhookEventDetail": {
+        "$ref": "./components/schemas/WebhookEventDetail.json"
+      },
+      "WebhookEventType": {
+        "$ref": "./components/schemas/WebhookEventType.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "fieldname": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Not authorized for given operation on the Resource."
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "example": "unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Webhooks",
+      "description": "Webhooks"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

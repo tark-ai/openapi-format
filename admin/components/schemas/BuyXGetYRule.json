@@ -1,0 +1,14 @@
+{
+  "oneOf": [
+    {
+      "$ref": "./BuyXGetYRuleBasedOnQuantity.json"
+    },
+    {
+      "$ref": "./BuyXGetYRuleBasedOnAmount.json"
+    }
+  ],
+  "title": "BuyXGetYRule",
+  "x-tags": [
+    "Coupons & promotions"
+  ]
+}

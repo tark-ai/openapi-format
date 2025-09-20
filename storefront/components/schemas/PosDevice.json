@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "device_type": {
+      "enum": [
+        "pos-terminal"
+      ]
+    },
+    "external_device_id": {
+      "description": "A Device ID shared by POS device provider.",
+      "type": "string",
+      "readOnly": true
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "model_number": {
+      "type": "string"
+    },
+    "mac_address": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location_id": {
+      "type": "string"
+    },
+    "location_name": {
+      "type": "string",
+      "readOnly": true
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PosDevice",
+    "description": "API reference for the PosDevice schema"
+  },
+  "title": "PosDevice"
+}

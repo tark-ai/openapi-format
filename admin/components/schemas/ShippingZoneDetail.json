@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "countries": {
+      "type": "array",
+      "items": {
+        "$ref": "./Country.json"
+      }
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "available_shipping_options": {
+      "type": "array",
+      "items": {
+        "$ref": "./ShippingOption.json"
+      },
+      "readOnly": true
+    }
+  },
+  "title": "ShippingZoneDetail",
+  "x-tags": [
+    "Store"
+  ]
+}

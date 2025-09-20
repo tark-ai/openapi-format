@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "document_type": {
+      "enum": [
+        "gst",
+        "pan",
+        "other"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "is_mandatory": {
+      "type": "boolean"
+    },
+    "is_attachment_required": {
+      "type": "boolean"
+    },
+    "verification_type": {
+      "enum": [
+        "auto",
+        "manual"
+      ]
+    }
+  },
+  "required": [
+    "document_type",
+    "title",
+    "is_mandatory",
+    "is_attachment_required",
+    "verification_type"
+  ],
+  "title": "KycDocumentConfig",
+  "x-tags": [
+    "Store"
+  ]
+}

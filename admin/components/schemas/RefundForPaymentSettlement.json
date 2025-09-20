@@ -1,0 +1,14 @@
+{
+  "allOf": [
+    {
+      "$ref": "./RefundForPaymentSettlementCommon.json"
+    },
+    {
+      "$ref": "./PaymentMethodDetail.json"
+    }
+  ],
+  "title": "RefundForPaymentSettlement",
+  "x-tags": [
+    "Payments"
+  ]
+}

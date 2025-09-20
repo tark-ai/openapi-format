@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "promotion_type": {
+      "type": "string",
+      "enum": [
+        "discount",
+        "volume-based",
+        "fixed-price",
+        "free-goods"
+      ],
+      "const": "volume-based",
+      "readOnly": true
+    },
+    "slabs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "quantity_limit": {
+            "description": "The minimum quantity required to qualify for the discount.",
+            "type": "integer"
+          },
+          "discount_percent": {
+            "description": "The percentage discount applied when the quantity limit is reached.",
+            "type": "number",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "quantity_limit",
+          "discount_percent"
+        ]
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/VolumeBasedPromotion",
+    "description": "API reference for the VolumeBasedPromotion schema"
+  },
+  "required": [
+    "promotion_type",
+    "slabs"
+  ],
+  "title": "VolumeBasedPromotion"
+}

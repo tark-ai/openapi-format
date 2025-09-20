@@ -1,0 +1,1249 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "version": "1.0",
+    "title": "CE Storefront APIs - Orders",
+    "summary": "Customer-facing e-commerce API for building exceptional shopping experiences",
+    "description": "Public-facing API for Commerce Engine storefronts, enabling seamless shopping experiences with product browsing, cart management, checkout processing, user accounts, and order tracking. Perfect for building web, mobile, and headless commerce applications.",
+    "contact": {
+      "name": "Support",
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "license": {
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "All Rights Reserved"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "staging"
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/storefront",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "description": "Store ID",
+          "default": "store_id"
+        }
+      },
+      "x-speakeasy-server-id": "prod"
+    }
+  ],
+  "paths": {
+    "/orders": {
+      "post": {
+        "operationId": "create-order",
+        "summary": "Create order",
+        "description": "Create new order",
+        "requestBody": {
+          "description": "Request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cart_id": {
+                    "type": "string"
+                  },
+                  "payment_gateway": {
+                    "$ref": "#/components/schemas/PaymentGateway"
+                  },
+                  "payment_gateway_params": {
+                    "$ref": "#/components/schemas/PaymentGatewayParams"
+                  }
+                },
+                "required": [
+                  "cart_id",
+                  "payment_gateway",
+                  "payment_gateway_params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/Order"
+                        },
+                        "payment_required": {
+                          "type": "boolean"
+                        },
+                        "payment_info": {
+                          "oneOf": [
+                            {
+                              "$ref": "#/components/schemas/PayuPaymentInfo"
+                            },
+                            {
+                              "$ref": "#/components/schemas/JuspayPaymentInfo"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "order",
+                        "payment_required",
+                        "payment_info"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/create-order",
+          "description": "API reference for the create-order operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "createOrder"
+      },
+      "get": {
+        "operationId": "list-orders",
+        "summary": "Retrieve all orders",
+        "description": "list customers all orders",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/pageParam"
+          },
+          {
+            "$ref": "#/components/parameters/pageLimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/sortingParam"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "array of string",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "user id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "orders": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderList"
+                          }
+                        },
+                        "pagination": {
+                          "$ref": "#/components/schemas/Pagination"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-orders",
+          "description": "API reference for the list-orders operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listOrders"
+      }
+    },
+    "/orders/returns": {
+      "get": {
+        "operationId": "list-returns",
+        "summary": "Retrieve all order returns",
+        "description": "Retrieve all order returns",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "returns": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderReturn"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-returns",
+          "description": "API reference for the list-returns operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listReturns"
+      }
+    },
+    "/orders/{order_number}": {
+      "get": {
+        "operationId": "get-order-detail",
+        "summary": "Retrieve order detail",
+        "description": "view particular order details",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "order details",
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "required": [
+                        "order"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-order-detail",
+          "description": "API reference for the get-order-detail operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getOrderDetail"
+      }
+    },
+    "/orders/{order_number}/cancel": {
+      "post": {
+        "operationId": "cancel-order",
+        "summary": "Cancel order",
+        "description": "Order cancellation",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cancellation_reason": {
+                    "type": "string"
+                  },
+                  "refund_mode": {
+                    "type": "string",
+                    "enum": [
+                      "original_payment_mode",
+                      "bank_transfer"
+                    ]
+                  },
+                  "bank_account_id": {
+                    "description": "verified bank account id if refund_mode = bank_transfer",
+                    "type": "string"
+                  },
+                  "feedback": {
+                    "description": "feedback text",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "cancellation_reason",
+                  "refund_mode"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "order details",
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "order": {
+                          "$ref": "#/components/schemas/OrderDetail"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/cancel-order",
+          "description": "API reference for the cancel-order operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "cancelOrder"
+      }
+    },
+    "/orders/{order_number}/payment-status": {
+      "get": {
+        "operationId": "get-payment-status",
+        "summary": "Retrieve payment status",
+        "description": "Retrieve payment status of a paricular order.",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "order details",
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "pending",
+                            "success",
+                            "failed",
+                            "partially_paid"
+                          ]
+                        },
+                        "amount_paid": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "amount_unpaid": {
+                          "type": "number",
+                          "format": "double"
+                        },
+                        "is_retry_available": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "status",
+                        "amount_paid",
+                        "amount_unpaid",
+                        "is_retry_available"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-payment-status",
+          "description": "API reference for the get-payment-status operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "getPaymentStatus"
+      }
+    },
+    "/orders/{order_number}/payments": {
+      "get": {
+        "operationId": "list-order-payments",
+        "summary": "Retrieve order payments",
+        "description": "Retrieve order payments",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "order details",
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "payments": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderPayment"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-order-payments",
+          "description": "API reference for the list-order-payments operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listOrderPayments"
+      }
+    },
+    "/orders/{order_number}/refunds": {
+      "get": {
+        "operationId": "list-order-refunds",
+        "summary": "Retrieve order refunds",
+        "description": "Retrieve order refunds",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "order details",
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "refunds": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderRefund"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-order-refunds",
+          "description": "API reference for the list-order-refunds operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "listOrderRefunds"
+      }
+    },
+    "/orders/{order_number}/retry-payment": {
+      "post": {
+        "operationId": "retry-order-payment",
+        "summary": "Retry payment",
+        "description": "To generate new payment request if first payment request is failed or expired. Retry payment request can be made after 15 mins of last request or immediately after last payment request is marked as failed.",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "payment_gateway_params": {
+                    "$ref": "#/components/schemas/PaymentGatewayParams"
+                  }
+                },
+                "required": [
+                  "payment_gateway_params"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "payment_info": {
+                          "oneOf": [
+                            {
+                              "$ref": "#/components/schemas/PayuPaymentInfo"
+                            },
+                            {
+                              "$ref": "#/components/schemas/JuspayPaymentInfo"
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "payment_info"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "message",
+                    "success",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/retry-order-payment",
+          "description": "API reference for the retry-order-payment operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "retryOrderPayment"
+      }
+    },
+    "/orders/{order_number}/return": {
+      "post": {
+        "operationId": "create-order-return",
+        "summary": "Create order return",
+        "description": "Create order return",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrderReturn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "order details",
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "order_return": {
+                          "$ref": "#/components/schemas/OrderReturn"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/create-order-return",
+          "description": "API reference for the create-order-return operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "createOrderReturn"
+      }
+    },
+    "/orders/{order_number}/return/{return_id}": {
+      "get": {
+        "operationId": "get-order-return-detail",
+        "summary": "Retrieve order return detail",
+        "description": "Retrieve order return detail",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "return_id",
+            "in": "path",
+            "description": "return id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "order_return": {
+                          "$ref": "#/components/schemas/OrderReturn"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/get-order-return-detail",
+          "description": "API reference for the get-order-return-detail operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": true,
+        "x-speakeasy-name-override": "getOrderReturnDetail"
+      }
+    },
+    "/orders/{order_number}/shipments": {
+      "get": {
+        "operationId": "list-order-shipments",
+        "summary": "Retrieve order shipments",
+        "description": "Retrieve order shipments",
+        "parameters": [
+          {
+            "name": "order_number",
+            "in": "path",
+            "description": "order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "default": "order details",
+                      "readOnly": true
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "readOnly": true
+                    },
+                    "content": {
+                      "properties": {
+                        "shipments": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/OrderShipment"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "externalDocs": {
+          "url": "https://llm-docs.commercengine.io/operations/list-order-shipments",
+          "description": "API reference for the list-order-shipments operation"
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "tags": [
+          "Orders"
+        ],
+        "x-speakeasy-group": "orders",
+        "x-speakeasy-ignore": false,
+        "x-speakeasy-name-override": "listOrderShipments"
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "pageLimitParam": {
+        "name": "limit",
+        "in": "query",
+        "description": "no of rows per page",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "pageParam": {
+        "name": "page",
+        "in": "query",
+        "description": "page number of pagination list",
+        "required": false,
+        "schema": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "sortingParam": {
+        "name": "sort_by",
+        "in": "query",
+        "description": "JSON string format: {\"field1\":\"asc\", \"field2\":\"desc\"}",
+        "required": false,
+        "schema": {
+          "description": "json string in format {'field_name':'asc', 'other_field_name':'desc', ...}",
+          "type": "string",
+          "examples": [
+            "{\"country\":\"asc\",\"city\":\"asc\",\"population\":\"desc\"}"
+          ]
+        }
+      }
+    },
+    "schemas": {
+      "CreateOrderReturn": {
+        "$ref": "./components/schemas/CreateOrderReturn.json"
+      },
+      "JuspayPaymentInfo": {
+        "$ref": "./components/schemas/JuspayPaymentInfo.json"
+      },
+      "Order": {
+        "$ref": "./components/schemas/Order.json"
+      },
+      "OrderDetail": {
+        "$ref": "./components/schemas/OrderDetail.json"
+      },
+      "OrderList": {
+        "$ref": "./components/schemas/OrderList.json"
+      },
+      "OrderPayment": {
+        "$ref": "./components/schemas/OrderPayment.json"
+      },
+      "OrderRefund": {
+        "$ref": "./components/schemas/OrderRefund.json"
+      },
+      "OrderReturn": {
+        "$ref": "./components/schemas/OrderReturn.json"
+      },
+      "OrderShipment": {
+        "$ref": "./components/schemas/OrderShipment.json"
+      },
+      "Pagination": {
+        "$ref": "./components/schemas/Pagination.json"
+      },
+      "PaymentGateway": {
+        "$ref": "./components/schemas/PaymentGateway.json"
+      },
+      "PaymentGatewayParams": {
+        "$ref": "./components/schemas/PaymentGatewayParams.json"
+      },
+      "PayuPaymentInfo": {
+        "$ref": "./components/schemas/PayuPaymentInfo.json"
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                },
+                "error": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "examples": [
+                    "Not authorized for given operation on the Resource."
+                  ],
+                  "x-speakeasy-error-message": true
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "examples": [
+                    "unauthorized"
+                  ]
+                }
+              },
+              "required": [
+                "message",
+                "success",
+                "code"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "description": "Access token",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Orders",
+      "description": "Orders"
+    }
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io",
+    "description": "Commerce Engine API Reference Documentation"
+  }
+}

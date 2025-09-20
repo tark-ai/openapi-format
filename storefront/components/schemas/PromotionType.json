@@ -1,0 +1,13 @@
+{
+  "enum": [
+    "discount",
+    "free-goods",
+    "free-shipping",
+    "buy-x-get-y",
+    "volume-based"
+  ],
+  "externalDocs": {
+    "url": "https://llm-docs.commercengine.io/schemas/PromotionType",
+    "description": "API reference for the PromotionType schema"
+  }
+}

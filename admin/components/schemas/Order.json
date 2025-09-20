@@ -1,0 +1,160 @@
+{
+  "type": "object",
+  "properties": {
+    "order_number": {
+      "type": "string"
+    },
+    "order_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "awaiting_approval",
+        "cancelled",
+        "shipped",
+        "delivered",
+        "awaiting_shipment"
+      ]
+    },
+    "payment_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "success",
+        "failed",
+        "partially_paid",
+        "refunded"
+      ]
+    },
+    "payment_success_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_email": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "customer_phone": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "customer_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_promotion_applied": {
+      "type": "boolean"
+    },
+    "promotion_discount_amount": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "is_coupon_applied": {
+      "type": "boolean"
+    },
+    "coupon_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coupon_discount_amount": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double"
+    },
+    "on_subscription": {
+      "type": "boolean"
+    },
+    "subtotal": {
+      "type": "number",
+      "format": "double"
+    },
+    "item_total_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "subtotal_including_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_total_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "shipping_amount_including_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "total_tax": {
+      "type": "number",
+      "format": "double"
+    },
+    "grand_total": {
+      "type": "number",
+      "format": "double"
+    },
+    "loyalty_point_redeemed": {
+      "type": "integer"
+    },
+    "credit_balance_used": {
+      "type": "integer"
+    },
+    "to_be_paid": {
+      "type": "number",
+      "format": "double"
+    },
+    "loyalty_point_earned": {
+      "type": "integer"
+    },
+    "order_items_count": {
+      "type": "integer"
+    },
+    "currency": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        }
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "Order",
+  "x-tags": [
+    "Orders"
+  ]
+}

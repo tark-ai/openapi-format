@@ -1,0 +1,941 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CE Admin APIs - Metrics",
+    "version": "1.0",
+    "summary": "Comprehensive admin interface for managing your e-commerce platform",
+    "description": "Complete administrative API suite for Commerce Engine, providing powerful tools to manage products, orders, customers, inventory, analytics, and system configuration. Designed for administrators and backend integrations requiring full platform control.",
+    "license": {
+      "name": "All Rights Reserved",
+      "url": "https://www.commercengine.io/contact-us"
+    },
+    "contact": {
+      "email": "support@commercengine.io",
+      "url": "https://www.commercengine.io/contact-us",
+      "name": "Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://staging.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Staging Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    },
+    {
+      "url": "https://prod.api.commercengine.io/api/v1/{store_id}/admin",
+      "description": "Prod Server",
+      "variables": {
+        "store_id": {
+          "default": "store_id",
+          "description": "Store ID"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/catalog/metrics/product-analytics": {
+      "get": {
+        "operationId": "get-product-metrics",
+        "summary": "Retrieve product analytics stats",
+        "description": "Retrieve product analytics stats",
+        "parameters": [
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "for aggregating data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          },
+          {
+            "name": "sku",
+            "in": "query",
+            "description": "To retrieve analytics stats of a particular sku.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "To retrieve analytics stats of a particular user. ",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "stats": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "metrics": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/ProductAnalyticsStats"
+                              }
+                            }
+                          }
+                        },
+                        "lifetime_stats": {
+                          "$ref": "#/components/schemas/ProductAnalyticsStats"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      },
+      "parameters": []
+    },
+    "/customers/metrics/stats": {
+      "get": {
+        "operationId": "get-customer-metrics",
+        "summary": "Retrieve customers stats",
+        "description": "Retrieve customers stats",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "query",
+            "description": "To retrieve stats of a particular customer.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "for aggregating data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "stats": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "metrics": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/CustomerStats"
+                              }
+                            }
+                          }
+                        },
+                        "lifetime_stats": {
+                          "$ref": "#/components/schemas/CustomerStats"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      },
+      "parameters": []
+    },
+    "/offers/coupons/metrics/stats": {
+      "get": {
+        "operationId": "get-coupons-metrics",
+        "summary": "Retrieve coupons stats",
+        "description": "Retrieve coupons stats",
+        "parameters": [
+          {
+            "name": "coupon_id",
+            "in": "query",
+            "description": "To retrieve analytics stats of a particular coupon. ",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "for aggregating data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "stats": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "metrics": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/CouponStats"
+                              }
+                            }
+                          }
+                        },
+                        "lifetime_stats": {
+                          "$ref": "#/components/schemas/CouponStats"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      },
+      "parameters": []
+    },
+    "/orders/metrics/stats": {
+      "get": {
+        "operationId": "get-orders-metrics",
+        "summary": "Retrieve orders stats",
+        "description": "Retrieve orders stats",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "query",
+            "description": "customer id to filter data customer wise",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "for aggregating data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "product id to filter data product wise",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "variant_id",
+            "in": "query",
+            "description": "variant id to filter data variant wise",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "stats": {
+                          "type": "object",
+                          "properties": {
+                            "date": {
+                              "type": "string"
+                            },
+                            "metrics": {
+                              "type": "object",
+                              "$ref": "#/components/schemas/OrderStats"
+                            }
+                          }
+                        },
+                        "lifetime_stats": {
+                          "$ref": "#/components/schemas/OrderStats"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      }
+    },
+    "/orders/metrics/top-selling-products": {
+      "get": {
+        "operationId": "get-top-selling-products",
+        "summary": "List all top selling products",
+        "description": "List all top selling products",
+        "parameters": [
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "To retrieve analytics stats of a particular user. ",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "products": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TopSellingProduct"
+                          }
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      },
+      "parameters": []
+    },
+    "/orders/payments/metrics/stats": {
+      "get": {
+        "operationId": "get-payments-metrics",
+        "summary": "Retrieve payments stats",
+        "description": "Retrieve payments stats",
+        "parameters": [
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "for aggregating data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "To retrieve analytics stats of a particular user. ",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "stats": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "metrics": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/PaymentStats"
+                              }
+                            }
+                          }
+                        },
+                        "lifetime_stats": {
+                          "$ref": "#/components/schemas/PaymentStats"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      },
+      "parameters": []
+    },
+    "/shipping/metrics/stats": {
+      "get": {
+        "operationId": "get-shipping-metrics",
+        "summary": "Retrieve shipments stats",
+        "description": "Retrieve shipments stats",
+        "parameters": [
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "for aggregating data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          },
+          {
+            "name": "sku",
+            "in": "query",
+            "description": "To retrieve analytics stats of a particular sku.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user_id",
+            "in": "query",
+            "description": "To retrieve analytics stats of a particular user. ",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "content": {
+                      "properties": {
+                        "stats": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "metrics": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/ShippingStats"
+                              }
+                            }
+                          }
+                        },
+                        "lifetime_stats": {
+                          "$ref": "#/components/schemas/ShippingStats"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      },
+      "parameters": []
+    },
+    "/webhooks/metrics/stats": {
+      "get": {
+        "operationId": "get-webhook-metrics",
+        "summary": "Retrieve webhook stats",
+        "description": "Retrieve webhook stats",
+        "parameters": [
+          {
+            "name": "date_from",
+            "in": "query",
+            "description": "start datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "date_to",
+            "in": "query",
+            "description": "end datetime",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "for aggregating data",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Webhook stats retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "content": {
+                      "properties": {
+                        "stats": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "date",
+                              "metrics"
+                            ],
+                            "properties": {
+                              "date": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "metrics": {
+                                "$ref": "#/components/schemas/WebhookStats"
+                              }
+                            }
+                          }
+                        },
+                        "lifetime_stats": {
+                          "$ref": "#/components/schemas/WebhookStats"
+                        }
+                      },
+                      "required": [
+                        "stats",
+                        "lifetime_stats"
+                      ],
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "success",
+                    "message",
+                    "content"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        },
+        "tags": [
+          "Metrics"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "CouponStats": {
+        "$ref": "./components/schemas/CouponStats.json"
+      },
+      "CustomerStats": {
+        "$ref": "./components/schemas/CustomerStats.json"
+      },
+      "OrderStats": {
+        "$ref": "./components/schemas/OrderStats.json"
+      },
+      "PaymentStats": {
+        "$ref": "./components/schemas/PaymentStats.json"
+      },
+      "ProductAnalyticsStats": {
+        "$ref": "./components/schemas/ProductAnalyticsStats.json"
+      },
+      "ShippingStats": {
+        "$ref": "./components/schemas/ShippingStats.json"
+      },
+      "TopSellingProduct": {
+        "$ref": "./components/schemas/TopSellingProduct.json"
+      },
+      "WebhookStats": {
+        "$ref": "./components/schemas/WebhookStats.json"
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "Requested resource not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                },
+                "code": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Not authorized for given operation on the Resource",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "example": "Not authorized for given operation on the Resource."
+                },
+                "success": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "code": {
+                  "type": "string",
+                  "example": "unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Metrics",
+      "description": "Metrics"
+    }
+  ],
+  "security": [
+    {
+      "Authorization": []
+    }
+  ]
+}

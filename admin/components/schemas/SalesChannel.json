@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "readOnly": true
+    },
+    "sales_channel_sku": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "sales_channel_sku"
+  ],
+  "title": "SalesChannel"
+}

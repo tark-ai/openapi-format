@@ -1,0 +1,15 @@
+{
+  "description": "Payment settlement with orders",
+  "allOf": [
+    {
+      "$ref": "./PaymentSettlementWithRefundCommon.json"
+    },
+    {
+      "$ref": "./PaymentMethodDetail.json"
+    }
+  ],
+  "title": "PaymentSettlementWithRefund",
+  "x-tags": [
+    "Payments"
+  ]
+}

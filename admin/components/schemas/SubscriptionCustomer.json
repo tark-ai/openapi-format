@@ -1,0 +1,47 @@
+{
+  "description": "Subscription Customer model",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "customer_profile_image_url": {
+      "type": "string"
+    },
+    "subscription_start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subscription_end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "subscription_status": {
+      "enum": [
+        "active",
+        "paused",
+        "stopped",
+        "cancelled"
+      ]
+    },
+    "subscription_next_billing_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "title": "SubscriptionCustomer",
+  "x-tags": [
+    "Orders"
+  ]
+}

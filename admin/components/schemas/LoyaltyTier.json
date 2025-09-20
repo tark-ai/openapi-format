@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true
+    },
+    "name": {
+      "description": "name of loyalty tier",
+      "type": "string"
+    },
+    "total_spent_threshold": {
+      "description": "It should be null if tier upgrade criteria is total orders only.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "total_orders_threshold": {
+      "description": "It should be null if tier upgrade criteria is total spent only.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "points_earning_rate": {
+      "description": "The rate at which points are earned. For point earning type = dynamic",
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "fixed_points": {
+      "description": "Fixed loyalty points for all orders. For point earning type = fixed",
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "point_value": {
+      "description": "The monetary value of one loyalty point.",
+      "type": "number",
+      "default": 1
+    },
+    "earn_points_with_promotion": {
+      "description": "Indicates whether customers can earn loyalty points on orders that have promotions applied.",
+      "type": "boolean",
+      "default": true
+    },
+    "redeem_points_with_promotion": {
+      "description": "Indicates whether customers can redeem loyalty points when placing orders that have promotions applied.",
+      "type": "boolean",
+      "default": true
+    },
+    "is_initial": {
+      "description": "only one tier will have value as True",
+      "type": "boolean",
+      "readOnly": true
+    },
+    "next_tier_id": {
+      "description": "id of next loyalty tier",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "readOnly": true
+    }
+  },
+  "required": [
+    "name",
+    "total_spent_threshold",
+    "total_orders_threshold",
+    "points_earning_rate",
+    "fixed_points",
+    "point_value",
+    "earn_points_with_promotion",
+    "redeem_points_with_promotion"
+  ],
+  "title": "LoyaltyTier",
+  "x-tags": [
+    "Customers"
+  ]
+}
