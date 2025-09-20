@@ -32,6 +32,7 @@ const {parseFile, writeFile, stringify, detectFormat, parseString, analyzeOpenAp
 const {parseTpl, getOperation} = require('./utils/parseTpl');
 const {writePaths, writeComponents, writeSplitOpenAPISpec} = require('./utils/split');
 const {dirname, extname} = require('path');
+const path = require('path');
 const {openapiOverlay, resolveJsonPath, resolveJsonPathValue} = require('./utils/overlay');
 
 /**
@@ -215,6 +216,7 @@ async function openapiFilter(oaObj, options) {
 
   const stripFlags = [...(filterSet.stripFlags ?? [])];
   const stripUnused = [...(filterSet.unusedComponents ?? [])];
+  const stripWebhooks = filterSet.stripWebhooks ?? false;
   const textReplace = filterSet.textReplace || [];
   let doRecurse = false;
 
@@ -227,6 +229,17 @@ async function openapiFilter(oaObj, options) {
   const inverseFilterFlagValuesKeys = Object.keys(Object.assign({}, ...(filterSet.inverseFlagValues ?? [])));
   const inverseFilterFlagValues = [...(filterSet.inverseFlagValues ?? [])];
   const inverseFilterFlagHash = inverseFilterFlagValues.map(o => JSON.stringify(o));
+
+  // Store path-level parameters before filtering to preserve them
+  const pathLevelParameters = {};
+  if (jsonObj.paths) {
+    Object.keys(jsonObj.paths).forEach(pathKey => {
+      const pathObj = jsonObj.paths[pathKey];
+      if (pathObj && pathObj.parameters && Array.isArray(pathObj.parameters)) {
+        pathLevelParameters[pathKey] = JSON.parse(JSON.stringify(pathObj.parameters));
+      }
+    });
+  }
 
   // Initiate components tracking
   const comps = {
@@ -799,6 +812,11 @@ async function openapiFilter(oaObj, options) {
       // debugFilterStep = 'Filter - Strip flags'
       this.delete();
     }
+    // Strip webhooks
+    if (stripWebhooks && this.key === 'webhooks' && this.level === 1) {
+      // debugFilterStep = 'Filter - Strip webhooks'
+      this.delete();
+    }
   });
 
   // Recurse to strip any remaining unusedComp, to a maximum depth of 10
@@ -811,6 +829,24 @@ async function openapiFilter(oaObj, options) {
     const resultObj = await openapiFilter(jsonObj, options);
     jsonObj = resultObj.data;
     unusedComp = JSON.parse(JSON.stringify(options.unusedComp));
+  }
+
+  // Restore path-level parameters that were preserved before filtering
+  if (jsonObj.paths && Object.keys(pathLevelParameters).length > 0) {
+    Object.keys(pathLevelParameters).forEach(pathKey => {
+      if (jsonObj.paths[pathKey]) {
+        // Only restore parameters if the path still exists and has operations
+        const pathObj = jsonObj.paths[pathKey];
+        const hasOperations = Object.keys(pathObj).some(key =>
+          key !== 'parameters' && typeof pathObj[key] === 'object' && pathObj[key] !== null
+        );
+
+        if (hasOperations) {
+          // Restore path-level parameters
+          jsonObj.paths[pathKey].parameters = pathLevelParameters[pathKey];
+        }
+      }
+    });
   }
 
   // Prepare totalComp for the final result
@@ -1094,12 +1130,21 @@ async function openapiSplit(oaObj, options = {}) {
   options.outputDir = dirname(options.output);
   options.extension = extname(options.output).substring(1);
 
-  if (oaObj?.components) {
-    await writeComponents(oaObj.components, options);
-  }
+  if (options.stoplight) {
+    // Stoplight mode: only split schemas
+    if (oaObj?.components?.schemas) {
+      const componentsToSplit = { schemas: oaObj.components.schemas };
+      await writeComponents(componentsToSplit, options);
+    }
+  } else {
+    // Standard mode: split all components and paths
+    if (oaObj?.components) {
+      await writeComponents(oaObj.components, options);
+    }
 
-  if (oaObj?.paths) {
-    await writePaths(oaObj.paths, options);
+    if (oaObj?.paths) {
+      await writePaths(oaObj.paths, options);
+    }
   }
 
   await writeSplitOpenAPISpec(oaObj, options);
@@ -1202,6 +1247,132 @@ async function openapiRename(oaObj, options) {
   return {data: jsonObj, resultData: {}};
 }
 
+/**
+ * OpenAPI split by tags function
+ * Split the OpenAPI document into multiple files by tags with shared schemas
+ * @param {object} oaObj OpenAPI document
+ * @param {object} options OpenAPI-format options
+ * @returns {Promise<void>}
+ */
+async function openapiSplitByTags(oaObj, options = {}) {
+  if (!options.output) {
+    throw new Error('Output directory is required');
+  }
+
+  // Extract all unique tags from operations
+  const allTags = new Set();
+  if (oaObj.paths) {
+    for (const path of Object.values(oaObj.paths)) {
+      for (const operation of Object.values(path)) {
+        if (operation && operation.tags && Array.isArray(operation.tags)) {
+          operation.tags.forEach(tag => allTags.add(tag));
+        }
+      }
+    }
+  }
+
+  const tagsArray = Array.from(allTags);
+  console.log(`Found ${tagsArray.length} unique tags: ${tagsArray.join(', ')}`);
+
+  // Set up output directory structure
+  options.outputDir = dirname(options.output);
+  options.extension = extname(options.output).substring(1);
+
+  // Create shared components (schemas only) using stoplight mode
+  if (oaObj?.components?.schemas) {
+    const stoplightOptions = { ...options, stoplight: true };
+    const componentsToSplit = { schemas: oaObj.components.schemas };
+    await writeComponents(componentsToSplit, stoplightOptions);
+  }
+
+  // Create a tag-based API spec for each tag
+  for (const tag of tagsArray) {
+    console.log(`Creating API spec for tag: ${tag}`);
+
+    // Use filter to keep only operations with this tag AND remove unused components AND strip webhooks
+    const filterOptions = {
+      ...options,
+      filterSet: {
+        inverseTags: [tag],
+        unusedComponents: ['schemas', 'responses', 'parameters', 'examples', 'requestBodies', 'headers'],
+        stripWebhooks: true
+      }
+    };
+
+    // Filter the spec to only include operations with this tag and remove unused components
+    const filteredResult = await openapiFilter(oaObj, filterOptions);
+    let taggedSpec = filteredResult.data;
+
+    // Update title to reflect the tag
+    if (taggedSpec.info) {
+      taggedSpec.info.title = `${taggedSpec.info.title} - ${tag}`;
+    }
+
+    // Replace schema references with external file references (only for schemas that remain after filtering)
+    if (taggedSpec?.components?.schemas) {
+      const usedSchemas = Object.keys(taggedSpec.components.schemas);
+      console.log(`  - Uses ${usedSchemas.length} schemas: ${usedSchemas.slice(0, 5).join(', ')}${usedSchemas.length > 5 ? '...' : ''}`);
+
+      usedSchemas.forEach(schemaName => {
+        taggedSpec.components.schemas[schemaName] = {
+          $ref: `./components/schemas/${schemaName}.${options.extension}`
+        };
+      });
+    }
+
+    // Write the tag-based API spec
+    const sanitizedTag = tag.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const tagOutputPath = path.join(options.outputDir, `${sanitizedTag}-api.${options.extension}`);
+    await writeFile(tagOutputPath, taggedSpec, options);
+  }
+
+  // Create dedicated webhooks.json if webhooks exist
+  if (oaObj?.webhooks) {
+    console.log('Creating dedicated webhooks.json file');
+
+    // Create a webhooks-only spec
+    const webhooksSpec = {
+      ...oaObj,
+      paths: {}, // Remove all paths
+      webhooks: oaObj.webhooks
+    };
+
+    // Update title to reflect webhooks
+    if (webhooksSpec.info) {
+      webhooksSpec.info.title = `${webhooksSpec.info.title} - Webhooks`;
+    }
+
+    // Filter to only keep webhook-related components (remove unused)
+    const webhookFilterOptions = {
+      ...options,
+      filterSet: {
+        unusedComponents: ['schemas', 'responses', 'parameters', 'examples', 'requestBodies', 'headers']
+      }
+    };
+
+    const webhookFilteredResult = await openapiFilter(webhooksSpec, webhookFilterOptions);
+    let webhookSpec = webhookFilteredResult.data;
+
+    // Replace schema references with external file references (only for schemas that remain after filtering)
+    if (webhookSpec?.components?.schemas) {
+      const usedSchemas = Object.keys(webhookSpec.components.schemas);
+      console.log(`  - Webhooks use ${usedSchemas.length} schemas: ${usedSchemas.slice(0, 5).join(', ')}${usedSchemas.length > 5 ? '...' : ''}`);
+
+      usedSchemas.forEach(schemaName => {
+        webhookSpec.components.schemas[schemaName] = {
+          $ref: `./components/schemas/${schemaName}.${options.extension}`
+        };
+      });
+    }
+
+    // Write the webhooks API spec
+    const webhookOutputPath = path.join(options.outputDir, `webhooks.${options.extension}`);
+    await writeFile(webhookOutputPath, webhookSpec, options);
+  }
+
+  console.log(`Split complete! Created ${tagsArray.length} tag-based API specs${oaObj?.webhooks ? ' + webhooks.json' : ''} with shared schemas.`);
+}
+
 module.exports = {
   openapiFilter: openapiFilter,
   openapiGenerate: openapiGenerate,
@@ -1209,6 +1380,7 @@ module.exports = {
   openapiChangeCase: openapiChangeCase,
   openapiOverlay: openapiOverlay,
   openapiSplit: openapiSplit,
+  openapiSplitByTags: openapiSplitByTags,
   openapiConvertVersion: openapiConvertVersion,
   openapiRename: openapiRename,
   readFile: readFile,

@@ -7,23 +7,35 @@ async function writeSplitOpenAPISpec(oaObj, options) {
   const openapiDoc = {...oaObj};
   const ext = `${options.extension}`;
 
-  // Replace paths with $ref links
-  if (openapiDoc?.paths) {
-    Object.keys(openapiDoc.paths).forEach(pathKey => {
-      const sanitizedPath = sanitizeFileName(pathKey);
-      openapiDoc.paths[pathKey] = {$ref: `paths/${sanitizedPath}.${ext}`};
-    });
-  }
-
-  // Replace components with $ref links
-  if (openapiDoc?.components) {
-    Object.keys(openapiDoc.components).forEach(componentType => {
-      Object.keys(openapiDoc.components[componentType]).forEach(componentName => {
-        openapiDoc.components[componentType][componentName] = {
-          $ref: `components/${componentType}/${componentName}.${ext}`
+  if (options.stoplight) {
+    // Stoplight mode: only replace schemas with $ref links, keep everything else inline
+    if (openapiDoc?.components?.schemas) {
+      Object.keys(openapiDoc.components.schemas).forEach(schemaName => {
+        openapiDoc.components.schemas[schemaName] = {
+          $ref: `./components/schemas/${schemaName}.${ext}`
         };
       });
-    });
+    }
+  } else {
+    // Standard mode: replace both paths and all components with $ref links
+    // Replace paths with $ref links
+    if (openapiDoc?.paths) {
+      Object.keys(openapiDoc.paths).forEach(pathKey => {
+        const sanitizedPath = sanitizeFileName(pathKey);
+        openapiDoc.paths[pathKey] = {$ref: `./paths/${sanitizedPath}.${ext}`};
+      });
+    }
+
+    // Replace components with $ref links
+    if (openapiDoc?.components) {
+      Object.keys(openapiDoc.components).forEach(componentType => {
+        Object.keys(openapiDoc.components[componentType]).forEach(componentName => {
+          openapiDoc.components[componentType][componentName] = {
+            $ref: `./components/${componentType}/${componentName}.${ext}`
+          };
+        });
+      });
+    }
   }
 
   // Write the openapi.yaml file
@@ -85,7 +97,12 @@ function convertComponentsToRef(obj, ext, currentFileDir) {
 
         // Determine the correct relative path
         const refFilePath = path.join('components', componentType, `${componentName}.${ext}`);
-        const relativePath = path.relative(currentFileDir, refFilePath).replace(/\\/g, '/');
+        let relativePath = path.relative(currentFileDir, refFilePath).replace(/\\/g, '/');
+
+        // Ensure relative path starts with ./
+        if (!relativePath.startsWith('./') && !relativePath.startsWith('../')) {
+          relativePath = './' + relativePath;
+        }
 
         // Update the reference to point to the correct relative path
         this.update(relativePath);

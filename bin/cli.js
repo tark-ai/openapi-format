@@ -32,6 +32,8 @@ program
   .option('--convertTo <oaVersion>', 'convert the OpenAPI document to OpenAPI version 3.1')
   .option('--no-bundle', `don't bundle the local and remote $ref in the OpenAPI document`, false)
   .option('--split', 'split the OpenAPI document into a multi-file structure', false)
+  .option('--stoplight', 'split only schemas for Stoplight Studio compatibility (use with --split)', false)
+  .option('--splitByTags', 'split the OpenAPI document into multiple files by tags with shared schemas', false)
   .option('--json', 'print the file to stdout as JSON')
   .option('--yaml', 'print the file to stdout as YAML')
   .option('-p, --playground', 'Open config in online playground')
@@ -343,24 +345,35 @@ async function run(oaFile, options) {
 
   options.yamlComments = fileOptions.yamlComments || {};
   if (options.output) {
-    if (options.split !== true) {
+    if (options.splitByTags === true) {
       try {
-        // Write OpenAPI string to single file
-        await openapiFormat.writeFile(options.output, resObj, options);
-        infoOut(`- Output file:\t\t${options.output}`); // LOG - config file
+        // Write Split by tags files
+        await openapiFormat.openapiSplitByTags(resObj, options);
+        infoOut(`- Output location:\t${options.output}`); // LOG - config file
       } catch (err) {
-        console.error('\x1b[31m', `Output file error - no such file or directory "${options.output}"`);
+        console.error('\x1b[31m', `Split by tags error - no such file or directory "${options.output}"`);
         if (options.verbose >= 1) {
           console.error(err);
         }
       }
-    } else {
+    } else if (options.split === true) {
       try {
         // Write Split files
         await openapiFormat.openapiSplit(resObj, options);
         infoOut(`- Output location:\t${options.output}`); // LOG - config file
       } catch (err) {
         console.error('\x1b[31m', `Split error - no such file or directory "${options.output}"`);
+        if (options.verbose >= 1) {
+          console.error(err);
+        }
+      }
+    } else {
+      try {
+        // Write OpenAPI string to single file
+        await openapiFormat.writeFile(options.output, resObj, options);
+        infoOut(`- Output file:\t\t${options.output}`); // LOG - config file
+      } catch (err) {
+        console.error('\x1b[31m', `Output file error - no such file or directory "${options.output}"`);
         if (options.verbose >= 1) {
           console.error(err);
         }
